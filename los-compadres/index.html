@@ -1,0 +1,545 @@
+<title>Los Compadres</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper: #e7e0d0;
+    --paper-raised: #f4eee0;
+    --ink: #241a12;
+    --ink-soft: #5c5145;
+    --navy: #1f3f52;
+    --navy-solid: #14293a;
+    --copper: #a8672c;
+    --copper-deep: #7c4a1c;
+    --line: #cdbe9c;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper: #17130e; --paper-raised: #221c15; --ink: #ece2cd; --ink-soft: #b7a691;
+      --navy: #6b9bb3; --navy-solid: #274a5e; --copper: #d89049; --copper-deep: #eaab63; --line: #3a3123;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper: #17130e; --paper-raised: #221c15; --ink: #ece2cd; --ink-soft: #b7a691;
+    --navy: #6b9bb3; --navy-solid: #274a5e; --copper: #d89049; --copper-deep: #eaab63; --line: #3a3123;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:"Libre Franklin","Segoe UI",sans-serif; font-size:16px; line-height:1.65; overflow-x:hidden; }
+  a{ color:inherit; }
+  h1,h2,h3{ font-family:"Rye", Georgia, serif; text-wrap:balance; margin:0; color:var(--ink); font-weight:400; }
+  :focus-visible{ outline:2px solid var(--copper); outline-offset:3px; }
+
+  .label{ font-family:"IBM Plex Mono",ui-monospace,monospace; text-transform:uppercase; letter-spacing:0.15em; font-size:0.7rem; color:var(--ink-soft); }
+  .wrap{ max-width:1100px; margin:0 auto; padding:0 clamp(1.25rem,4vw,3rem); }
+
+  /* ---------- motion base ---------- */
+  .reveal{ opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.is-visible{ opacity:1; transform:none; }
+  .reveal-stagger > *{ transition-delay:calc(var(--i,0) * 90ms); }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; }
+    .reveal, .reveal.is-visible{ opacity:1 !important; transform:none !important; transition:none !important; }
+    .magnetic{ transform:none !important; }
+  }
+
+  /* jug garland divider */
+  .jugs{ height:26px; overflow:hidden; display:flex; justify-content:center; }
+  .jugs svg{ height:26px; width:auto; }
+  .jugs path{ fill:none; stroke:var(--copper); stroke-width:1.6; opacity:0.75; }
+  .jugs line{ stroke:var(--line); stroke-width:1.4; }
+
+  /* ---------- dot nav ---------- */
+  .dotnav{ position:fixed; right:1.4rem; top:50%; transform:translateY(-50%); z-index:50; display:flex; flex-direction:column; gap:0.9rem; }
+  .dotnav a{ width:8px; height:8px; border-radius:50%; background:var(--line); display:block; position:relative; transition:background .2s, transform .2s; }
+  .dotnav a:hover, .dotnav a.active{ background:var(--copper); transform:scale(1.35); }
+  .dotnav a .tip{ position:absolute; right:16px; top:50%; transform:translateY(-50%); white-space:nowrap; font-family:"IBM Plex Mono",monospace; font-size:0.68rem; letter-spacing:0.06em; color:var(--ink-soft); opacity:0; transition:opacity .15s; pointer-events:none; }
+  .dotnav a:hover .tip{ opacity:1; }
+  @media (max-width:900px){ .dotnav{ display:none; } }
+
+  /* ---------- top bar ---------- */
+  .topbar{ position:sticky; top:0; z-index:40; background:color-mix(in srgb, var(--paper) 90%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
+  .topbar-inner{ max-width:1100px; margin:0 auto; padding:0.8rem clamp(1.25rem,4vw,3rem); display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+  .brand{ display:flex; align-items:baseline; gap:0.55rem; }
+  .brand-mark{ font-family:"Rye",serif; font-size:1.35rem; letter-spacing:0.01em; }
+  .brand-sub{ font-family:"IBM Plex Mono",monospace; font-size:0.63rem; color:var(--ink-soft); letter-spacing:0.09em; }
+  .topnav{ display:flex; gap:1.5rem; align-items:center; }
+  .topnav a{ font-size:0.85rem; text-decoration:none; color:var(--ink-soft); border-bottom:1px solid transparent; padding-bottom:2px; transition:color .15s, border-color .15s; }
+  .topnav a:hover{ color:var(--ink); border-color:var(--copper); }
+  .topnav a.cta{ color:var(--paper-raised); background:var(--navy-solid); padding:0.5rem 1.05rem; border-radius:2px; border-bottom:none; }
+  .topnav a.cta:hover{ background:var(--copper-deep); }
+  @media (max-width:640px){ .topnav a:not(.cta){ display:none; } }
+
+  /* ---------- hero ---------- */
+  .hero{ position:relative; overflow:hidden; min-height:92vh; display:flex; align-items:center; padding:clamp(3rem,8vw,5rem) 0;
+    background:
+      radial-gradient(85% 65% at 88% -8%, color-mix(in srgb, var(--copper) 20%, transparent), transparent 60%),
+      radial-gradient(70% 60% at 8% 108%, color-mix(in srgb, var(--navy) 22%, transparent), transparent 65%),
+      var(--paper);
+  }
+  .hero-grid{ display:grid; grid-template-columns:1.15fr 0.85fr; gap:clamp(2rem,5vw,3.5rem); align-items:center; width:100%; }
+  @media (max-width:880px){ .hero-grid{ grid-template-columns:1fr; } }
+
+  .eyebrow{ display:flex; align-items:center; gap:0.6rem; margin-bottom:1.1rem; opacity:0; animation:fadeUp .7s ease .1s forwards; }
+  .eyebrow .rule{ width:2.2rem; height:1px; background:var(--copper); }
+
+  .hero h1{ font-size:clamp(2.3rem,5.6vw,4rem); line-height:1.14; letter-spacing:0.01em; }
+  .hero h1 .line{ display:block; overflow:hidden; }
+  .hero h1 .line span{ display:inline-block; opacity:0; transform:translateY(100%); animation:fadeUp .8s cubic-bezier(.2,.8,.2,1) forwards; }
+  .hero h1 span.accent{ color:var(--navy); }
+  @keyframes fadeUp{ to{ opacity:1; transform:translateY(0); } }
+
+  .hero p.lede{ margin-top:1.3rem; max-width:32rem; font-size:1.08rem; color:var(--ink-soft); opacity:0; animation:fadeUp .7s ease .55s forwards; }
+
+  .rating-badge{ display:inline-flex; align-items:center; gap:0.6rem; margin-top:1.4rem; padding:0.55rem 1rem; border:1px solid var(--line); border-radius:3px; background:var(--paper-raised); opacity:0; animation:fadeUp .7s ease .7s forwards; }
+  .rating-badge .stars{ color:var(--copper); font-size:0.95rem; letter-spacing:0.05em; }
+  .rating-badge .count{ font-family:"IBM Plex Mono",monospace; font-size:0.76rem; color:var(--ink-soft); }
+
+  .hero-ctas{ display:flex; gap:0.9rem; margin-top:1.8rem; flex-wrap:wrap; opacity:0; animation:fadeUp .7s ease .85s forwards; }
+  .btn{ display:inline-flex; align-items:center; gap:0.5rem; font-family:"IBM Plex Mono",monospace; font-size:0.75rem; letter-spacing:0.05em; text-transform:uppercase; text-decoration:none; padding:0.85rem 1.4rem; border-radius:2px; border:1px solid transparent; transition:background .15s, color .15s, border-color .15s; will-change:transform; }
+  .btn-solid{ background:var(--navy-solid); color:var(--paper-raised); }
+  .btn-solid:hover{ background:var(--copper-deep); }
+  .btn-line{ border-color:var(--ink-soft); color:var(--ink); }
+  .btn-line:hover{ border-color:var(--ink); }
+
+  .scroll-cue{ position:absolute; bottom:1.6rem; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:0.4rem; opacity:0.6; }
+  .scroll-cue .stick{ width:1px; height:34px; background:linear-gradient(var(--ink-soft), transparent); animation:stickmove 1.8s ease-in-out infinite; }
+  @keyframes stickmove{ 0%{ opacity:0; transform:scaleY(0.4); } 40%{ opacity:1; } 100%{ opacity:0; transform:scaleY(1) translateY(10px); } }
+
+  /* hero illustration: hanging jug w/ parallax */
+  .jugpot{ position:relative; aspect-ratio:1/1.05; border-radius:6px; overflow:hidden; background:linear-gradient(160deg, var(--navy-solid), var(--navy) 60%, var(--copper-deep)); box-shadow:0 30px 60px -28px color-mix(in srgb, var(--navy-solid) 70%, black); display:flex; align-items:center; justify-content:center; opacity:0; animation:fadeUp 1s ease .3s forwards; }
+  .jugpot-inner{ width:58%; height:58%; transition:transform .25s ease-out; }
+  .jugpot-inner svg{ width:100%; height:100%; }
+  .jugline{ fill:none; stroke:var(--paper-raised); stroke-width:2.2; stroke-linejoin:round; stroke-linecap:round; opacity:0.92; }
+  .steam{ stroke:var(--paper-raised); stroke-width:2; fill:none; opacity:0.55; }
+  .steam-anim{ animation:rise 4s ease-in-out infinite; }
+  @keyframes rise{ 0%,100%{ transform:translateY(0); opacity:0.55; } 50%{ transform:translateY(-4px); opacity:0.85; } }
+
+  /* ---------- sections ---------- */
+  section{ padding:clamp(3rem,7vw,5.4rem) 0; }
+  .section-head{ max-width:38rem; margin-bottom:clamp(2rem,5vw,3rem); }
+  .section-head h2{ font-size:clamp(1.6rem,3.4vw,2.2rem); margin-top:0.5rem; }
+  .section-head p{ color:var(--ink-soft); margin-top:0.8rem; }
+  .section-head.center{ margin-inline:auto; text-align:center; }
+
+  /* since 1969 counter strip */
+  .heritage{ background:var(--navy-solid); }
+  .heritage .wrap{ display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; text-align:center; }
+  @media (max-width:700px){ .heritage .wrap{ grid-template-columns:1fr; } }
+  .stat{ display:flex; flex-direction:column; gap:0.3rem; }
+  .stat .n{ font-family:"IBM Plex Mono",monospace; font-size:clamp(2.1rem,5vw,3rem); color:var(--copper); font-variant-numeric:tabular-nums; }
+  .stat .t{ font-size:0.86rem; color:color-mix(in srgb, var(--paper-raised) 75%, transparent); }
+
+  /* signature dishes ranked by mentions */
+  .dishes{ background:var(--paper-raised); }
+  .dish-rank{ display:flex; flex-direction:column; gap:1.1rem; max-width:42rem; }
+  .drow{ display:grid; grid-template-columns:2.2rem 1fr auto; align-items:center; gap:1rem; }
+  .drow .rk{ font-family:"IBM Plex Mono",monospace; color:var(--copper); font-size:0.85rem; }
+  .drow .name{ font-size:1.02rem; }
+  .drow .meta{ display:flex; align-items:center; gap:0.7rem; }
+  .drow .bar{ width:120px; height:6px; background:var(--line); border-radius:3px; overflow:hidden; }
+  .drow .bar > span{ display:block; height:100%; width:0%; background:var(--navy); transition:width 1s cubic-bezier(.2,.8,.2,1); }
+  .drow.is-visible .bar > span{ width:var(--fill,0%); }
+  .drow .mentions{ font-family:"IBM Plex Mono",monospace; font-size:0.72rem; color:var(--ink-soft); white-space:nowrap; }
+  .dishes-foot{ margin-top:1.7rem; font-size:0.83rem; color:var(--ink-soft); font-style:italic; max-width:38rem; }
+
+  /* ceiling story */
+  .ceiling-grid{ display:grid; grid-template-columns:0.9fr 1.1fr; gap:clamp(2rem,5vw,3.5rem); align-items:center; }
+  @media (max-width:860px){ .ceiling-grid{ grid-template-columns:1fr; } }
+  .ceiling-art{ aspect-ratio:4/3; border-radius:5px; border:1px solid var(--line); background:var(--paper-raised); position:relative; overflow:hidden; }
+  .ceiling-art svg{ width:100%; height:100%; }
+  .jugrow path{ fill:none; stroke:var(--copper); stroke-width:2; }
+  .jugrow line{ stroke:var(--line); stroke-width:2; }
+  .jugrow .swing{ transform-origin:top center; animation:swing 5s ease-in-out infinite; }
+  .jugrow .swing:nth-child(2){ animation-delay:.4s; } .jugrow .swing:nth-child(3){ animation-delay:.8s; } .jugrow .swing:nth-child(4){ animation-delay:1.2s; }
+  @keyframes swing{ 0%,100%{ transform:rotate(-1.5deg); } 50%{ transform:rotate(1.5deg); } }
+  .ceiling-copy p{ color:var(--ink-soft); max-width:34rem; margin:0 0 1rem; }
+  .ceiling-copy .tag{ display:inline-block; margin-top:0.4rem; font-family:"IBM Plex Mono",monospace; font-size:0.72rem; color:var(--navy); border:1px solid var(--navy); padding:0.3rem 0.6rem; border-radius:3px; }
+
+  /* ratings breakdown */
+  .scores{ display:grid; grid-template-columns:repeat(4,1fr); gap:1.4rem; max-width:44rem; }
+  @media (max-width:640px){ .scores{ grid-template-columns:repeat(2,1fr);} }
+  .score-item .label{ margin-bottom:0.5rem; }
+  .score-item .val{ font-family:"IBM Plex Mono",monospace; font-size:1.4rem; color:var(--ink); font-variant-numeric:tabular-nums; }
+  .score-bar{ margin-top:0.5rem; height:5px; background:var(--line); border-radius:3px; overflow:hidden; }
+  .score-bar > span{ display:block; height:100%; width:0%; background:var(--copper); transition:width 1.1s cubic-bezier(.2,.8,.2,1); }
+  .score-item.is-visible .score-bar > span{ width:var(--fill,0%); }
+
+  /* full carta tags */
+  .carta-groups{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem; }
+  @media (max-width:760px){ .carta-groups{ grid-template-columns:1fr; } }
+  .carta-group{ padding:1.5rem; border:1px solid var(--line); border-radius:4px; background:var(--paper); }
+  .carta-group h3{ font-family:"IBM Plex Mono",monospace; font-size:0.85rem; text-transform:uppercase; letter-spacing:0.07em; color:var(--navy); font-weight:500; margin-bottom:0.8rem; }
+  .taglist{ display:flex; flex-wrap:wrap; gap:0.5rem; }
+  .taglist span{ font-size:0.82rem; padding:0.3rem 0.6rem; border:1px solid var(--line); border-radius:12px; color:var(--ink-soft); }
+
+  /* reviews marquee */
+  .reviews{ background:var(--paper-raised); overflow:hidden; }
+  .marquee{ display:flex; gap:1.2rem; width:max-content; animation:scrollx 32s linear infinite; }
+  .marquee:hover{ animation-play-state:paused; }
+  @keyframes scrollx{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+  .review-card{ width:320px; flex:0 0 auto; padding:1.4rem; background:var(--paper); border:1px solid var(--line); border-radius:4px; display:flex; flex-direction:column; gap:0.7rem; }
+  .review-card .stars{ color:var(--copper); font-size:0.85rem; letter-spacing:0.06em; }
+  .review-card p{ margin:0; font-size:0.92rem; color:var(--ink-soft); }
+  .review-card .who{ font-family:"IBM Plex Mono",monospace; font-size:0.72rem; color:var(--ink); letter-spacing:0.04em; }
+  .marquee-mask{ mask-image:linear-gradient(90deg, transparent, black 6%, black 94%, transparent); }
+
+  /* practical */
+  .practical-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:2rem; }
+  @media (max-width:760px){ .practical-grid{ grid-template-columns:1fr; } }
+  .info-card{ border:1px solid var(--line); border-radius:3px; padding:1.6rem; background:var(--paper-raised); }
+  .info-card h3{ font-family:"IBM Plex Mono",monospace; font-size:0.9rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--navy); margin-bottom:0.8rem; }
+  .info-card p{ margin:0.2rem 0; color:var(--ink-soft); font-size:0.92rem; }
+  .info-card .big{ color:var(--ink); font-size:1rem; }
+  .info-card a{ text-decoration:none; }
+  .info-card a:hover{ color:var(--copper-deep); }
+
+  .reserve-band{ margin-top:2.4rem; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; flex-wrap:wrap; padding:1.9rem clamp(1.5rem,4vw,2.6rem); background:var(--navy-solid); border-radius:5px; position:relative; overflow:hidden; }
+  .reserve-band::before{ content:""; position:absolute; inset:0; background:radial-gradient(60% 120% at 90% 50%, color-mix(in srgb, var(--copper) 25%, transparent), transparent 70%); }
+  .reserve-band > *{ position:relative; }
+  .reserve-band h3{ color:var(--paper-raised); font-size:1.25rem; }
+  .reserve-band p{ color:color-mix(in srgb, var(--paper-raised) 78%, transparent); margin:0.3rem 0 0; font-size:0.9rem; }
+  .reserve-actions{ display:flex; gap:0.8rem; flex-wrap:wrap; }
+  .reserve-actions .btn-solid{ background:var(--copper); color:#221204; }
+  .reserve-actions .btn-solid:hover{ background:var(--paper-raised); color:var(--navy-solid); }
+  .reserve-actions .btn-line{ border-color:color-mix(in srgb, var(--paper-raised) 55%, transparent); color:var(--paper-raised); }
+
+  footer{ border-top:1px solid var(--line); padding:2.2rem 0; margin-top:1rem; }
+  .foot-grid{ display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; align-items:center; }
+  .foot-grid p{ margin:0; font-size:0.8rem; color:var(--ink-soft); }
+  .foot-grid a{ text-decoration:none; }
+  .foot-note{ margin-top:0.6rem; font-size:0.72rem; color:var(--ink-soft); opacity:0.75; }
+
+  /* back to top */
+  .totop{ position:fixed; right:1.4rem; bottom:1.4rem; z-index:50; width:2.6rem; height:2.6rem; border-radius:50%; background:var(--navy-solid); color:var(--paper-raised); display:flex; align-items:center; justify-content:center; text-decoration:none; opacity:0; pointer-events:none; transition:opacity .25s, transform .2s; font-size:1.1rem; }
+  .totop.show{ opacity:1; pointer-events:auto; }
+  .totop:hover{ background:var(--copper-deep); }
+</style>
+
+<nav class="dotnav" aria-hidden="true">
+  <a href="#top" data-target="top" class="active"><span class="tip">Inici</span></a>
+  <a href="#historia" data-target="historia"><span class="tip">1969</span></a>
+  <a href="#plats" data-target="plats"><span class="tip">Plats</span></a>
+  <a href="#sostre" data-target="sostre"><span class="tip">La casa</span></a>
+  <a href="#carta" data-target="carta"><span class="tip">Carta</span></a>
+  <a href="#opinions" data-target="opinions"><span class="tip">Opinions</span></a>
+  <a href="#info" data-target="info"><span class="tip">Info</span></a>
+</nav>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <span class="brand-mark">Los Compadres</span>
+      <span class="brand-sub">L'ESCALA · DES DE 1969</span>
+    </div>
+    <nav class="topnav">
+      <a href="#sostre">La casa</a>
+      <a href="#plats">Els plats</a>
+      <a href="#opinions">Opinions</a>
+      <a href="#info" class="cta">Reservar</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow"><span class="rule"></span><span class="label">Carrer Bonaire, 13 · L'Escala</span></div>
+      <h1>
+        <span class="line"><span style="animation-delay:.15s">Des</span> <span style="animation-delay:.22s">de</span> <span style="animation-delay:.29s">1969,</span></span>
+        <span class="line"><span style="animation-delay:.4s">la</span> <span style="animation-delay:.47s">mateixa</span> <span class="accent" style="animation-delay:.54s">taula</span><span style="animation-delay:.6s">.</span></span>
+      </h1>
+      <p class="lede">Un bar de tota la vida al casc antic de L'Escala. Musclos a la belga sota un sostre ple de gerres, i el mateix tracte de sempre — el que fa que hi tornis.</p>
+      <div class="rating-badge">
+        <span class="stars">★★★★☆</span>
+        <span class="count">4,3 / 5 TripAdvisor · 231 ressenyes</span>
+      </div>
+      <div class="hero-ctas">
+        <a class="btn btn-solid magnetic" href="tel:+34972770855">Reservar taula</a>
+        <a class="btn btn-line magnetic" href="#plats">Veure els plats</a>
+      </div>
+    </div>
+    <div class="jugpot" aria-hidden="true">
+      <div class="jugpot-inner" id="jugParallax">
+        <svg viewBox="0 0 200 200">
+          <path class="jugline" d="M100,26 C86,26 78,36 78,46 C78,52 82,56 80,62 L66,72 C56,80 50,94 50,112 L50,150 C50,168 70,180 100,180 C130,180 150,168 150,150 L150,112 C150,94 144,80 134,72 L120,62 C118,56 122,52 122,46 C122,36 114,26 100,26 Z"></path>
+          <path class="jugline" d="M100,26 C100,20 100,14 100,10"></path>
+          <path class="jugline" d="M60,100 C50,100 44,94 44,86" opacity="0.7"></path>
+          <g class="steam-anim">
+            <path class="steam" d="M84,54 C80,48 88,44 84,38"></path>
+            <path class="steam" d="M100,54 C96,48 104,44 100,38" opacity="0.7"></path>
+            <path class="steam" d="M116,54 C112,48 120,44 116,38" opacity="0.5"></path>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue" aria-hidden="true"><span class="stick"></span><span class="label">scroll</span></div>
+</header>
+
+<section id="historia" class="heritage">
+  <div class="wrap">
+    <div class="stat reveal"><span class="n" data-count="57">0</span><span class="t">anys servint la mateixa recepta</span></div>
+    <div class="stat reveal" style="transition-delay:.1s"><span class="n" data-count="231">0</span><span class="t">ressenyes a Tripadvisor</span></div>
+    <div class="stat reveal" style="transition-delay:.2s"><span class="n" data-count="4.3" data-decimals="1">0</span><span class="t">valoració mitjana / 5</span></div>
+  </div>
+</section>
+
+<div class="jugs" aria-hidden="true">
+  <svg preserveAspectRatio="none" viewBox="0 0 600 26"><line x1="0" y1="2" x2="600" y2="2"></line><g>
+    <path d="M20,2 v4 c0,5 3,7 3,10 c0,3 -3,4 -3,7 c0,3 3,4 6,4 c3,0 6,-1 6,-4 c0,-3 -3,-4 -3,-7 c0,-3 3,-5 3,-10 v-4"></path>
+    <path d="M80,2 v4 c0,5 3,7 3,10 c0,3 -3,4 -3,7 c0,3 3,4 6,4 c3,0 6,-1 6,-4 c0,-3 -3,-4 -3,-7 c0,-3 3,-5 3,-10 v-4"></path>
+    <path d="M140,2 v4 c0,5 3,7 3,10 c0,3 -3,4 -3,7 c0,3 3,4 6,4 c3,0 6,-1 6,-4 c0,-3 -3,-4 -3,-7 c0,-3 3,-5 3,-10 v-4"></path>
+    <path d="M200,2 v4 c0,5 3,7 3,10 c0,3 -3,4 -3,7 c0,3 3,4 6,4 c3,0 6,-1 6,-4 c0,-3 -3,-4 -3,-7 c0,-3 3,-5 3,-10 v-4"></path>
+    <path d="M260,2 v4 c0,5 3,7 3,10 c0,3 -3,4 -3,7 c0,3 3,4 6,4 c3,0 6,-1 6,-4 c0,-3 -3,-4 -3,-7 c0,-3 3,-5 3,-10 v-4"></path>
+    <path d="M320,2 v4 c0,5 3,7 3,10 c0,3 -3,4 -3,7 c0,3 3,4 6,4 c3,0 6,-1 6,-4 c0,-3 -3,-4 -3,-7 c0,-3 3,-5 3,-10 v-4"></path>
+    <path d="M380,2 v4 c0,5 3,7 3,10 c0,3 -3,4 -3,7 c0,3 3,4 6,4 c3,0 6,-1 6,-4 c0,-3 -3,-4 -3,-7 c0,-3 3,-5 3,-10 v-4"></path>
+    <path d="M440,2 v4 c0,5 3,7 3,10 c0,3 -3,4 -3,7 c0,3 3,4 6,4 c3,0 6,-1 6,-4 c0,-3 -3,-4 -3,-7 c0,-3 3,-5 3,-10 v-4"></path>
+    <path d="M500,2 v4 c0,5 3,7 3,10 c0,3 -3,4 -3,7 c0,3 3,4 6,4 c3,0 6,-1 6,-4 c0,-3 -3,-4 -3,-7 c0,-3 3,-5 3,-10 v-4"></path>
+    <path d="M560,2 v4 c0,5 3,7 3,10 c0,3 -3,4 -3,7 c0,3 3,4 6,4 c3,0 6,-1 6,-4 c0,-3 -3,-4 -3,-7 c0,-3 3,-5 3,-10 v-4"></path>
+  </g></svg>
+</div>
+
+<section id="plats" class="dishes">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="label">El que més es comenta</span>
+      <h2>Els plats de tota la vida</h2>
+      <p>No ens ho inventem: aquest és el rànquing real de plats més mencionats a les ressenyes dels clients.</p>
+    </div>
+    <div class="dish-rank">
+      <div class="drow reveal" style="--fill:100%"><span class="rk">01</span><span class="name">Musclos a la belga</span><span class="meta"><span class="bar"><span></span></span><span class="mentions">24 mencions</span></span></div>
+      <div class="drow reveal" style="--fill:54%; transition-delay:.08s"><span class="rk">02</span><span class="name">Calamars a la planxa</span><span class="meta"><span class="bar"><span></span></span><span class="mentions">13 mencions</span></span></div>
+      <div class="drow reveal" style="--fill:33%; transition-delay:.16s"><span class="rk">03</span><span class="name">Navalles</span><span class="meta"><span class="bar"><span></span></span><span class="mentions">8 mencions</span></span></div>
+      <div class="drow reveal" style="--fill:29%; transition-delay:.24s"><span class="rk">04</span><span class="name">Raves de calamar</span><span class="meta"><span class="bar"><span></span></span><span class="mentions">7 mencions</span></span></div>
+      <div class="drow reveal" style="--fill:25%; transition-delay:.32s"><span class="rk">05</span><span class="name">Tallarinés</span><span class="meta"><span class="bar"><span></span></span><span class="mentions">6 mencions</span></span></div>
+    </div>
+    <p class="dishes-foot reveal">Rànquing a partir de les ressenyes públiques de Tripadvisor. La carta completa — amb preus — s'ensenya al local.</p>
+  </div>
+</section>
+
+<section id="sostre">
+  <div class="wrap ceiling-grid">
+    <div class="ceiling-art reveal">
+      <svg viewBox="0 0 300 220" preserveAspectRatio="xMidYMid meet">
+        <g class="jugrow">
+          <line x1="0" y1="20" x2="300" y2="20"></line>
+          <path class="swing" d="M40,20 v6 c0,7 5,10 5,15 c0,4 -5,6 -5,10 c0,5 5,7 10,7 c5,0 10,-2 10,-7 c0,-4 -5,-6 -5,-10 c0,-5 5,-8 5,-15 v-6"></path>
+          <path class="swing" d="M110,20 v6 c0,7 5,10 5,15 c0,4 -5,6 -5,10 c0,5 5,7 10,7 c5,0 10,-2 10,-7 c0,-4 -5,-6 -5,-10 c0,-5 5,-8 5,-15 v-6"></path>
+          <path class="swing" d="M180,20 v6 c0,7 5,10 5,15 c0,4 -5,6 -5,10 c0,5 5,7 10,7 c5,0 10,-2 10,-7 c0,-4 -5,-6 -5,-10 c0,-5 5,-8 5,-15 v-6"></path>
+          <path class="swing" d="M250,20 v6 c0,7 5,10 5,15 c0,4 -5,6 -5,10 c0,5 5,7 10,7 c5,0 10,-2 10,-7 c0,-4 -5,-6 -5,-10 c0,-5 5,-8 5,-15 v-6"></path>
+        </g>
+      </svg>
+    </div>
+    <div class="ceiling-copy reveal" style="transition-delay:.12s">
+      <div class="section-head" style="margin-bottom:1rem;">
+        <span class="label">La casa · des de 1969</span>
+        <h2>El sostre que tothom recorda</h2>
+      </div>
+      <p>Abans d'arribar al plat, la primera cosa que es comenta de Los Compadres és el sostre: ple de gerres penjades, any rere any. Els viatgers ho fotografien tant com el menjar.</p>
+      <p>Sota aquest sostre, la mateixa recepta de musclos a la belga porta gairebé sis dècades servint-se igual: amb pa per sucar i sense presses.</p>
+      <span class="tag">Tripadvisor: "Quirky ceiling"</span>
+    </div>
+  </div>
+</section>
+
+<section class="dishes">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="label">Per categories</span>
+      <h2>Com puntua la gent</h2>
+    </div>
+    <div class="scores">
+      <div class="score-item reveal" style="--fill:90%"><span class="label">Servei</span><div class="val" data-count="4.5" data-decimals="1">0</div><div class="score-bar"><span></span></div></div>
+      <div class="score-item reveal" style="--fill:84%; transition-delay:.08s"><span class="label">Menjar</span><div class="val" data-count="4.2" data-decimals="1">0</div><div class="score-bar"><span></span></div></div>
+      <div class="score-item reveal" style="--fill:84%; transition-delay:.16s"><span class="label">Preu</span><div class="val" data-count="4.2" data-decimals="1">0</div><div class="score-bar"><span></span></div></div>
+      <div class="score-item reveal" style="--fill:86%; transition-delay:.24s"><span class="label">Ambient</span><div class="val" data-count="4.3" data-decimals="1">0</div><div class="score-bar"><span></span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="carta">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="label">Tota la carta</span>
+      <h2>Del mar, de casa i de sempre</h2>
+    </div>
+    <div class="carta-groups">
+      <div class="carta-group reveal">
+        <h3>Del mar</h3>
+        <div class="taglist"><span>Musclos a la belga</span><span>Navalles</span><span>Calamars</span><span>Gambes</span><span>Lubina</span></div>
+      </div>
+      <div class="carta-group reveal" style="transition-delay:.08s">
+        <h3>De casa</h3>
+        <div class="taglist"><span>Croquetes</span><span>Paella</span><span>Costelles de porc</span><span>Pollastre rostit</span><span>Tortilla</span></div>
+      </div>
+      <div class="carta-group reveal" style="transition-delay:.16s">
+        <h3>Pasta i amanides</h3>
+        <div class="taglist"><span>Carbonara</span><span>Lasanya</span><span>Tallarinés</span><span>Amanides</span><span>Pizza</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="jugs" aria-hidden="true">
+  <svg preserveAspectRatio="none" viewBox="0 0 600 26"><line x1="0" y1="2" x2="600" y2="2"></line><g>
+    <path d="M20,2 v4 c0,5 3,7 3,10 c0,3 -3,4 -3,7 c0,3 3,4 6,4 c3,0 6,-1 6,-4 c0,-3 -3,-4 -3,-7 c0,-3 3,-5 3,-10 v-4"></path>
+    <path d="M80,2 v4 c0,5 3,7 3,10 c0,3 -3,4 -3,7 c0,3 3,4 6,4 c3,0 6,-1 6,-4 c0,-3 -3,-4 -3,-7 c0,-3 3,-5 3,-10 v-4"></path>
+    <path d="M140,2 v4 c0,5 3,7 3,10 c0,3 -3,4 -3,7 c0,3 3,4 6,4 c3,0 6,-1 6,-4 c0,-3 -3,-4 -3,-7 c0,-3 3,-5 3,-10 v-4"></path>
+    <path d="M200,2 v4 c0,5 3,7 3,10 c0,3 -3,4 -3,7 c0,3 3,4 6,4 c3,0 6,-1 6,-4 c0,-3 -3,-4 -3,-7 c0,-3 3,-5 3,-10 v-4"></path>
+    <path d="M260,2 v4 c0,5 3,7 3,10 c0,3 -3,4 -3,7 c0,3 3,4 6,4 c3,0 6,-1 6,-4 c0,-3 -3,-4 -3,-7 c0,-3 3,-5 3,-10 v-4"></path>
+    <path d="M320,2 v4 c0,5 3,7 3,10 c0,3 -3,4 -3,7 c0,3 3,4 6,4 c3,0 6,-1 6,-4 c0,-3 -3,-4 -3,-7 c0,-3 3,-5 3,-10 v-4"></path>
+    <path d="M380,2 v4 c0,5 3,7 3,10 c0,3 -3,4 -3,7 c0,3 3,4 6,4 c3,0 6,-1 6,-4 c0,-3 -3,-4 -3,-7 c0,-3 3,-5 3,-10 v-4"></path>
+    <path d="M440,2 v4 c0,5 3,7 3,10 c0,3 -3,4 -3,7 c0,3 3,4 6,4 c3,0 6,-1 6,-4 c0,-3 -3,-4 -3,-7 c0,-3 3,-5 3,-10 v-4"></path>
+    <path d="M500,2 v4 c0,5 3,7 3,10 c0,3 -3,4 -3,7 c0,3 3,4 6,4 c3,0 6,-1 6,-4 c0,-3 -3,-4 -3,-7 c0,-3 3,-5 3,-10 v-4"></path>
+    <path d="M560,2 v4 c0,5 3,7 3,10 c0,3 -3,4 -3,7 c0,3 3,4 6,4 c3,0 6,-1 6,-4 c0,-3 -3,-4 -3,-7 c0,-3 3,-5 3,-10 v-4"></path>
+  </g></svg>
+</div>
+
+<section id="opinions" class="reviews">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="label">El que diuen — ressenyes reals</span>
+      <h2>231 ressenyes a Tripadvisor</h2>
+    </div>
+  </div>
+  <div class="marquee-mask">
+    <div class="marquee">
+      <div class="review-card"><span class="stars">★★★★★</span><p>"Restaurante de los de antes, buen servicio, calidad en la comida, una parada en L'Escala a la que siempre venimos. Pedidos los mejillones a la belga, riquísimos."</p><span class="who">— Alfonso</span></div>
+      <div class="review-card"><span class="stars">★★★★★</span><p>"Tot el que vam demanar estava boníssim, tot super casolà i fet amb molt de carinyo."</p><span class="who">— Laura</span></div>
+      <div class="review-card"><span class="stars">★★★★★</span><p>"Comida y sitio espectacular."</p><span class="who">— Ismael</span></div>
+      <div class="review-card"><span class="stars">★★★★★</span><p>"Restaurante de los de antes, buen servicio, calidad en la comida, una parada en L'Escala a la que siempre venimos. Pedidos los mejillones a la belga, riquísimos."</p><span class="who">— Alfonso</span></div>
+      <div class="review-card"><span class="stars">★★★★★</span><p>"Tot el que vam demanar estava boníssim, tot super casolà i fet amb molt de carinyo."</p><span class="who">— Laura</span></div>
+      <div class="review-card"><span class="stars">★★★★★</span><p>"Comida y sitio espectacular."</p><span class="who">— Ismael</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="info">
+  <div class="wrap">
+    <div class="practical-grid">
+      <div class="info-card reveal">
+        <h3>Horari</h3>
+        <p class="big">Dv – Dg</p><p>08:00–15:30 i 18:30–22:30</p>
+        <p class="big" style="margin-top:0.5rem;">Dl – Dc</p><p>18:00–22:30</p>
+        <p style="margin-top:0.6rem;">Dijous tancat</p>
+      </div>
+      <div class="info-card reveal" style="transition-delay:.08s">
+        <h3>On som</h3>
+        <p class="big">Carrer Bonaire, 13</p>
+        <p>17130 L'Escala, Girona</p>
+        <p>Aparcament a 3 min (C. Església)</p>
+      </div>
+      <div class="info-card reveal" style="transition-delay:.16s">
+        <h3>Contacte</h3>
+        <p class="big"><a href="tel:+34972770855">+34 972 77 08 55</a></p>
+        <p><a href="https://www.instagram.com/loscompadreslescala/">@loscompadreslescala</a></p>
+        <p style="margin-top:0.6rem;">Reobrim cada temporada l'1 de maig</p>
+      </div>
+    </div>
+
+    <div class="reserve-band reveal">
+      <div><h3>Taula per demà?</h3><p>Local petit i concorregut — millor reservar amb un dia d'antelació.</p></div>
+      <div class="reserve-actions">
+        <a class="btn btn-solid magnetic" href="tel:+34972770855">Trucar ara</a>
+        <a class="btn btn-line magnetic" href="https://wa.me/34972770855">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <p>© 2026 Los Compadres — L'Escala, Costa Brava</p>
+      <p><a href="https://www.instagram.com/loscompadreslescala/">Instagram</a></p>
+    </div>
+    <p class="foot-note">Propuesta de diseño web — datos de horario, dirección, reseñas y rànquing de platos tomados de fuentes públicas (Tripadvisor, Instagram); a confirmar con el restaurante antes de publicar.</p>
+  </div>
+</footer>
+
+<a href="#top" class="totop" id="toTop" aria-label="Tornar a dalt">↑</a>
+
+<script>
+(function(){
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function fmt(v, dec){
+    return dec ? v.toFixed(dec).replace('.', ',') : String(Math.round(v));
+  }
+  function animateCount(el){
+    var target = parseFloat(el.dataset.count);
+    var dec = parseInt(el.dataset.decimals || '0', 10);
+    if(reduceMotion){ el.textContent = fmt(target, dec); return; }
+    var start = performance.now(), duration = 1100;
+    function tick(now){
+      var p = Math.min((now-start)/duration, 1);
+      var eased = 1 - Math.pow(1-p, 3);
+      el.textContent = fmt(target*eased, dec);
+      if(p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        var counter = entry.target.querySelector('[data-count]');
+        if(counter && !counter.dataset.done){ counter.dataset.done='1'; animateCount(counter); }
+        if(entry.target.hasAttribute('data-count')){
+          if(!entry.target.dataset.done){ entry.target.dataset.done='1'; animateCount(entry.target); }
+        }
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.3});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  if(!reduceMotion){
+    var jug = document.getElementById('jugParallax');
+    var heroEl = document.querySelector('.hero');
+    if(jug && heroEl && matchMedia('(hover:hover)').matches){
+      heroEl.addEventListener('mousemove', function(e){
+        var r = heroEl.getBoundingClientRect();
+        var x = (e.clientX - r.left)/r.width - 0.5;
+        var y = (e.clientY - r.top)/r.height - 0.5;
+        jug.style.transform = 'translate(' + (x*10) + 'px,' + (y*10) + 'px)';
+      });
+      heroEl.addEventListener('mouseleave', function(){ jug.style.transform = ''; });
+    }
+    if(matchMedia('(hover:hover)').matches){
+      document.querySelectorAll('.magnetic').forEach(function(btn){
+        btn.addEventListener('mousemove', function(e){
+          var r = btn.getBoundingClientRect();
+          var x = e.clientX - r.left - r.width/2;
+          var y = e.clientY - r.top - r.height/2;
+          btn.style.transform = 'translate(' + (x*0.18) + 'px,' + (y*0.3) + 'px)';
+        });
+        btn.addEventListener('mouseleave', function(){ btn.style.transform = ''; });
+      });
+    }
+  }
+
+  var dots = document.querySelectorAll('.dotnav a');
+  var sectionIds = ['top','historia','plats','sostre','carta','opinions','info'];
+  var sections = sectionIds.map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  var navIo = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        dots.forEach(function(d){ d.classList.toggle('active', d.dataset.target === entry.target.id); });
+      }
+    });
+  }, {threshold:0.5, rootMargin:'-20% 0px -55% 0px'});
+  sections.forEach(function(s){ navIo.observe(s); });
+
+  var toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', function(){
+    toTop.classList.toggle('show', window.scrollY > 700);
+  }, {passive:true});
+})();
+</script>

@@ -1,0 +1,436 @@
+<title>Bakkhos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Mulish:ital,wght@0,400;0,600;0,700;0,800;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper: #f2e6ce; --paper-raised: #fbf3e1; --ink: #341016; --ink-soft: #70504a;
+    --accent: #b8862a; --accent-deep: #8a5a13; --wine: #7a1f2b; --wine-deep: #5c141d; --olive: #5c6b3f; --line: #d9c4a0;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper: #1c0d10; --paper-raised: #281317; --ink: #f1e3c9; --ink-soft: #caa89a;
+      --accent: #e3ac52; --accent-deep: #f0c473; --wine: #c8495a; --wine-deep: #e17383; --olive: #93a86d; --line: #452127;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper: #1c0d10; --paper-raised: #281317; --ink: #f1e3c9; --ink-soft: #caa89a;
+    --accent: #e3ac52; --accent-deep: #f0c473; --wine: #c8495a; --wine-deep: #e17383; --olive: #93a86d; --line: #452127;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:"Mulish","Segoe UI",sans-serif; font-size:16px; line-height:1.65; overflow-x:hidden; }
+  a{ color:inherit; }
+  h1,h2,h3{ font-family:"Cinzel", Georgia, serif; text-wrap:balance; margin:0; color:var(--ink); }
+  :focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+
+  .label{ font-family:"IBM Plex Mono", ui-monospace, monospace; text-transform:uppercase; letter-spacing:0.16em; font-size:0.7rem; color:var(--ink-soft); }
+  .wrap{ max-width:1100px; margin:0 auto; padding:0 clamp(1.25rem,4vw,3rem); }
+
+  .reveal{ opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.is-visible{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; }
+    .reveal, .reveal.is-visible{ opacity:1 !important; transform:none !important; transition:none !important; }
+    .magnetic{ transform:none !important; }
+  }
+
+  .meander{ height:14px; overflow:hidden; }
+  .meander svg{ width:100%; height:14px; display:block; }
+  .meander path{ stroke:var(--line); stroke-width:2; fill:none; }
+
+  /* dot nav */
+  .dotnav{ position:fixed; right:1.4rem; top:50%; transform:translateY(-50%); z-index:50; display:flex; flex-direction:column; gap:0.9rem; }
+  .dotnav a{ width:8px; height:8px; border-radius:50%; background:var(--line); display:block; position:relative; transition:background .2s, transform .2s; }
+  .dotnav a:hover, .dotnav a.active{ background:var(--accent); transform:scale(1.35); }
+  .dotnav a .tip{ position:absolute; right:16px; top:50%; transform:translateY(-50%); white-space:nowrap; font-family:"IBM Plex Mono",monospace; font-size:0.68rem; letter-spacing:0.06em; color:var(--ink-soft); opacity:0; transition:opacity .15s; pointer-events:none; }
+  .dotnav a:hover .tip{ opacity:1; }
+  @media (max-width:900px){ .dotnav{ display:none; } }
+
+  /* top bar */
+  .topbar{ position:sticky; top:0; z-index:40; background:color-mix(in srgb, var(--paper) 90%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
+  .topbar-inner{ max-width:1100px; margin:0 auto; padding:0.85rem clamp(1.25rem,4vw,3rem); display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+  .brand{ display:flex; align-items:baseline; gap:0.55rem; }
+  .brand-mark{ font-weight:700; font-size:1.3rem; letter-spacing:0.03em; }
+  .brand-sub{ font-family:"IBM Plex Mono",monospace; font-size:0.66rem; color:var(--ink-soft); letter-spacing:0.1em; }
+  .topnav{ display:flex; gap:1.5rem; align-items:center; }
+  .topnav a{ font-size:0.85rem; text-decoration:none; color:var(--ink-soft); border-bottom:1px solid transparent; padding-bottom:2px; transition:color .15s, border-color .15s; }
+  .topnav a:hover{ color:var(--ink); border-color:var(--accent); }
+  .topnav a.cta{ color:var(--paper-raised); background:var(--wine); padding:0.5rem 1.05rem; border-radius:2px; border-bottom:none; }
+  .topnav a.cta:hover{ background:var(--accent-deep); color:var(--wine-deep); }
+  @media (max-width:640px){ .topnav a:not(.cta){ display:none; } }
+
+  /* hero */
+  .hero{ position:relative; overflow:hidden; min-height:92vh; display:flex; align-items:center; padding:clamp(3rem,8vw,5rem) 0;
+    background:
+      radial-gradient(90% 70% at 85% -10%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%),
+      radial-gradient(70% 60% at 5% 110%, color-mix(in srgb, var(--wine) 18%, transparent), transparent 65%),
+      var(--paper);
+  }
+  .hero-grid{ display:grid; grid-template-columns:1.15fr 0.85fr; gap:clamp(2rem,5vw,3.5rem); align-items:center; width:100%; }
+  @media (max-width:880px){ .hero-grid{ grid-template-columns:1fr; } }
+  .eyebrow{ display:flex; align-items:center; gap:0.6rem; margin-bottom:1.1rem; opacity:0; animation:fadeUp .7s ease .1s forwards; }
+  .eyebrow .rule{ width:2.2rem; height:1px; background:var(--accent); }
+  .hero h1{ font-size:clamp(2.1rem,4.8vw,3.4rem); line-height:1.14; font-weight:700; letter-spacing:0.01em; }
+  .hero h1 .line{ display:block; overflow:hidden; }
+  .hero h1 .line span{ display:inline-block; opacity:0; transform:translateY(100%); animation:fadeUp .8s cubic-bezier(.2,.8,.2,1) forwards; }
+  .hero h1 span.accent{ color:var(--wine); }
+  @keyframes fadeUp{ to{ opacity:1; transform:translateY(0); } }
+  .hero p.lede{ margin-top:1.2rem; max-width:32rem; font-size:1.06rem; color:var(--ink-soft); opacity:0; animation:fadeUp .7s ease .55s forwards; }
+  .rating-badge{ display:inline-flex; align-items:center; gap:0.6rem; margin-top:1.4rem; padding:0.55rem 1rem; border:1px solid var(--line); border-radius:3px; background:var(--paper-raised); opacity:0; animation:fadeUp .7s ease .7s forwards; }
+  .rating-badge .stars{ color:var(--accent); font-size:0.95rem; letter-spacing:0.05em; }
+  .rating-badge .count{ font-family:"IBM Plex Mono",monospace; font-size:0.78rem; color:var(--ink-soft); }
+  .hero-ctas{ display:flex; gap:0.9rem; margin-top:1.8rem; flex-wrap:wrap; opacity:0; animation:fadeUp .7s ease .85s forwards; }
+  .btn{ display:inline-flex; align-items:center; gap:0.5rem; font-family:"IBM Plex Mono",monospace; font-size:0.76rem; letter-spacing:0.05em; text-transform:uppercase; text-decoration:none; padding:0.85rem 1.4rem; border-radius:2px; border:1px solid transparent; transition:background .15s, color .15s, border-color .15s; }
+  .btn-solid{ background:var(--wine); color:var(--paper-raised); }
+  .btn-solid:hover{ background:var(--accent-deep); color:var(--wine-deep); }
+  .btn-line{ border-color:var(--ink-soft); color:var(--ink); }
+  .btn-line:hover{ border-color:var(--ink); }
+
+  .scroll-cue{ position:absolute; bottom:1.6rem; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:0.4rem; opacity:0.6; }
+  .scroll-cue .stick{ width:1px; height:34px; background:linear-gradient(var(--ink-soft), transparent); animation:stickmove 1.8s ease-in-out infinite; }
+  @keyframes stickmove{ 0%{ opacity:0; transform:scaleY(0.4); } 40%{ opacity:1; } 100%{ opacity:0; transform:scaleY(1) translateY(10px); } }
+
+  .emblem{ position:relative; aspect-ratio:1/1.05; border-radius:6px; overflow:hidden; background:linear-gradient(160deg, var(--wine-deep), var(--wine) 55%, var(--accent-deep)); box-shadow:0 30px 60px -28px color-mix(in srgb, var(--wine-deep) 70%, black); display:flex; align-items:center; justify-content:center; opacity:0; animation:fadeUp 1s ease .3s forwards; }
+  .emblem-inner{ width:62%; height:62%; transition:transform .25s ease-out; }
+  .emblem-inner svg{ width:100%; height:100%; }
+  .amphora{ fill:none; stroke:var(--paper-raised); stroke-width:2.4; stroke-linejoin:round; stroke-linecap:round; opacity:0.92; }
+  .flame{ fill:var(--accent); opacity:0.9; }
+  .flame-flicker{ animation:flicker 3.2s ease-in-out infinite; transform-origin:50% 100%; }
+  @keyframes flicker{ 0%,100%{ transform:scaleY(1) rotate(0deg);} 50%{ transform:scaleY(1.08) rotate(-1.5deg);} }
+
+  section{ padding:clamp(3rem,7vw,5.2rem) 0; }
+  .section-head{ max-width:38rem; margin-bottom:clamp(2rem,5vw,3rem); }
+  .section-head h2{ font-size:clamp(1.6rem,3.2vw,2.15rem); margin-top:0.5rem; }
+  .section-head p{ color:var(--ink-soft); margin-top:0.8rem; }
+  .section-head.center{ margin-inline:auto; text-align:center; }
+
+  /* stats strip */
+  .heritage{ background:var(--wine); }
+  .heritage .wrap{ display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; text-align:center; }
+  @media (max-width:700px){ .heritage .wrap{ grid-template-columns:1fr; } }
+  .stat{ display:flex; flex-direction:column; gap:0.3rem; }
+  .stat .n{ font-family:"IBM Plex Mono",monospace; font-size:clamp(2.1rem,5vw,3rem); color:var(--accent); font-variant-numeric:tabular-nums; }
+  .stat .t{ font-size:0.86rem; color:color-mix(in srgb, var(--paper-raised) 78%, transparent); }
+
+  /* three kitchens */
+  .worlds{ background:var(--paper-raised); }
+  .worlds-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(1.5rem,3vw,2.2rem); }
+  @media (max-width:800px){ .worlds-grid{ grid-template-columns:1fr; } }
+  .world-card{ padding:1.8rem; border:1px solid var(--line); border-radius:4px; background:var(--paper); }
+  .world-card .num{ font-family:"IBM Plex Mono",monospace; color:var(--accent); font-size:0.78rem; letter-spacing:0.1em; }
+  .world-card h3{ font-size:1.2rem; margin-top:0.7rem; }
+  .world-card p{ color:var(--ink-soft); margin-top:0.6rem; font-size:0.94rem; }
+
+  /* menu */
+  .menu-groups{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(2rem,5vw,3.4rem); }
+  @media (max-width:760px){ .menu-groups{ grid-template-columns:1fr; } }
+  .menu-group h3{ font-size:1rem; text-transform:uppercase; letter-spacing:0.09em; font-family:"IBM Plex Mono",monospace; font-weight:500; color:var(--wine); padding-bottom:0.6rem; border-bottom:1px solid var(--line); margin-bottom:1rem; }
+  .dish{ display:flex; justify-content:space-between; align-items:baseline; gap:1rem; padding:0.62rem 0; border-bottom:1px dotted var(--line); }
+  .dish:last-child{ border-bottom:none; }
+  .dish-name{ font-size:0.97rem; }
+  .dish-note{ display:block; font-size:0.81rem; color:var(--ink-soft); margin-top:0.15rem; }
+  .dish-price{ font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; color:var(--accent); white-space:nowrap; font-size:0.92rem; }
+  .menu-foot{ margin-top:1.8rem; font-size:0.84rem; color:var(--ink-soft); font-style:italic; }
+
+  /* scores */
+  .scores{ display:grid; grid-template-columns:repeat(4,1fr); gap:1.4rem; max-width:44rem; }
+  @media (max-width:640px){ .scores{ grid-template-columns:repeat(2,1fr);} }
+  .score-item .label{ margin-bottom:0.5rem; }
+  .score-item .val{ font-family:"IBM Plex Mono",monospace; font-size:1.4rem; color:var(--ink); font-variant-numeric:tabular-nums; }
+  .score-bar{ margin-top:0.5rem; height:5px; background:var(--line); border-radius:3px; overflow:hidden; }
+  .score-bar > span{ display:block; height:100%; width:0%; background:var(--accent); transition:width 1.1s cubic-bezier(.2,.8,.2,1); }
+  .score-item.is-visible .score-bar > span{ width:var(--fill,0%); }
+
+  /* reviews marquee */
+  .reviews{ background:var(--paper-raised); overflow:hidden; }
+  .marquee{ display:flex; gap:1.2rem; width:max-content; animation:scrollx 34s linear infinite; }
+  .marquee:hover{ animation-play-state:paused; }
+  @keyframes scrollx{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+  .review-card{ width:320px; flex:0 0 auto; padding:1.4rem; background:var(--paper); border:1px solid var(--line); border-radius:4px; display:flex; flex-direction:column; gap:0.7rem; }
+  .review-card .stars{ color:var(--accent); font-size:0.85rem; letter-spacing:0.06em; }
+  .review-card p{ margin:0; font-size:0.9rem; color:var(--ink-soft); }
+  .review-card .who{ font-family:"IBM Plex Mono",monospace; font-size:0.72rem; color:var(--ink); letter-spacing:0.04em; }
+  .marquee-mask{ mask-image:linear-gradient(90deg, transparent, black 6%, black 94%, transparent); }
+
+  /* practical */
+  .practical-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:2rem; }
+  @media (max-width:760px){ .practical-grid{ grid-template-columns:1fr; } }
+  .info-card{ border:1px solid var(--line); border-radius:3px; padding:1.6rem; background:var(--paper-raised); }
+  .info-card h3{ font-size:0.95rem; font-family:"IBM Plex Mono",monospace; letter-spacing:0.06em; text-transform:uppercase; color:var(--wine); margin-bottom:0.8rem; }
+  .info-card p{ margin:0.2rem 0; color:var(--ink-soft); font-size:0.92rem; }
+  .info-card .big{ color:var(--ink); font-size:1rem; }
+  .info-card a{ text-decoration:none; }
+  .info-card a:hover{ color:var(--accent-deep); }
+
+  .reserve-band{ margin-top:2.4rem; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; flex-wrap:wrap; padding:1.9rem clamp(1.5rem,4vw,2.6rem); background:var(--wine); border-radius:5px; position:relative; overflow:hidden; }
+  .reserve-band::before{ content:""; position:absolute; inset:0; background:radial-gradient(60% 120% at 90% 50%, color-mix(in srgb, var(--accent) 28%, transparent), transparent 70%); }
+  .reserve-band > *{ position:relative; }
+  .reserve-band h3{ color:var(--paper-raised); font-size:1.25rem; }
+  .reserve-band p{ color:color-mix(in srgb, var(--paper-raised) 78%, transparent); margin:0.3rem 0 0; font-size:0.9rem; }
+  .reserve-actions{ display:flex; gap:0.8rem; flex-wrap:wrap; }
+  .reserve-actions .btn-solid{ background:var(--accent); color:var(--wine-deep); }
+  .reserve-actions .btn-solid:hover{ background:var(--paper-raised); color:var(--wine); }
+  .reserve-actions .btn-line{ border-color:color-mix(in srgb, var(--paper-raised) 55%, transparent); color:var(--paper-raised); }
+
+  footer{ border-top:1px solid var(--line); padding:2.2rem 0; margin-top:1rem; }
+  .foot-grid{ display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; align-items:center; }
+  .foot-grid p{ margin:0; font-size:0.8rem; color:var(--ink-soft); }
+  .foot-grid a{ text-decoration:none; }
+  .foot-note{ margin-top:0.6rem; font-size:0.72rem; color:var(--ink-soft); opacity:0.75; }
+
+  .totop{ position:fixed; right:1.4rem; bottom:1.4rem; z-index:50; width:2.6rem; height:2.6rem; border-radius:50%; background:var(--wine); color:var(--paper-raised); display:flex; align-items:center; justify-content:center; text-decoration:none; opacity:0; pointer-events:none; transition:opacity .25s; font-size:1.1rem; }
+  .totop.show{ opacity:1; pointer-events:auto; }
+  .totop:hover{ background:var(--accent-deep); color:var(--wine-deep); }
+</style>
+
+<nav class="dotnav" aria-hidden="true">
+  <a href="#top" data-target="top" class="active"><span class="tip">Inici</span></a>
+  <a href="#stats" data-target="stats"><span class="tip">Datos</span></a>
+  <a href="#casa" data-target="casa"><span class="tip">La casa</span></a>
+  <a href="#carta" data-target="carta"><span class="tip">Carta</span></a>
+  <a href="#puntuacions" data-target="puntuacions"><span class="tip">Puntos</span></a>
+  <a href="#opiniones" data-target="opiniones"><span class="tip">Opiniones</span></a>
+  <a href="#info" data-target="info"><span class="tip">Info</span></a>
+</nav>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><span class="brand-mark">BAKKHOS</span><span class="brand-sub">CAFÉ · PIZZERÍA · GRILL</span></div>
+    <nav class="topnav">
+      <a href="#casa">La casa</a>
+      <a href="#carta">La carta</a>
+      <a href="#opiniones">Opiniones</a>
+      <a href="#info" class="cta">Reservar</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow"><span class="rule"></span><span class="label">Carrer del Tamariu 7 · Empuriabrava</span></div>
+      <h1>
+        <span class="line"><span style="animation-delay:.15s">Tres</span> <span style="animation-delay:.24s">cocinas.</span></span>
+        <span class="line"><span style="animation-delay:.38s">Una</span> <span style="animation-delay:.47s">mesa</span> <span class="accent" style="animation-delay:.56s">XXL</span><span style="animation-delay:.62s">.</span></span>
+      </h1>
+      <p class="lede">Pizzas al horno para compartir, parrilla al estilo argentino y desayunos que empiezan a las 7:30. Bakkhos es el sitio donde toda la mesa se pone de acuerdo — al final, siempre repites.</p>
+      <div class="rating-badge"><span class="stars">★★★★☆</span><span class="count">4,4 / 5 TripAdvisor · 98 opiniones</span></div>
+      <div class="hero-ctas">
+        <a class="btn btn-solid magnetic" href="tel:+34972199956">Reservar mesa</a>
+        <a class="btn btn-line magnetic" href="#carta">Ver la carta</a>
+      </div>
+    </div>
+    <div class="emblem" aria-hidden="true">
+      <div class="emblem-inner" id="emblemParallax">
+        <svg viewBox="0 0 200 200">
+          <path class="amphora" d="M100,18 C90,18 84,26 84,34 C84,40 88,44 88,50 L70,58 C58,62 50,74 50,90 L50,150 C50,168 66,182 100,182 C134,182 150,168 150,150 L150,90 C150,74 142,62 130,58 L112,50 C112,44 116,40 116,34 C116,26 110,18 100,18 Z"></path>
+          <path class="amphora" d="M64,86 C74,96 88,102 100,102 C112,102 126,96 136,86" opacity="0.6"></path>
+          <g class="flame-flicker" transform="translate(100,150)"><path class="flame" d="M0,-26 C10,-16 12,-4 4,4 C8,-2 4,-8 0,-12 C-4,-8 -8,-2 -4,4 C-12,-4 -10,-16 0,-26 Z"></path></g>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue" aria-hidden="true"><span class="stick"></span><span class="label">scroll</span></div>
+</header>
+
+<section id="stats" class="heritage">
+  <div class="wrap">
+    <div class="stat reveal"><span class="n" data-count="4.4" data-decimals="1">0</span><span class="t">valoración media en Tripadvisor</span></div>
+    <div class="stat reveal" style="transition-delay:.1s"><span class="n" data-count="98">0</span><span class="t">opiniones verificadas</span></div>
+    <div class="stat reveal" style="transition-delay:.2s"><span class="n" data-count="949">0</span><span class="t">seguidores en Instagram</span></div>
+  </div>
+</section>
+
+<div class="meander" aria-hidden="true"><svg preserveAspectRatio="none" viewBox="0 0 400 14"><path d="M0,2 H8 V12 H16 V2 H24 V12 H32 V2 H40 V12 H48 V2 H56 V12 H64 V2 H72 V12 H80 V2 H88 V12 H96 V2 H104 V12 H112 V2 H120 V12 H128 V2 H136 V12 H144 V2 H152 V12 H160 V2 H168 V12 H176 V2 H184 V12 H192 V2 H200 V12 H208 V2 H216 V12 H224 V2 H232 V12 H240 V2 H248 V12 H256 V2 H264 V12 H272 V2 H280 V12 H288 V2 H296 V12 H304 V2 H312 V12 H320 V2 H328 V12 H336 V2 H344 V12 H352 V2 H360 V12 H368 V2 H376 V12 H384 V2 H392 V12 H400"></path></svg></div>
+
+<section id="casa" class="worlds">
+  <div class="wrap">
+    <div class="section-head center reveal" style="margin-bottom:2.4rem;">
+      <span class="label">Baco, dios del vino y del banquete</span>
+      <h2>El nombre no es casualidad</h2>
+      <p>En Bakkhos conviven, sin pelearse, la pizzería italiana, la parrilla argentina y el café de barrio de toda la vida.</p>
+    </div>
+    <div class="worlds-grid">
+      <div class="world-card reveal"><span class="num">01 — ITALIA</span><h3>Del horno</h3><p>Pizzas XXL de masa fina y borde crujiente, para compartir en el centro de la mesa.</p></div>
+      <div class="world-card reveal" style="transition-delay:.08s"><span class="num">02 — ARGENTINA</span><h3>De la brasa</h3><p>Entrecot, solomillo y empanadas argentinas hechas como en casa. Y el cachopo de la casa, que se ha ganado fama propia.</p></div>
+      <div class="world-card reveal" style="transition-delay:.16s"><span class="num">03 — DE BARRIO</span><h3>De 7:30 a 23:00</h3><p>Desayunos completos desde primera hora, café todo el día y una terraza amplia para quedarse hasta la cena.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="carta">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="label">La carta · selección</span>
+      <h2>Raciones que no escatiman</h2>
+      <p>Una muestra de la carta — precios orientativos, a confirmar con la carta real del local.</p>
+    </div>
+    <div class="menu-groups">
+      <div class="menu-group reveal">
+        <h3>Del horno</h3>
+        <div class="dish"><span class="dish-name">Pizza Poseidón XXL<span class="dish-note">la más pedida de la carta</span></span><span class="dish-price">14 €</span></div>
+        <div class="dish"><span class="dish-name">Pizza Napolitana XXL</span><span class="dish-price">12 €</span></div>
+        <div class="dish"><span class="dish-name">Empanadas argentinas<span class="dish-note">unidad</span></span><span class="dish-price">2,5 €</span></div>
+        <div class="dish"><span class="dish-name">Nachos de la casa</span><span class="dish-price">9 €</span></div>
+      </div>
+      <div class="menu-group reveal" style="transition-delay:.1s">
+        <h3>De la brasa</h3>
+        <div class="dish"><span class="dish-name">Cachopo de la casa<span class="dish-note">el más pedido, según nuestros clientes</span></span><span class="dish-price">17 €</span></div>
+        <div class="dish"><span class="dish-name">Entrecot a la plancha</span><span class="dish-price">19 €</span></div>
+        <div class="dish"><span class="dish-name">Solomillo con salsa a elegir</span><span class="dish-price">18 €</span></div>
+        <div class="dish"><span class="dish-name">Tiramisú casero</span><span class="dish-price">5,5 €</span></div>
+      </div>
+    </div>
+    <p class="menu-foot reveal">También desayunos completos, cafés, sangría y menú infantil — carta detallada disponible en el local.</p>
+  </div>
+</section>
+
+<div class="meander" aria-hidden="true"><svg preserveAspectRatio="none" viewBox="0 0 400 14"><path d="M0,2 H8 V12 H16 V2 H24 V12 H32 V2 H40 V12 H48 V2 H56 V12 H64 V2 H72 V12 H80 V2 H88 V12 H96 V2 H104 V12 H112 V2 H120 V12 H128 V2 H136 V12 H144 V2 H152 V12 H160 V2 H168 V12 H176 V2 H184 V12 H192 V2 H200 V12 H208 V2 H216 V12 H224 V2 H232 V12 H240 V2 H248 V12 H256 V2 H264 V12 H272 V2 H280 V12 H288 V2 H296 V12 H304 V2 H312 V12 H320 V2 H328 V12 H336 V2 H344 V12 H352 V2 H360 V12 H368 V2 H376 V12 H384 V2 H392 V12 H400"></path></svg></div>
+
+<section id="puntuacions">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="label">Por categorías</span>
+      <h2>Cómo puntúa la gente</h2>
+    </div>
+    <div class="scores">
+      <div class="score-item reveal" style="--fill:80%"><span class="label">Servicio</span><div class="val" data-count="4.0" data-decimals="1">0</div><div class="score-bar"><span></span></div></div>
+      <div class="score-item reveal" style="--fill:82%; transition-delay:.08s"><span class="label">Comida</span><div class="val" data-count="4.1" data-decimals="1">0</div><div class="score-bar"><span></span></div></div>
+      <div class="score-item reveal" style="--fill:84%; transition-delay:.16s"><span class="label">Precio</span><div class="val" data-count="4.2" data-decimals="1">0</div><div class="score-bar"><span></span></div></div>
+      <div class="score-item reveal" style="--fill:74%; transition-delay:.24s"><span class="label">Ambiente</span><div class="val" data-count="3.7" data-decimals="1">0</div><div class="score-bar"><span></span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="opiniones" class="reviews">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="label">Lo que dicen — opiniones reales</span>
+      <h2>4,4 de 5 en Tripadvisor</h2>
+    </div>
+  </div>
+  <div class="marquee-mask">
+    <div class="marquee">
+      <div class="review-card"><span class="stars">★★★★★</span><p>"Tercera vez que vengo y me encanta, el cachopo brutal, buenísimo. El personal, atentos y educados, local muy limpio."</p><span class="who">— Rous</span></div>
+      <div class="review-card"><span class="stars">★★★★★</span><p>"Hemos celebrado el 18 cumpleaños de nuestro hijo. Todo genial... la cena súper... y el personal muy implicado."</p><span class="who">— Xavi</span></div>
+      <div class="review-card"><span class="stars">★★★★★</span><p>"Excelente servicio, buenos precios y buena comida."</p><span class="who">— Brian</span></div>
+      <div class="review-card"><span class="stars">★★★★★</span><p>"Muy bien ubicado. Su comida es espectacular, con una presentación de los platos inigualable."</p><span class="who">— Andrés</span></div>
+      <div class="review-card"><span class="stars">★★★★★</span><p>"La comida es muy sabrosa y el personal es amable."</p><span class="who">— Emil</span></div>
+      <div class="review-card"><span class="stars">★★★★★</span><p>"Tercera vez que vengo y me encanta, el cachopo brutal, buenísimo. El personal, atentos y educados, local muy limpio."</p><span class="who">— Rous</span></div>
+      <div class="review-card"><span class="stars">★★★★★</span><p>"Hemos celebrado el 18 cumpleaños de nuestro hijo. Todo genial... la cena súper... y el personal muy implicado."</p><span class="who">— Xavi</span></div>
+      <div class="review-card"><span class="stars">★★★★★</span><p>"Excelente servicio, buenos precios y buena comida."</p><span class="who">— Brian</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="info">
+  <div class="wrap">
+    <div class="practical-grid">
+      <div class="info-card reveal">
+        <h3>Horario</h3>
+        <p class="big">Lunes – Sábado</p><p>07:30 – 23:00</p>
+        <p class="big" style="margin-top:0.5rem;">Domingo</p><p>08:30 – 23:00</p>
+      </div>
+      <div class="info-card reveal" style="transition-delay:.08s">
+        <h3>Dónde estamos</h3>
+        <p class="big">Carrer del Tamariu, 7</p>
+        <p>Empuriabrava · 17487 Girona</p>
+        <p>Justo detrás del Aldi — parking gratuito</p>
+      </div>
+      <div class="info-card reveal" style="transition-delay:.16s">
+        <h3>Contacto</h3>
+        <p class="big"><a href="tel:+34972199956">+34 972 19 99 56</a></p>
+        <p><a href="https://www.instagram.com/bakkhoscafe/">@bakkhoscafe</a></p>
+      </div>
+    </div>
+
+    <div class="reserve-band reveal">
+      <div><h3>¿Mesa para esta noche?</h3><p>En temporada alta, se llena — mejor reservar con antelación.</p></div>
+      <div class="reserve-actions">
+        <a class="btn btn-solid magnetic" href="tel:+34972199956">Llamar ahora</a>
+        <a class="btn btn-line magnetic" href="https://wa.me/34972199956">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid"><p>© 2026 Bakkhos — Empuriabrava, Costa Brava</p><p><a href="https://www.instagram.com/bakkhoscafe/">Instagram</a></p></div>
+    <p class="foot-note">Propuesta de diseño web — carta, precios y horario ilustrativos a partir de datos públicos (Tripadvisor, Instagram), pendientes de confirmar con el restaurante antes de publicar.</p>
+  </div>
+</footer>
+
+<a href="#top" class="totop" id="toTop" aria-label="Volver arriba">↑</a>
+
+<script>
+(function(){
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function fmt(v, dec){ return dec ? v.toFixed(dec).replace('.', ',') : String(Math.round(v)); }
+  function animateCount(el){
+    var target = parseFloat(el.dataset.count);
+    var dec = parseInt(el.dataset.decimals || '0', 10);
+    if(reduceMotion){ el.textContent = fmt(target, dec); return; }
+    var start = performance.now(), duration = 1100;
+    function tick(now){
+      var p = Math.min((now-start)/duration, 1);
+      var eased = 1 - Math.pow(1-p, 3);
+      el.textContent = fmt(target*eased, dec);
+      if(p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        var counter = entry.target.querySelector('[data-count]');
+        if(counter && !counter.dataset.done){ counter.dataset.done='1'; animateCount(counter); }
+        if(entry.target.hasAttribute('data-count') && !entry.target.dataset.done){ entry.target.dataset.done='1'; animateCount(entry.target); }
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.3});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  if(!reduceMotion && matchMedia('(hover:hover)').matches){
+    var emblem = document.getElementById('emblemParallax');
+    var heroEl = document.querySelector('.hero');
+    if(emblem && heroEl){
+      heroEl.addEventListener('mousemove', function(e){
+        var r = heroEl.getBoundingClientRect();
+        var x = (e.clientX - r.left)/r.width - 0.5;
+        var y = (e.clientY - r.top)/r.height - 0.5;
+        emblem.style.transform = 'translate(' + (x*10) + 'px,' + (y*10) + 'px)';
+      });
+      heroEl.addEventListener('mouseleave', function(){ emblem.style.transform = ''; });
+    }
+    document.querySelectorAll('.magnetic').forEach(function(btn){
+      btn.addEventListener('mousemove', function(e){
+        var r = btn.getBoundingClientRect();
+        var x = e.clientX - r.left - r.width/2;
+        var y = e.clientY - r.top - r.height/2;
+        btn.style.transform = 'translate(' + (x*0.18) + 'px,' + (y*0.3) + 'px)';
+      });
+      btn.addEventListener('mouseleave', function(){ btn.style.transform = ''; });
+    });
+  }
+
+  var dots = document.querySelectorAll('.dotnav a');
+  var sectionIds = ['top','stats','casa','carta','puntuacions','opiniones','info'];
+  var sections = sectionIds.map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  var navIo = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){ dots.forEach(function(d){ d.classList.toggle('active', d.dataset.target === entry.target.id); }); }
+    });
+  }, {threshold:0.5, rootMargin:'-20% 0px -55% 0px'});
+  sections.forEach(function(s){ navIo.observe(s); });
+
+  var toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', function(){ toTop.classList.toggle('show', window.scrollY > 700); }, {passive:true});
+})();
+</script>
