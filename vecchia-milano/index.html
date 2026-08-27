@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vecchia Milano</title>
+<meta name="description" content="Trattoria Vecchia Milano, Empuriabrava. Cocina lombarda frente al puerto desde 1998. Pasta y risotto, sin pizzas. 4,3 sobre 5 en TripAdvisor.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add("js");</script>
+<style>
+/* ============ IDENTIDAD ============
+   Verde Navigli · Crema Parmigiano · Vermiglio · Latón · Nero Sforza
+   Milán no es rojo-blanco-verde: es verde profundo, latón y racionalismo. */
+:root{
+  --navigli:#1C3A33;
+  --navigli-clar:#2E5C50;
+  --vermiglio:#C1452C;
+  --llauto:#C9A961;
+  --llauto-viu:#E0C078;
+  --parmigiano:#F2EADB;
+  --sforza:#0E1614;
+
+  --bg:#0E1614;
+  --bg-2:#142220;
+  --bg-3:#1C302B;
+  --tinta:#F0EBDF;
+  --tinta-suau:#A8B5AC;
+  --accent:var(--llauto-viu);
+  --accent-2:var(--vermiglio);
+  --vora:rgba(240,235,223,.14);
+  --vora-forta:rgba(240,235,223,.3);
+  --visual-a:#14322B;
+  --visual-b:#0E1614;
+  --visual-c:#2E5C50;
+  --tancat:#E8705A;
+
+  --radi:2px;
+  --max:1240px;
+  --pad:clamp(20px,5vw,64px);
+  --suau:cubic-bezier(.22,1,.36,1);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--tinta);
+  font-family:'Jost',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:clamp(15px,.55vw + 14px,17px);line-height:1.68;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+::selection{background:var(--accent);color:var(--sforza)}
+
+.env{width:100%;max-width:var(--max);margin-inline:auto;padding-inline:var(--pad)}
+
+/* ============ CAPA VISUAL ============ */
+.visual{position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none}
+.visual-fons{
+  position:absolute;inset:-2%;
+  background:
+    radial-gradient(115% 78% at 74% 16%, var(--visual-c) 0%, transparent 58%),
+    radial-gradient(95% 70% at 10% 94%, var(--visual-a) 0%, transparent 62%),
+    linear-gradient(170deg, var(--visual-a) 0%, var(--visual-b) 56%, var(--visual-b) 100%);
+}
+.gra{
+  position:absolute;inset:0;opacity:.4;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.vinyeta{position:absolute;inset:0;background:radial-gradient(112% 78% at 50% 40%, transparent 42%, rgba(6,12,10,.6) 100%)}
+/* Galería abovedada: nervios de hierro y vidrio */
+.galeria{position:absolute;inset:0;width:100%;height:100%}
+.galeria path,.galeria line{fill:none;stroke:var(--llauto);stroke-width:1;opacity:.24}
+.galeria .traç{stroke-dasharray:var(--llarg);stroke-dashoffset:var(--llarg);animation:dibuixa 3s var(--suau) forwards}
+@keyframes dibuixa{to{stroke-dashoffset:0}}
+
+/* ============ NAV ============ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:80;transition:background .4s ease,backdrop-filter .4s ease,border-color .4s ease;border-bottom:1px solid transparent}
+.nav.enganxat{background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom-color:var(--vora)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:66px}
+.marca{
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;
+  font-size:clamp(19px,1.1vw + 15px,24px);letter-spacing:.02em;
+  text-decoration:none;line-height:1;white-space:nowrap;color:var(--tinta);
+}
+.marca em{font-style:italic;color:var(--accent)}
+.nav-enllacos{display:none;gap:clamp(16px,2.2vw,34px);align-items:center}
+@media(min-width:900px){.nav-enllacos{display:flex}}
+.nav-enllacos a{text-decoration:none;font-size:12.5px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--tinta-suau);position:relative;padding:6px 0;transition:color .25s ease}
+.nav-enllacos a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--accent);transition:width .35s var(--suau)}
+.nav-enllacos a:hover{color:var(--tinta)}
+.nav-enllacos a:hover::after{width:100%}
+.nav-dreta{display:flex;align-items:center;gap:10px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 26px;border-radius:2px;text-decoration:none;font-weight:500;font-size:13.5px;letter-spacing:.09em;text-transform:uppercase;border:1px solid transparent;cursor:pointer;font-family:'Jost',sans-serif;transition:transform .35s var(--suau),box-shadow .35s ease,background .25s ease,color .25s ease,border-color .25s ease}
+.btn-ple{background:var(--accent);color:var(--sforza)}
+.btn-ple:hover{transform:translateY(-3px);box-shadow:0 18px 40px -14px rgba(0,0,0,.6)}
+.btn-buit{border-color:var(--vora-forta);color:var(--tinta);background:transparent}
+.btn-buit:hover{transform:translateY(-3px);border-color:var(--accent);background:rgba(224,192,120,.1)}
+.btn-petit{padding:10px 18px;font-size:12px}
+
+/* ============ HERO ============ */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;padding-block:120px clamp(40px,7vh,80px);overflow:hidden}
+.hero-in{position:relative;z-index:2;width:100%}
+.etiqueta{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);margin-bottom:clamp(16px,2.4vw,26px)}
+.punt{width:5px;height:5px;border-radius:50%;background:var(--accent);flex:0 0 auto;animation:bat 2.6s ease-in-out infinite}
+@keyframes bat{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:clamp(52px,12vw,182px);line-height:.86;letter-spacing:-.022em;margin:0 0 clamp(22px,3vw,34px);text-wrap:balance}
+h1 em{font-style:italic;font-weight:400;color:var(--accent);display:block}
+.hero-baix{display:flex;flex-wrap:wrap;gap:clamp(20px,4vw,60px);align-items:flex-end;justify-content:space-between}
+.hero-text{font-size:clamp(15.5px,.7vw + 14px,19px);line-height:1.62;max-width:38ch;color:var(--tinta-suau);margin:0}
+.hero-text strong{color:var(--tinta);font-weight:500}
+.hero-btns{display:flex;flex-wrap:wrap;gap:12px}
+.cue{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:2;display:grid;place-items:center;gap:8px;color:var(--tinta-suau);font-size:10px;letter-spacing:.2em;text-transform:uppercase}
+.cue span{display:block;width:1px;height:34px;background:linear-gradient(var(--accent),transparent);animation:baixa 2.2s ease-in-out infinite}
+@keyframes baixa{0%,100%{transform:scaleY(.4);opacity:.5;transform-origin:top}50%{transform:scaleY(1);opacity:1;transform-origin:top}}
+@media(max-width:700px){.cue{display:none}}
+
+/* ============ TIPOGRAFÍA GIGANTE ============ */
+.slab{position:relative;overflow:hidden;padding:clamp(52px,9vw,110px) var(--pad);border-top:1px solid var(--vora);border-bottom:1px solid var(--vora);background:var(--bg-2);text-align:center}
+.slab-mot{font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;font-size:clamp(38px,13vw,260px);line-height:.8;letter-spacing:-.03em;margin:0;white-space:nowrap;color:var(--tinta);display:inline-block}
+.slab-mot em{font-style:italic;color:var(--accent)}
+.slab-mot.parteix{white-space:normal}
+.slab-mot.parteix em{display:block}
+.slab-peu{display:flex;flex-wrap:wrap;gap:clamp(14px,4vw,48px);justify-content:center;margin-top:clamp(20px,3vw,34px);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--tinta-suau)}
+.slab-peu b{color:var(--accent);font-weight:600}
+
+/* ============ ESTADÍSTICAS ============ */
+.stats{padding-block:clamp(48px,8vw,96px)}
+.stats-graella{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(26px,4vw,48px)}
+@media(min-width:820px){.stats-graella{grid-template-columns:repeat(4,1fr)}}
+.stat{border-top:1px solid var(--vora);padding-top:clamp(14px,2vw,20px)}
+.stat-xifra{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:clamp(42px,6.5vw,80px);line-height:1;letter-spacing:-.02em;color:var(--accent);display:block;font-variant-numeric:tabular-nums}
+.stat-sufix{font-size:.4em;color:var(--tinta-suau);font-weight:400}
+.stat-etiq{font-size:11.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-suau);margin-top:12px;line-height:1.5}
+
+/* ============ SECCIONES ============ */
+section{position:relative}
+.cap{max-width:60ch;margin-bottom:clamp(30px,5vw,54px)}
+.sobretitol{font-size:11px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);margin:0 0 16px}
+h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:clamp(36px,6.2vw,84px);line-height:1;letter-spacing:-.02em;margin:0 0 20px;text-wrap:balance}
+h2 em{font-style:italic;color:var(--accent)}
+.cap p:not(.sobretitol){font-size:clamp(15.5px,.55vw + 14px,18px);color:var(--tinta-suau);margin:0}
+
+/* ============ LA CASA ============ */
+.sala{display:grid;grid-template-columns:1fr;align-items:stretch}
+@media(min-width:940px){.sala{grid-template-columns:1.05fr .95fr}}
+.sala-visual{position:relative;min-height:clamp(340px,58vh,660px);overflow:hidden}
+.sala-visual .galeria path,.sala-visual .galeria line{opacity:.36}
+.sala-txt{display:flex;flex-direction:column;justify-content:center;padding:clamp(48px,7vw,104px) var(--pad);background:var(--bg-2)}
+@media(min-width:940px){.sala-txt{padding-right:max(var(--pad),calc((100vw - var(--max))/2 + var(--pad)))}}
+.sala-txt p:not(.sobretitol){font-size:clamp(15.5px,.55vw + 14px,17.5px);color:var(--tinta-suau);margin:0 0 20px;max-width:52ch}
+.sala-txt p strong{color:var(--tinta);font-weight:500}
+.fets{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:14px;max-width:52ch}
+.fets li{display:flex;gap:14px;align-items:flex-start;font-size:15px;color:var(--tinta-suau)}
+.fets svg{width:17px;height:17px;flex:0 0 auto;margin-top:4px;color:var(--accent)}
+.fets b{color:var(--tinta);font-weight:500}
+
+/* ============ CARTA ============ */
+.carta{padding-block:clamp(56px,9vw,120px);overflow:hidden}
+.carta-cap{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end;justify-content:space-between;margin-bottom:clamp(28px,4vw,48px)}
+.pista{
+  display:flex;gap:clamp(12px,1.6vw,20px);overflow-x:auto;scroll-snap-type:x proximity;
+  padding-inline:max(var(--pad),calc((100vw - var(--max))/2 + var(--pad)));padding-bottom:18px;
+  scroll-padding-inline-start:max(var(--pad),calc((100vw - var(--max))/2 + var(--pad)));
+  scrollbar-width:thin;scrollbar-color:var(--vora-forta) transparent;
+}
+.pista::-webkit-scrollbar{height:5px}
+.pista::-webkit-scrollbar-thumb{background:var(--vora-forta);border-radius:100px}
+.pista::-webkit-scrollbar-track{background:transparent}
+.plat{scroll-snap-align:start;flex:0 0 min(78vw,352px);position:relative;border:1px solid var(--vora);background:var(--bg-2);overflow:hidden;padding:clamp(26px,3vw,36px);min-height:clamp(240px,32vh,300px);display:flex;flex-direction:column;transition:transform .45s var(--suau),border-color .45s ease,background .45s ease}
+.plat::before{content:"";position:absolute;inset:0 auto 0 0;width:2px;background:var(--accent);transform:scaleY(0);transform-origin:bottom;transition:transform .5s var(--suau)}
+.plat:hover{transform:translateY(-8px);border-color:var(--vora-forta);background:var(--bg-3)}
+.plat:hover::before{transform:scaleY(1)}
+.plat-num{font-family:'Cormorant Garamond',Georgia,serif;font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.2em;display:block;margin-bottom:auto}
+.plat h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:clamp(23px,1.7vw + 15px,31px);line-height:1.08;margin:24px 0 12px;letter-spacing:-.01em}
+.plat p{margin:0;font-size:14px;color:var(--tinta-suau);line-height:1.62}
+.pista-ajuda{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--tinta-suau);display:flex;align-items:center;gap:10px}
+.pista-ajuda svg{width:22px;height:12px;color:var(--accent)}
+
+/* ============ RESEÑAS ============ */
+.cites{padding-block:clamp(56px,9vw,120px);background:var(--bg-2);border-block:1px solid var(--vora)}
+.cita-gran{border-top:1px solid var(--vora);padding-block:clamp(32px,5vw,58px);display:grid;gap:clamp(16px,3vw,40px)}
+@media(min-width:900px){.cita-gran{grid-template-columns:1fr 2.1fr;align-items:start}}
+.cita-meta-col{display:flex;flex-direction:column;gap:8px}
+.estrelles{display:flex;gap:3px;color:var(--accent)}
+.estrelles svg{width:14px;height:14px}
+.cita-autor{font-size:14.5px;font-weight:500;color:var(--tinta)}
+.cita-font{font-size:12px;color:var(--tinta-suau);letter-spacing:.06em}
+.cita-gran blockquote{margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(23px,2.8vw,44px);line-height:1.2;font-style:italic;font-weight:400;color:var(--tinta);text-wrap:balance}
+
+/* ============ INFO ============ */
+.info{padding-block:clamp(56px,9vw,116px)}
+.info-graella{display:grid;gap:0;grid-template-columns:1fr;border-top:1px solid var(--vora)}
+@media(min-width:700px){.info-graella{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1020px){.info-graella{grid-template-columns:repeat(4,1fr)}}
+.info-bloc{padding:clamp(26px,3vw,36px) clamp(20px,2vw,28px);border-bottom:1px solid var(--vora);transition:background .35s ease}
+@media(min-width:700px){.info-bloc{border-right:1px solid var(--vora)}.info-bloc:nth-child(2n){border-right:0}}
+@media(min-width:1020px){.info-bloc{border-right:1px solid var(--vora)}.info-bloc:nth-child(2n){border-right:1px solid var(--vora)}.info-bloc:nth-child(4n){border-right:0}}
+.info-bloc:hover{background:var(--bg-2)}
+.info-icona{width:20px;height:20px;color:var(--accent);margin-bottom:16px}
+.info-bloc h3{font-size:11px;font-weight:500;letter-spacing:.19em;text-transform:uppercase;color:var(--tinta-suau);margin:0 0 12px}
+.info-bloc p{margin:0;font-size:15px;line-height:1.6}
+.info-bloc a{color:var(--accent);text-decoration:none;font-weight:500}
+.info-bloc a:hover{text-decoration:underline}
+.horari-fila{display:flex;justify-content:space-between;gap:14px;font-size:14px;padding:4px 0}
+.horari-fila span:last-child{color:var(--tinta-suau);text-align:right;font-variant-numeric:tabular-nums}
+.tancat{color:var(--tancat)!important;font-weight:600}
+
+/* ============ CTA ============ */
+.cta{position:relative;overflow:hidden;padding-block:clamp(70px,12vw,150px);text-align:center}
+.cta .env{position:relative;z-index:2}
+.cta h2{margin-bottom:20px}
+.cta p{color:var(--tinta-suau);max-width:48ch;margin:0 auto clamp(30px,4vw,42px);font-size:clamp(15.5px,.6vw + 14px,18px)}
+.cta-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+
+/* ============ PIE ============ */
+footer{padding-block:clamp(44px,6vw,72px) clamp(28px,4vw,40px);border-top:1px solid var(--vora)}
+.peu-dalt{display:flex;flex-wrap:wrap;gap:28px;justify-content:space-between;align-items:flex-start;margin-bottom:36px}
+.peu-marca{font-family:'Cormorant Garamond',Georgia,serif;font-size:34px;font-weight:600;margin:0 0 10px}
+.peu-marca em{font-style:italic;color:var(--accent)}
+.peu-adr{font-size:14px;color:var(--tinta-suau);margin:0;line-height:1.65}
+.socials{display:flex;gap:10px}
+.social{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--vora-forta);color:var(--tinta);text-decoration:none;transition:transform .35s var(--suau),background .25s ease,color .25s ease,border-color .25s ease}
+.social:hover{transform:translateY(-4px);background:var(--accent);color:var(--sforza);border-color:var(--accent)}
+.social svg{width:17px;height:17px}
+.peu-notes{border-top:1px solid var(--vora);padding-top:26px;font-size:12px;line-height:1.75;color:var(--tinta-suau)}
+.peu-notes p{margin:0 0 10px}
+.peu-notes strong{color:var(--tinta);font-weight:500}
+
+/* ============ REVELADO ============ */
+.js .rev{transition:opacity .85s var(--suau),transform .85s var(--suau)}
+.js .rev.amagat{opacity:0;transform:translateY(30px)}
+.js .rev.dins{opacity:1;transform:none}
+
+/* En pantalles estretes el nom llarg empenyia el botó fora de la pantalla */
+@media(max-width:430px){
+  .nav-in{gap:8px}
+  .marca{font-size:14px}
+  .btn-petit{padding:9px 13px;font-size:11.5px;letter-spacing:.02em}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;transition-delay:0ms!important;scroll-behavior:auto!important}
+  .js .rev{opacity:1;transform:none}
+  .traç{stroke-dashoffset:0!important}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="env nav-in">
+    <a href="#dalt" class="marca">Vecchia <em>Milano</em></a>
+    <div class="nav-enllacos">
+      <a href="#casa">La casa</a>
+      <a href="#cocina">La cocina</a>
+      <a href="#opiniones">Opiniones</a>
+      <a href="#visitanos">Visítanos</a>
+    </div>
+    <div class="nav-dreta">
+      <a href="tel:+34972453260" class="btn btn-ple btn-petit">Reservar</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="dalt">
+  <div class="visual" aria-hidden="true">
+    <div class="visual-fons" data-parallax="18"></div>
+    <svg class="galeria" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMax slice" data-parallax="32">
+      <path class="traç" d="M170 800 L170 400 Q170 150 470 150 Q770 150 770 400 L770 800"/>
+      <path class="traç" d="M600 800 L600 330 Q600 60 900 60 Q1200 60 1200 330 L1200 800"/>
+      <line class="traç" x1="470" y1="150" x2="470" y2="800"/>
+      <line class="traç" x1="320" y1="800" x2="470" y2="180"/>
+      <line class="traç" x1="620" y1="800" x2="470" y2="180"/>
+      <line class="traç" x1="0" y1="520" x2="1200" y2="520"/>
+      <line class="traç" x1="0" y1="640" x2="1200" y2="640"/>
+    </svg>
+    <div class="gra"></div>
+    <div class="vinyeta"></div>
+  </div>
+
+  <div class="env hero-in">
+    <span class="etiqueta rev"><span class="punt"></span>Empuriabrava · frente al puerto</span>
+    <h1 class="rev">Pasta y risotto<em>desde 1998</em></h1>
+    <div class="hero-baix">
+      <p class="hero-text rev">Una trattoria lombarda pequeña, sin pizzas en la carta, frente a los amarres de Empuriabrava. <strong>4,3 sobre 5 con 206 reseñas.</strong></p>
+      <div class="hero-btns rev">
+        <a href="tel:+34972453260" class="btn btn-ple">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+          972 45 32 60
+        </a>
+        <a href="#cocina" class="btn btn-buit">Ver la cocina</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="cue" aria-hidden="true"><span></span>Baja</div>
+</header>
+
+<section class="slab">
+  <h2 class="slab-mot rev">VECCHIA <em>MILANO</em></h2>
+  <div class="slab-peu rev">
+    <span><b>4,3</b> / 5 en TripAdvisor</span>
+    <span><b>954</b> reseñas en Restaurant Guru</span>
+    <span><b>1998</b> · año de apertura</span>
+  </div>
+</section>
+
+<section class="stats" aria-label="Datos de reputación">
+  <div class="env">
+    <div class="stats-graella">
+      <!-- la cifra real ya está en el HTML: si el JS falla, se ve el número, nunca un cero -->
+      <div class="stat rev">
+        <span class="stat-xifra"><span class="compt" data-fi="4.3" data-dec="1">4,3</span></span>
+        <div class="stat-etiq">Valoración media<br>en TripAdvisor</div>
+      </div>
+      <div class="stat rev">
+        <span class="stat-xifra"><span class="compt" data-fi="206">206</span></span>
+        <div class="stat-etiq">Reseñas<br>en TripAdvisor</div>
+      </div>
+      <div class="stat rev">
+        <span class="stat-xifra"><span class="compt" data-fi="954">954</span></span>
+        <div class="stat-etiq">Reseñas<br>en Restaurant Guru</div>
+      </div>
+      <div class="stat rev">
+        <span class="stat-xifra"><span class="compt" data-fi="27">27</span><span class="stat-sufix"> años</span></span>
+        <div class="stat-etiq">Cocinando<br>en Empuriabrava</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sala" id="casa">
+  <div class="sala-visual" aria-hidden="true">
+    <div class="visual">
+      <div class="visual-fons"></div>
+      <svg class="galeria" viewBox="0 0 600 700" preserveAspectRatio="xMidYMid slice">
+        <path d="M90 700 L90 360 Q90 140 300 140 Q510 140 510 360 L510 700"/>
+        <line x1="300" y1="140" x2="300" y2="700"/>
+        <line x1="150" y1="700" x2="300" y2="170"/>
+        <line x1="450" y1="700" x2="300" y2="170"/>
+        <line x1="0" y1="470" x2="600" y2="470"/>
+        <circle cx="300" cy="300" r="3" fill="currentColor" stroke="none" opacity=".45"/>
+      </svg>
+      <div class="gra"></div>
+      <div class="vinyeta"></div>
+    </div>
+  </div>
+  <div class="sala-txt">
+    <p class="sobretitol rev">La casa</p>
+    <h2 class="rev">Lejos del <em>bullicio</em></h2>
+    <p class="rev">Lo que más se repite en las reseñas no es un plato, es la sensación de haber encontrado algo escondido. <strong>«Muy buena dirección, lejos de la multitud»</strong>, escribe Alexia en agosto de 2026. Y Laurence B., en junio del mismo año: <strong>«Seguramente el mejor italiano de la región.»</strong></p>
+    <p class="rev">En el Poblat Típic, junto a los canales de Empuriabrava, la casa lleva desde 1998 con una decisión poco habitual por aquí: <strong>no hay pizzas en la carta.</strong> Solo pasta, risotto y cocina del norte de Italia.</p>
+    <ul class="fets">
+      <li class="rev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Sin pizzas:</b> solo pasta y risotto</span></li>
+      <li class="rev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Terraza</b> con vistas a los amarres</span></li>
+      <li class="rev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Postres caseros,</b> tiramisú incluido</span></li>
+      <li class="rev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Negocio familiar</b> desde hace 27 años</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="carta" id="cocina">
+  <div class="env">
+    <div class="carta-cap">
+      <div class="cap" style="margin-bottom:0">
+        <p class="sobretitol rev">La cocina</p>
+        <h2 class="rev">Lo que los clientes <em>piden por su nombre</em></h2>
+        <p class="rev">Ninguno de estos platos es invención nuestra: todos aparecen citados en reseñas publicadas.</p>
+      </div>
+      <div class="pista-ajuda rev" aria-hidden="true">
+        <svg viewBox="0 0 40 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M0 6h36M31 1l5 5-5 5"/></svg>
+        Arrastra
+      </div>
+    </div>
+  </div>
+  <div class="pista" id="pista" tabindex="0" role="region" aria-label="Carta de platos, lista desplazable horizontalmente">
+    <article class="plat rev"><span class="plat-num">01</span><h3>Spaghetti alle vongole</h3><p>El plato más citado de la casa en las reseñas, por encima de cualquier otro de la carta.</p></article>
+    <article class="plat rev"><span class="plat-num">02</span><h3>Spaghetti allo scoglio</h3><p>La otra pasta de mar de la carta, con el marisco que llega al puerto de al lado.</p></article>
+    <article class="plat rev"><span class="plat-num">03</span><h3>Ravioli de alcachofa y trufa</h3><p>Pasta rellena, uno de los platos que los clientes destacan como fuera de lo corriente en la zona.</p></article>
+    <article class="plat rev"><span class="plat-num">04</span><h3>Tagliatelle ai funghi porcini</h3><p>Con boletus. Cocina del norte de Italia, la que da nombre a la casa.</p></article>
+    <article class="plat rev"><span class="plat-num">05</span><h3>Tiramisú casero</h3><p>El postre que aparece por su nombre en las reseñas, señalado siempre como hecho en casa.</p></article>
+    <article class="plat rev"><span class="plat-num">06</span><h3>Antipasti de la casa</h3><p>Silke H. los describe en septiembre de 2025 como «entrantes deliciosos» antes de la pasta.</p></article>
+  </div>
+</section>
+
+<section class="cites" id="opiniones">
+  <div class="env">
+    <div class="cap">
+      <p class="sobretitol rev">Opiniones</p>
+      <h2 class="rev">Lo que <em>dicen ellos</em></h2>
+      <p class="rev">Reseñas reales publicadas en TripAdvisor, traducidas del original.</p>
+    </div>
+
+    <figure class="cita-gran rev">
+      <div class="cita-meta-col">
+        <div class="estrelles" aria-label="5 sobre 5">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg>
+        </div>
+        <span class="cita-autor">Laurence B.</span>
+        <span class="cita-font">TripAdvisor · Junio 2026</span>
+      </div>
+      <blockquote>«Excelente restaurante italiano, seguramente el mejor de la región. Todo es perfecto.»</blockquote>
+    </figure>
+
+    <figure class="cita-gran rev">
+      <div class="cita-meta-col">
+        <div class="estrelles" aria-label="5 sobre 5">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg>
+        </div>
+        <span class="cita-autor">Alexia</span>
+        <span class="cita-font">TripAdvisor · Agosto 2026</span>
+      </div>
+      <blockquote>«Muy buena dirección, lejos de la multitud. La acogida es encantadora y el servicio, de gran calidad.»</blockquote>
+    </figure>
+
+    <figure class="cita-gran rev">
+      <div class="cita-meta-col">
+        <div class="estrelles" aria-label="5 sobre 5">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg>
+        </div>
+        <span class="cita-autor">Silke H.</span>
+        <span class="cita-font">TripAdvisor · Septiembre 2025</span>
+      </div>
+      <blockquote>«Venimos a Empuriabrava una vez al año y siempre comemos aquí. Entrantes deliciosos, pasta deliciosa.»</blockquote>
+    </figure>
+  </div>
+</section>
+
+<section class="info" id="visitanos">
+  <div class="env">
+    <div class="cap">
+      <p class="sobretitol rev">Visítanos</p>
+      <h2 class="rev">Dónde y <em>cuándo</em></h2>
+    </div>
+  </div>
+  <div class="env" style="padding-inline:0">
+    <div class="info-graella">
+      <div class="info-bloc rev" style="padding-left:var(--pad)">
+        <svg class="info-icona" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <h3>Dirección</h3>
+        <p>Carrer Poblat Típic-Gregal, 22<br>17487 Empuriabrava, Girona</p>
+      </div>
+      <div class="info-bloc rev">
+        <svg class="info-icona" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+        <h3>Reservas</h3>
+        <p><a href="tel:+34972453260">972 45 32 60</a><br><a href="mailto:trattoriavecchiamilano@gmail.com">Escríbenos por correo</a></p>
+      </div>
+      <div class="info-bloc rev">
+        <svg class="info-icona" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <h3>Horario</h3>
+        <div class="horari-fila"><span>Lunes</span><span class="tancat">Cerrado</span></div>
+        <div class="horari-fila"><span>Mar – Sáb</span><span>13:00 – 15:30</span></div>
+        <div class="horari-fila"><span></span><span>19:30 – 23:00</span></div>
+        <div class="horari-fila"><span>Domingo</span><span>13:00 – 15:30</span></div>
+      </div>
+      <div class="info-bloc rev" style="padding-right:var(--pad)">
+        <svg class="info-icona" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <h3>Cocina</h3>
+        <p>Italiana · Lombarda<br>Pasta y risotto</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="visual" aria-hidden="true">
+    <div class="visual-fons"></div>
+    <div class="gra"></div>
+    <div class="vinyeta"></div>
+  </div>
+  <div class="env">
+    <h2 class="rev">¿Mesa junto <em>al puerto</em>?</h2>
+    <p class="rev">La sala es pequeña y en verano se llena. Conviene llamar con antelación, sobre todo para cenar en la terraza.</p>
+    <div class="cta-btns rev">
+      <a href="tel:+34972453260" class="btn btn-ple">Llamar ahora</a>
+      <a href="https://www.facebook.com/p/Trattoria-Vecchia-Milano-100047608250537/" class="btn btn-buit" rel="noopener">Ver Facebook</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="env">
+    <div class="peu-dalt">
+      <div>
+        <p class="peu-marca">Vecchia <em>Milano</em></p>
+        <p class="peu-adr">Carrer Poblat Típic-Gregal, 22<br>17487 Empuriabrava · Castelló d'Empúries · Girona</p>
+      </div>
+      <div class="socials">
+        <a href="https://www.facebook.com/p/Trattoria-Vecchia-Milano-100047608250537/" class="social" rel="noopener" aria-label="Facebook de Trattoria Vecchia Milano"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="tel:+34972453260" class="social" aria-label="Llamar a Trattoria Vecchia Milano"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></a>
+        <a href="mailto:trattoriavecchiamilano@gmail.com" class="social" aria-label="Escribir a Trattoria Vecchia Milano"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg></a>
+      </div>
+    </div>
+    <div class="peu-notes">
+      <p><strong>Sobre los datos de esta página.</strong> La valoración de 4,3/5 y las 206 reseñas proceden de la ficha pública de TripAdvisor de Trattoria Vecchia Milano, consultada en agosto de 2026. Las 954 reseñas con 4,5/5 corresponden a su ficha en Restaurant Guru. Las cifras pueden variar con el tiempo.</p>
+      <p><strong>Año de apertura.</strong> La referencia a 1998 y los 27 años de actividad proceden de reseñas de clientes que citan esa fecha, no de una fuente oficial del restaurante.</p>
+      <p><strong>Imágenes.</strong> Esta página no utiliza ninguna fotografía del restaurante: todo lo que se ve son fondos generados con código.</p>
+      <p><strong>Precios.</strong> Esta página no publica precios ni carta con importes, porque no se ha localizado ninguna carta oficial con precios verificables.</p>
+      <p><strong>Reseñas.</strong> Las citas son reseñas reales de clientes publicadas en TripAdvisor, traducidas al español desde el idioma original (francés y alemán). Se ha mantenido íntegro el sentido de cada opinión.</p>
+      <p style="margin-top:16px;opacity:.7">Propuesta de página web · Maqueta de demostración</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduir = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var arrel = document.documentElement;
+  var hiHaIO = "IntersectionObserver" in window;
+
+  var nav = document.getElementById("nav");
+  function alScroll(){ nav.classList.toggle("enganxat", window.scrollY > 40); }
+  alScroll();
+  window.addEventListener("scroll", alScroll, { passive: true });
+
+  /* Enllaços interns per scroll, no per navegació d'ancora.
+     El clic natural a href="#id" fa que el navegador navegui a la URL amb
+     hash nou; en un iframe o vista prèvia en sandbox (com el panell de
+     previsualització d'aquesta mateixa eina) aquesta navegació es bloqueja
+     i el botó sembla trencat. Cridant scrollIntoView directament, el clic
+     mai depèn de navegar enlloc — funciona igual a qualsevol navegador i
+     també dins de qualsevol sandbox que bloquegi el canvi de hash. */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener("click", function(e){
+      var id = a.getAttribute("href").slice(1);
+      var dest = document.getElementById(id);
+      if(!dest) return;
+      e.preventDefault();
+      dest.scrollIntoView({ behavior: reduir.matches ? "auto" : "smooth", block: "start" });
+      if(history.replaceState){
+        try{ history.replaceState(null, "", "#" + id); }catch(err){}
+      }
+    });
+  });
+
+  var revelables = document.querySelectorAll(".rev");
+  function mostra(el, retard){
+    el.classList.remove("amagat");
+    if(retard > 0) el.style.transitionDelay = retard + "ms";
+    el.classList.add("dins");
+    // el retardo hay que quitarlo al acabar: si se queda puesto, todos los
+    // hover posteriores de ese elemento llegarían tarde y parecería roto
+    var neteja = function(){ el.style.transitionDelay = ""; el.removeEventListener("transitionend", neteja); };
+    el.addEventListener("transitionend", neteja);
+    setTimeout(neteja, retard + 1200);
+  }
+  function mostraTot(){
+    revelables.forEach(function(el){ el.classList.remove("amagat"); el.classList.add("dins"); el.style.transitionDelay = ""; });
+  }
+
+  var pista = document.getElementById("pista");
+  // Dentro de un carrusel horizontal la mayoría de tarjetas nunca cruzan el
+  // umbral: se revelan todas en cascada cuando entra el carrusel.
+  var enCarrusel = pista ? [].slice.call(pista.querySelectorAll(".rev")) : [];
+
+  if(reduir.matches || !hiHaIO){
+    mostraTot();
+  } else {
+    revelables.forEach(function(el){
+      el.classList.add("amagat");
+      var germans = [].slice.call(el.parentElement.children).filter(function(n){ return n.classList.contains("rev"); });
+      el.dataset.ordre = Math.min(germans.indexOf(el), 8);
+    });
+    var obs = new IntersectionObserver(function(entrades){
+      entrades.forEach(function(e){
+        if(!e.isIntersecting) return;
+        mostra(e.target, parseInt(e.target.dataset.ordre || "0", 10) * 90);
+        obs.unobserve(e.target);
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -6% 0px" });
+    revelables.forEach(function(el){ if(enCarrusel.indexOf(el) === -1) obs.observe(el); });
+    if(enCarrusel.length){
+      var obsP = new IntersectionObserver(function(en){
+        en.forEach(function(e){
+          if(!e.isIntersecting) return;
+          enCarrusel.forEach(function(el, i){ mostra(el, Math.min(i, 8) * 85); });
+          obsP.unobserve(pista);
+        });
+      }, { threshold: 0.06 });
+      obsP.observe(pista);
+    }
+    // Red de seguridad: si a los 3 s no se ha revelado ni un solo elemento con
+    // la página ya visible, se muestra todo antes que dejar nada invisible.
+    setTimeout(function comprova(){
+      if(document.visibilityState !== "visible"){
+        document.addEventListener("visibilitychange", function un(){
+          document.removeEventListener("visibilitychange", un);
+          setTimeout(comprova, 1200);
+        });
+        return;
+      }
+      var cap = true;
+      revelables.forEach(function(el){ if(el.classList.contains("dins")) cap = false; });
+      if(cap) mostraTot();
+    }, 3000);
+  }
+
+  /* ---- La palabra gigante se ajusta al ancho real ---- */
+  var slab = document.querySelector(".slab-mot");
+  if(slab){
+    var ajusta = function(){
+      var cont = slab.parentElement;
+      var estil = getComputedStyle(cont);
+      var disp = cont.clientWidth - parseFloat(estil.paddingLeft) - parseFloat(estil.paddingRight);
+      if(disp <= 0) return;
+      var MIN = 44; // per sota, deixa de ser tipografia gegant
+      slab.classList.remove("parteix");
+      var mesura = function(){
+        slab.style.fontSize = "100px";
+        var w = slab.getBoundingClientRect().width / 100;
+        slab.style.fontSize = "";
+        return w;
+      };
+      var ems = mesura();
+      if(!ems) return;
+      var objectiu = disp * (window.innerWidth < 600 ? 0.94 : 1) / ems;
+      // un nom llarg en una sola línia quedaria minúscul: es parteix en dues
+      if(objectiu < MIN && slab.querySelector("em")){
+        slab.classList.add("parteix");
+        var ems2 = mesura();
+        if(ems2) objectiu = disp * 0.94 / ems2;
+      }
+      slab.style.fontSize = Math.max(24, Math.min(objectiu, 300)) + "px";
+    };
+    ajusta();
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(ajusta).catch(function(){});
+    var temps;
+    window.addEventListener("resize", function(){ clearTimeout(temps); temps = setTimeout(ajusta, 120); }, { passive: true });
+  }
+
+  document.querySelectorAll(".galeria .traç").forEach(function(p){
+    if(p.getTotalLength) p.style.setProperty("--llarg", p.getTotalLength());
+  });
+
+  function formata(n, dec){
+    if(dec > 0) return n.toFixed(dec).replace(".", ",");
+    return Math.round(n).toLocaleString("es-ES");
+  }
+  function anima(el){
+    var fi = parseFloat(el.dataset.fi), dec = parseInt(el.dataset.dec || "0", 10);
+    if(reduir.matches){ el.textContent = formata(fi, dec); return; }
+    var dur = 1800, ini = null;
+    (function pas(ts){
+      if(ini === null) ini = ts;
+      var p = Math.min((ts - ini) / dur, 1);
+      el.textContent = formata(fi * (1 - Math.pow(1 - p, 4)), dec);
+      if(p < 1) requestAnimationFrame(pas); else el.textContent = formata(fi, dec);
+    })(performance.now());
+  }
+  var comptadors = document.querySelectorAll(".compt");
+  function fixa(el){ el.textContent = formata(parseFloat(el.dataset.fi), parseInt(el.dataset.dec || "0", 10)); }
+  if(!hiHaIO || reduir.matches){
+    comptadors.forEach(fixa);
+  } else {
+    comptadors.forEach(function(el){ el.textContent = formata(0, parseInt(el.dataset.dec || "0", 10)); });
+    var obsC = new IntersectionObserver(function(en){
+      en.forEach(function(e){ if(e.isIntersecting){ anima(e.target); obsC.unobserve(e.target); } });
+    }, { threshold: 0.35 });
+    comptadors.forEach(function(el){ obsC.observe(el); });
+    setTimeout(function(){
+      comptadors.forEach(function(el){ if(el.textContent === formata(0, parseInt(el.dataset.dec || "0", 10))) fixa(el); });
+    }, 4000);
+  }
+
+  if(pista){
+    var baixat = false, xIni = 0, sIni = 0, mogut = false;
+    pista.addEventListener("pointerdown", function(e){
+      if(e.pointerType !== "mouse") return;
+      baixat = true; mogut = false; xIni = e.clientX; sIni = pista.scrollLeft;
+      pista.style.cursor = "grabbing";
+    });
+    window.addEventListener("pointermove", function(e){
+      if(!baixat) return;
+      var d = e.clientX - xIni;
+      if(Math.abs(d) > 3) mogut = true;
+      pista.scrollLeft = sIni - d;
+    });
+    window.addEventListener("pointerup", function(){
+      if(!baixat) return;
+      baixat = false; pista.style.cursor = "";
+    });
+    pista.addEventListener("click", function(e){ if(mogut) e.preventDefault(); }, true);
+  }
+
+  var capes = document.querySelectorAll(".hero [data-parallax]");
+  if(capes.length && !reduir.matches && window.matchMedia("(hover: hover) and (pointer: fine)").matches){
+    var hero = document.querySelector(".hero"), pendent = false, px = 0, py = 0;
+    hero.addEventListener("mousemove", function(ev){
+      var r = hero.getBoundingClientRect();
+      px = (ev.clientX - r.left) / r.width - 0.5;
+      py = (ev.clientY - r.top) / r.height - 0.5;
+      if(pendent) return;
+      pendent = true;
+      requestAnimationFrame(function(){
+        capes.forEach(function(c){
+          var d = parseFloat(c.dataset.parallax) || 0;
+          c.style.transform = "translate3d(" + (px * d) + "px," + (py * d * 0.55) + "px,0)";
+        });
+        pendent = false;
+      });
+    });
+    hero.addEventListener("mouseleave", function(){
+      capes.forEach(function(c){ c.style.transform = ""; });
+    });
+  }
+})();
+</script>
+</body>
+</html>

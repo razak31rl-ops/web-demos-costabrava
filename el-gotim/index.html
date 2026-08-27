@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El Gotim</title>
+<meta name="description" content="Restaurant El Gotim, L'Escala. Cuina de mercat catalana sota una sala de voltes de pedra. 4,4 sobre 5 amb 357 ressenyes a TripAdvisor.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Archivo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add("js");</script>
+<style>
+/* ============ IDENTITAT ============
+   Vermell Gotim · Or d'Anxova · Pedra de Volta · Nit de Celler
+   La pàgina neix fosca: la sala de voltes és un espai de pedra i llum baixa. */
+:root{
+  --vi:#7B2036;
+  --vi-viu:#A8324E;
+  --anxova:#8A6318;
+  --anxova-clar:#D9A94E;
+  --pedra:#E4D9C8;
+  --celler:#120A0D;
+  --crema:#FBF7F1;
+
+  --bg:#120A0D;
+  --bg-2:#1B1015;
+  --bg-3:#26161C;
+  --tinta:#F4EADE;
+  --tinta-suau:#BCA79E;
+  --accent:var(--anxova-clar);
+  --accent-2:var(--vi-viu);
+  --vora:rgba(244,234,222,.15);
+  --vora-forta:rgba(244,234,222,.32);
+  --visual-a:#3A1420;
+  --visual-b:#120A0D;
+  --visual-c:#5C2033;
+  --tancat:#E8879B;
+
+  --radi:2px;
+  --max:1240px;
+  --pad:clamp(20px,5vw,64px);
+  --suau:cubic-bezier(.22,1,.36,1);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--tinta);
+  font-family:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:clamp(15px,.55vw + 14px,17px);line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+::selection{background:var(--accent);color:var(--bg)}
+
+.env{width:100%;max-width:var(--max);margin-inline:auto;padding-inline:var(--pad)}
+
+/* ============ CAPA VISUAL A SANGRE ============ */
+.visual{position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none}
+.visual-fons{
+  position:absolute;inset:-2%;
+  background:
+    radial-gradient(120% 80% at 78% 18%, var(--visual-c) 0%, transparent 58%),
+    radial-gradient(100% 70% at 12% 92%, var(--visual-a) 0%, transparent 62%),
+    linear-gradient(168deg, var(--visual-a) 0%, var(--visual-b) 55%, var(--visual-b) 100%);
+}
+.gra{
+  position:absolute;inset:0;opacity:.42;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.vinyeta{position:absolute;inset:0;background:radial-gradient(110% 78% at 50% 42%, transparent 42%, rgba(10,5,7,.62) 100%)}
+.voltes-art{position:absolute;inset:0;width:100%;height:100%}
+.voltes-art path{fill:none;stroke:var(--anxova-clar);stroke-width:1;opacity:.26}
+.voltes-art .traç{stroke-dasharray:var(--llarg);stroke-dashoffset:var(--llarg);animation:dibuixa 2.8s var(--suau) forwards}
+@keyframes dibuixa{to{stroke-dashoffset:0}}
+
+/* ============ NAV ============ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:80;
+  transition:background .4s ease,backdrop-filter .4s ease,border-color .4s ease;
+  border-bottom:1px solid transparent;
+}
+.nav.enganxat{
+  background:color-mix(in srgb,var(--bg) 82%,transparent);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom-color:var(--vora);
+}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:66px}
+.marca{
+  font-family:'Bodoni Moda',Georgia,serif;font-weight:600;
+  font-size:clamp(18px,1vw + 15px,22px);letter-spacing:.01em;
+  text-decoration:none;line-height:1;white-space:nowrap;color:var(--tinta);
+}
+.marca em{font-style:italic;color:var(--accent)}
+.nav-enllacos{display:none;gap:clamp(16px,2.2vw,34px);align-items:center}
+@media(min-width:900px){.nav-enllacos{display:flex}}
+.nav-enllacos a{
+  text-decoration:none;font-size:12.5px;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--tinta-suau);position:relative;padding:6px 0;
+  transition:color .25s ease;
+}
+.nav-enllacos a::after{
+  content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--accent);
+  transition:width .35s var(--suau);
+}
+.nav-enllacos a:hover{color:var(--tinta)}
+.nav-enllacos a:hover::after{width:100%}
+.nav-dreta{display:flex;align-items:center;gap:10px}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:14px 26px;border-radius:100px;text-decoration:none;font-weight:600;
+  font-size:14px;letter-spacing:.03em;border:1px solid transparent;cursor:pointer;
+  font-family:'Archivo',sans-serif;
+  transition:transform .35s var(--suau),box-shadow .35s ease,background .25s ease,color .25s ease,border-color .25s ease;
+}
+.btn-ple{background:var(--accent);color:var(--celler)}
+.btn-ple:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 18px 40px -14px rgba(0,0,0,.65)}
+.btn-buit{border-color:var(--vora-forta);color:var(--tinta);background:transparent}
+.btn-buit:hover{transform:translateY(-3px) scale(1.02);border-color:var(--accent);background:rgba(217,169,78,.1)}
+.btn-petit{padding:10px 19px;font-size:13px}
+
+/* ============ HERO 100vh ============ */
+.hero{
+  position:relative;min-height:100svh;display:flex;align-items:flex-end;
+  padding-block:120px clamp(40px,7vh,80px);overflow:hidden;
+}
+.hero-in{position:relative;z-index:2;width:100%}
+.etiqueta{
+  display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:600;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--accent);
+  margin-bottom:clamp(16px,2.4vw,26px);
+}
+.punt{width:5px;height:5px;border-radius:50%;background:var(--accent);flex:0 0 auto;animation:bat 2.6s ease-in-out infinite}
+@keyframes bat{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+h1{
+  font-family:'Bodoni Moda',Georgia,serif;font-weight:700;
+  font-size:clamp(50px,11.5vw,168px);line-height:.85;letter-spacing:-.03em;
+  margin:0 0 clamp(22px,3vw,34px);text-wrap:balance;
+}
+h1 em{font-style:italic;font-weight:400;color:var(--accent);display:block}
+.hero-baix{display:flex;flex-wrap:wrap;gap:clamp(20px,4vw,60px);align-items:flex-end;justify-content:space-between}
+.hero-text{
+  font-size:clamp(15.5px,.7vw + 14px,19px);line-height:1.6;
+  max-width:38ch;color:var(--tinta-suau);margin:0;
+}
+.hero-text strong{color:var(--tinta);font-weight:600}
+.hero-btns{display:flex;flex-wrap:wrap;gap:12px}
+.cue{
+  position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:2;
+  display:grid;place-items:center;gap:8px;color:var(--tinta-suau);
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+}
+.cue span{display:block;width:1px;height:34px;background:linear-gradient(var(--accent),transparent);animation:baixa 2.2s ease-in-out infinite}
+@keyframes baixa{0%,100%{transform:scaleY(.4);opacity:.5;transform-origin:top}50%{transform:scaleY(1);opacity:1;transform-origin:top}}
+@media(max-width:700px){.cue{display:none}}
+
+/* ============ TIPOGRAFIA GEGANT ============ */
+.slab{
+  position:relative;overflow:hidden;padding:clamp(52px,9vw,110px) var(--pad);
+  border-top:1px solid var(--vora);border-bottom:1px solid var(--vora);
+  background:var(--bg-2);text-align:center;
+}
+/* La mida la calcula el JS mesurant el text real (veure "ajusta").
+   Aquest clamp és el pla B: conservador, no desborda mai. */
+.slab-mot{
+  font-family:'Bodoni Moda',Georgia,serif;font-weight:800;
+  font-size:clamp(38px,13vw,260px);line-height:.78;letter-spacing:-.045em;
+  margin:0;white-space:nowrap;color:var(--tinta);display:inline-block;
+}
+.slab-mot em{font-style:italic;color:var(--accent)}
+.slab-peu{
+  display:flex;flex-wrap:wrap;gap:clamp(14px,4vw,48px);justify-content:center;
+  margin-top:clamp(20px,3vw,34px);font-size:11.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--tinta-suau);text-align:center;
+}
+.slab-peu b{color:var(--accent);font-weight:600}
+
+/* ============ ESTADÍSTIQUES ============ */
+.stats{padding-block:clamp(48px,8vw,96px)}
+.stats-graella{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(26px,4vw,48px)}
+@media(min-width:820px){.stats-graella{grid-template-columns:repeat(4,1fr)}}
+.stat{border-top:1px solid var(--vora);padding-top:clamp(14px,2vw,20px)}
+.stat-xifra{
+  font-family:'Bodoni Moda',Georgia,serif;font-weight:700;
+  font-size:clamp(40px,6.5vw,76px);line-height:1;letter-spacing:-.035em;
+  color:var(--accent);display:block;font-variant-numeric:tabular-nums;
+}
+.stat-sufix{font-size:.42em;color:var(--tinta-suau);font-weight:400}
+.stat-etiq{
+  font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--tinta-suau);margin-top:12px;line-height:1.5;
+}
+
+/* ============ SECCIONS ============ */
+section{position:relative}
+.cap{max-width:60ch;margin-bottom:clamp(30px,5vw,54px)}
+.sobretitol{
+  font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 16px;
+}
+h2{
+  font-family:'Bodoni Moda',Georgia,serif;font-weight:700;
+  font-size:clamp(34px,6vw,78px);line-height:.98;letter-spacing:-.028em;margin:0 0 20px;
+  text-wrap:balance;
+}
+h2 em{font-style:italic;color:var(--accent)}
+.cap p:not(.sobretitol){font-size:clamp(15.5px,.55vw + 14px,18px);color:var(--tinta-suau);margin:0}
+
+/* ============ LA SALA (split a sangre) ============ */
+.sala{display:grid;grid-template-columns:1fr;align-items:stretch}
+@media(min-width:940px){.sala{grid-template-columns:1.05fr .95fr}}
+.sala-visual{position:relative;min-height:clamp(340px,58vh,660px);overflow:hidden}
+.sala-visual .voltes-art path{opacity:.4;stroke-width:1.2}
+.sala-txt{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(48px,7vw,104px) var(--pad);background:var(--bg-2);
+}
+@media(min-width:940px){
+  .sala-txt{padding-right:max(var(--pad),calc((100vw - var(--max))/2 + var(--pad)))}
+}
+.sala-txt p:not(.sobretitol){font-size:clamp(15.5px,.55vw + 14px,17.5px);color:var(--tinta-suau);margin:0 0 20px;max-width:52ch}
+.sala-txt p strong{color:var(--tinta);font-weight:600}
+.fets{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:14px;max-width:52ch}
+.fets li{display:flex;gap:14px;align-items:flex-start;font-size:15px;color:var(--tinta-suau)}
+.fets svg{width:17px;height:17px;flex:0 0 auto;margin-top:3px;color:var(--accent)}
+.fets b{color:var(--tinta);font-weight:600}
+
+/* ============ CARTA: galeria horitzontal ============ */
+.carta{padding-block:clamp(56px,9vw,120px);overflow:hidden}
+.carta-cap{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end;justify-content:space-between;margin-bottom:clamp(28px,4vw,48px)}
+/* Va a sangre per la dreta però la primera targeta s'alinea amb el titular:
+   el padding iguala el corredor del contenidor a qualsevol amplada. */
+.pista{
+  display:flex;gap:clamp(12px,1.6vw,20px);overflow-x:auto;scroll-snap-type:x proximity;
+  padding-inline:max(var(--pad),calc((100vw - var(--max))/2 + var(--pad)));
+  padding-bottom:18px;
+  /* sense això el snap ignora el padding i la primera targeta queda tallada */
+  scroll-padding-inline-start:max(var(--pad),calc((100vw - var(--max))/2 + var(--pad)));
+  scrollbar-width:thin;scrollbar-color:var(--vora-forta) transparent;
+}
+.pista::-webkit-scrollbar{height:5px}
+.pista::-webkit-scrollbar-thumb{background:var(--vora-forta);border-radius:100px}
+.pista::-webkit-scrollbar-track{background:transparent}
+.plat{
+  scroll-snap-align:start;flex:0 0 min(78vw,352px);position:relative;
+  border:1px solid var(--vora);background:var(--bg-2);overflow:hidden;
+  padding:clamp(26px,3vw,36px);min-height:clamp(240px,32vh,300px);
+  display:flex;flex-direction:column;
+  transition:transform .45s var(--suau),border-color .45s ease,background .45s ease;
+}
+.plat::before{
+  content:"";position:absolute;inset:0 auto 0 0;width:2px;background:var(--accent);
+  transform:scaleY(0);transform-origin:bottom;transition:transform .5s var(--suau);
+}
+.plat:hover{transform:translateY(-8px);border-color:var(--vora-forta);background:var(--bg-3)}
+.plat:hover::before{transform:scaleY(1)}
+.plat-num{
+  font-family:'Bodoni Moda',Georgia,serif;font-size:12px;font-weight:600;color:var(--accent);
+  letter-spacing:.2em;display:block;margin-bottom:auto;
+}
+.plat h3{
+  font-family:'Bodoni Moda',Georgia,serif;font-weight:600;
+  font-size:clamp(21px,1.6vw + 15px,28px);line-height:1.1;margin:24px 0 12px;letter-spacing:-.015em;
+}
+.plat p{margin:0;font-size:14px;color:var(--tinta-suau);line-height:1.62}
+.pista-ajuda{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--tinta-suau);display:flex;align-items:center;gap:10px}
+.pista-ajuda svg{width:22px;height:12px;color:var(--accent)}
+
+/* ============ PUNTUACIONS ============ */
+.punts{padding-block:clamp(56px,9vw,116px);background:var(--bg-2);border-block:1px solid var(--vora)}
+.barres{display:grid;gap:clamp(18px,2.6vw,26px);max-width:820px}
+.barra-fila{display:grid;gap:10px}
+.barra-cap{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.barra-nom{font-size:14px;font-weight:500;letter-spacing:.06em;text-transform:uppercase}
+.barra-val{
+  font-family:'Bodoni Moda',Georgia,serif;font-size:22px;font-weight:700;color:var(--accent);
+  font-variant-numeric:tabular-nums;
+}
+.barra-pista{height:2px;background:var(--vora);overflow:hidden}
+.barra-omple{height:100%;width:0;background:var(--accent);transition:width 1.6s var(--suau)}
+.punts-nota{margin-top:32px;font-size:13px;color:var(--tinta-suau);max-width:60ch}
+
+/* ============ RESSENYES ============ */
+.cites{padding-block:clamp(56px,9vw,120px)}
+.cita-gran{
+  border-top:1px solid var(--vora);padding-block:clamp(32px,5vw,58px);
+  display:grid;gap:clamp(16px,3vw,40px);
+}
+@media(min-width:900px){.cita-gran{grid-template-columns:1fr 2.1fr;align-items:start}}
+.cita-meta-col{display:flex;flex-direction:column;gap:8px}
+.estrelles{display:flex;gap:3px;color:var(--accent)}
+.estrelles svg{width:14px;height:14px}
+.cita-autor{font-size:14.5px;font-weight:600;color:var(--tinta)}
+.cita-font{font-size:12px;color:var(--tinta-suau);letter-spacing:.06em}
+.cita-gran blockquote{
+  margin:0;font-family:'Bodoni Moda',Georgia,serif;
+  font-size:clamp(21px,2.6vw,40px);line-height:1.22;font-style:italic;font-weight:400;
+  color:var(--tinta);text-wrap:balance;
+}
+
+/* ============ INFO ============ */
+.info{padding-block:clamp(56px,9vw,116px);background:var(--bg-2);border-block:1px solid var(--vora)}
+.info-graella{display:grid;gap:0;grid-template-columns:1fr;border-top:1px solid var(--vora)}
+@media(min-width:700px){.info-graella{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1020px){.info-graella{grid-template-columns:repeat(4,1fr)}}
+.info-bloc{
+  padding:clamp(26px,3vw,36px) clamp(20px,2vw,28px);
+  border-bottom:1px solid var(--vora);
+  transition:background .35s ease;
+}
+@media(min-width:700px){.info-bloc{border-right:1px solid var(--vora)}.info-bloc:nth-child(2n){border-right:0}}
+@media(min-width:1020px){.info-bloc{border-right:1px solid var(--vora)}.info-bloc:nth-child(2n){border-right:1px solid var(--vora)}.info-bloc:nth-child(4n){border-right:0}}
+.info-bloc:hover{background:var(--bg-3)}
+.info-icona{width:20px;height:20px;color:var(--accent);margin-bottom:16px}
+.info-bloc h3{
+  font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--tinta-suau);margin:0 0 12px;
+}
+.info-bloc p{margin:0;font-size:15px;line-height:1.6}
+.info-bloc a{color:var(--accent);text-decoration:none;font-weight:600}
+.info-bloc a:hover{text-decoration:underline}
+.horari-fila{display:flex;justify-content:space-between;gap:14px;font-size:14px;padding:4px 0}
+.horari-fila span:last-child{color:var(--tinta-suau);text-align:right;font-variant-numeric:tabular-nums}
+.tancat{color:var(--tancat)!important;font-weight:600}
+
+
+/* ============ CTA a sangre ============ */
+.cta{position:relative;overflow:hidden;padding-block:clamp(70px,12vw,150px);text-align:center}
+.cta .env{position:relative;z-index:2}
+.cta h2{margin-bottom:20px}
+.cta p{color:var(--tinta-suau);max-width:48ch;margin:0 auto clamp(30px,4vw,42px);font-size:clamp(15.5px,.6vw + 14px,18px)}
+.cta-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+
+/* ============ PEU ============ */
+footer{padding-block:clamp(44px,6vw,72px) clamp(28px,4vw,40px);border-top:1px solid var(--vora)}
+.peu-dalt{display:flex;flex-wrap:wrap;gap:28px;justify-content:space-between;align-items:flex-start;margin-bottom:36px}
+.peu-marca{font-family:'Bodoni Moda',Georgia,serif;font-size:30px;font-weight:700;margin:0 0 10px}
+.peu-marca em{font-style:italic;color:var(--accent)}
+.peu-adr{font-size:14px;color:var(--tinta-suau);margin:0;line-height:1.65}
+.socials{display:flex;gap:10px}
+.social{
+  width:42px;height:42px;display:grid;place-items:center;border-radius:50%;
+  border:1px solid var(--vora-forta);color:var(--tinta);text-decoration:none;
+  transition:transform .35s var(--suau),background .25s ease,color .25s ease,border-color .25s ease;
+}
+.social:hover{transform:translateY(-4px);background:var(--accent);color:var(--celler);border-color:var(--accent)}
+.social svg{width:17px;height:17px}
+.peu-notes{border-top:1px solid var(--vora);padding-top:26px;font-size:12px;line-height:1.75;color:var(--tinta-suau)}
+.peu-notes p{margin:0 0 10px}
+.peu-notes strong{color:var(--tinta);font-weight:600}
+
+/* ============ REVELAT ============
+   Only ".amagat" hides, and that class is added by JS right before observing.
+   Si el JS falla, no s'amaga res: el pitjor cas és una pàgina sense animació,
+   mai una pàgina en blanc. */
+.js .rev{transition:opacity .85s var(--suau),transform .85s var(--suau)}
+.js .rev.amagat{opacity:0;transform:translateY(30px)}
+.js .rev.dins{opacity:1;transform:none}
+
+/* En pantalles estretes el nom llarg empenyia el botó fora de la pantalla */
+@media(max-width:430px){
+  .nav-in{gap:8px}
+  .marca{font-size:14px}
+  .btn-petit{padding:9px 13px;font-size:11.5px;letter-spacing:.02em}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;transition-delay:0ms!important;scroll-behavior:auto!important;
+  }
+  .js .rev{opacity:1;transform:none}
+  .traç{stroke-dashoffset:0!important}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="env nav-in">
+    <a href="#dalt" class="marca">El <em>Gotim</em></a>
+    <div class="nav-enllacos">
+      <a href="#sala">La sala</a>
+      <a href="#cuina">La cuina</a>
+      <a href="#opinions">Opinions</a>
+      <a href="#visitans">Visita'ns</a>
+    </div>
+    <div class="nav-dreta">
+      <a href="tel:+34972773054" class="btn btn-ple btn-petit">Reservar</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="dalt">
+  <div class="visual" aria-hidden="true">
+    <div class="visual-fons" data-parallax="18"></div>
+    <svg class="voltes-art" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMax slice" data-parallax="34">
+      <path class="traç" d="M60 800 L60 430 Q60 210 290 210 Q520 210 520 430 L520 800"/>
+      <path class="traç" d="M400 800 L400 370 Q400 120 660 120 Q920 120 920 370 L920 800"/>
+      <path class="traç" d="M800 800 L800 430 Q800 210 1020 210 Q1240 210 1240 430 L1240 800"/>
+      <path class="traç" d="M0 610 L1200 610"/>
+      <path class="traç" d="M0 690 L1200 690"/>
+    </svg>
+    <div class="gra"></div>
+    <div class="vinyeta"></div>
+  </div>
+
+  <div class="env hero-in">
+    <span class="etiqueta rev"><span class="punt"></span>L'Escala · Alt Empordà</span>
+    <h1 class="rev">Cuina de mercat<em>sota volta</em></h1>
+    <div class="hero-baix">
+      <p class="hero-text rev">Arrossos, bacallà i anxoves de L'Escala en una sala de voltes de pedra, lluny del brogit del passeig marítim. <strong>4,4 sobre 5 amb 357 ressenyes.</strong></p>
+      <div class="hero-btns rev">
+        <a href="tel:+34972773054" class="btn btn-ple">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+          972 77 30 54
+        </a>
+        <a href="#cuina" class="btn btn-buit">Veure la cuina</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="cue" aria-hidden="true"><span></span>Baixa</div>
+</header>
+
+<section class="slab">
+  <h2 class="slab-mot rev">EL <em>GOTIM</em></h2>
+  <div class="slab-peu rev">
+    <span><b>4,4</b> / 5 a TripAdvisor</span>
+    <span><b>357</b> ressenyes</span>
+    <span><b>#12</b> de 162 a L'Escala</span>
+  </div>
+</section>
+
+<section class="stats" aria-label="Dades de reputació">
+  <div class="env">
+    <div class="stats-graella">
+      <!-- la xifra real ja és al HTML: si el JS falla, es veu el número, mai un zero -->
+      <div class="stat rev">
+        <span class="stat-xifra"><span class="compt" data-fi="4.4" data-dec="1">4,4</span></span>
+        <div class="stat-etiq">Valoració mitjana<br>a TripAdvisor</div>
+      </div>
+      <div class="stat rev">
+        <span class="stat-xifra"><span class="compt" data-fi="357">357</span></span>
+        <div class="stat-etiq">Ressenyes<br>de clients reals</div>
+      </div>
+      <div class="stat rev">
+        <span class="stat-xifra">#<span class="compt" data-fi="12">12</span><span class="stat-sufix">/162</span></span>
+        <div class="stat-etiq">Del rànquing de<br>restaurants de L'Escala</div>
+      </div>
+      <div class="stat rev">
+        <span class="stat-xifra"><span class="compt" data-fi="1490">1.490</span></span>
+        <div class="stat-etiq">Seguidors<br>a Instagram</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sala" id="sala">
+  <div class="sala-visual" aria-hidden="true">
+    <div class="visual">
+      <div class="visual-fons"></div>
+      <svg class="voltes-art" viewBox="0 0 600 700" preserveAspectRatio="xMidYMid slice">
+        <path d="M60 700 L60 380 Q60 170 250 170 Q440 170 440 380 L440 700"/>
+        <path d="M330 700 L330 430 Q330 260 470 260 Q610 260 610 430 L610 700"/>
+        <path d="M0 560 L600 560"/>
+        <circle cx="250" cy="350" r="3" fill="currentColor" stroke="none" opacity=".5"/>
+      </svg>
+      <div class="gra"></div>
+      <div class="vinyeta"></div>
+    </div>
+  </div>
+  <div class="sala-txt">
+    <p class="sobretitol rev">La sala</p>
+    <h2 class="rev">Un racó <em>lluny de la gentada</em></h2>
+    <p class="rev">Els clients no descriuen El Gotim per la seva carta abans que per la seva sala. <strong>«Una preciosa sala de voltes on t'acullen amb calidesa»</strong>, escriu una clienta francesa el setembre del 2025. I un altre comensal, el juliol del 2026: <strong>«És difícil trobar un lloc així a L'Escala.»</strong></p>
+    <p class="rev">Al carrer Doctor Puig Sureda, a pocs metres del mar però fora del passeig, El Gotim porta la cuina de mercat catalana a una sala de pedra amb capacitat per a grups, sense perdre l'ambient intimista que repeteixen les ressenyes.</p>
+    <ul class="fets">
+      <li class="rev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Menú per a grups</b> i sopars d'empresa</span></li>
+      <li class="rev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Opció sense gluten</b> i menú infantil</span></li>
+      <li class="rev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Amanides ecològiques</b> i vedella de Girona</span></li>
+      <li class="rev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Peix fresc</b> i anxoves elaborades a la casa</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="carta" id="cuina">
+  <div class="env">
+    <div class="carta-cap">
+      <div class="cap" style="margin-bottom:0">
+        <p class="sobretitol rev">La cuina</p>
+        <h2 class="rev">Els plats que <em>els clients anomenen</em></h2>
+        <p class="rev">Cap d'aquests plats és invenció nostra: tots apareixen citats pel seu nom a les ressenyes publicades.</p>
+      </div>
+      <div class="pista-ajuda rev" aria-hidden="true">
+        <svg viewBox="0 0 40 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M0 6h36M31 1l5 5-5 5"/></svg>
+        Arrossega
+      </div>
+    </div>
+  </div>
+  <div class="pista" id="pista" tabindex="0" role="region" aria-label="Carta de plats, llista desplaçable horitzontalment">
+      <article class="plat rev"><span class="plat-num">01</span><h3>Anxoves de L'Escala</h3><p>Elaborades a la casa. «Sense una sola espina, no gaire salades, sobre pa cruixent amb oli», descriu en Fernando G. el setembre del 2025.</p></article>
+      <article class="plat rev"><span class="plat-num">02</span><h3>Arròs Gotim</h3><p>L'arròs que porta el nom de la casa. Els arrossos són l'especialitat més repetida a les ressenyes.</p></article>
+      <article class="plat rev"><span class="plat-num">03</span><h3>Fideuà de marisc</h3><p>Citada diverses vegades i destacada pel servei ràpid fins i tot en hores punta d'estiu.</p></article>
+      <article class="plat rev"><span class="plat-num">04</span><h3>Bacallà amb formatge</h3><p>Un dels dos plats que una clienta francesa posa com a exemple de «carta original amb plats bastant elaborats i producte fresc local».</p></article>
+      <article class="plat rev"><span class="plat-num">05</span><h3>Calamars amb ceba de Figueres</h3><p>L'altre plat d'aquell exemple. Producte de proximitat de l'Alt Empordà portat a la carta sense disfressar-lo.</p></article>
+      <article class="plat rev"><span class="plat-num">06</span><h3>Canelons de bacallà</h3><p>Amb brandada, sobre crema de pebrots del piquillo. Un clàssic de la casa citat el setembre del 2025.</p></article>
+      <article class="plat rev"><span class="plat-num">07</span><h3>Llenguado farcit de gambes</h3><p>Del capítol de peix fresc, al costat del lluç i el bacallà en les seves diverses preparacions.</p></article>
+      <article class="plat rev"><span class="plat-num">08</span><h3>Amanida de formatge de cabra</h3><p>Amb base d'amanides ecològiques, un dels eixos que el mateix restaurant destaca del seu producte.</p></article>
+      <article class="plat rev"><span class="plat-num">09</span><h3>Poma caramel·litzada</h3><p>Amb gelat de vainilla. La postra que apareix amb nom propi a les ressenyes de la casa.</p></article>
+  </div>
+</section>
+
+<section class="punts">
+  <div class="env">
+    <div class="cap">
+      <p class="sobretitol rev">Les puntuacions</p>
+      <h2 class="rev">Què puntuen <em>més alt</em></h2>
+    </div>
+    <div class="barres" id="barres">
+      <div class="barra-fila rev"><div class="barra-cap"><span class="barra-nom">Menjar</span><span class="barra-val">5,0</span></div><div class="barra-pista"><div class="barra-omple" data-pct="100"></div></div></div>
+      <div class="barra-fila rev"><div class="barra-cap"><span class="barra-nom">Servei</span><span class="barra-val">5,0</span></div><div class="barra-pista"><div class="barra-omple" data-pct="100"></div></div></div>
+      <div class="barra-fila rev"><div class="barra-cap"><span class="barra-nom">Relació qualitat-preu</span><span class="barra-val">5,0</span></div><div class="barra-pista"><div class="barra-omple" data-pct="100"></div></div></div>
+      <div class="barra-fila rev"><div class="barra-cap"><span class="barra-nom">Ambient</span><span class="barra-val">4,5</span></div><div class="barra-pista"><div class="barra-omple" data-pct="90"></div></div></div>
+    </div>
+    <p class="punts-nota rev">Puntuacions de categoria extretes de les ressenyes recents amb desglossament visible. La valoració global és de 4,4 sobre 5 amb 357 ressenyes, posició 12 de 162 restaurants de L'Escala.</p>
+  </div>
+</section>
+
+<section class="cites" id="opinions">
+  <div class="env">
+    <div class="cap">
+      <p class="sobretitol rev">Opinions</p>
+      <h2 class="rev">El que <em>diuen ells</em></h2>
+      <p class="rev">Ressenyes reals publicades a TripAdvisor, traduïdes de l'original.</p>
+    </div>
+
+    <figure class="cita-gran rev">
+      <div class="cita-meta-col">
+        <div class="estrelles" aria-label="5 sobre 5">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg>
+        </div>
+        <span class="cita-autor">Quim S.</span>
+        <span class="cita-font">TripAdvisor · Juliol 2026</span>
+      </div>
+      <blockquote>«És difícil trobar un lloc així a L'Escala. Un racó agradable lluny de la gentada dels restaurants de primera línia de mar. Excel·lent tant per l'oferta gastronòmica com per l'ambient i el servei càlid.»</blockquote>
+    </figure>
+
+    <figure class="cita-gran rev">
+      <div class="cita-meta-col">
+        <div class="estrelles" aria-label="5 sobre 5">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg>
+        </div>
+        <span class="cita-autor">amap30 · Muret, França</span>
+        <span class="cita-font">TripAdvisor · Setembre 2025</span>
+      </div>
+      <blockquote>«Aquest restaurant és preciós: una bonica sala de voltes on t'acullen amb calidesa. La carta és original i ofereix plats bastant elaborats, amb producte fresc local.»</blockquote>
+    </figure>
+
+    <figure class="cita-gran rev">
+      <div class="cita-meta-col">
+        <div class="estrelles" aria-label="5 sobre 5">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg>
+        </div>
+        <span class="cita-autor">angeletjo62 · Arras, França</span>
+        <span class="cita-font">TripAdvisor · Abril 2026</span>
+      </div>
+      <blockquote>«Un restaurant que recomano moltíssim! L'entorn és preciós, els plats són deliciosos, generosos i perfectament preparats, amb productes d'alta qualitat.»</blockquote>
+    </figure>
+  </div>
+</section>
+
+<section class="info" id="visitans">
+  <div class="env">
+    <div class="cap">
+      <p class="sobretitol rev">Visita'ns</p>
+      <h2 class="rev">On i <em>quan</em></h2>
+    </div>
+  </div>
+  <div class="env" style="padding-inline:0">
+    <div class="info-graella">
+      <div class="info-bloc rev" style="padding-left:var(--pad)">
+        <svg class="info-icona" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <h3>Adreça</h3>
+        <p>Carrer Doctor Puig Sureda, 18<br>17130 L'Escala, Girona</p>
+      </div>
+      <div class="info-bloc rev">
+        <svg class="info-icona" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+        <h3>Reserves</h3>
+        <p><a href="tel:+34972773054">972 77 30 54</a><br><a href="mailto:elgotim2012@gmail.com">elgotim2012@gmail.com</a></p>
+      </div>
+      <div class="info-bloc rev">
+        <svg class="info-icona" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <h3>Horari</h3>
+        <div class="horari-fila"><span>Dilluns</span><span class="tancat">Tancat</span></div>
+        <div class="horari-fila"><span>Dt. – Dg.</span><span>13:00 – 15:00</span></div>
+        <div class="horari-fila"><span></span><span>20:00 – 23:00</span></div>
+      </div>
+      <div class="info-bloc rev" style="padding-right:var(--pad)">
+        <svg class="info-icona" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <h3>Cuina</h3>
+        <p>Mediterrània · Catalana<br>Espanyola · Europea</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="visual" aria-hidden="true">
+    <div class="visual-fons"></div>
+    <div class="gra"></div>
+    <div class="vinyeta"></div>
+  </div>
+  <div class="env">
+    <h2 class="rev">Taula per a <em>dos</em>?</h2>
+    <p class="rev">A l'estiu la sala s'omple. Val la pena trucar amb un dia d'antelació, sobretot per als dinars de cap de setmana i els sopars de grup.</p>
+    <div class="cta-btns rev">
+      <a href="tel:+34972773054" class="btn btn-ple">Trucar ara</a>
+      <a href="https://www.instagram.com/elgotim/" class="btn btn-buit" rel="noopener">Veure Instagram</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="env">
+    <div class="peu-dalt">
+      <div>
+        <p class="peu-marca">El <em>Gotim</em></p>
+        <p class="peu-adr">Carrer Doctor Puig Sureda, 18<br>17130 L'Escala · Alt Empordà · Girona</p>
+      </div>
+      <div class="socials">
+        <a href="https://www.instagram.com/elgotim/" class="social" rel="noopener" aria-label="Instagram de El Gotim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></a>
+        <a href="tel:+34972773054" class="social" aria-label="Trucar a El Gotim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></a>
+        <a href="mailto:elgotim2012@gmail.com" class="social" aria-label="Escriure a El Gotim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg></a>
+      </div>
+    </div>
+    <div class="peu-notes">
+      <p><strong>Sobre les dades d'aquesta pàgina.</strong> La valoració de 4,4/5, les 357 ressenyes, la posició 12 de 162 i el desglossament per categories provenen de la fitxa pública de TripAdvisor de Restaurant El Gotim, consultada l'agost del 2026. Les xifres poden variar amb el temps. Els 1.490 seguidors corresponen al perfil públic d'Instagram @elgotim.</p>
+      <p><strong>Imatges.</strong> Aquesta pàgina no fa servir cap fotografia del restaurant: tot el que es veu són fons generats amb codi. No s'ha publicat cap imatge que no sigui pròpia.</p>
+      <p><strong>Preus.</strong> Aquesta pàgina no publica preus ni carta amb import, perquè no s'ha localitzat cap carta oficial amb preus verificables.</p>
+      <p><strong>Ressenyes.</strong> Les citacions són ressenyes reals de clients publicades a TripAdvisor, traduïdes al català des de l'idioma original (francès i castellà). S'ha mantingut el sentit íntegre de cada opinió.</p>
+      <p style="margin-top:16px;opacity:.7">Proposta de pàgina web · Maqueta de demostració</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduir = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var arrel = document.documentElement;
+  var hiHaIO = "IntersectionObserver" in window;
+
+  /* ---- Nav enganxada ---- */
+  var nav = document.getElementById("nav");
+  function alScroll(){ nav.classList.toggle("enganxat", window.scrollY > 40); }
+  alScroll();
+  window.addEventListener("scroll", alScroll, { passive: true });
+
+  /* Enllaços interns per scroll, no per navegació d'ancora.
+     El clic natural a href="#id" fa que el navegador navegui a la URL amb
+     hash nou; en un iframe o vista prèvia en sandbox (com el panell de
+     previsualització d'aquesta mateixa eina) aquesta navegació es bloqueja
+     i el botó sembla trencat. Cridant scrollIntoView directament, el clic
+     mai depèn de navegar enlloc — funciona igual a qualsevol navegador i
+     també dins de qualsevol sandbox que bloquegi el canvi de hash. */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener("click", function(e){
+      var id = a.getAttribute("href").slice(1);
+      var dest = document.getElementById(id);
+      if(!dest) return;
+      e.preventDefault();
+      dest.scrollIntoView({ behavior: reduir.matches ? "auto" : "smooth", block: "start" });
+      if(history.replaceState){
+        try{ history.replaceState(null, "", "#" + id); }catch(err){}
+      }
+    });
+  });
+
+  /* ---- Revelat: stagger per grup, i el retard es NETEJA en acabar
+         (si es deixés posat, tots els hovers posteriors arribarien tard) ---- */
+  var revelables = document.querySelectorAll(".rev");
+  function mostra(el, retard){
+    el.classList.remove("amagat");
+    if(retard > 0) el.style.transitionDelay = retard + "ms";
+    el.classList.add("dins");
+    // el retard s'ha de treure en acabar: si es queda posat, tots els hovers
+    // posteriors d'aquest element arribarien tard i semblaria que va trencat
+    var neteja = function(){ el.style.transitionDelay = ""; el.removeEventListener("transitionend", neteja); };
+    el.addEventListener("transitionend", neteja);
+    setTimeout(neteja, retard + 1200);
+  }
+  function mostraTot(){
+    revelables.forEach(function(el){ el.classList.remove("amagat"); el.classList.add("dins"); el.style.transitionDelay = ""; });
+  }
+
+  var pista = document.getElementById("pista");
+  // Dins d'un carrusel horitzontal la majoria de targetes no creuen mai el llindar:
+  // es revelen totes en cascada quan entra el carrusel, no una per una.
+  var enCarrusel = pista ? [].slice.call(pista.querySelectorAll(".rev")) : [];
+
+  if(reduir.matches || !hiHaIO){
+    mostraTot();
+  } else {
+    revelables.forEach(function(el){
+      el.classList.add("amagat");
+      // índex estable dins del contenidor: la cascada no depèn del lot de l'observador
+      var germans = [].slice.call(el.parentElement.children).filter(function(n){ return n.classList.contains("rev"); });
+      el.dataset.ordre = Math.min(germans.indexOf(el), 8);
+    });
+    var obs = new IntersectionObserver(function(entrades){
+      entrades.forEach(function(e){
+        if(!e.isIntersecting) return;
+        mostra(e.target, parseInt(e.target.dataset.ordre || "0", 10) * 90);
+        obs.unobserve(e.target);
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -6% 0px" });
+    revelables.forEach(function(el){
+      if(enCarrusel.indexOf(el) === -1) obs.observe(el);
+    });
+    if(enCarrusel.length){
+      var obsP = new IntersectionObserver(function(en){
+        en.forEach(function(e){
+          if(!e.isIntersecting) return;
+          enCarrusel.forEach(function(el, i){ mostra(el, Math.min(i, 8) * 85); });
+          obsP.unobserve(pista);
+        });
+      }, { threshold: 0.06 });
+      obsP.observe(pista);
+    }
+
+    // Xarxa de seguretat: si passats 3 s no s'ha revelat ni un sol element amb
+    // la pàgina ja visible, l'observador no funciona (pestanya restaurada,
+    // navegador rar, error extern). Abans que quedi res invisible, es mostra tot.
+    setTimeout(function comprova(){
+      if(document.visibilityState !== "visible"){
+        document.addEventListener("visibilitychange", function un(){
+          document.removeEventListener("visibilitychange", un);
+          setTimeout(comprova, 1200);
+        });
+        return;
+      }
+      var cap = true;
+      revelables.forEach(function(el){ if(el.classList.contains("dins")) cap = false; });
+      if(cap) mostraTot();
+    }, 3000);
+  }
+
+  /* ---- El mot gegant s'ajusta a l'amplada real ----
+     Amb CSS pur caldria encertar un vw màgic per a cada text i cada tipografia;
+     mesurant-lo encaixa sempre, també si canvia la font o l'idioma. */
+  var slab = document.querySelector(".slab-mot");
+  if(slab){
+    var ajusta = function(){
+      var cont = slab.parentElement;
+      var estil = getComputedStyle(cont);
+      var disp = cont.clientWidth - parseFloat(estil.paddingLeft) - parseFloat(estil.paddingRight);
+      if(disp <= 0) return;
+      var MIN = 44; // per sota, deixa de ser tipografia gegant
+      slab.classList.remove("parteix");
+      var mesura = function(){
+        slab.style.fontSize = "100px";
+        var w = slab.getBoundingClientRect().width / 100;
+        slab.style.fontSize = "";
+        return w;
+      };
+      var ems = mesura();
+      if(!ems) return;
+      var objectiu = disp * (window.innerWidth < 600 ? 0.94 : 1) / ems;
+      // un nom llarg en una sola línia quedaria minúscul: es parteix en dues
+      if(objectiu < MIN && slab.querySelector("em")){
+        slab.classList.add("parteix");
+        var ems2 = mesura();
+        if(ems2) objectiu = disp * 0.94 / ems2;
+      }
+      slab.style.fontSize = Math.max(24, Math.min(objectiu, 300)) + "px";
+    };
+    ajusta();
+    // la mesura amb la tipografia de reserva no val: es refà quan carrega la bona
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(ajusta).catch(function(){});
+    var temps;
+    window.addEventListener("resize", function(){ clearTimeout(temps); temps = setTimeout(ajusta, 120); }, { passive: true });
+  }
+
+  /* ---- Traçat de les voltes ---- */
+  document.querySelectorAll(".voltes-art .traç").forEach(function(p){
+    p.style.setProperty("--llarg", p.getTotalLength());
+  });
+
+  /* ---- Comptadors ---- */
+  function formata(n, dec){
+    if(dec > 0) return n.toFixed(dec).replace(".", ",");
+    return Math.round(n).toLocaleString("ca-ES");
+  }
+  function anima(el){
+    var fi = parseFloat(el.dataset.fi), dec = parseInt(el.dataset.dec || "0", 10);
+    if(reduir.matches){ el.textContent = formata(fi, dec); return; }
+    var dur = 1800, ini = null;
+    (function pas(ts){
+      if(ini === null) ini = ts;
+      var p = Math.min((ts - ini) / dur, 1);
+      el.textContent = formata(fi * (1 - Math.pow(1 - p, 4)), dec);
+      if(p < 1) requestAnimationFrame(pas); else el.textContent = formata(fi, dec);
+    })(performance.now());
+  }
+  var comptadors = document.querySelectorAll(".compt");
+  function fixa(el){ el.textContent = formata(parseFloat(el.dataset.fi), parseInt(el.dataset.dec || "0", 10)); }
+  if(!hiHaIO || reduir.matches){
+    comptadors.forEach(fixa);
+  } else {
+    // el zero només es posa ara, quan ja sabem que es podrà animar
+    comptadors.forEach(function(el){ el.textContent = formata(0, parseInt(el.dataset.dec || "0", 10)); });
+    var obsC = new IntersectionObserver(function(en){
+      en.forEach(function(e){ if(e.isIntersecting){ anima(e.target); obsC.unobserve(e.target); } });
+    }, { threshold: 0.35 });
+    comptadors.forEach(function(el){ obsC.observe(el); });
+    // si al cap de 4 s cap comptador no ha arrencat, es posa la xifra real
+    setTimeout(function(){
+      comptadors.forEach(function(el){ if(el.textContent === formata(0, parseInt(el.dataset.dec || "0", 10))) fixa(el); });
+    }, 4000);
+  }
+
+  /* ---- Barres ---- */
+  var zona = document.getElementById("barres");
+  function omple(){
+    zona.querySelectorAll(".barra-omple").forEach(function(b, i){
+      var pct = b.dataset.pct + "%";
+      if(reduir.matches){ b.style.width = pct; return; }
+      setTimeout(function(){ b.style.width = pct; }, i * 170);
+    });
+  }
+  if(zona){
+    if(!hiHaIO){ omple(); }
+    else {
+      var obsB = new IntersectionObserver(function(en){
+        en.forEach(function(e){ if(e.isIntersecting){ omple(); obsB.unobserve(zona); } });
+      }, { threshold: 0.3 });
+      obsB.observe(zona);
+    }
+  }
+
+  /* ---- Galeria: arrossegar amb el ratolí ---- */
+  var pista = document.getElementById("pista");
+  if(pista){
+    var baixat = false, xIni = 0, sIni = 0, mogut = false;
+    pista.addEventListener("pointerdown", function(e){
+      if(e.pointerType !== "mouse") return;
+      baixat = true; mogut = false; xIni = e.clientX; sIni = pista.scrollLeft;
+      pista.style.cursor = "grabbing";
+    });
+    window.addEventListener("pointermove", function(e){
+      if(!baixat) return;
+      var d = e.clientX - xIni;
+      if(Math.abs(d) > 3) mogut = true;
+      pista.scrollLeft = sIni - d;
+    });
+    window.addEventListener("pointerup", function(){
+      if(!baixat) return;
+      baixat = false; pista.style.cursor = "";
+    });
+    pista.addEventListener("click", function(e){ if(mogut) e.preventDefault(); }, true);
+  }
+
+  /* ---- Parallax lleuger del hero (només ratolí fi) ---- */
+  var capes = document.querySelectorAll(".hero [data-parallax]");
+  if(capes.length && !reduir.matches && window.matchMedia("(hover: hover) and (pointer: fine)").matches){
+    var hero = document.querySelector(".hero"), pendent = false, px = 0, py = 0;
+    hero.addEventListener("mousemove", function(ev){
+      var r = hero.getBoundingClientRect();
+      px = (ev.clientX - r.left) / r.width - 0.5;
+      py = (ev.clientY - r.top) / r.height - 0.5;
+      if(pendent) return;
+      pendent = true;
+      requestAnimationFrame(function(){
+        capes.forEach(function(c){
+          var d = parseFloat(c.dataset.parallax) || 0;
+          c.style.transform = "translate3d(" + (px * d) + "px," + (py * d * 0.55) + "px,0)";
+        });
+        pendent = false;
+      });
+    });
+    hero.addEventListener("mouseleave", function(){
+      capes.forEach(function(c){ c.style.transform = ""; });
+    });
+  }
+})();
+</script>
+</body>
+</html>

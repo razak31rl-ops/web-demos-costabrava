@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Japa 2Go</title>
+<meta name="description" content="Japa 2Go, sushi y grill con fusión japonesa-brasileña en Empuriabrava y Roses. 4,7 sobre 5 con 545 reseñas en Restaurant Guru.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add("js");</script>
+<style>
+/* ============ IDENTIDAD ============
+   Índigo Ai · Verde Amazonia · Coral Salmón · Amarillo Ipanema · Sumi
+   Los dos orígenes reales de la casa: el añil japonés y el trópico brasileño. */
+:root{
+  --ai:#1B3A5C;
+  --ai-viu:#2C6390;
+  --amazonia:#1F7A5A;
+  --coral:#E8765A;
+  --ipanema:#F0B429;
+  --sumi:#0B1017;
+  --paper:#F4F1EA;
+
+  --bg:#0B1017;
+  --bg-2:#121A24;
+  --bg-3:#1B2735;
+  --tinta:#F1EFE9;
+  --tinta-suau:#9EAEBE;
+  --accent:var(--ipanema);
+  --accent-2:var(--coral);
+  --vora:rgba(241,239,233,.14);
+  --vora-forta:rgba(241,239,233,.3);
+  --visual-a:#132C46;
+  --visual-b:#0B1017;
+  --visual-c:#1F7A5A;
+  --tancat:#F0866B;
+
+  --max:1240px;
+  --pad:clamp(20px,5vw,64px);
+  --suau:cubic-bezier(.22,1,.36,1);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--tinta);
+  font-family:'Barlow',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:clamp(15px,.55vw + 14px,17px);line-height:1.66;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+::selection{background:var(--accent);color:var(--sumi)}
+
+.env{width:100%;max-width:var(--max);margin-inline:auto;padding-inline:var(--pad)}
+
+/* ============ CAPA VISUAL ============ */
+.visual{position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none}
+.visual-fons{
+  position:absolute;inset:-2%;
+  background:
+    radial-gradient(116% 76% at 78% 16%, var(--visual-c) 0%, transparent 54%),
+    radial-gradient(96% 70% at 8% 92%, var(--visual-a) 0%, transparent 60%),
+    linear-gradient(172deg, var(--visual-a) 0%, var(--visual-b) 56%, var(--visual-b) 100%);
+}
+.gra{
+  position:absolute;inset:0;opacity:.4;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.vinyeta{position:absolute;inset:0;background:radial-gradient(112% 78% at 50% 40%, transparent 42%, rgba(3,6,10,.62) 100%)}
+/* Seigaiha: las olas concéntricas del textil japonés */
+.onades{position:absolute;inset:0;width:100%;height:100%}
+.onades path,.onades circle{fill:none;stroke:var(--ipanema);stroke-width:1;opacity:.2}
+.onades .traç{stroke-dasharray:var(--llarg);stroke-dashoffset:var(--llarg);animation:dibuixa 3.1s var(--suau) forwards}
+@keyframes dibuixa{to{stroke-dashoffset:0}}
+
+/* ============ NAV ============ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:80;transition:background .4s ease,backdrop-filter .4s ease,border-color .4s ease;border-bottom:1px solid transparent}
+.nav.enganxat{background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom-color:var(--vora)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:66px}
+.marca{font-family:'Shippori Mincho B1',Georgia,serif;font-weight:700;font-size:clamp(18px,1vw + 15px,22px);letter-spacing:.01em;text-decoration:none;line-height:1;white-space:nowrap;color:var(--tinta)}
+.marca em{font-style:normal;color:var(--accent)}
+.nav-enllacos{display:none;gap:clamp(16px,2.2vw,34px);align-items:center}
+@media(min-width:900px){.nav-enllacos{display:flex}}
+.nav-enllacos a{text-decoration:none;font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-suau);position:relative;padding:6px 0;transition:color .25s ease}
+.nav-enllacos a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--accent);transition:width .35s var(--suau)}
+.nav-enllacos a:hover{color:var(--tinta)}
+.nav-enllacos a:hover::after{width:100%}
+.nav-dreta{display:flex;align-items:center;gap:10px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 26px;border-radius:4px;text-decoration:none;font-weight:600;font-size:14px;letter-spacing:.04em;border:1px solid transparent;cursor:pointer;font-family:'Barlow',sans-serif;transition:transform .35s var(--suau),box-shadow .35s ease,background .25s ease,color .25s ease,border-color .25s ease}
+.btn-ple{background:var(--accent);color:var(--sumi)}
+.btn-ple:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 18px 40px -14px rgba(0,0,0,.6)}
+.btn-buit{border-color:var(--vora-forta);color:var(--tinta);background:transparent}
+.btn-buit:hover{transform:translateY(-3px) scale(1.02);border-color:var(--accent);background:rgba(240,180,41,.1)}
+.btn-petit{padding:10px 18px;font-size:13px}
+
+/* ============ HERO ============ */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;padding-block:120px clamp(40px,7vh,80px);overflow:hidden}
+.hero-in{position:relative;z-index:2;width:100%}
+.etiqueta{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:clamp(16px,2.4vw,26px)}
+.punt{width:5px;height:5px;border-radius:50%;background:var(--accent);flex:0 0 auto;animation:bat 2.6s ease-in-out infinite}
+@keyframes bat{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+h1{font-family:'Shippori Mincho B1',Georgia,serif;font-weight:800;font-size:clamp(46px,10.5vw,156px);line-height:.92;letter-spacing:-.03em;margin:0 0 clamp(22px,3vw,34px);text-wrap:balance}
+h1 em{font-style:normal;color:var(--accent);display:block}
+.hero-baix{display:flex;flex-wrap:wrap;gap:clamp(20px,4vw,60px);align-items:flex-end;justify-content:space-between}
+.hero-text{font-size:clamp(15.5px,.7vw + 14px,19px);line-height:1.6;max-width:38ch;color:var(--tinta-suau);margin:0}
+.hero-text strong{color:var(--tinta);font-weight:600}
+.hero-btns{display:flex;flex-wrap:wrap;gap:12px}
+.cue{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:2;display:grid;place-items:center;gap:8px;color:var(--tinta-suau);font-size:10px;letter-spacing:.2em;text-transform:uppercase}
+.cue span{display:block;width:1px;height:34px;background:linear-gradient(var(--accent),transparent);animation:baixa 2.2s ease-in-out infinite}
+@keyframes baixa{0%,100%{transform:scaleY(.4);opacity:.5;transform-origin:top}50%{transform:scaleY(1);opacity:1;transform-origin:top}}
+@media(max-width:700px){.cue{display:none}}
+
+/* ============ TIPOGRAFÍA GIGANTE ============ */
+.slab{position:relative;overflow:hidden;padding:clamp(52px,9vw,110px) var(--pad);border-top:1px solid var(--vora);border-bottom:1px solid var(--vora);background:var(--bg-2);text-align:center}
+.slab-mot{font-family:'Shippori Mincho B1',Georgia,serif;font-weight:800;font-size:clamp(34px,12vw,250px);line-height:.85;letter-spacing:-.04em;margin:0;white-space:nowrap;color:var(--tinta);display:inline-block}
+.slab-mot em{font-style:normal;color:var(--accent)}
+.slab-mot.parteix{white-space:normal}
+.slab-mot.parteix em{display:block}
+.slab-peu{display:flex;flex-wrap:wrap;gap:clamp(14px,4vw,48px);justify-content:center;margin-top:clamp(20px,3vw,34px);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--tinta-suau);font-weight:600}
+.slab-peu b{color:var(--accent);font-weight:700}
+
+/* ============ ESTADÍSTICAS ============ */
+.stats{padding-block:clamp(48px,8vw,96px)}
+.stats-graella{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(26px,4vw,48px)}
+@media(min-width:820px){.stats-graella{grid-template-columns:repeat(4,1fr)}}
+.stat{border-top:1px solid var(--vora);padding-top:clamp(14px,2vw,20px)}
+.stat-xifra{font-family:'Shippori Mincho B1',Georgia,serif;font-weight:800;font-size:clamp(38px,6vw,74px);line-height:1;letter-spacing:-.035em;color:var(--accent);display:block;font-variant-numeric:tabular-nums}
+.stat-sufix{font-size:.4em;color:var(--tinta-suau);font-weight:500}
+.stat-etiq{font-size:11.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--tinta-suau);margin-top:12px;line-height:1.5}
+
+/* ============ SECCIONES ============ */
+section{position:relative}
+.cap{max-width:60ch;margin-bottom:clamp(30px,5vw,54px)}
+.sobretitol{font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin:0 0 16px}
+h2{font-family:'Shippori Mincho B1',Georgia,serif;font-weight:700;font-size:clamp(32px,5.6vw,74px);line-height:1.02;letter-spacing:-.03em;margin:0 0 20px;text-wrap:balance}
+h2 em{font-style:normal;color:var(--accent)}
+.cap p:not(.sobretitol){font-size:clamp(15.5px,.55vw + 14px,18px);color:var(--tinta-suau);margin:0}
+
+/* ============ LA CASA ============ */
+.sala{display:grid;grid-template-columns:1fr;align-items:stretch}
+@media(min-width:940px){.sala{grid-template-columns:1.05fr .95fr}}
+.sala-visual{position:relative;min-height:clamp(340px,58vh,660px);overflow:hidden}
+.sala-visual .onades path,.sala-visual .onades circle{opacity:.3}
+.sala-txt{display:flex;flex-direction:column;justify-content:center;padding:clamp(48px,7vw,104px) var(--pad);background:var(--bg-2)}
+@media(min-width:940px){.sala-txt{padding-right:max(var(--pad),calc((100vw - var(--max))/2 + var(--pad)))}}
+.sala-txt p:not(.sobretitol){font-size:clamp(15.5px,.55vw + 14px,17.5px);color:var(--tinta-suau);margin:0 0 20px;max-width:52ch}
+.sala-txt p strong{color:var(--tinta);font-weight:600}
+.fets{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:14px;max-width:52ch}
+.fets li{display:flex;gap:14px;align-items:flex-start;font-size:15px;color:var(--tinta-suau)}
+.fets svg{width:17px;height:17px;flex:0 0 auto;margin-top:4px;color:var(--accent)}
+.fets b{color:var(--tinta);font-weight:600}
+
+/* ============ CARTA ============ */
+.carta{padding-block:clamp(56px,9vw,120px);overflow:hidden}
+.carta-cap{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end;justify-content:space-between;margin-bottom:clamp(28px,4vw,48px)}
+.pista{
+  display:flex;gap:clamp(12px,1.6vw,20px);overflow-x:auto;scroll-snap-type:x proximity;
+  padding-inline:max(var(--pad),calc((100vw - var(--max))/2 + var(--pad)));padding-bottom:18px;
+  scroll-padding-inline-start:max(var(--pad),calc((100vw - var(--max))/2 + var(--pad)));
+  scrollbar-width:thin;scrollbar-color:var(--vora-forta) transparent;
+}
+.pista::-webkit-scrollbar{height:5px}
+.pista::-webkit-scrollbar-thumb{background:var(--vora-forta);border-radius:100px}
+.pista::-webkit-scrollbar-track{background:transparent}
+.plat{scroll-snap-align:start;flex:0 0 min(78vw,352px);position:relative;border:1px solid var(--vora);background:var(--bg-2);overflow:hidden;padding:clamp(26px,3vw,36px);min-height:clamp(240px,32vh,300px);display:flex;flex-direction:column;border-radius:6px;transition:transform .45s var(--suau),border-color .45s ease,background .45s ease}
+.plat::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--accent);transform:scaleY(0);transform-origin:bottom;transition:transform .5s var(--suau)}
+.plat:hover{transform:translateY(-8px);border-color:var(--vora-forta);background:var(--bg-3)}
+.plat:hover::before{transform:scaleY(1)}
+.plat-num{font-family:'Shippori Mincho B1',Georgia,serif;font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.18em;display:block;margin-bottom:auto}
+.plat h3{font-family:'Shippori Mincho B1',Georgia,serif;font-weight:700;font-size:clamp(20px,1.4vw + 15px,27px);line-height:1.14;margin:24px 0 12px;letter-spacing:-.02em}
+.plat p{margin:0;font-size:14px;color:var(--tinta-suau);line-height:1.62}
+.pista-ajuda{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--tinta-suau);display:flex;align-items:center;gap:10px;font-weight:600}
+.pista-ajuda svg{width:22px;height:12px;color:var(--accent)}
+
+/* ============ PUNTUACIONES ============ */
+.punts{padding-block:clamp(56px,9vw,116px);background:var(--bg-2);border-block:1px solid var(--vora)}
+.barres{display:grid;gap:clamp(18px,2.6vw,26px);max-width:820px}
+.barra-fila{display:grid;gap:10px}
+.barra-cap{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.barra-nom{font-size:13.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase}
+.barra-val{font-family:'Shippori Mincho B1',Georgia,serif;font-size:22px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+.barra-pista{height:3px;background:var(--vora);overflow:hidden;border-radius:100px}
+.barra-omple{height:100%;width:0;background:var(--accent);transition:width 1.6s var(--suau);border-radius:100px}
+.punts-nota{margin-top:32px;font-size:13px;color:var(--tinta-suau);max-width:62ch}
+
+/* ============ RESEÑAS ============ */
+.cites{padding-block:clamp(56px,9vw,120px)}
+.cita-gran{border-top:1px solid var(--vora);padding-block:clamp(32px,5vw,58px);display:grid;gap:clamp(16px,3vw,40px)}
+@media(min-width:900px){.cita-gran{grid-template-columns:1fr 2.1fr;align-items:start}}
+.cita-meta-col{display:flex;flex-direction:column;gap:8px}
+.estrelles{display:flex;gap:3px;color:var(--accent)}
+.estrelles svg{width:14px;height:14px}
+.cita-autor{font-size:14.5px;font-weight:600;color:var(--tinta)}
+.cita-font{font-size:12px;color:var(--tinta-suau);letter-spacing:.06em}
+.cita-gran blockquote{margin:0;font-family:'Shippori Mincho B1',Georgia,serif;font-size:clamp(20px,2.5vw,38px);line-height:1.28;font-weight:500;color:var(--tinta);text-wrap:balance;letter-spacing:-.015em}
+
+/* ============ DOS SEDES ============ */
+.seus{padding-block:clamp(56px,9vw,116px)}
+.seus-graella{display:grid;gap:clamp(16px,2.4vw,26px);grid-template-columns:1fr}
+@media(min-width:760px){.seus-graella{grid-template-columns:repeat(2,1fr)}}
+.seu{border:1px solid var(--vora);border-radius:6px;padding:clamp(28px,3.4vw,42px);background:var(--bg-2);transition:transform .45s var(--suau),border-color .35s ease,background .35s ease}
+.seu:hover{transform:translateY(-6px);border-color:var(--vora-forta);background:var(--bg-3)}
+.seu-etiq{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
+.seu h3{font-family:'Shippori Mincho B1',Georgia,serif;font-weight:700;font-size:clamp(24px,2vw + 16px,34px);margin:0 0 12px;letter-spacing:-.02em}
+.seu p{margin:0 0 18px;font-size:15px;color:var(--tinta-suau);line-height:1.6}
+
+/* ============ INFO ============ */
+.info{padding-block:clamp(56px,9vw,116px);background:var(--bg-2);border-block:1px solid var(--vora)}
+.info-graella{display:grid;gap:0;grid-template-columns:1fr;border-top:1px solid var(--vora)}
+@media(min-width:700px){.info-graella{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1020px){.info-graella{grid-template-columns:repeat(4,1fr)}}
+.info-bloc{padding:clamp(26px,3vw,36px) clamp(20px,2vw,28px);border-bottom:1px solid var(--vora);transition:background .35s ease}
+@media(min-width:700px){.info-bloc{border-right:1px solid var(--vora)}.info-bloc:nth-child(2n){border-right:0}}
+@media(min-width:1020px){.info-bloc{border-right:1px solid var(--vora)}.info-bloc:nth-child(2n){border-right:1px solid var(--vora)}.info-bloc:nth-child(4n){border-right:0}}
+.info-bloc:hover{background:var(--bg-3)}
+.info-icona{width:20px;height:20px;color:var(--accent);margin-bottom:16px}
+.info-bloc h3{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--tinta-suau);margin:0 0 12px}
+.info-bloc p{margin:0;font-size:15px;line-height:1.6}
+.info-bloc a{color:var(--accent);text-decoration:none;font-weight:600}
+.info-bloc a:hover{text-decoration:underline}
+.horari-fila{display:flex;justify-content:space-between;gap:14px;font-size:14px;padding:4px 0}
+.horari-fila span:last-child{color:var(--tinta-suau);text-align:right;font-variant-numeric:tabular-nums}
+
+/* ============ CTA ============ */
+.cta{position:relative;overflow:hidden;padding-block:clamp(70px,12vw,150px);text-align:center}
+.cta .env{position:relative;z-index:2}
+.cta h2{margin-bottom:20px}
+.cta p{color:var(--tinta-suau);max-width:48ch;margin:0 auto clamp(30px,4vw,42px);font-size:clamp(15.5px,.6vw + 14px,18px)}
+.cta-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+
+/* ============ PIE ============ */
+footer{padding-block:clamp(44px,6vw,72px) clamp(28px,4vw,40px);border-top:1px solid var(--vora)}
+.peu-dalt{display:flex;flex-wrap:wrap;gap:28px;justify-content:space-between;align-items:flex-start;margin-bottom:36px}
+.peu-marca{font-family:'Shippori Mincho B1',Georgia,serif;font-size:30px;font-weight:800;margin:0 0 10px;letter-spacing:-.02em}
+.peu-marca em{font-style:normal;color:var(--accent)}
+.peu-adr{font-size:14px;color:var(--tinta-suau);margin:0;line-height:1.65}
+.socials{display:flex;gap:10px}
+.social{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--vora-forta);color:var(--tinta);text-decoration:none;transition:transform .35s var(--suau),background .25s ease,color .25s ease,border-color .25s ease}
+.social:hover{transform:translateY(-4px);background:var(--accent);color:var(--sumi);border-color:var(--accent)}
+.social svg{width:17px;height:17px}
+.peu-notes{border-top:1px solid var(--vora);padding-top:26px;font-size:12px;line-height:1.75;color:var(--tinta-suau)}
+.peu-notes p{margin:0 0 10px}
+.peu-notes strong{color:var(--tinta);font-weight:600}
+
+/* ============ REVELADO ============ */
+.js .rev{transition:opacity .85s var(--suau),transform .85s var(--suau)}
+.js .rev.amagat{opacity:0;transform:translateY(30px)}
+.js .rev.dins{opacity:1;transform:none}
+
+/* En pantalles estretes el nom llarg empenyia el botó fora de la pantalla */
+@media(max-width:430px){
+  .nav-in{gap:8px}
+  .marca{font-size:14px}
+  .btn-petit{padding:9px 13px;font-size:11.5px;letter-spacing:.02em}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;transition-delay:0ms!important;scroll-behavior:auto!important}
+  .js .rev{opacity:1;transform:none}
+  .traç{stroke-dashoffset:0!important}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="env nav-in">
+    <a href="#dalt" class="marca">Japa <em>2Go</em></a>
+    <div class="nav-enllacos">
+      <a href="#casa">La casa</a>
+      <a href="#cocina">La carta</a>
+      <a href="#opiniones">Opiniones</a>
+      <a href="#sedes">Dónde estamos</a>
+    </div>
+    <div class="nav-dreta">
+      <a href="tel:+34640806187" class="btn btn-ple btn-petit">Pedir</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="dalt">
+  <div class="visual" aria-hidden="true">
+    <div class="visual-fons" data-parallax="18"></div>
+    <svg class="onades" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMax slice" data-parallax="32">
+      <path class="traç" d="M-100 700 Q50 560 200 700 T500 700 T800 700 T1100 700 T1400 700"/>
+      <path class="traç" d="M-100 760 Q50 620 200 760 T500 760 T800 760 T1100 760 T1400 760"/>
+      <path class="traç" d="M-100 640 Q50 500 200 640 T500 640 T800 640 T1100 640 T1400 640"/>
+      <circle class="traç" cx="880" cy="250" r="150"/>
+      <circle class="traç" cx="880" cy="250" r="105"/>
+      <circle class="traç" cx="880" cy="250" r="60"/>
+      <path class="traç" d="M0 470 L1200 400"/>
+    </svg>
+    <div class="gra"></div>
+    <div class="vinyeta"></div>
+  </div>
+
+  <div class="env hero-in">
+    <span class="etiqueta rev"><span class="punt"></span>Empuriabrava &amp; Roses</span>
+    <h1 class="rev">Sushi con acento<em>brasileño</em></h1>
+    <div class="hero-baix">
+      <p class="hero-text rev">Una cocina japonesa llevada por manos brasileñas: la mezcla que los clientes describen como el hallazgo de la zona. <strong>4,7 sobre 5 con 545 reseñas.</strong></p>
+      <div class="hero-btns rev">
+        <a href="tel:+34640806187" class="btn btn-ple">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+          640 80 61 87
+        </a>
+        <a href="#cocina" class="btn btn-buit">Ver la carta</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="cue" aria-hidden="true"><span></span>Baja</div>
+</header>
+
+<section class="slab">
+  <h2 class="slab-mot rev">JAPA <em>2GO</em></h2>
+  <div class="slab-peu rev">
+    <span><b>4,7</b> / 5 en Restaurant Guru</span>
+    <span><b>545</b> reseñas</span>
+    <span><b>2</b> locales: Empuriabrava y Roses</span>
+  </div>
+</section>
+
+<section class="stats" aria-label="Datos de reputación">
+  <div class="env">
+    <div class="stats-graella">
+      <!-- la cifra real ya está en el HTML: si el JS falla, se ve el número, nunca un cero -->
+      <div class="stat rev">
+        <span class="stat-xifra"><span class="compt" data-fi="4.7" data-dec="1">4,7</span></span>
+        <div class="stat-etiq">Valoración en<br>Restaurant Guru</div>
+      </div>
+      <div class="stat rev">
+        <span class="stat-xifra"><span class="compt" data-fi="545">545</span></span>
+        <div class="stat-etiq">Reseñas<br>de clientes reales</div>
+      </div>
+      <div class="stat rev">
+        <span class="stat-xifra"><span class="compt" data-fi="6550">6.550</span></span>
+        <div class="stat-etiq">Seguidores<br>en Instagram</div>
+      </div>
+      <div class="stat rev">
+        <span class="stat-xifra"><span class="compt" data-fi="9.2" data-dec="1">9,2</span><span class="stat-sufix">/10</span></span>
+        <div class="stat-etiq">Servicio<br>según TheFork</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sala" id="casa">
+  <div class="sala-visual" aria-hidden="true">
+    <div class="visual">
+      <div class="visual-fons"></div>
+      <svg class="onades" viewBox="0 0 600 700" preserveAspectRatio="xMidYMid slice">
+        <path d="M-60 560 Q40 460 140 560 T340 560 T540 560 T740 560"/>
+        <path d="M-60 630 Q40 530 140 630 T340 630 T540 630 T740 630"/>
+        <circle cx="300" cy="250" r="130"/>
+        <circle cx="300" cy="250" r="90"/>
+        <circle cx="300" cy="250" r="50"/>
+        <circle cx="300" cy="250" r="4" fill="currentColor" stroke="none" opacity=".5"/>
+      </svg>
+      <div class="gra"></div>
+      <div class="vinyeta"></div>
+    </div>
+  </div>
+  <div class="sala-txt">
+    <p class="sobretitol rev">La casa</p>
+    <h2 class="rev">Dos cocinas <em>en una barra</em></h2>
+    <p class="rev">Lo que los clientes destacan no es solo el sushi, es la mezcla. <strong>«Bonito descubrimiento, gran mezcla japonesa-brasileña, personal muy amable»</strong>, escribe david O. en julio de 2025 tras varias visitas.</p>
+    <p class="rev">Y el trato se repite en las opiniones: <strong>«La dirección, muy amable, reconoce a sus clientes»</strong>, apunta Nathalie C. en abril de 2025. La casa trabaja en sala, a domicilio y con reserva, todos los días del año, de doce del mediodía a once de la noche.</p>
+    <ul class="fets">
+      <li class="rev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Abierto todos los días,</b> de 12:00 a 23:00</span></li>
+      <li class="rev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Dos locales:</b> Empuriabrava y Roses</span></li>
+      <li class="rev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>A domicilio</b> y con reserva previa</span></li>
+      <li class="rev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Producto fresco:</b> lo más repetido en las reseñas</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="carta" id="cocina">
+  <div class="env">
+    <div class="carta-cap">
+      <div class="cap" style="margin-bottom:0">
+        <p class="sobretitol rev">La carta</p>
+        <h2 class="rev">Lo que <em>más se pide</em></h2>
+        <p class="rev">Ninguno de estos platos es invención nuestra: todos aparecen citados en reseñas publicadas.</p>
+      </div>
+      <div class="pista-ajuda rev" aria-hidden="true">
+        <svg viewBox="0 0 40 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M0 6h36M31 1l5 5-5 5"/></svg>
+        Arrastra
+      </div>
+    </div>
+  </div>
+  <div class="pista" id="pista" tabindex="0" role="region" aria-label="Carta de platos, lista desplazable horizontalmente">
+    <article class="plat rev"><span class="plat-num">01</span><h3>Surtido de sushi</h3><p>La bandeja variada es lo primero que aparece cuando los clientes describen una mesa de la casa.</p></article>
+    <article class="plat rev"><span class="plat-num">02</span><h3>Maki de salmón</h3><p>El maki más citado por su nombre en las opiniones publicadas.</p></article>
+    <article class="plat rev"><span class="plat-num">03</span><h3>Tekka maki</h3><p>De atún. El otro maki que los clientes mencionan de forma recurrente.</p></article>
+    <article class="plat rev"><span class="plat-num">04</span><h3>Gyozas</h3><p>Las empanadillas japonesas a la plancha, del capítulo de entrantes calientes.</p></article>
+    <article class="plat rev"><span class="plat-num">05</span><h3>Ebi fry</h3><p>Gambas rebozadas en panko. Parte del lado frito de la carta, no solo crudo.</p></article>
+    <article class="plat rev"><span class="plat-num">06</span><h3>Teriyaki de pollo</h3><p>Del apartado de grill que da la segunda mitad al nombre de la casa.</p></article>
+  </div>
+</section>
+
+<section class="punts">
+  <div class="env">
+    <div class="cap">
+      <p class="sobretitol rev">Las puntuaciones</p>
+      <h2 class="rev">Qué puntúan <em>más alto</em></h2>
+    </div>
+    <div class="barres" id="barres">
+      <div class="barra-fila rev"><div class="barra-cap"><span class="barra-nom">Servicio</span><span class="barra-val">9,2</span></div><div class="barra-pista"><div class="barra-omple" data-pct="92"></div></div></div>
+      <div class="barra-fila rev"><div class="barra-cap"><span class="barra-nom">Comida</span><span class="barra-val">9,0</span></div><div class="barra-pista"><div class="barra-omple" data-pct="90"></div></div></div>
+      <div class="barra-fila rev"><div class="barra-cap"><span class="barra-nom">Restaurant Guru</span><span class="barra-val">4,7</span></div><div class="barra-pista"><div class="barra-omple" data-pct="94"></div></div></div>
+      <div class="barra-fila rev"><div class="barra-cap"><span class="barra-nom">TripAdvisor</span><span class="barra-val">4,4</span></div><div class="barra-pista"><div class="barra-omple" data-pct="88"></div></div></div>
+    </div>
+    <p class="punts-nota rev">Las puntuaciones de servicio y comida son las de TheFork sobre 10. Las dos últimas son las valoraciones globales de Restaurant Guru (4,7 sobre 5 con 545 reseñas) y TripAdvisor (4,4 sobre 5 con 48 reseñas), representadas en la misma escala para poder compararlas.</p>
+  </div>
+</section>
+
+<section class="cites" id="opiniones">
+  <div class="env">
+    <div class="cap">
+      <p class="sobretitol rev">Opiniones</p>
+      <h2 class="rev">Lo que <em>dicen ellos</em></h2>
+      <p class="rev">Reseñas reales publicadas en TripAdvisor, traducidas del francés original.</p>
+    </div>
+
+    <figure class="cita-gran rev">
+      <div class="cita-meta-col">
+        <div class="estrelles" aria-label="5 sobre 5">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg>
+        </div>
+        <span class="cita-autor">david O.</span>
+        <span class="cita-font">TripAdvisor · Julio 2025</span>
+      </div>
+      <blockquote>«Bonito descubrimiento. Gran mezcla japonesa-brasileña, personal muy amable. Hemos comido muy bien allí varias veces.»</blockquote>
+    </figure>
+
+    <figure class="cita-gran rev">
+      <div class="cita-meta-col">
+        <div class="estrelles" aria-label="5 sobre 5">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg>
+        </div>
+        <span class="cita-autor">Gaby</span>
+        <span class="cita-font">TripAdvisor · Septiembre 2025</span>
+      </div>
+      <blockquote>«Acogida agradable, producto muy bueno y fresco. Buena relación calidad-precio. Mucha comida en el plato.»</blockquote>
+    </figure>
+
+    <figure class="cita-gran rev">
+      <div class="cita-meta-col">
+        <div class="estrelles" aria-label="5 sobre 5">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L7 14.2l-5-4.9 6.9-1z"/></svg>
+        </div>
+        <span class="cita-autor">Nathalie C.</span>
+        <span class="cita-font">TripAdvisor · Abril 2025</span>
+      </div>
+      <blockquote>«Nos encanta: producto fresco y sabroso. La dirección, muy amable, reconoce a sus clientes.»</blockquote>
+    </figure>
+  </div>
+</section>
+
+<section class="seus" id="sedes">
+  <div class="env">
+    <div class="cap">
+      <p class="sobretitol rev">Dónde estamos</p>
+      <h2 class="rev">Dos casas, <em>una cocina</em></h2>
+    </div>
+    <div class="seus-graella">
+      <article class="seu rev">
+        <p class="seu-etiq">Local 1</p>
+        <h3>Empuriabrava</h3>
+        <p>Carrer Sant Morí, 8 — Local 7<br>17487 Empuriabrava, Girona</p>
+        <a href="tel:+34640806187" class="btn btn-buit btn-petit">640 80 61 87</a>
+      </article>
+      <article class="seu rev">
+        <p class="seu-etiq">Local 2</p>
+        <h3>Roses</h3>
+        <p>Avinguda de Rhode, 129<br>17480 Roses, Girona</p>
+        <a href="tel:+34640806187" class="btn btn-buit btn-petit">640 80 61 87</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="info">
+  <div class="env">
+    <div class="cap">
+      <p class="sobretitol rev">Información</p>
+      <h2 class="rev">Horario y <em>contacto</em></h2>
+    </div>
+  </div>
+  <div class="env" style="padding-inline:0">
+    <div class="info-graella">
+      <div class="info-bloc rev" style="padding-left:var(--pad)">
+        <svg class="info-icona" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <h3>Horario</h3>
+        <div class="horari-fila"><span>Todos los días</span><span>12:00 – 23:00</span></div>
+      </div>
+      <div class="info-bloc rev">
+        <svg class="info-icona" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+        <h3>Pedidos</h3>
+        <p><a href="tel:+34640806187">640 80 61 87</a><br><a href="mailto:japa2goes@gmail.com">japa2goes@gmail.com</a></p>
+      </div>
+      <div class="info-bloc rev">
+        <svg class="info-icona" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3h18v13H3zM8 21h8M12 16v5"/></svg>
+        <h3>Servicios</h3>
+        <p>Sala · A domicilio<br>Reserva previa</p>
+      </div>
+      <div class="info-bloc rev" style="padding-right:var(--pad)">
+        <svg class="info-icona" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <h3>Cocina</h3>
+        <p>Japonesa · Brasileña<br>Sushi y grill</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="visual" aria-hidden="true">
+    <div class="visual-fons"></div>
+    <div class="gra"></div>
+    <div class="vinyeta"></div>
+  </div>
+  <div class="env">
+    <h2 class="rev">¿Aquí o <em>para llevar</em>?</h2>
+    <p class="rev">Abrimos todos los días de doce del mediodía a once de la noche, en los dos locales. Una llamada basta para reservar mesa o encargar la bandeja.</p>
+    <div class="cta-btns rev">
+      <a href="tel:+34640806187" class="btn btn-ple">Llamar ahora</a>
+      <a href="https://www.instagram.com/japa2go_es/" class="btn btn-buit" rel="noopener">Ver Instagram</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="env">
+    <div class="peu-dalt">
+      <div>
+        <p class="peu-marca">Japa <em>2Go</em></p>
+        <p class="peu-adr">Carrer Sant Morí, 8 · Empuriabrava<br>Avinguda de Rhode, 129 · Roses<br>Alt Empordà · Girona</p>
+      </div>
+      <div class="socials">
+        <a href="https://www.instagram.com/japa2go_es/" class="social" rel="noopener" aria-label="Instagram de Japa 2Go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></a>
+        <a href="tel:+34640806187" class="social" aria-label="Llamar a Japa 2Go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></a>
+        <a href="mailto:japa2goes@gmail.com" class="social" aria-label="Escribir a Japa 2Go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg></a>
+      </div>
+    </div>
+    <div class="peu-notes">
+      <p><strong>Sobre los datos de esta página.</strong> El 4,7 sobre 5 con 545 reseñas procede de la ficha pública de Japa 2Go en Restaurant Guru; el 4,4 sobre 5 con 48 reseñas, de su ficha en TripAdvisor; y las puntuaciones de comida (9/10) y servicio (9,2/10), de su ficha en TheFork. Todas consultadas en agosto de 2026 y sujetas a variación.</p>
+      <p><strong>Instagram.</strong> Los 6.550 seguidores corresponden al perfil público @japa2go_es en el momento de la consulta.</p>
+      <p><strong>Imágenes.</strong> Esta página no utiliza ninguna fotografía del restaurante: todo lo que se ve son fondos generados con código.</p>
+      <p><strong>Precios.</strong> Esta página no publica precios ni carta con importes, porque no se ha localizado ninguna carta oficial con precios verificables.</p>
+      <p><strong>Reseñas.</strong> Las citas son reseñas reales de clientes publicadas en TripAdvisor, traducidas al español desde el francés original. Se ha mantenido íntegro el sentido de cada opinión.</p>
+      <p style="margin-top:16px;opacity:.7">Propuesta de página web · Maqueta de demostración</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduir = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var arrel = document.documentElement;
+  var hiHaIO = "IntersectionObserver" in window;
+
+  var nav = document.getElementById("nav");
+  function alScroll(){ nav.classList.toggle("enganxat", window.scrollY > 40); }
+  alScroll();
+  window.addEventListener("scroll", alScroll, { passive: true });
+
+  /* Enllaços interns per scroll, no per navegació d'ancora.
+     El clic natural a href="#id" fa que el navegador navegui a la URL amb
+     hash nou; en un iframe o vista prèvia en sandbox (com el panell de
+     previsualització d'aquesta mateixa eina) aquesta navegació es bloqueja
+     i el botó sembla trencat. Cridant scrollIntoView directament, el clic
+     mai depèn de navegar enlloc — funciona igual a qualsevol navegador i
+     també dins de qualsevol sandbox que bloquegi el canvi de hash. */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener("click", function(e){
+      var id = a.getAttribute("href").slice(1);
+      var dest = document.getElementById(id);
+      if(!dest) return;
+      e.preventDefault();
+      dest.scrollIntoView({ behavior: reduir.matches ? "auto" : "smooth", block: "start" });
+      if(history.replaceState){
+        try{ history.replaceState(null, "", "#" + id); }catch(err){}
+      }
+    });
+  });
+
+  var revelables = document.querySelectorAll(".rev");
+  function mostra(el, retard){
+    el.classList.remove("amagat");
+    if(retard > 0) el.style.transitionDelay = retard + "ms";
+    el.classList.add("dins");
+    // el retardo hay que quitarlo al acabar: si se queda puesto, todos los
+    // hover posteriores de ese elemento llegarían tarde y parecería roto
+    var neteja = function(){ el.style.transitionDelay = ""; el.removeEventListener("transitionend", neteja); };
+    el.addEventListener("transitionend", neteja);
+    setTimeout(neteja, retard + 1200);
+  }
+  function mostraTot(){
+    revelables.forEach(function(el){ el.classList.remove("amagat"); el.classList.add("dins"); el.style.transitionDelay = ""; });
+  }
+
+  var pista = document.getElementById("pista");
+  // Dentro de un carrusel horizontal la mayoría de tarjetas nunca cruzan el
+  // umbral: se revelan todas en cascada cuando entra el carrusel.
+  var enCarrusel = pista ? [].slice.call(pista.querySelectorAll(".rev")) : [];
+
+  if(reduir.matches || !hiHaIO){
+    mostraTot();
+  } else {
+    revelables.forEach(function(el){
+      el.classList.add("amagat");
+      var germans = [].slice.call(el.parentElement.children).filter(function(n){ return n.classList.contains("rev"); });
+      el.dataset.ordre = Math.min(germans.indexOf(el), 8);
+    });
+    var obs = new IntersectionObserver(function(entrades){
+      entrades.forEach(function(e){
+        if(!e.isIntersecting) return;
+        mostra(e.target, parseInt(e.target.dataset.ordre || "0", 10) * 90);
+        obs.unobserve(e.target);
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -6% 0px" });
+    revelables.forEach(function(el){ if(enCarrusel.indexOf(el) === -1) obs.observe(el); });
+    if(enCarrusel.length){
+      var obsP = new IntersectionObserver(function(en){
+        en.forEach(function(e){
+          if(!e.isIntersecting) return;
+          enCarrusel.forEach(function(el, i){ mostra(el, Math.min(i, 8) * 85); });
+          obsP.unobserve(pista);
+        });
+      }, { threshold: 0.06 });
+      obsP.observe(pista);
+    }
+    // Red de seguridad: si a los 3 s no se ha revelado ni un solo elemento con
+    // la página ya visible, se muestra todo antes que dejar nada invisible.
+    setTimeout(function comprova(){
+      if(document.visibilityState !== "visible"){
+        document.addEventListener("visibilitychange", function un(){
+          document.removeEventListener("visibilitychange", un);
+          setTimeout(comprova, 1200);
+        });
+        return;
+      }
+      var cap = true;
+      revelables.forEach(function(el){ if(el.classList.contains("dins")) cap = false; });
+      if(cap) mostraTot();
+    }, 3000);
+  }
+
+  /* ---- La palabra gigante se ajusta al ancho real ---- */
+  var slab = document.querySelector(".slab-mot");
+  if(slab){
+    var ajusta = function(){
+      var cont = slab.parentElement;
+      var estil = getComputedStyle(cont);
+      var disp = cont.clientWidth - parseFloat(estil.paddingLeft) - parseFloat(estil.paddingRight);
+      if(disp <= 0) return;
+      var MIN = 44; // per sota, deixa de ser tipografia gegant
+      slab.classList.remove("parteix");
+      var mesura = function(){
+        slab.style.fontSize = "100px";
+        var w = slab.getBoundingClientRect().width / 100;
+        slab.style.fontSize = "";
+        return w;
+      };
+      var ems = mesura();
+      if(!ems) return;
+      var objectiu = disp * (window.innerWidth < 600 ? 0.94 : 1) / ems;
+      // un nom llarg en una sola línia quedaria minúscul: es parteix en dues
+      if(objectiu < MIN && slab.querySelector("em")){
+        slab.classList.add("parteix");
+        var ems2 = mesura();
+        if(ems2) objectiu = disp * 0.94 / ems2;
+      }
+      slab.style.fontSize = Math.max(24, Math.min(objectiu, 260)) + "px";
+    };
+    ajusta();
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(ajusta).catch(function(){});
+    var temps;
+    window.addEventListener("resize", function(){ clearTimeout(temps); temps = setTimeout(ajusta, 120); }, { passive: true });
+  }
+
+  document.querySelectorAll(".onades .traç").forEach(function(p){
+    if(p.getTotalLength) p.style.setProperty("--llarg", p.getTotalLength());
+  });
+
+  function formata(n, dec){
+    if(dec > 0) return n.toFixed(dec).replace(".", ",");
+    return Math.round(n).toLocaleString("es-ES");
+  }
+  function anima(el){
+    var fi = parseFloat(el.dataset.fi), dec = parseInt(el.dataset.dec || "0", 10);
+    if(reduir.matches){ el.textContent = formata(fi, dec); return; }
+    var dur = 1800, ini = null;
+    (function pas(ts){
+      if(ini === null) ini = ts;
+      var p = Math.min((ts - ini) / dur, 1);
+      el.textContent = formata(fi * (1 - Math.pow(1 - p, 4)), dec);
+      if(p < 1) requestAnimationFrame(pas); else el.textContent = formata(fi, dec);
+    })(performance.now());
+  }
+  var comptadors = document.querySelectorAll(".compt");
+  function fixa(el){ el.textContent = formata(parseFloat(el.dataset.fi), parseInt(el.dataset.dec || "0", 10)); }
+  if(!hiHaIO || reduir.matches){
+    comptadors.forEach(fixa);
+  } else {
+    comptadors.forEach(function(el){ el.textContent = formata(0, parseInt(el.dataset.dec || "0", 10)); });
+    var obsC = new IntersectionObserver(function(en){
+      en.forEach(function(e){ if(e.isIntersecting){ anima(e.target); obsC.unobserve(e.target); } });
+    }, { threshold: 0.35 });
+    comptadors.forEach(function(el){ obsC.observe(el); });
+    setTimeout(function(){
+      comptadors.forEach(function(el){ if(el.textContent === formata(0, parseInt(el.dataset.dec || "0", 10))) fixa(el); });
+    }, 4000);
+  }
+
+  var zona = document.getElementById("barres");
+  function omple(){
+    zona.querySelectorAll(".barra-omple").forEach(function(b, i){
+      var pct = b.dataset.pct + "%";
+      if(reduir.matches){ b.style.width = pct; return; }
+      setTimeout(function(){ b.style.width = pct; }, i * 170);
+    });
+  }
+  if(zona){
+    if(!hiHaIO){ omple(); }
+    else {
+      var obsB = new IntersectionObserver(function(en){
+        en.forEach(function(e){ if(e.isIntersecting){ omple(); obsB.unobserve(zona); } });
+      }, { threshold: 0.3 });
+      obsB.observe(zona);
+      setTimeout(function(){
+        var cap = true;
+        zona.querySelectorAll(".barra-omple").forEach(function(b){ if(b.style.width) cap = false; });
+        if(cap) omple();
+      }, 4500);
+    }
+  }
+
+  if(pista){
+    var baixat = false, xIni = 0, sIni = 0, mogut = false;
+    pista.addEventListener("pointerdown", function(e){
+      if(e.pointerType !== "mouse") return;
+      baixat = true; mogut = false; xIni = e.clientX; sIni = pista.scrollLeft;
+      pista.style.cursor = "grabbing";
+    });
+    window.addEventListener("pointermove", function(e){
+      if(!baixat) return;
+      var d = e.clientX - xIni;
+      if(Math.abs(d) > 3) mogut = true;
+      pista.scrollLeft = sIni - d;
+    });
+    window.addEventListener("pointerup", function(){
+      if(!baixat) return;
+      baixat = false; pista.style.cursor = "";
+    });
+    pista.addEventListener("click", function(e){ if(mogut) e.preventDefault(); }, true);
+  }
+
+  var capes = document.querySelectorAll(".hero [data-parallax]");
+  if(capes.length && !reduir.matches && window.matchMedia("(hover: hover) and (pointer: fine)").matches){
+    var hero = document.querySelector(".hero"), pendent = false, px = 0, py = 0;
+    hero.addEventListener("mousemove", function(ev){
+      var r = hero.getBoundingClientRect();
+      px = (ev.clientX - r.left) / r.width - 0.5;
+      py = (ev.clientY - r.top) / r.height - 0.5;
+      if(pendent) return;
+      pendent = true;
+      requestAnimationFrame(function(){
+        capes.forEach(function(c){
+          var d = parseFloat(c.dataset.parallax) || 0;
+          c.style.transform = "translate3d(" + (px * d) + "px," + (py * d * 0.55) + "px,0)";
+        });
+        pendent = false;
+      });
+    });
+    hero.addEventListener("mouseleave", function(){
+      capes.forEach(function(c){ c.style.transform = ""; });
+    });
+  }
+})();
+</script>
+</body>
+</html>
