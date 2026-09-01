@@ -48,19 +48,8 @@
     --nav-bg:rgba(248,236,220,0.92);
     --shadow: 0 10px 30px rgba(74,20,32,0.16);
   }
-  html[data-theme="dark"]{
-    --sand:#1c0d10;
-    --sand-2:#26141a;
-    --paper:#2a161b;
-    --ink:#f1e3d6;
-    --heading:#f1e3d6;
-    --muted:#c9b6a6;
-    --line:rgba(241,227,214,0.14);
-    --nav-bg:rgba(20,10,12,0.85);
-    --shadow: 0 10px 30px rgba(0,0,0,0.4);
-  }
   *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;color-scheme:light dark;}
+  html{scroll-behavior:smooth;color-scheme:light;}
   body{
     margin:0;
     background:var(--sand);
@@ -405,17 +394,6 @@
 </footer>
 
 <script>
-  // Theme: suit le mode clair/sombre du téléphone en direct, sans bouton manuel
-  const root = document.documentElement;
-  const darkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
-  function applySystemTheme(isDark){
-    root.setAttribute('data-theme', isDark ? 'dark' : 'light');
-  }
-
-  applySystemTheme(darkMediaQuery.matches);
-  darkMediaQuery.addEventListener('change', (e)=> applySystemTheme(e.matches));
-
   // ===== I18N =====
   const ui = {
     es:{ heroSub:"Tasty Moments · frente al mar",
