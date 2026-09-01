@@ -1,0 +1,783 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Red Pepper — La Carta</title>
+<meta name="description" content="Red Pepper, restaurante frente al mar en L'Escala. Tapas para compartir, cócteles de autor, poke bowls y vinos de bodega. Carta digital en español, inglés y francés.">
+<meta property="og:title" content="Red Pepper — La Carta">
+<meta property="og:description" content="Restaurante frente al mar en L'Escala. Tapas, cócteles de autor, poke bowls y vinos. Passeig del Petit Príncep, 96.">
+<meta property="og:type" content="restaurant.menu">
+<meta name="theme-color" content="#4a1420">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Red Pepper",
+  "servesCuisine": ["Mediterranean", "Tapas", "Seafood"],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Passeig del Petit Príncep, 96",
+    "addressLocality": "L'Escala",
+    "postalCode": "17130",
+    "addressCountry": "ES"
+  },
+  "telephone": "+33637858643",
+  "openingHours": "Mo-Su 10:30-23:00",
+  "priceRange": "€€"
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600;700&family=Parisienne&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#4a1420;
+    --navy-2:#2f0c14;
+    --sand:#f8ecdc;
+    --sand-2:#f0dfc4;
+    --chili:#c1572c;
+    --chili-dark:#973f1c;
+    --gold:#d9a441;
+    --olive:#a97a3e;
+    --paper:#fdf7ec;
+    --ink:#2b1810;
+    --heading:#4a1420;
+    --muted:#7a6a5a;
+    --line:rgba(74,20,32,0.16);
+    --nav-bg:rgba(248,236,220,0.92);
+    --shadow: 0 10px 30px rgba(74,20,32,0.16);
+  }
+  html[data-theme="dark"]{
+    --sand:#1c0d10;
+    --sand-2:#26141a;
+    --paper:#2a161b;
+    --ink:#f1e3d6;
+    --heading:#f1e3d6;
+    --muted:#c9b6a6;
+    --line:rgba(241,227,214,0.14);
+    --nav-bg:rgba(20,10,12,0.85);
+    --shadow: 0 10px 30px rgba(0,0,0,0.4);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;color-scheme:light dark;}
+  body{
+    margin:0;
+    background:var(--sand);
+    color:var(--ink);
+    font-family:'Jost',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    transition:background .25s ease, color .25s ease;
+  }
+  ::selection{background:var(--chili);color:white;}
+
+  h1,h2,h3{font-family:'Cormorant Garamond',serif;margin:0;}
+  .eyebrow{
+    font-family:'Jost',sans-serif;
+    text-transform:uppercase;
+    letter-spacing:.18em;
+    font-size:.72rem;
+    font-weight:600;
+    color:var(--chili);
+  }
+
+  /* ===== NAV ===== */
+  .nav{
+    position:sticky;top:0;z-index:50;
+    background:var(--nav-bg);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1100px;margin:0 auto;padding:14px 20px;
+    display:flex;align-items:center;gap:14px;
+  }
+  .brand{
+    font-family:'Parisienne',cursive;font-weight:400;font-size:1.7rem;
+    color:var(--heading);white-space:nowrap;display:flex;align-items:center;gap:8px;
+  }
+  .brand span.dot{color:var(--chili);}
+  .pills{
+    display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;flex:1;
+  }
+  .pills::-webkit-scrollbar{display:none;}
+  .pill{
+    flex:none;
+    font-size:.82rem;font-weight:600;
+    padding:7px 14px;border-radius:999px;
+    color:var(--heading);text-decoration:none;
+    border:1px solid var(--line);
+    transition:.2s;white-space:nowrap;
+  }
+  .pill:hover, .pill.active{background:var(--navy);color:var(--sand-2);border-color:var(--navy);}
+  html[data-theme="dark"] .pill:hover, html[data-theme="dark"] .pill.active{color:#f1e3d6;}
+
+  .lang-switch{
+    flex:none;display:flex;gap:4px;background:var(--sand-2);
+    border-radius:999px;padding:3px;border:1px solid var(--line);
+  }
+  .lang-btn{
+    flex:none;border:none;background:none;cursor:pointer;
+    font-family:'Jost',sans-serif;font-size:.72rem;font-weight:700;
+    letter-spacing:.03em;color:var(--muted);
+    padding:6px 9px;border-radius:999px;transition:.2s;
+  }
+  .lang-btn.active{background:var(--chili);color:#fff;}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    background:linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+    color:var(--sand);
+    overflow:hidden;
+    padding:70px 20px 90px;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(700px 380px at 88% -10%, rgba(217,164,65,0.4), transparent 60%),
+      radial-gradient(600px 320px at 8% 105%, rgba(193,87,44,0.45), transparent 60%);
+  }
+  .hero-inner{position:relative;max-width:1100px;margin:0 auto;text-align:center;}
+  .pepper-mark{
+    width:56px;height:56px;margin:0 auto 18px;
+    animation:sway 4.5s ease-in-out infinite;
+    transform-origin:50% 15%;
+  }
+  @keyframes sway{
+    0%,100%{transform:rotate(-6deg);}
+    50%{transform:rotate(6deg);}
+  }
+  .hero h1{
+    font-family:'Parisienne',cursive;font-weight:400;
+    font-size:clamp(3.4rem,10vw,6rem);
+    line-height:0.95;
+    color:#f8ecdc;
+  }
+  .hero .sub{
+    font-family:'Jost',sans-serif;
+    text-transform:uppercase;
+    letter-spacing:.3em;
+    font-size:.78rem;font-weight:500;
+    color:var(--gold);
+    margin-top:14px;
+  }
+  .hero p.desc{
+    max-width:520px;margin:22px auto 0;
+    color:rgba(244,236,216,0.8);font-size:1rem;line-height:1.6;
+  }
+  .hero-info{
+    margin-top:34px;display:flex;flex-wrap:wrap;justify-content:center;gap:14px 28px;
+    font-size:.88rem;
+  }
+  .hero-info div, .hero-info a{display:flex;align-items:center;gap:8px;color:rgba(244,236,216,0.92);}
+  .hero-info svg{width:16px;height:16px;flex:none;color:var(--gold);}
+
+  .fringe{
+    display:flex;width:100%;overflow:hidden;line-height:0;
+  }
+  .fringe span{
+    flex:none;width:22px;height:34px;
+    background:var(--sand);
+    clip-path:polygon(0 0,100% 0,50% 100%);
+    margin-right:6px;
+    opacity:.9;
+  }
+
+  /* ===== SECTIONS ===== */
+  section.menu-section{
+    max-width:1100px;margin:0 auto;padding:64px 20px 10px;
+    scroll-margin-top:80px;
+  }
+  .section-head{margin-bottom:30px;}
+  .section-head h2{font-size:clamp(1.7rem,4vw,2.4rem);color:var(--heading);margin-top:6px;}
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+    gap:22px;
+  }
+
+  /* Elegant menu card */
+  .ticket{
+    position:relative;
+    background:var(--paper);
+    border-radius:10px;
+    padding:20px 20px 18px;
+    box-shadow:var(--shadow);
+    border-top:2px solid var(--gold);
+  }
+  .ticket-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
+  .ticket h3{font-size:1.15rem;font-weight:600;color:var(--heading);line-height:1.3;}
+  .price{
+    font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--chili);
+    white-space:nowrap;font-size:1.2rem;
+  }
+  .ticket p.desc{
+    font-size:.85rem;color:var(--muted);margin-top:8px;line-height:1.5;
+  }
+  .tags{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;}
+  .tag{
+    font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+    padding:3px 8px;border-radius:999px;
+  }
+  .tag.veg{background:rgba(107,122,58,0.15);color:var(--olive);}
+  .tag.signature{background:rgba(232,161,58,0.2);color:#a5710f;}
+  .aller{font-size:.72rem;color:var(--muted);margin-top:8px;font-style:italic;}
+
+  .allergen-legend{
+    max-width:1100px;margin:40px auto 0;padding:0 20px;
+    font-size:.8rem;color:var(--muted);line-height:1.8;
+  }
+  .allergen-legend .legend-title{
+    font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.1rem;
+    color:var(--heading);margin-bottom:6px;
+  }
+
+  /* Drinks accordion */
+  .accordion{border-top:1px solid var(--line);}
+  .acc-item{border-bottom:1px solid var(--line);}
+  .acc-head{
+    width:100%;text-align:left;background:none;border:none;cursor:pointer;
+    padding:18px 4px;display:flex;justify-content:space-between;align-items:center;
+    font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.25rem;color:var(--heading);
+  }
+  .acc-head .plus{font-size:1.4rem;color:var(--chili);transition:.25s;font-family:'Inter';font-weight:400;}
+  .acc-item.open .plus{transform:rotate(45deg);}
+  .acc-body{
+    max-height:0;overflow:hidden;transition:max-height .35s ease;
+  }
+  .acc-body-inner{padding:0 4px 20px;display:grid;gap:10px;}
+  .drink-row{
+    display:flex;justify-content:space-between;gap:14px;
+    font-size:.9rem;padding:6px 0;border-bottom:1px dotted var(--line);
+  }
+  .drink-row .name{color:var(--ink);}
+  .drink-row .name small{display:block;color:var(--muted);font-size:.76rem;}
+  .drink-row .p{color:var(--chili);font-weight:600;white-space:nowrap;}
+
+  .kitchen-note{
+    font-family:'Parisienne',cursive;font-size:1.6rem;color:var(--chili-dark);
+    text-align:center;margin:56px 0 0;
+  }
+
+  footer{
+    margin-top:80px;background:var(--navy-2);color:var(--sand);
+    padding:50px 20px 40px;text-align:center;
+  }
+  footer h3{font-size:1.5rem;margin-bottom:10px;}
+  footer .info{display:flex;justify-content:center;gap:26px;flex-wrap:wrap;margin-top:16px;font-size:.9rem;color:rgba(244,236,216,0.75);}
+  footer .credit{margin-top:30px;font-size:.75rem;color:rgba(244,236,216,0.4);}
+
+  @media (max-width:640px){
+    .hero{padding:50px 16px 70px;}
+    .nav-inner{gap:12px;}
+    .brand{font-size:1.05rem;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .pepper-mark{animation:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">🌶️ Red Pepper<span class="dot">.</span></div>
+    <div class="pills" id="pills">
+      <a class="pill" href="#tapas" data-target="tapas">Tapas</a>
+      <a class="pill" href="#entrantes" data-target="entrantes">Entrantes</a>
+      <a class="pill" href="#especialidades" data-target="especialidades">Especialidades</a>
+      <a class="pill" href="#poke" data-target="poke">Poke Bowls</a>
+      <a class="pill" href="#postres" data-target="postres">Postres</a>
+      <a class="pill" href="#cocktails" data-target="cocktails">Cocktails</a>
+      <a class="pill" href="#vinos" data-target="vinos">Vinos</a>
+      <a class="pill" href="#bebidas" data-target="bebidas">Bebidas</a>
+    </div>
+    <div class="lang-switch" id="langSwitch">
+      <button class="lang-btn" data-lang="es" type="button">ES</button>
+      <button class="lang-btn" data-lang="en" type="button">EN</button>
+      <button class="lang-btn" data-lang="fr" type="button">FR</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <svg class="pepper-mark" viewBox="0 0 64 64" fill="none">
+      <path d="M30 8c2-4 6-6 9-4-1 4-4 6-6 7l-3 3" stroke="#d9a441" stroke-width="3" stroke-linecap="round"/>
+      <path d="M28 16c-10 2-17 12-15 24 2 11 12 18 21 15 9-3 14-14 12-25-2-10-9-16-18-14z" fill="#c1572c"/>
+      <ellipse cx="24" cy="26" rx="3.2" ry="5" fill="#f8ecdc" opacity="0.3"/>
+    </svg>
+    <h1>Red Pepper</h1>
+    <div class="sub" id="heroSub">Tasty Moments · frente al mar</div>
+    <p class="desc" id="heroDesc">De sol a luna, en el Passeig del Petit Príncep. Tapas para compartir, cócteles de autor y los pies casi en la arena.</p>
+    <div class="hero-info">
+      <a href="https://maps.google.com/?q=Passeig+del+Petit+Pr%C3%ADncep+96+L%27Escala" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z"/></svg> Passeig del Petit Príncep, 96 · L'Escala</a>
+      <div><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1a11 11 0 100 22 11 11 0 000-22zm1 11.4l4.2 2.5-.8 1.3L11 13V6h1.5v6.4z"/></svg> <span id="heroHours">Todos los días · 10:30–23:00</span></div>
+      <a href="tel:+33637858643" style="color:inherit;text-decoration:none;"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.9 15.9 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11 11 0 003.5.56 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11 11 0 00.56 3.5 1 1 0 01-.25 1z"/></svg> +33 637 858 643</a>
+    </div>
+  </div>
+  <div class="fringe" id="fringe"></div>
+</header>
+
+<section class="menu-section" id="tapas">
+  <div class="section-head">
+    <span class="eyebrow" data-eyebrow="tapas">Para compartir</span>
+    <h2 data-title="tapas">Tapas</h2>
+  </div>
+  <div class="grid" id="grid-tapas"></div>
+</section>
+
+<section class="menu-section" id="entrantes">
+  <div class="section-head">
+    <span class="eyebrow" data-eyebrow="entrantes">Para empezar</span>
+    <h2 data-title="entrantes">Entrantes</h2>
+  </div>
+  <div class="grid" id="grid-entrantes"></div>
+</section>
+
+<section class="menu-section" id="especialidades">
+  <div class="section-head">
+    <span class="eyebrow" data-eyebrow="especialidades">La casa</span>
+    <h2 data-title="especialidades">Especialidades</h2>
+  </div>
+  <div class="grid" id="grid-especialidades"></div>
+</section>
+
+<section class="menu-section" id="poke">
+  <div class="section-head">
+    <span class="eyebrow" data-eyebrow="poke">Frescos</span>
+    <h2 data-title="poke">Poke Bowls</h2>
+  </div>
+  <div class="grid" id="grid-poke"></div>
+</section>
+
+<section class="menu-section" id="postres">
+  <div class="section-head">
+    <span class="eyebrow" data-eyebrow="postres">Dulce final</span>
+    <h2 data-title="postres">Postres</h2>
+  </div>
+  <div class="grid" id="grid-postres"></div>
+  <p class="kitchen-note" id="kitchenNote">— Cocina abierta sin parar, de 12h a 22h45 —</p>
+</section>
+
+<section class="menu-section" id="cocktails">
+  <div class="section-head">
+    <span class="eyebrow" data-eyebrow="cocktails">De autor</span>
+    <h2 data-title="cocktails">Cocktails</h2>
+  </div>
+  <div class="grid" id="grid-cocktails"></div>
+</section>
+
+<section class="menu-section" id="vinos">
+  <div class="section-head">
+    <span class="eyebrow" data-eyebrow="vinos">Bodega</span>
+    <h2 data-title="vinos">Vinos</h2>
+  </div>
+  <div class="accordion" id="accordion-vinos"></div>
+</section>
+
+<section class="menu-section" id="bebidas" style="margin-bottom:20px;">
+  <div class="section-head">
+    <span class="eyebrow" data-eyebrow="bebidas">Para acompañar</span>
+    <h2 data-title="bebidas">Bebidas</h2>
+  </div>
+  <div class="accordion" id="accordion-bebidas"></div>
+</section>
+
+<div class="allergen-legend">
+  <div class="legend-title" id="allergenTitle">Alérgenos</div>
+  <div id="allergenList"></div>
+</div>
+
+<footer>
+  <h3 style="font-family:'Parisienne',cursive;font-weight:400;font-size:2.4rem;">🌶️ Red Pepper</h3>
+  <p style="opacity:.75;font-size:.92rem;"><a href="https://maps.google.com/?q=Passeig+del+Petit+Pr%C3%ADncep+96+L%27Escala" target="_blank" rel="noopener" style="color:inherit;">Passeig del Petit Príncep, 96 · 17130 L'Escala</a></p>
+  <div class="info">
+    <a href="tel:+33637858643" style="color:inherit;text-decoration:none;">📞 +33 637 858 643</a>
+    <a href="https://instagram.com/redpepperlescalaofficial" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">📷 @redpepperlescalaofficial</a>
+    <span id="footerOpen">Abierto todos los días, 10:30–23:00</span>
+  </div>
+  <div class="credit" id="footerCredit">Carta digital creada con ❤️ para Red Pepper</div>
+</footer>
+
+<script>
+  // Theme: suit le mode clair/sombre du téléphone en direct, sans bouton manuel
+  const root = document.documentElement;
+  const darkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function applySystemTheme(isDark){
+    root.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  }
+
+  applySystemTheme(darkMediaQuery.matches);
+  darkMediaQuery.addEventListener('change', (e)=> applySystemTheme(e.matches));
+
+  // ===== I18N =====
+  const ui = {
+    es:{ heroSub:"Tasty Moments · frente al mar",
+      heroDesc:"De sol a luna, en el Passeig del Petit Príncep. Tapas para compartir, cócteles de autor y los pies casi en la arena.",
+      heroHours:"Todos los días · 10:30–23:00", ask:"Pregúntanos",
+      kitchen:"— Cocina abierta sin parar, de 12h a 22h45 —",
+      footerOpen:"Abierto todos los días, 10:30–23:00",
+      footerCredit:"Carta digital creada con ❤️ para Red Pepper",
+      sections:{tapas:{eyebrow:"Para compartir",title:"Tapas"},entrantes:{eyebrow:"Para empezar",title:"Entrantes"},
+        especialidades:{eyebrow:"La casa",title:"Especialidades"},poke:{eyebrow:"Frescos",title:"Poke Bowls"},
+        postres:{eyebrow:"Dulce final",title:"Postres"},cocktails:{eyebrow:"De autor",title:"Cocktails"},
+        vinos:{eyebrow:"Bodega",title:"Vinos"},bebidas:{eyebrow:"Para acompañar",title:"Bebidas"}},
+      pillLabels:{tapas:"Tapas",entrantes:"Entrantes",especialidades:"Especialidades",poke:"Poke Bowls",postres:"Postres",cocktails:"Cocktails",vinos:"Vinos",bebidas:"Bebidas"},
+      tags:{veg:"Vegetariano",vegan:"Vegano",signature:"Especialidad",cocktailSig:"Signature",nonalc:"Sin alcohol"},
+      allergenTitle:"Alérgenos", allergenLabel:"Alérgenos",
+      allergenNames:{1:"Gluten",2:"Crustáceos",3:"Huevos",4:"Pescado",5:"Cacahuetes",6:"Soja",7:"Lácteos",8:"Frutos de cáscara",9:"Apio",10:"Mostaza",11:"Sésamo",12:"Sulfitos",13:"Altramuces",14:"Moluscos"} },
+    en:{ heroSub:"Tasty Moments · by the sea",
+      heroDesc:"From sunrise to moonlight, on Passeig del Petit Príncep. Tapas to share, signature cocktails, and your feet almost in the sand.",
+      heroHours:"Open every day · 10:30 AM–11:00 PM", ask:"Ask us",
+      kitchen:"— Kitchen open non-stop, 12 PM to 10:45 PM —",
+      footerOpen:"Open every day, 10:30 AM–11:00 PM",
+      footerCredit:"Digital menu made with ❤️ for Red Pepper",
+      sections:{tapas:{eyebrow:"To share",title:"Tapas"},entrantes:{eyebrow:"To start",title:"Starters"},
+        especialidades:{eyebrow:"House specials",title:"Specialties"},poke:{eyebrow:"Fresh & light",title:"Poke Bowls"},
+        postres:{eyebrow:"Sweet ending",title:"Desserts"},cocktails:{eyebrow:"Signature",title:"Cocktails"},
+        vinos:{eyebrow:"Cellar",title:"Wines"},bebidas:{eyebrow:"To go with it",title:"Drinks"}},
+      pillLabels:{tapas:"Tapas",entrantes:"Starters",especialidades:"Specialties",poke:"Poke Bowls",postres:"Desserts",cocktails:"Cocktails",vinos:"Wines",bebidas:"Drinks"},
+      tags:{veg:"Vegetarian",vegan:"Vegan",signature:"Chef's Special",cocktailSig:"Signature",nonalc:"Alcohol-free"},
+      allergenTitle:"Allergens", allergenLabel:"Allergens",
+      allergenNames:{1:"Gluten",2:"Crustaceans",3:"Eggs",4:"Fish",5:"Peanuts",6:"Soybeans",7:"Milk",8:"Nuts",9:"Celery",10:"Mustard",11:"Sesame",12:"Sulphites",13:"Lupin",14:"Molluscs"} },
+    fr:{ heroSub:"Tasty Moments · les pieds dans le sable",
+      heroDesc:"Du lever au coucher du soleil, sur le Passeig del Petit Príncep. Tapas à partager, cocktails signature et les pieds presque dans le sable.",
+      heroHours:"Tous les jours · 10h30–23h00", ask:"Posez-nous une question",
+      kitchen:"— Cuisine ouverte sans interruption, de 12h à 22h45 —",
+      footerOpen:"Ouvert tous les jours, 10h30–23h00",
+      footerCredit:"Carte digitale créée avec ❤️ pour Red Pepper",
+      sections:{tapas:{eyebrow:"À partager",title:"Tapas"},entrantes:{eyebrow:"Pour commencer",title:"Entrées"},
+        especialidades:{eyebrow:"La maison",title:"Spécialités"},poke:{eyebrow:"Frais",title:"Poke Bowls"},
+        postres:{eyebrow:"Note sucrée",title:"Desserts"},cocktails:{eyebrow:"Signature",title:"Cocktails"},
+        vinos:{eyebrow:"Cave à vins",title:"Vins"},bebidas:{eyebrow:"Pour accompagner",title:"Boissons"}},
+      pillLabels:{tapas:"Tapas",entrantes:"Entrées",especialidades:"Spécialités",poke:"Poke Bowls",postres:"Desserts",cocktails:"Cocktails",vinos:"Vins",bebidas:"Boissons"},
+      tags:{veg:"Végétarien",vegan:"Végane",signature:"Spécialité maison",cocktailSig:"Signature",nonalc:"Sans alcool"},
+      allergenTitle:"Allergènes", allergenLabel:"Allergènes",
+      allergenNames:{1:"Gluten",2:"Crustacés",3:"Œufs",4:"Poisson",5:"Arachides",6:"Soja",7:"Lait",8:"Fruits à coque",9:"Céleri",10:"Moutarde",11:"Sésame",12:"Sulfites",13:"Lupin",14:"Mollusques"} },
+  };
+
+  // ===== MENU DATA (name/desc per language, tag key optional) =====
+  const menuData = {
+    tapas:[
+      {price:"6,90€", tag:"veg", es:["Patatas bravas caseras picantes",""], en:["Homemade Fresh Spicy Bravas Potatoes",""], fr:["Pommes de terre fraîches épicées « bravas » maison",""]},
+      {price:"11,00€", aller:[1,14], es:["Calamares a la andaluza",""], en:["Andalusian Style Squids",""], fr:["Calamars à l'andalouse maison",""]},
+      {price:"11,90€", aller:[1,4], es:["Anchoas de L'Escala y pan con tomate","6 unidades"], en:["Anchovies of Escala and Bread with Tomato","6 pieces"], fr:["Anchois de l'Escala et pain à la tomate","6 pièces"]},
+      {price:"9,90€", aller:[4], es:["Pescadito frito fresco","Boquerones fritos"], en:["Fried Small Fresh Fish","Fried Anchovies"], fr:["Petite friture de poissons frais","Anchois frits"]},
+      {price:"19,00€", aller:[1], es:["Jamón ibérico de bellota","Jabugo 100g, con pan con tomate"], en:["Bellota Iberian Ham","Jabugo 100g, and Bread with Tomato"], fr:["Jambon ibérique de bellota","Jabugo 100g, et pain à la tomate"]},
+      {price:"14,90€", tag:"veg", aller:[7], es:["Camembert entero asado","250g, con higos, miel y mascarpone"], en:["Whole Roasted Camembert","250g, with Figs, Honey and Mascarpone"], fr:["Camembert entier rôti","250g, aux figues, miel et mascarpone"]},
+      {price:"8,70€", aller:[1], es:["Fingers de pollo","7 unidades"], en:["Chicken Fingers","7 pieces"], fr:["Fingers de poulet","7 pièces"]},
+      {price:"8,50€", tag:"vegan", aller:[1], es:["Hummus de remolacha casero","Con mini tostadas"], en:["Homemade Beetroot Hummus","With Mini Toasted Bread"], fr:["Houmous de betterave maison","Avec petits pains grillés"]},
+      {price:"11,00€", aller:[14], es:["Chipirones","Calamares pequeños fritos"], en:["Fried Baby Squids",""], fr:["Chipirons","Petits calamars frits"]},
+      {price:"9,50€", aller:[1,2], es:["Twister de langostinos crujientes","5 unidades"], en:["Crispy Prawns Twister","5 pieces"], fr:["Twister de langoustines croustillantes","5 pièces"]},
+      {price:"25,00€", aller:[1,7], es:["Surtido ibérico y queso manchego","Lomo, salchichón, chorizo, pan con tomate"], en:["Assortment of Iberian Charcuterie and Manchego Cheese","Pork loin, salami, chorizo, bread with tomato"], fr:["Assiette de charcuterie ibérique et fromage manchego","Longe de porc, saucisson, chorizo, pain à la tomate"]},
+      {price:"8,50€", aller:[7], es:["Plato de queso manchego","Curado 24 meses"], en:["Manchego Cheese Platter","Aged 24 Months"], fr:["Assiette de fromage manchego","24 mois affiné"]},
+      {price:"7,50€", tag:"vegan", es:["Pimientos de Padrón",""], en:["Padron Peppers",""], fr:["Poivrons de Padrón",""]},
+      {price:"15,50€", aller:[1], es:["Hueso de tuétano y pan tostado con perejil",""], en:["Marrow Bones and Toasted Bread with Parsley",""], fr:["Os à moelle et pain grillé au persil",""]},
+      {price:"6,00€", tag:"vegan", es:["Patatas fritas caseras",""], en:["Homemade Fries",""], fr:["Frites maison",""]},
+      {price:"4,90€", aller:[1], es:["Pan con tomate","6 unidades"], en:["Bread with Tomato","6 pieces"], fr:["Pain à la tomate","6 pièces"]},
+      {price:"1,50€", es:["Suplemento de pan",""], en:["Bread Supplement",""], fr:["Supplément de pain",""]},
+      {price:"0,50€", es:["Suplemento de salsa",""], en:["Sauce Supplement",""], fr:["Supplément de sauce",""]},
+    ],
+    entrantes:[
+      {price:"16,00€", aller:[4], es:["Tartar de atún fresco a la mexicana","Atún marinado con salsa ponzu sobre guacamole cremoso y nachos"], en:["Mexican Style Fresh Tuna Tartar","Marinated Tuna with Ponzu Sauce on Creamy Guacamole and Nachos"], fr:["Tartare de thon frais à la mexicaine","Thon mariné à la sauce ponzu sur guacamole crémeux et nachos"]},
+      {price:"18,00€", aller:[4,6], es:["Tiradito de salmón crudo thai","Corazón de salmón fresco en láminas marinado en soja y leche de coco, con jengibre y citronela"], en:["Thai Raw Salmon Tiradito","Sliced Fresh Salmon Heart Marinated in Soy Sauce and Coconut Milk, with Ginger and Citronella"], fr:["Tiradito de saumon cru thaï","Cœur de saumon frais en tranches mariné au soja et au lait de coco, avec gingembre et citronnelle"]},
+      {price:"17,50€", tag:"veg", aller:[7], es:["Burrata cremosa","Con mermelada casera de tomate, mezclum, salsa pesto, frutos secos y tomates secos"], en:["Creamy Burrata","Burrata Cheese with Homemade Tomato Marmalade, Mezclum, Pesto Sauce, Dried Fruits and Sun-Dried Tomatoes"], fr:["Burrata crémeuse","Fromage burrata avec confiture de tomates maison, mezclum, sauce pesto, fruits secs et tomates séchées"]},
+    ],
+    especialidades:[
+      {price:"17,90€", tag:"signature", aller:[1,7], es:['Hamburguesa "Red Pepper"',"180g de ternera con pan brioche artesanal, queso cheddar, doble bacon, cebolla crujiente, ensalada, tomate, salsa barbacoa y patatas fritas"], en:['"Red Pepper" Burger',"180g of Beef in Artisan Brioche Bread, Cheddar Cheese, Double Bacon, Crispy Onion, Salad, Tomato, Barbecue Sauce and Fries"], fr:['Le burger « Red Pepper »',"180g de bœuf avec pain brioché artisanal, fromage cheddar, double bacon, oignon croustillant, salade, tomate, sauce barbecue et frites"]},
+      {price:"17,50€", aller:[1,7], es:["Hamburguesa siciliana","Pan focaccia, filete de pollo, queso manchego, ensalada, tomate, cebolla crujiente, salsa pesto y patatas fritas"], en:["Sicilian Hamburger","Focaccia Bread, Chicken Fillet, Manchego Cheese, Salad, Tomato, Crispy Onion, Pesto Sauce and Fries"], fr:["Le burger sicilien","Pain focaccia, suprême de poulet, fromage manchego, salade, tomate, oignon croustillant, sauce pesto et frites"]},
+      {price:"25,50€", es:["Entrecot de ternera","±300/330g, patatas nuevas, tomate al horno y espárragos (suplemento salsa 1,50€)"], en:["Beef Entrecote","±300/330g, New Potatoes, Baked Tomatoes and Asparagus (Sauce Supplement 1,50€)"], fr:["Entrecôte de bœuf","±300/330g, pommes de terre grenaille, tomate au four et asperges (supplément sauce 1,50€)"]},
+      {price:"24,90€", es:["Codillo de cerdo crujiente al horno","Patatas nuevas, tomate al horno y espárragos"], en:["Crispy Baked Pork Knuckle","New Potatoes, Baked Tomatoes and Asparagus"], fr:["Jarret de porc croustillant au four","Pommes de terre grenaille, tomate au four et asperges"]},
+      {price:"21,90€", aller:[4], es:["Salmón a la plancha","±170g, con verduras y parmentier de patatas"], en:["Grilled Salmon","±170g, with Vegetables and Potato Parmentier"], fr:["Saumon grillé","±170g, aux légumes et parmentier de pommes de terre"]},
+      {price:"19,50€", aller:[7], es:["Risotto caprese con jamón","Tomates secos, crema de pesto, setas de temporada y perlas de mozzarella"], en:["Risotto Caprese with Ham","Sun-Dried Tomatoes, Pesto Cream, Seasonal Mushrooms and Mozzarella Pearls"], fr:["Risotto caprese au jambon","Tomates séchées, crème de pesto, champignons de saison et perles de mozzarella"]},
+      {price:"23,00€", aller:[1,7], es:["Milanesa de ternera francesa a la napolitana","±170g, salsa de tomate casera, jamón york, queso edam y patatas fritas"], en:["Neapolitan Style French Beef Milanesa","±170g, Homemade Tomato Sauce, York Ham, Edam Cheese and Fries"], fr:["Milanaise de veau française à la napolitaine","±170g, sauce de tomate maison, jambon blanc, fromage edam et frites"]},
+      {price:"22,50€", es:["Tartar de ternera cortado a cuchillo","Carne charolesa francesa, 100% ternera (180g), patatas fritas caseras"], en:["Hand-Cut Beef Tartare","French Charolais Beef (180g), Homemade French Fries"], fr:["Tartare de bœuf coupé au couteau","Viande charolaise française, pur bœuf (180g), frites maison"]},
+      {price:"24,90€", aller:[4,8], es:["Lomo de bacalao fresco","Con salsa de chorizo casera, trocitos de pistacho y parmentier de patata"], en:["Fresh Cod Loin","With Homemade Chorizo Sauce and Pistachio Pieces and Potato Parmentier"], fr:["Dos de cabillaud frais","Avec sauce chorizo maison et éclats de pistache, parmentier de pomme de terre"]},
+    ],
+    poke:[
+      {price:"17,50€", es:["Poke Bowl Salmón","Zanahoria, pepino, aguacate, tomates cherry, arroz o ensalada"], en:["Poke Bowl Salmon","Carrot, Cucumber, Avocado, Cherry Tomatoes, Rice or Salad"], fr:["Poke Bowl Saumon","Carotte, concombre, avocat, tomates cerises, riz ou salade"]},
+      {price:"17,50€", es:["Poke Bowl Atún Rojo","Zanahoria, pepino, aguacate, tomates cherry, arroz o ensalada"], en:["Poke Bowl Red Tuna","Carrot, Cucumber, Avocado, Cherry Tomatoes, Rice or Salad"], fr:["Poke Bowl Thon Rouge","Carotte, concombre, avocat, tomates cerises, riz ou salade"]},
+      {price:"17,50€", es:["Poke Bowl Pollo","Zanahoria, pepino, aguacate, tomates cherry, arroz o ensalada"], en:["Poke Bowl Chicken","Carrot, Cucumber, Avocado, Cherry Tomatoes, Rice or Salad"], fr:["Poke Bowl Poulet","Carotte, concombre, avocat, tomates cerises, riz ou salade"]},
+    ],
+    postres:[
+      {price:"6,50€", aller:[3,7], es:["Crema catalana casera",""], en:["Homemade Catalan Cream",""], fr:["Crème catalane maison",""]},
+      {price:"7,50€", aller:[3,7], es:["Coulant de chocolate","Con bola de vainilla"], en:["Chocolate Coulant","With Vanilla Ball"], fr:["Coulant de chocolat","Avec boule de vanille"]},
+      {price:"8,50€", aller:[1,7], es:["Banoffee casero","Crumble de galletas Lotus, plátano, salsa de caramelo y mascarpone"], en:["Homemade Banoffee Cake","Lotus Cookie Crumble, Banana, Caramel Sauce and Mascarpone"], fr:["Banoffee maison","Crumble de biscuits Lotus, banane, sauce caramel et mascarpone"]},
+      {price:"7,90€", aller:[1,3,7], es:["Brioche perdida casera","Salsa de caramelo y bola de vainilla"], en:["Homemade French Toast","Caramel Sauce and Vanilla Ball"], fr:["Brioche perdue maison","Sauce caramel et boule de vanille"]},
+      {price:"8,90€", aller:[3,7], es:["Pavlova","Frutos rojos frescos, bola de vainilla y nata montada"], en:["Pavlova","Fresh Red Fruits, Vanilla Ball and Cream"], fr:["Pavlova","Fruits rouges fraîches, boule de vanille et chantilly"]},
+    ],
+    cocktails:[
+      {price:"9,00€", es:["Mojito",""], en:["Mojito",""], fr:["Mojito",""]},
+      {price:"9,50€", es:["Strawberry Mojito",""], en:["Strawberry Mojito",""], fr:["Strawberry Mojito",""]},
+      {price:"9,00€", es:["Piña Colada",""], en:["Piña Colada",""], fr:["Piña Colada",""]},
+      {price:"9,00€", es:["Daiquiri",""], en:["Daiquiri",""], fr:["Daiquiri",""]},
+      {price:"9,50€", es:["Strawberry Daiquiri",""], en:["Strawberry Daiquiri",""], fr:["Strawberry Daiquiri",""]},
+      {price:"9,00€", es:["St. Germain","Licor de saúco, prosecco y soda"], en:["St. Germain","Elderflower Liqueur, Prosecco and Soda"], fr:["St. Germain","Liqueur sureau, prosecco et soda"]},
+      {price:"8,50€", es:["Aperol Spritz",""], en:["Aperol Spritz",""], fr:["Aperol Spritz",""]},
+      {price:"9,00€", es:["Margarita",""], en:["Margarita",""], fr:["Margarita",""]},
+      {price:"8,50€", es:["Limoncello Spritz","Limoncello, prosecco y soda"], en:["Limoncello Spritz","Limoncello, Prosecco and Soda"], fr:["Limoncello Spritz","Limoncello, prosecco et soda"]},
+      {price:"9,00€", es:["Moscow Mule",""], en:["Moscow Mule",""], fr:["Moscow Mule",""]},
+      {price:"9,00€", es:["Caipirinha",""], en:["Caipirinha",""], fr:["Caipirinha",""]},
+      {price:"9,00€", es:["Tom Collins","Gin, zumo de limón, sirope de azúcar y soda"], en:["Tom Collins","Gin, Lemon Juice, Sugar Syrup and Soda"], fr:["Tom Collins","Gin, jus de citron, sirop de sucre et soda"]},
+      {price:"9,00€", es:["Pink Dream","Vodka, puré de fresas, crema de coco y esencia de vainilla"], en:["Pink Dream","Vodka, Strawberry Purée, Coconut Cream and Vanilla Essence"], fr:["Pink Dream","Vodka, purée de fraises, crème de coco et essence de vanille"]},
+      {price:"9,00€", es:["Negroni","Ginebra, Campari y Martini rojo"], en:["Negroni","Gin, Campari and Red Martini"], fr:["Negroni","Gin, Campari et Martini rouge"]},
+      {price:"11,00€", es:["Long Island","Tequila, ginebra, vodka, ron, triple sec, refresco de cola"], en:["Long Island","Tequila, Gin, Vodka, Rum, Triple Sec, Cola"], fr:["Long Island","Tequila, gin, vodka, rhum, triple sec, pulco"]},
+      {price:"9,00€", es:["Martini Espresso","Vodka, café, Kahlúa y azúcar moreno"], en:["Martini Espresso","Vodka, Coffee, Kahlúa and Brown Sugar"], fr:["Martini Espresso","Vodka, café, Kahlúa et sucre roux"]},
+      {price:"9,50€", tag:"cocktailSig", es:["Venice Beach","Vodka, licor de plátano, zumo de piña y sirope de arándano"], en:["Venice Beach","Vodka, Banana Liqueur, Pineapple Juice and Cranberry Syrup"], fr:["Venice Beach","Vodka, liqueur de banane, jus d'ananas et sirop de cranberry"]},
+      {price:"10,00€", tag:"cocktailSig", es:["Mai Tai Cherry","Ron oscuro, limón, azúcar moreno y cereza amarena"], en:["Mai Tai Cherry","Dark Rum, Lemon, Brown Sugar and Amarena Cherry"], fr:["Mai Tai Cherry","Rhum brun, citron, sucre brun et cerise amarena"]},
+      {price:"10,00€", tag:"cocktailSig", es:["Magic","Ron, naranja natural, jengibre fresco, zumo de manzana, zumo de arándano y canela especiada"], en:["Magic","Rum, Fresh Orange, Fresh Ginger, Apple Juice, Cranberry Juice and Spiced Cinnamon"], fr:["Magic","Rhum, orange naturelle, gingembre frais, jus de pomme, jus de cranberry et cannelle épicée"]},
+      {price:"9,50€", tag:"cocktailSig", es:["Thé Glacé","Concentrado de frambuesa, jengibre, limón, lima y ron oscuro"], en:["Iced Tea","Raspberry Concentrate, Ginger, Lemon, Lime and Dark Rum"], fr:["Thé glacé","Concentré de framboise, gingembre, citron, citron vert et rhum brun"]},
+      {price:"9,50€", tag:"cocktailSig", es:["Cosmopolitan de Barbe à Papa","Vodka, zumo de arándano, zumo de lima y sirope de algodón de azúcar"], en:["Cotton Candy Cosmopolitan","Vodka, Cranberry Juice, Lime Juice and Cotton Candy Syrup"], fr:["Cosmopolitan de barbe à papa","Vodka, jus de cranberry, jus de citron vert et sirop de barbe à papa"]},
+      {price:"9,50€", tag:"cocktailSig", es:["Cocktail Pop Corn","Vodka, zumo de manzana, sirope de caramelo y sirope de palomitas"], en:["Pop Corn Cocktail","Vodka, Apple Juice, Caramel Syrup and Popcorn Syrup"], fr:["Cocktail pop corn","Vodka, jus de pomme, sirop de caramel et sirop de maïs soufflé"]},
+      {price:"10,00€", tag:"cocktailSig", es:["Madeleine","Amaretto, triple sec, limón y zumo de piña"], en:["Madeleine","Amaretto, Triple Sec, Lemon and Pineapple Juice"], fr:["Madeleine","Amaretto, triple sec, citron et jus d'ananas"]},
+      {price:"7,00€", tag:"nonalc", es:["Virgin Mojito",""], en:["Virgin Mojito",""], fr:["Virgin Mojito",""]},
+      {price:"7,00€", tag:"nonalc", es:["Virgin Magic","Naranja, limón fresco, jengibre, zumo de manzana y canela especiada"], en:["Virgin Magic","Orange, Fresh Lemon, Ginger, Apple Juice and Spiced Cinnamon"], fr:["Virgin Magic","Orange, citron frais, gingembre, jus de pomme et cannelle épicée"]},
+      {price:"7,00€", tag:"nonalc", es:["San Francisco","Mezcla de zumos y sirope de granadina"], en:["San Francisco","Mix of Juices and Grenadine Syrup"], fr:["San Francisco","Mélange de jus et sirop de grenadine"]},
+      {price:"7,00€", tag:"nonalc", es:["Thé Glacé sin alcohol","Concentrado de frambuesa y jengibre, limón y lima"], en:["Iced Tea (alcohol-free)","Raspberry and Ginger Concentrate, Lemon and Lime"], fr:["Thé glacé sans alcool","Concentré de framboise et gingembre, citron et citron vert"]},
+      {price:"7,00€", tag:"nonalc", es:["Virgin Piña Colada",""], en:["Virgin Piña Colada",""], fr:["Virgin Piña Colada",""]},
+    ],
+  };
+
+  function renderMenu(lang){
+    Object.keys(menuData).forEach(sectionId=>{
+      const grid = document.getElementById('grid-'+sectionId);
+      if(!grid) return;
+      grid.innerHTML = menuData[sectionId].map(it=>{
+        const [name, desc] = it[lang];
+        const descHtml = desc ? `<p class="desc">${desc}</p>` : '';
+        const tagClass = it.tag === 'signature' ? 'signature' : (it.tag ? 'veg' : '');
+        const tagHtml = it.tag ? `<div class="tags"><span class="tag ${tagClass}">${ui[lang].tags[it.tag]}</span></div>` : '';
+        const allerHtml = (it.aller && it.aller.length) ? `<div class="aller">${ui[lang].allergenLabel}: ${it.aller.map(n=>ui[lang].allergenNames[n]).join(', ')}</div>` : '';
+        return `<div class="ticket"><div class="ticket-top"><h3>${name}</h3><span class="price">${it.price}</span></div>${descHtml}${tagHtml}${allerHtml}</div>`;
+      }).join('');
+    });
+  }
+
+  // Accordion data (group titles per language; item/wine names kept as-is across languages)
+  const vinos = {
+    es:[
+      {title:"Vinos Blancos", items:[
+        ["Red Pepper Wine (Borinot)","Rueda, Verdejo","4,00€ / 18,00€"],
+        ["Missatges Autòcton 2024","Empordà, Garnatxa blanca i Macabeu","20,00€"],
+        ["Vividors del Vi 2023","Penedès, Xarel·lo, Malvasía de Sitges","23,00€"],
+        ["Lafage Cadireta 2022","Languedoc, Chardonnay","26,00€"],
+        ["Orchard Lane 2023","Nueva Zelanda, Sauvignon Blanc","29,00€"],
+      ]},
+      {title:"Vinos Rosados", items:[
+        ["Red Pepper Wine (Borinot)","Rioja, Tempranillo","4,00€ / 18,00€"],
+        ["La Delicate","Languedoc, Cinsault","23,00€"],
+      ]},
+      {title:"Vinos Tintos", items:[
+        ["Red Pepper Wine (Borinot)","Rioja, Tempranillo","4,00€ / 18,00€"],
+        ["Missatger Negre 2024","Empordà, Carinyena de viñas viejas","21,00€"],
+        ["Ahintof Coffee","Sudáfrica, Pinotage","23,00€"],
+        ["Mapuche Las Niñas 2022","Chile, Carmenere/Syrah","25,00€"],
+        ["Camino Terra Remota 2021","Empordà","29,00€"],
+        ["Cuatro Gatos Locos","Argentina, Malbec","33,00€"],
+      ]},
+      {title:"Espumosos", items:[
+        ["Champagne Ayala Brut Majeur","","60,00€"],
+        ["Cava Familia Oliveda Brut","España","4,50€ / 19,00€"],
+      ]},
+    ],
+  };
+  vinos.en = JSON.parse(JSON.stringify(vinos.es).replace(/"Vinos Blancos"/,'"White Wines"').replace(/"Vinos Rosados"/,'"Rosé Wines"').replace(/"Vinos Tintos"/,'"Red Wines"').replace(/"Espumosos"/,'"Sparkling"'));
+  vinos.fr = JSON.parse(JSON.stringify(vinos.es).replace(/"Vinos Blancos"/,'"Vins Blancs"').replace(/"Vinos Rosados"/,'"Vins Rosés"').replace(/"Vinos Tintos"/,'"Vins Rouges"').replace(/"Espumosos"/,'"Vins Effervescents"'));
+
+  const bebidasBase = [
+    {key:"Refrescos", items:[
+      ["Coca-Cola / Zero","","3,50€"],["Fanta Naranja","","3,50€"],["Fanta Limón","","3,50€"],
+      ["Sprite","","3,50€"],["Nestea","","3,50€"],["Aquarius","","3,50€"],
+      ["Fever Tree Tónica","","3,50€"],["Fever Tree Limonada","","3,50€"],
+      ["Fever Tree Pink","","3,50€"],["Fever Tree Ginger Beer","","3,50€"],
+    ]},
+    {key:"Agua y zumos", items:[
+      ["Agua mineral 50cl","","2,70€"],["Agua con gas 50cl","","2,90€"],
+      ["Zumo de naranja","","2,80€"],["Zumo de manzana","","2,80€"],
+      ["Zumo de melocotón","","2,80€"],["Zumo de piña","","2,80€"],
+      ["Zumo de naranja natural","","4,50€"],
+    ]},
+    {key:"Cafetería", items:[
+      ["Café","","1,80€"],["Cortado","","2,00€"],["Americano","","1,90€"],
+      ["Café con leche","","2,80€"],["Chocolate caliente","","4,00€"],
+      ["Capuccino","","3,80€"],["Capuccino con nata","","4,50€"],
+      ["Irish Coffee","","8,50€"],["Carajillo","","3,50€"],["Té","","3,00€"],
+      ["Latte Macchiato","","4,50€"],["Café Frappé","","4,50€"],
+      ["Suplemento avena","","0,50€"],
+    ]},
+    {key:"Cervezas", items:[
+      ["Caña 33cl","","3,00€"],["Clara 33cl","","3,50€"],["Jarra 50cl","","5,20€"],
+      ["Paulaner 50cl","","5,20€"],["San Miguel 33cl","","3,70€"],["Estrella Damm 33cl","","3,70€"],
+      ["1870 Rubia 33cl","","3,70€"],["Águila Dorada 33cl","","3,70€"],
+      ["Caña sirope / Mónaco 30cl","","3,50€"],["Cañita","","2,70€"],
+      ["Amstel 0.0 tostada 33cl","","3,70€"],["Desperados 33cl","","4,50€"],
+    ]},
+    {key:"Snacks", items:[
+      ["Bolsa de patatas","","2,50€"],["Aceitunas","","2,50€"],
+    ]},
+    {key:"Sangrías", items:[
+      ["Tinto","copa 35cl / jarra 1l","6,50€ / 17,50€"],
+      ["Blanca","copa 35cl / jarra 1l","6,50€ / 17,50€"],
+      ["Cava","copa 35cl / jarra 1l","7,50€ / 18,50€"],
+      ["Tinto Verano","","6,70€"],
+    ]},
+    {key:"Aperitivos y digestivos", items:[
+      ["Ricard","","5,50€"],["Campari","","5,00€"],["Kir (Cassis/Melocotón/Mora)","","4,00€"],
+      ["Vermouth blanco/rojo","","4,90€"],["Get 27","","4,80€"],["Ratafía","","4,90€"],
+      ["Baileys","","4,90€"],["Crema Catalana (licor)","","4,50€"],
+      ["Licor de manzana","","4,50€"],["Licor de melocotón","","4,50€"],
+      ["Oporto Tawny","","5,20€"],["Malibú piña o naranja","","7,50€"],
+    ]},
+    {key:"Brandy", items:[
+      ["Soberano","","3,90€"],["Carlos I","","7,00€"],
+    ]},
+    {key:"Whisky", items:[
+      ["J&B","","8,00€"],["Ballantine's","","8,00€"],["Jack Daniel's","","9,00€"],
+      ["Cardhú 12 años","","10,00€"],["Jameson","","8,00€"],
+      ["+ Suplemento soda","","1,50€"],
+    ]},
+    {key:"Cognac", items:[
+      ["Hennessy VSOP","","13,00€"],
+    ]},
+    {key:"Gin", items:[
+      ["Beefeater","","8,00€"],["Puerto de Indias","","9,00€"],["Seagram's","","8,00€"],
+      ["Bombay Sapphire","","8,50€"],["Hendrick's","","9,00€"],
+      ["+ Suplemento soda","","1,50€"],
+    ]},
+    {key:"Ron", items:[
+      ["Bacardi","","8,00€"],["Cacique","","8,00€"],["Brugal","","8,00€"],
+      ["Havana 7 años","","9,60€"],["Prestige","","12,00€"],
+      ["+ Suplemento soda","","1,50€"],
+    ]},
+    {key:"Vodkas", items:[
+      ["Absolut","","8,00€"],["Grey Goose","","9,00€"],
+      ["+ Suplemento soda","","1,50€"],
+    ]},
+  ];
+  const bebidasTitles = {
+    es:["Refrescos","Agua y zumos","Cafetería","Cervezas","Snacks","Sangrías","Aperitivos y digestivos","Brandy","Whisky","Cognac","Gin","Ron","Vodkas"],
+    en:["Soft Drinks","Water & Juices","Coffee","Beers","Snacks","Sangria","Aperitifs & Digestifs","Brandy","Whisky","Cognac","Gin","Rum","Vodkas"],
+    fr:["Boissons gazeuses","Eaux et jus","Cafés","Bières","Snacks","Sangrias","Apéritifs et digestifs","Brandy","Whisky","Cognac","Gin","Rhum","Vodkas"],
+  };
+  function bebidasFor(lang){
+    return bebidasBase.map((g,i)=>({title:bebidasTitles[lang][i], items:g.items}));
+  }
+
+  function buildAccordion(containerId, groups){
+    const el = document.getElementById(containerId);
+    el.innerHTML = '';
+    groups.forEach((group, i)=>{
+      const item = document.createElement('div');
+      item.className = 'acc-item';
+      const rows = group.items.map(([name, sub, price])=>`
+        <div class="drink-row">
+          <span class="name">${name}${sub ? `<small>${sub}</small>` : ''}</span>
+          <span class="p">${price}</span>
+        </div>`).join('');
+      item.innerHTML = `
+        <button class="acc-head" aria-expanded="false">
+          <span>${group.title}</span><span class="plus">+</span>
+        </button>
+        <div class="acc-body"><div class="acc-body-inner">${rows}</div></div>
+      `;
+      el.appendChild(item);
+      const head = item.querySelector('.acc-head');
+      const body = item.querySelector('.acc-body');
+      head.addEventListener('click', ()=>{
+        const isOpen = item.classList.contains('open');
+        el.querySelectorAll('.acc-item.open').forEach(o=>{
+          if(o!==item){o.classList.remove('open'); o.querySelector('.acc-body').style.maxHeight=null; o.querySelector('.acc-head').setAttribute('aria-expanded','false');}
+        });
+        item.classList.toggle('open', !isOpen);
+        head.setAttribute('aria-expanded', String(!isOpen));
+        body.style.maxHeight = !isOpen ? body.scrollHeight + 'px' : null;
+      });
+      if(i===0){ head.click(); }
+    });
+  }
+
+  function renderUI(lang){
+    const t = ui[lang];
+    document.getElementById('heroSub').textContent = t.heroSub;
+    document.getElementById('heroDesc').textContent = t.heroDesc;
+    document.getElementById('heroHours').textContent = t.heroHours;
+    document.getElementById('kitchenNote').textContent = t.kitchen;
+    document.getElementById('footerOpen').textContent = t.footerOpen;
+    document.getElementById('footerCredit').textContent = t.footerCredit;
+    document.querySelectorAll('[data-eyebrow]').forEach(el=>{
+      el.textContent = t.sections[el.dataset.eyebrow].eyebrow;
+    });
+    document.querySelectorAll('[data-title]').forEach(el=>{
+      el.textContent = t.sections[el.dataset.title].title;
+    });
+    document.querySelectorAll('.pill[data-target]').forEach(el=>{
+      el.textContent = t.pillLabels[el.dataset.target];
+    });
+    document.getElementById('allergenTitle').textContent = t.allergenTitle;
+    document.getElementById('allergenList').textContent = Object.keys(t.allergenNames)
+      .map(n=>`${n} ${t.allergenNames[n]}`).join(' · ');
+    document.documentElement.lang = lang;
+  }
+
+  function setLanguage(lang){
+    renderUI(lang);
+    renderMenu(lang);
+    buildAccordion('accordion-vinos', vinos[lang]);
+    buildAccordion('accordion-bebidas', bebidasFor(lang));
+    document.querySelectorAll('.lang-btn').forEach(b=>{
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+  }
+
+  document.getElementById('langSwitch').addEventListener('click', (e)=>{
+    const btn = e.target.closest('.lang-btn');
+    if(btn) setLanguage(btn.dataset.lang);
+  });
+
+  setLanguage('es'); // idioma por defecto al cargar
+
+  // Build fringe divider
+  const fringeEl = document.getElementById('fringe');
+  const count = Math.ceil(window.innerWidth / 28) + 2;
+  for(let i=0;i<count;i++){
+    const s = document.createElement('span');
+    fringeEl.appendChild(s);
+  }
+
+  // Enlaces de ancla reales (funcionan siempre, incluso sin JS);
+  // solo se afina el desplazamiento para compensar la nav fija
+  document.querySelectorAll('.pill[data-target]').forEach(pill=>{
+    pill.addEventListener('click', (e)=>{
+      const target = document.getElementById(pill.dataset.target);
+      if(target){
+        e.preventDefault();
+        const y = target.getBoundingClientRect().top + window.scrollY - 74;
+        window.scrollTo({top:y, behavior:'smooth'});
+        history.replaceState(null, '', '#' + pill.dataset.target);
+      }
+    });
+  });
+
+  // Pestaña activa al hacer scroll
+  const sections = document.querySelectorAll('.menu-section');
+  const pills = document.querySelectorAll('.pill');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        pills.forEach(p=>p.classList.remove('active'));
+        const match = document.querySelector(`.pill[data-target="${e.target.id}"]`);
+        if(match) match.classList.add('active');
+      }
+    });
+  }, {rootMargin:'-40% 0px -50% 0px'});
+  sections.forEach(s=>io.observe(s));
+</script>
+
+</body>
+</html>
