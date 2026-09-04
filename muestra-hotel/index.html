@@ -258,50 +258,6 @@
   .room-price b{font-family:'Bodoni Moda',serif;font-size:1.9rem;color:var(--gold);font-weight:500;}
   .room-price span{font-size:.78rem;color:var(--muted);}
 
-  /* ===== VISTA 360 ===== */
-  .pano-block{margin-top:56px;}
-  .pano-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:20px;}
-  .pano-head h3{font-size:1.6rem;}
-  .pano-head p{font-size:.9rem;margin-top:6px;}
-  .pano-tabs{display:flex;gap:8px;flex-wrap:wrap;}
-  .pano-tab{
-    background:none;border:1px solid var(--line);color:var(--muted);cursor:pointer;
-    font-family:'Inter';font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;
-    padding:10px 18px;border-radius:999px;transition:.25s;font-weight:600;
-  }
-  .pano-tab:hover{color:var(--cream);border-color:var(--sand);}
-  .pano-tab.active{background:var(--gold);border-color:var(--gold);color:#181310;}
-  .pano-tab:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
-  .pano-stage{
-    position:relative;width:100%;aspect-ratio:21/9;min-height:280px;
-    border:1px solid var(--line);border-radius:2px;overflow:hidden;background:var(--black-2);
-  }
-  @media (max-width:700px){.pano-stage{aspect-ratio:4/3;}}
-  #panoViewer{position:absolute;inset:0;}
-  .pano-cover{position:absolute;inset:0;z-index:3;cursor:pointer;border:none;padding:0;
-    background-size:cover;background-position:center;width:100%;}
-  .pano-cover::after{content:"";position:absolute;inset:0;background:rgba(14,13,12,.45);}
-  .pano-cover .play{
-    position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;
-    align-items:center;justify-content:center;gap:14px;color:var(--cream);
-  }
-  .pano-cover .ring360{
-    width:74px;height:74px;border-radius:50%;border:1px solid var(--cream);
-    display:flex;align-items:center;justify-content:center;
-    font-family:'Bodoni Moda',serif;font-size:1rem;letter-spacing:.02em;
-    background:rgba(14,13,12,.35);backdrop-filter:blur(4px);transition:.3s;
-  }
-  .pano-cover:hover .ring360{background:var(--gold);color:#181310;border-color:var(--gold);}
-  .pano-cover .lbl{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;}
-  .pano-hint{
-    position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:2;
-    background:rgba(14,13,12,.7);backdrop-filter:blur(6px);border:1px solid var(--line);
-    color:var(--muted);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;
-    padding:7px 16px;border-radius:999px;pointer-events:none;opacity:0;transition:opacity .4s;
-  }
-  .pano-stage.live .pano-hint{opacity:1;}
-  .pnlm-container{background:var(--black-2) !important;}
-
   /* ===== SERVICIOS ===== */
   .services{background:var(--black-2);padding:110px 0;border-top:1px solid var(--line);}
   .sv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
@@ -607,29 +563,6 @@
       </div>
     </div>
 
-    <div class="pano-block reveal">
-      <div class="pano-head">
-        <div>
-          <span class="eyebrow">Vista 360°</span>
-          <h3>Entra sin salir de casa</h3>
-          <p>Arrastra para mirar alrededor, como si estuvieras dentro.</p>
-        </div>
-        <div class="pano-tabs" role="tablist">
-          <button class="pano-tab active" data-pano="hab" role="tab" aria-selected="true">La habitación</button>
-          <button class="pano-tab" data-pano="terraza" role="tab" aria-selected="false">La terraza</button>
-        </div>
-      </div>
-      <div class="pano-stage" id="panoStage">
-        <div id="panoViewer"></div>
-        <button class="pano-cover" id="panoCover" style="background-image:url('assets/pano-hab.webp')" aria-label="Abrir la vista 360 grados">
-          <span class="play">
-            <span class="ring360">360°</span>
-            <span class="lbl">Pulsa para mirar alrededor</span>
-          </span>
-        </button>
-        <span class="pano-hint">Arrastra para girar</span>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -913,8 +846,6 @@
   <div class="credit">Diseño de muestra</div>
 </footer>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.js"></script>
 <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -1078,90 +1009,6 @@
 
     ScrollTrigger.refresh();
   }
-
-  // ===== VISTA 360 =====
-  // Son panorámicas anchas, no esferas completas: se limita el giro
-  // al ángulo real de la foto para que no aparezca ninguna costura.
-  const PANOS = {
-    hab:     { img:'assets/pano-hab.webp',     haov:150, vaov:63.6, yaw:0 },
-    terraza: { img:'assets/pano-terraza.webp', haov:150, vaov:63.6, yaw:0 }
-  };
-  let panoView = null, panoActual = 'hab';
-  const panoStage = document.getElementById('panoStage');
-  const panoCover = document.getElementById('panoCover');
-
-  // Calcula el encuadre para que NUNCA se vea el borde de la foto.
-  // La clave: el alto visible del visor debe caber dentro del alto real
-  // de la panorámica, dejando margen para poder mirar arriba y abajo.
-  function encuadrePano(p){
-    const rect = panoStage.getBoundingClientRect();
-    const aspecto = (rect.width || 1) / (rect.height || 1);
-    const grados = r => r * 180 / Math.PI;
-    const rad    = g => g * Math.PI / 180;
-    // Enseñamos solo la mitad del alto de la foto: la otra mitad es
-    // margen para poder girar a gusto sin llegar nunca al borde.
-    const vfov = p.vaov * 0.5;
-    let hfov = grados(2 * Math.atan(Math.tan(rad(vfov / 2)) * aspecto));
-    hfov = Math.min(hfov, p.haov * 0.9, 110);
-    // Recalcula el alto real que ocupa ese hfov ya recortado
-    const vfovReal = grados(2 * Math.atan(Math.tan(rad(hfov / 2)) / aspecto));
-    const margenV = Math.max(0, (p.vaov - vfovReal) / 2);
-    const margenH = Math.max(0, (p.haov - hfov) / 2);
-    return { hfov, margenV, margenH };
-  }
-
-  function abrirPano(clave){
-    const p = PANOS[clave];
-    if(!p || typeof pannellum === 'undefined') return;
-    if(panoView){ panoView.destroy(); panoView = null; }
-    const enc = encuadrePano(p);
-    panoView = pannellum.viewer('panoViewer', {
-      type:'equirectangular',
-      panorama:p.img,
-      haov:p.haov, vaov:p.vaov, vOffset:0,
-      minYaw:-enc.margenH, maxYaw:enc.margenH,
-      minPitch:-enc.margenV, maxPitch:enc.margenV,
-      yaw:p.yaw, pitch:0,
-      hfov:enc.hfov, minHfov:enc.hfov, maxHfov:enc.hfov,
-      autoLoad:true, showControls:false, showZoomCtrl:false,
-      showFullscreenCtrl:false, keyboardZoom:false, mouseZoom:false,
-      backgroundColor:[0.09,0.08,0.07]
-    });
-    panoStage.classList.add('live');
-    panoCover.style.display = 'none';
-    anchoPano = Math.round(panoStage.getBoundingClientRect().width);
-  }
-
-  // Recalcular el encuadre al cambiar el tamaño de la ventana.
-  // Solo si el ancho cambia de verdad: si no, el visor se recreaba
-  // una y otra vez y se quedaba tieso al arrastrar.
-  let panoTimer, anchoPano = 0;
-  window.addEventListener('resize', ()=>{
-    if(!panoStage || !panoStage.classList.contains('live')) return;
-    const ancho = Math.round(panoStage.getBoundingClientRect().width);
-    if(Math.abs(ancho - anchoPano) < 40) return;   // cambio insignificante
-    anchoPano = ancho;
-    clearTimeout(panoTimer);
-    panoTimer = setTimeout(()=> abrirPano(panoActual), 300);
-  });
-
-  if(panoCover){
-    panoCover.addEventListener('click', ()=> abrirPano(panoActual));
-  }
-  document.querySelectorAll('.pano-tab').forEach(tab=>{
-    tab.addEventListener('click', ()=>{
-      document.querySelectorAll('.pano-tab').forEach(t=>{
-        t.classList.remove('active'); t.setAttribute('aria-selected','false');
-      });
-      tab.classList.add('active'); tab.setAttribute('aria-selected','true');
-      panoActual = tab.dataset.pano;
-      if(panoStage.classList.contains('live')){
-        abrirPano(panoActual);            // ya está abierto: cambia de escena
-      } else {
-        panoCover.style.backgroundImage = `url('${PANOS[panoActual].img}')`;
-      }
-    });
-  });
 
   // ===== FAQ (acordeón) =====
   document.querySelectorAll('.faq-item').forEach(item=>{
