@@ -103,7 +103,7 @@
 
   /* ===== HERO ===== */
   .hero{height:100vh;min-height:640px;position:relative;overflow:hidden;display:flex;align-items:flex-end;}
-  .hero-bg{position:absolute;inset:-8% -2%;background:url('assets/hero-pool.webp') center/cover no-repeat;}
+  .hero-bg{position:absolute;inset:-8% -5%;background:url('assets/hero-pool.webp') center/cover no-repeat;}
   .hero-scrim{position:absolute;inset:0;background:linear-gradient(180deg, rgba(14,13,12,.62) 0%, rgba(14,13,12,.18) 38%, rgba(14,13,12,.55) 72%, rgba(14,13,12,.92) 100%);}
   .hero-content{position:relative;z-index:2;width:100%;padding-bottom:64px;}
   .hero-content h1{font-size:clamp(2.6rem,7vw,5.2rem);line-height:1.02;max-width:900px;}
@@ -200,6 +200,206 @@
   .t-cell h3{font-size:1.16rem;margin:14px 0 10px;}
   .t-cell p{font-size:.89rem;line-height:1.65;}
 
+  /* ===== CAJA DE RESERVAS ===== */
+  .bookbar{
+    position:relative;z-index:5;margin:-58px auto 0;max-width:1120px;
+    padding:0 clamp(20px,5vw,60px);
+  }
+  .bookbar-inner{
+    background:rgba(20,18,16,.88);backdrop-filter:blur(14px);
+    border:1px solid rgba(244,237,226,.16);border-radius:3px;
+    padding:20px 24px;display:grid;
+    grid-template-columns:repeat(3,1fr) auto;gap:20px;align-items:end;
+    box-shadow:0 26px 60px rgba(0,0,0,.45);
+  }
+  @media (max-width:880px){.bookbar{margin-top:-30px;} .bookbar-inner{grid-template-columns:1fr 1fr;}}
+  @media (max-width:520px){.bookbar-inner{grid-template-columns:1fr;gap:14px;}}
+  .bf label{
+    display:block;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--sand);margin-bottom:7px;font-weight:600;
+  }
+  .bf .val{
+    display:flex;align-items:baseline;gap:8px;
+    font-family:'Bodoni Moda',serif;font-size:1.32rem;color:var(--cream);
+  }
+  .bf .val small{font-family:'Inter';font-size:.72rem;color:var(--muted);letter-spacing:.04em;}
+  .bookbar .btn{width:100%;justify-content:center;padding:15px 26px;}
+  .bookbar-note{
+    text-align:center;font-size:.7rem;color:var(--muted);margin-top:10px;letter-spacing:.04em;
+  }
+
+  /* ===== HABITACIONES CON DATOS ===== */
+  .rooms{background:var(--black);padding:120px 0;}
+  .room{
+    display:grid;grid-template-columns:1.05fr .95fr;gap:0;
+    border:1px solid var(--line);border-radius:2px;overflow:hidden;margin-bottom:26px;
+    background:var(--black-2);
+  }
+  .room:nth-child(even) .room-img{order:2;}
+  @media (max-width:820px){.room{grid-template-columns:1fr;} .room:nth-child(even) .room-img{order:0;}}
+  .room-img{position:relative;min-height:320px;overflow:hidden;}
+  .room-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.3,1);}
+  .room:hover .room-img img{transform:scale(1.05);}
+  .room-body{padding:38px 36px;display:flex;flex-direction:column;justify-content:center;}
+  .room-body h3{font-size:1.7rem;margin-bottom:6px;}
+  .room-meta{display:flex;gap:18px;flex-wrap:wrap;margin:12px 0 16px;
+    font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--sand);}
+  .room-body p{font-size:.94rem;}
+  .room-feats{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;}
+  .feat{
+    font-size:.72rem;border:1px solid var(--line);border-radius:999px;
+    padding:5px 12px;color:var(--muted);
+  }
+  .room-foot{
+    display:flex;align-items:flex-end;justify-content:space-between;gap:16px;
+    margin-top:24px;padding-top:20px;border-top:1px solid var(--line);flex-wrap:wrap;
+  }
+  .room-price small{display:block;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
+  .room-price b{font-family:'Bodoni Moda',serif;font-size:1.9rem;color:var(--gold);font-weight:500;}
+  .room-price span{font-size:.78rem;color:var(--muted);}
+
+  /* ===== VISTA 360 ===== */
+  .pano-block{margin-top:56px;}
+  .pano-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:20px;}
+  .pano-head h3{font-size:1.6rem;}
+  .pano-head p{font-size:.9rem;margin-top:6px;}
+  .pano-tabs{display:flex;gap:8px;flex-wrap:wrap;}
+  .pano-tab{
+    background:none;border:1px solid var(--line);color:var(--muted);cursor:pointer;
+    font-family:'Inter';font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;
+    padding:10px 18px;border-radius:999px;transition:.25s;font-weight:600;
+  }
+  .pano-tab:hover{color:var(--cream);border-color:var(--sand);}
+  .pano-tab.active{background:var(--gold);border-color:var(--gold);color:#181310;}
+  .pano-tab:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+  .pano-stage{
+    position:relative;width:100%;aspect-ratio:21/9;min-height:280px;
+    border:1px solid var(--line);border-radius:2px;overflow:hidden;background:var(--black-2);
+  }
+  @media (max-width:700px){.pano-stage{aspect-ratio:4/3;}}
+  #panoViewer{position:absolute;inset:0;}
+  .pano-cover{position:absolute;inset:0;z-index:3;cursor:pointer;border:none;padding:0;
+    background-size:cover;background-position:center;width:100%;}
+  .pano-cover::after{content:"";position:absolute;inset:0;background:rgba(14,13,12,.45);}
+  .pano-cover .play{
+    position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:14px;color:var(--cream);
+  }
+  .pano-cover .ring360{
+    width:74px;height:74px;border-radius:50%;border:1px solid var(--cream);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Bodoni Moda',serif;font-size:1rem;letter-spacing:.02em;
+    background:rgba(14,13,12,.35);backdrop-filter:blur(4px);transition:.3s;
+  }
+  .pano-cover:hover .ring360{background:var(--gold);color:#181310;border-color:var(--gold);}
+  .pano-cover .lbl{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;}
+  .pano-hint{
+    position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:2;
+    background:rgba(14,13,12,.7);backdrop-filter:blur(6px);border:1px solid var(--line);
+    color:var(--muted);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;
+    padding:7px 16px;border-radius:999px;pointer-events:none;opacity:0;transition:opacity .4s;
+  }
+  .pano-stage.live .pano-hint{opacity:1;}
+  .pnlm-container{background:var(--black-2) !important;}
+
+  /* ===== SERVICIOS ===== */
+  .services{background:var(--black-2);padding:110px 0;border-top:1px solid var(--line);}
+  .sv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+    border:1px solid var(--line);}
+  @media (max-width:900px){.sv-grid{grid-template-columns:repeat(2,1fr);}}
+  .sv{background:var(--black-2);padding:30px 24px;text-align:center;transition:background .35s;}
+  .sv:hover{background:#1f1c18;}
+  .sv .ic{font-size:1.6rem;display:block;margin-bottom:12px;}
+  .sv h4{font-family:'Inter';font-size:.92rem;font-weight:600;margin:0 0 6px;color:var(--cream);}
+  .sv p{font-size:.8rem;line-height:1.5;}
+
+  /* ===== OFERTAS ===== */
+  .offers{background:var(--black);padding:120px 0;}
+  .of-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  @media (max-width:900px){.of-grid{grid-template-columns:1fr;}}
+  .offer{
+    border:1px solid var(--line);border-radius:2px;padding:32px 28px;
+    background:var(--black-2);display:flex;flex-direction:column;
+  }
+  .offer .tag{
+    display:inline-block;align-self:flex-start;font-size:.64rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--black);background:var(--gold);
+    padding:4px 11px;border-radius:999px;font-weight:700;margin-bottom:16px;
+  }
+  .offer h3{font-size:1.35rem;margin-bottom:10px;}
+  .offer p{font-size:.9rem;flex:1;}
+  .offer ul{list-style:none;padding:0;margin:16px 0 0;font-size:.85rem;color:var(--muted);}
+  .offer li{padding-left:16px;position:relative;margin-bottom:6px;}
+  .offer li::before{content:"·";position:absolute;left:4px;color:var(--gold);font-weight:700;}
+  .offer .price{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);}
+  .offer .price b{font-family:'Bodoni Moda',serif;font-size:1.6rem;color:var(--gold);font-weight:500;}
+  .offer .price span{font-size:.76rem;color:var(--muted);display:block;margin-top:2px;}
+
+  /* ===== RESEÑAS ===== */
+  .reviews{background:var(--black-2);padding:110px 0;border-top:1px solid var(--line);}
+  .rv-score{
+    display:flex;align-items:center;justify-content:center;gap:26px;margin-bottom:48px;flex-wrap:wrap;
+  }
+  .rv-score .num{font-family:'Bodoni Moda',serif;font-size:3.6rem;color:var(--gold);line-height:1;}
+  .rv-score .of{font-size:.8rem;color:var(--muted);}
+  .rv-score .stars{color:var(--gold);letter-spacing:3px;font-size:1.05rem;}
+  .rv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media (max-width:900px){.rv-grid{grid-template-columns:1fr;}}
+  .rv{border:1px solid var(--line);border-radius:2px;padding:26px 24px;background:var(--black);}
+  .rv .stars{color:var(--gold);font-size:.86rem;letter-spacing:2px;margin-bottom:12px;}
+  .rv p{font-size:.92rem;color:var(--cream);font-style:italic;}
+  .rv .who{margin-top:16px;font-size:.78rem;color:var(--muted);}
+  .rv .who b{color:var(--sand);font-weight:600;font-style:normal;}
+
+  /* ===== ENTORNO ===== */
+  .around{background:var(--black);padding:120px 0;}
+  .around-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;}
+  @media (max-width:900px){.around-grid{grid-template-columns:1fr;gap:34px;}}
+  .around-img{border-radius:2px;overflow:hidden;aspect-ratio:16/10;}
+  .around-img img{width:100%;height:100%;object-fit:cover;}
+  .around h2{font-size:clamp(1.9rem,4vw,2.6rem);margin-bottom:16px;}
+  .near{margin-top:26px;display:flex;flex-direction:column;gap:0;}
+  .near-row{
+    display:flex;justify-content:space-between;gap:16px;padding:12px 0;
+    border-bottom:1px solid var(--line);font-size:.9rem;
+  }
+  .near-row span:last-child{color:var(--sand);white-space:nowrap;font-size:.82rem;}
+
+  /* ===== FAQ ===== */
+  .faq{background:var(--black-2);padding:110px 0;border-top:1px solid var(--line);}
+  .faq-list{max-width:780px;margin:0 auto;}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    width:100%;background:none;border:none;color:var(--cream);cursor:pointer;
+    padding:22px 0;display:flex;justify-content:space-between;align-items:center;gap:18px;
+    font-family:'Bodoni Moda',serif;font-size:1.15rem;text-align:left;
+  }
+  .faq-q .pl{color:var(--gold);font-family:'Inter';font-size:1.3rem;font-weight:300;
+    transition:transform .3s;flex:none;}
+  .faq-item.open .faq-q .pl{transform:rotate(45deg);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+  .faq-a p{padding:0 0 22px;font-size:.94rem;max-width:66ch;}
+  .faq-q:focus-visible{outline:2px solid var(--gold);outline-offset:4px;}
+
+  /* ===== CONTACTO ===== */
+  .contact{background:var(--black);padding:110px 0;}
+  .ct-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;}
+  @media (max-width:900px){.ct-grid{grid-template-columns:1fr;gap:36px;}}
+  .ct-row{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);font-size:.94rem;}
+  .ct-row .ic{color:var(--gold);flex:none;}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media (max-width:600px){.form-grid{grid-template-columns:1fr;}}
+  .field{display:flex;flex-direction:column;gap:7px;}
+  .field.full{grid-column:1/-1;}
+  .field label{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sand);font-weight:600;}
+  .field input,.field textarea{
+    background:var(--black-2);border:1px solid var(--line);border-radius:2px;
+    padding:13px 14px;color:var(--cream);font-family:'Inter';font-size:.92rem;
+  }
+  .field textarea{resize:vertical;min-height:110px;}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--gold);}
+  .form-note{font-size:.74rem;color:var(--muted);margin-top:14px;}
+
   footer{background:var(--black-2);padding:60px 22px 32px;text-align:center;border-top:1px solid var(--line);}
   footer .fbrand{font-family:'Bodoni Moda',serif;font-size:1.6rem;margin-bottom:10px;}
   footer p.tag{font-size:.8rem;color:var(--muted);}
@@ -211,9 +411,9 @@
 
   .reveal{opacity:0;transform:translateY(28px);}
 
-  /* ===== HERO 3D TILT + FLOATING BADGE ===== */
-  .hero{perspective:1400px;}
-  .hero-bg{transform-style:preserve-3d;will-change:transform;}
+  /* ===== PROFUNDIDAD DEL HERO + INSIGNIA ===== */
+  .hero-bg{will-change:transform;}
+  .hero-content{will-change:transform;}
   .hero-float-badge{
     position:absolute;top:14%;right:8%;z-index:2;
     display:flex;align-items:center;gap:10px;background:rgba(14,13,12,.42);
@@ -271,12 +471,13 @@
   <div class="nav-inner">
     <a class="brand" href="#top">MIRADOR</a>
     <ul class="nav-links">
-      <li><a href="#nosotros">Nosotros</a></li>
       <li><a href="#habitaciones">Habitaciones</a></li>
-      <li><a href="#momentos">Momentos</a></li>
-      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="#ofertas">Ofertas</a></li>
+      <li><a href="#opiniones">Opiniones</a></li>
+      <li><a href="#entorno">Entorno</a></li>
+      <li><a href="#reservar">Contacto</a></li>
     </ul>
-    <a class="btn btn-ghost nav-book" href="#contacto" style="padding:10px 20px;">Reservar</a>
+    <a class="btn btn-ghost nav-book" href="#reservar" style="padding:10px 20px;">Reservar</a>
   </div>
 </nav>
 
@@ -289,12 +490,33 @@
     <p class="lede">Un mirador sobre el Mediterráneo. Suites con vistas al mar, una piscina infinita y el silencio como lujo.</p>
     <div class="hero-ctas">
       <a class="btn btn-solid" href="#habitaciones">Ver habitaciones</a>
-      <a class="btn btn-ghost" href="#contacto">Reservar estancia</a>
+      <a class="btn btn-ghost" href="#reservar">Reservar estancia</a>
     </div>
   </div>
   <div class="hero-float-badge"><b>4,9★</b> · 200+ estancias</div>
   <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
 </header>
+
+<div class="bookbar">
+  <div class="bookbar-inner">
+    <div class="bf">
+      <label>Entrada</label>
+      <div class="val">12 jun <small>2027</small></div>
+    </div>
+    <div class="bf">
+      <label>Salida</label>
+      <div class="val">15 jun <small>2027</small></div>
+    </div>
+    <div class="bf">
+      <label>Huéspedes</label>
+      <div class="val">2 <small>adultos</small></div>
+    </div>
+    <div class="bf">
+      <a class="btn btn-solid" href="#habitaciones">Ver disponibilidad</a>
+    </div>
+  </div>
+  <p class="bookbar-note">Reserva directa · Mejor precio garantizado · Cancelación gratuita hasta 48 h antes</p>
+</div>
 
 <section class="type-mask">
   <div class="tm-inner">
@@ -326,9 +548,94 @@
   </div>
 </section>
 
-<section class="hgallery" id="habitaciones">
+<section class="rooms" id="habitaciones">
+  <div class="wrap">
+    <div class="moments-head reveal">
+      <span class="eyebrow">Habitaciones</span>
+      <h2 style="font-size:clamp(2rem,4vw,2.8rem);">Dieciocho, y ninguna igual</h2>
+      <p>Todas con terraza y vistas al mar. Precios por noche, desayuno incluido.</p>
+    </div>
+
+    <div class="room reveal">
+      <div class="room-img"><img src="assets/room-doble.webp" alt="Habitación Doble Vista Mar" loading="lazy"></div>
+      <div class="room-body">
+        <h3>Doble Vista Mar</h3>
+        <div class="room-meta"><span>28 m²</span><span>2 personas</span><span>Terraza</span></div>
+        <p>Suelo de barro cocido, vigas de madera y contraventanas que se abren al Mediterráneo. La opción más pedida por parejas.</p>
+        <div class="room-feats">
+          <span class="feat">Cama king</span><span class="feat">Baño con ducha</span>
+          <span class="feat">Aire acondicionado</span><span class="feat">Wifi</span><span class="feat">Minibar</span>
+        </div>
+        <div class="room-foot">
+          <div class="room-price"><small>Desde</small><b>145 €</b> <span>/ noche</span></div>
+          <a class="btn btn-line" href="#reservar" style="padding:11px 22px;">Reservar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="room reveal">
+      <div class="room-img"><img src="assets/room.webp" alt="Suite Mediterráneo" loading="lazy"></div>
+      <div class="room-body">
+        <h3>Suite Mediterráneo</h3>
+        <div class="room-meta"><span>45 m²</span><span>2 personas</span><span>Terraza privada</span></div>
+        <p>Nuestra suite insignia: salón independiente, bañera exenta de piedra frente al ventanal y una terraza donde desayunar viendo el mar.</p>
+        <div class="room-feats">
+          <span class="feat">Cama king</span><span class="feat">Bañera exenta</span>
+          <span class="feat">Salón</span><span class="feat">Albornoces</span><span class="feat">Acceso al spa</span>
+        </div>
+        <div class="room-foot">
+          <div class="room-price"><small>Desde</small><b>225 €</b> <span>/ noche</span></div>
+          <a class="btn btn-line" href="#reservar" style="padding:11px 22px;">Reservar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="room reveal">
+      <div class="room-img"><img src="assets/room-familiar.webp" alt="Suite Familiar" loading="lazy"></div>
+      <div class="room-body">
+        <h3>Suite Familiar</h3>
+        <div class="room-meta"><span>60 m²</span><span>4 personas</span><span>Dos ambientes</span></div>
+        <p>Dos zonas de descanso comunicadas, pensada para familias que quieren espacio sin renunciar a las vistas ni al silencio.</p>
+        <div class="room-feats">
+          <span class="feat">2 ambientes</span><span class="feat">Cuna gratuita</span>
+          <span class="feat">Baño doble</span><span class="feat">Nevera</span><span class="feat">Wifi</span>
+        </div>
+        <div class="room-foot">
+          <div class="room-price"><small>Desde</small><b>290 €</b> <span>/ noche</span></div>
+          <a class="btn btn-line" href="#reservar" style="padding:11px 22px;">Reservar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pano-block reveal">
+      <div class="pano-head">
+        <div>
+          <span class="eyebrow">Vista 360°</span>
+          <h3>Entra sin salir de casa</h3>
+          <p>Arrastra para mirar alrededor, como si estuvieras dentro.</p>
+        </div>
+        <div class="pano-tabs" role="tablist">
+          <button class="pano-tab active" data-pano="hab" role="tab" aria-selected="true">La habitación</button>
+          <button class="pano-tab" data-pano="terraza" role="tab" aria-selected="false">La terraza</button>
+        </div>
+      </div>
+      <div class="pano-stage" id="panoStage">
+        <div id="panoViewer"></div>
+        <button class="pano-cover" id="panoCover" style="background-image:url('assets/pano-hab.webp')" aria-label="Abrir la vista 360 grados">
+          <span class="play">
+            <span class="ring360">360°</span>
+            <span class="lbl">Pulsa para mirar alrededor</span>
+          </span>
+        </button>
+        <span class="pano-hint">Arrastra para girar</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hgallery" id="espacios">
   <div class="hgallery-head">
-    <span class="eyebrow">Habitaciones &amp; espacios</span>
+    <span class="eyebrow">Espacios</span>
     <h2 style="font-size:clamp(1.6rem,3vw,2.2rem);">Cada detalle, con vistas al mar</h2>
   </div>
   <div class="hgallery-track" id="hgTrack">
@@ -337,6 +644,25 @@
     <div class="hpanel"><img src="assets/spa.webp" alt="Spa" loading="lazy"><div class="hcap"><b>Spa privado</b><span>Ritual de bienestar</span></div></div>
     <div class="hpanel"><img src="assets/pool-close.webp" alt="Piscina" loading="lazy"><div class="hcap"><b>Piscina infinita</b><span>Frente al horizonte</span></div></div>
     <div class="hpanel"><img src="assets/rooftop-bar.webp" alt="Rooftop bar" loading="lazy"><div class="hcap"><b>Rooftop bar</b><span>Atardeceres en altura</span></div></div>
+  </div>
+</section>
+
+<section class="services">
+  <div class="wrap">
+    <div class="moments-head reveal">
+      <span class="eyebrow">Servicios</span>
+      <h2>Todo lo que necesitas, ya incluido</h2>
+    </div>
+    <div class="sv-grid reveal">
+      <div class="sv"><span class="ic">🏊</span><h4>Piscina infinita</h4><p>Abierta de 8 a 21 h, con toallas y hamacas</p></div>
+      <div class="sv"><span class="ic">💆</span><h4>Spa</h4><p>Circuito de aguas y masajes con cita previa</p></div>
+      <div class="sv"><span class="ic">🍳</span><h4>Desayuno buffet</h4><p>Producto local, incluido en todas las tarifas</p></div>
+      <div class="sv"><span class="ic">🅿️</span><h4>Parking privado</h4><p>Gratuito para huéspedes, sin reserva previa</p></div>
+      <div class="sv"><span class="ic">📶</span><h4>Wifi de fibra</h4><p>En todo el hotel, sin coste</p></div>
+      <div class="sv"><span class="ic">🐕</span><h4>Admitimos mascotas</h4><p>Hasta 10 kg, avisando al reservar</p></div>
+      <div class="sv"><span class="ic">🚲</span><h4>Bicicletas</h4><p>Alquiler eléctrico en recepción</p></div>
+      <div class="sv"><span class="ic">🍽️</span><h4>Restaurante</h4><p>Cocina de mercado, abierto a no alojados</p></div>
+    </div>
   </div>
 </section>
 
@@ -349,6 +675,51 @@
   </div>
 </section>
 
+<section class="offers" id="ofertas">
+  <div class="wrap">
+    <div class="moments-head reveal">
+      <span class="eyebrow">Ofertas</span>
+      <h2>Paquetes de temporada</h2>
+      <p>Solo reservando directamente en esta web. No los encontrarás en ningún portal.</p>
+    </div>
+    <div class="of-grid">
+      <div class="offer reveal">
+        <span class="tag">Otoño</span>
+        <h3>Escapada de tres noches</h3>
+        <p>Los mejores meses de la Costa Brava son octubre y noviembre: sin colas, con el mar todavía templado.</p>
+        <ul>
+          <li>3 noches con desayuno</li>
+          <li>Una cena para dos en el restaurante</li>
+          <li>Salida tardía hasta las 14 h</li>
+        </ul>
+        <div class="price"><b>390 €</b><span>Doble Vista Mar · 130 €/noche</span></div>
+      </div>
+      <div class="offer reveal">
+        <span class="tag">Más vendido</span>
+        <h3>Bienestar en pareja</h3>
+        <p>Dos noches con el spa reservado en exclusiva durante una hora, sin nadie más.</p>
+        <ul>
+          <li>2 noches en Suite Mediterráneo</li>
+          <li>Circuito de aguas privado</li>
+          <li>Masaje de 50 min para dos</li>
+        </ul>
+        <div class="price"><b>560 €</b><span>Suite · 280 €/noche</span></div>
+      </div>
+      <div class="offer reveal">
+        <span class="tag">Larga estancia</span>
+        <h3>Una semana frente al mar</h3>
+        <p>Siete noches al precio de seis, con las bicicletas eléctricas incluidas para recorrer las calas.</p>
+        <ul>
+          <li>7 noches, pagas 6</li>
+          <li>Bicicletas eléctricas incluidas</li>
+          <li>Parking y wifi sin coste</li>
+        </ul>
+        <div class="price"><b>870 €</b><span>Doble Vista Mar · 124 €/noche</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="moments" id="momentos">
   <div class="wrap">
     <div class="moments-head reveal">
@@ -357,11 +728,122 @@
       <p>Aquí irían las fotografías reales de tu establecimiento, seleccionadas y tratadas con este mismo nivel de detalle.</p>
     </div>
     <div class="moments-grid">
-      <div class="mcard tall reveal"><img src="assets/hero-pool.webp" alt="Piscina al atardecer" loading="lazy"><div class="mcap">Atardecer en la piscina</div></div>
+      <div class="mcard tall reveal"><img src="assets/pool-life.webp" alt="Atardecer en la piscina" loading="lazy"><div class="mcap">La copa de las siete, junto a la piscina</div></div>
       <div class="m-stack">
-        <div class="mcard reveal"><img src="assets/breakfast.webp" alt="Desayuno" loading="lazy"><div class="mcap">Desayuno con vistas</div></div>
-        <div class="mcard reveal"><img src="assets/aerial.webp" alt="Vista aérea" loading="lazy"><div class="mcap">Sobre el acantilado</div></div>
+        <div class="mcard reveal"><img src="assets/breakfast-life.webp" alt="Desayuno en la terraza" loading="lazy"><div class="mcap">Desayunos que duran toda la mañana</div></div>
+        <div class="mcard reveal"><img src="assets/restaurante.webp" alt="Restaurante al anochecer" loading="lazy"><div class="mcap">Cenas a la luz de las velas</div></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews" id="opiniones">
+  <div class="wrap">
+    <div class="moments-head reveal">
+      <span class="eyebrow">Opiniones</span>
+      <h2>Lo que dicen quienes ya han venido</h2>
+    </div>
+    <div class="rv-score reveal">
+      <div><div class="num">4,9</div><div class="of">sobre 5</div></div>
+      <div>
+        <div class="stars">★★★★★</div>
+        <div class="of" style="margin-top:6px;">Basado en 214 opiniones verificadas</div>
+      </div>
+    </div>
+    <div class="rv-grid">
+      <div class="rv reveal">
+        <div class="stars">★★★★★</div>
+        <p>"Reservamos dos noches y acabamos alargando a cuatro. La terraza de la suite al amanecer no se paga con dinero."</p>
+        <div class="who"><b>Marta G.</b> · Barcelona · Junio</div>
+      </div>
+      <div class="rv reveal">
+        <div class="stars">★★★★★</div>
+        <p>"El desayuno es de otro nivel y el trato del equipo, cercanísimo. Se nota que es un hotel pequeño y lo cuidan."</p>
+        <div class="who"><b>Julien R.</b> · Toulouse · Septiembre</div>
+      </div>
+      <div class="rv reveal">
+        <div class="stars">★★★★☆</div>
+        <p>"Sitio precioso y muy tranquilo. La carretera de acceso es estrecha, pero merece cada curva."</p>
+        <div class="who"><b>Anna P.</b> · Girona · Agosto</div>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:22px;font-size:.76rem;color:var(--muted);">Opiniones de muestra, con fines de demostración.</p>
+  </div>
+</section>
+
+<section class="around" id="entorno">
+  <div class="wrap around-grid">
+    <div class="reveal">
+      <span class="eyebrow">El entorno</span>
+      <h2>Begur empieza en la puerta</h2>
+      <p>Estamos a diez minutos andando del casco antiguo y a cinco de tres calas distintas. El coche puede quedarse aparcado toda la estancia.</p>
+      <div class="near">
+        <div class="near-row"><span>Cala Sa Riera</span><span>6 min a pie</span></div>
+        <div class="near-row"><span>Casco antiguo y castillo de Begur</span><span>10 min a pie</span></div>
+        <div class="near-row"><span>Cala Aiguablava</span><span>8 min en coche</span></div>
+        <div class="near-row"><span>Camí de Ronda</span><span>Sale desde el hotel</span></div>
+        <div class="near-row"><span>Aeropuerto de Girona</span><span>50 min</span></div>
+        <div class="near-row"><span>Barcelona</span><span>1 h 45 min</span></div>
+      </div>
+    </div>
+    <div class="around-img reveal"><img src="assets/entorno.webp" alt="Calle del casco antiguo de Begur" loading="lazy"></div>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap">
+    <div class="moments-head reveal">
+      <span class="eyebrow">Antes de venir</span>
+      <h2>Preguntas frecuentes</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>¿A qué hora es la entrada y la salida?</span><span class="pl">+</span></button>
+        <div class="faq-a"><p>La entrada es a partir de las 15 h y la salida hasta las 12 h. Si necesitáis flexibilidad, avisadnos al reservar y lo intentamos ajustar sin coste.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>¿Puedo cancelar sin coste?</span><span class="pl">+</span></button>
+        <div class="faq-a"><p>Sí. Reservando directamente en esta web, la cancelación es gratuita hasta 48 horas antes de la llegada. En los paquetes de temporada el plazo es de 7 días.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>¿Hay aparcamiento?</span><span class="pl">+</span></button>
+        <div class="faq-a"><p>Sí, parking privado gratuito para huéspedes, sin necesidad de reservarlo. La carretera de acceso es estrecha pero está asfaltada y señalizada.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>¿Aceptáis mascotas?</span><span class="pl">+</span></button>
+        <div class="faq-a"><p>Aceptamos perros de hasta 10 kg avisando al reservar. No pueden acceder al restaurante ni a la zona de spa.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>¿El restaurante está abierto a quien no se aloja?</span><span class="pl">+</span></button>
+        <div class="faq-a"><p>Sí, con reserva previa. Servimos cenas de 20 a 22:30 h de miércoles a domingo.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="reservar">
+  <div class="wrap ct-grid">
+    <div class="reveal">
+      <span class="eyebrow">Reservas</span>
+      <h2 style="font-size:clamp(1.9rem,4vw,2.5rem);margin-bottom:18px;">Hablamos y lo organizamos</h2>
+      <p style="margin-bottom:24px;">Escríbenos y te contestamos el mismo día. Si prefieres llamar, mejor todavía.</p>
+      <div class="ct-row"><span class="ic">📍</span><span>Camí de Sa Riera, 12 · 17255 Begur, Girona</span></div>
+      <div class="ct-row"><span class="ic">📞</span><span>972 00 00 00</span></div>
+      <div class="ct-row"><span class="ic">✉️</span><span>reservas@mirador-demo.com</span></div>
+      <div class="ct-row"><span class="ic">🕘</span><span>Recepción de 8 a 22 h, todos los días</span></div>
+    </div>
+    <div class="reveal">
+      <div class="form-grid">
+        <div class="field"><label for="f-nombre">Nombre</label><input id="f-nombre" type="text" placeholder="Tu nombre"></div>
+        <div class="field"><label for="f-email">Email</label><input id="f-email" type="email" placeholder="tu@email.com"></div>
+        <div class="field"><label for="f-entrada">Entrada</label><input id="f-entrada" type="text" placeholder="12/06/2027"></div>
+        <div class="field"><label for="f-salida">Salida</label><input id="f-salida" type="text" placeholder="15/06/2027"></div>
+        <div class="field full"><label for="f-msg">Mensaje</label><textarea id="f-msg" placeholder="Cuéntanos qué necesitáis: número de personas, habitación que os interesa, si venís con mascota…"></textarea></div>
+        <div class="field full">
+          <a class="btn btn-solid" href="#reservar" style="justify-content:center;">Enviar solicitud</a>
+        </div>
+      </div>
+      <p class="form-note">Formulario de muestra: no envía nada. En tu web recibirías cada solicitud en tu correo.</p>
     </div>
   </div>
 </section>
@@ -431,6 +913,8 @@
   <div class="credit">Diseño de muestra</div>
 </footer>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.js"></script>
 <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -524,18 +1008,35 @@
     // Hero parallax
     gsap.to('#heroBg', { yPercent: 14, ease:'none', scrollTrigger:{ trigger:'.hero', start:'top top', end:'bottom top', scrub:true } });
 
-    // Hero 3D tilt on mouse move (depth feel)
-    const heroEl = document.querySelector('.hero');
+    // Profundidad en el hero: capas que se mueven a distinta velocidad.
+    // Nada de rotar la foto (eso parecía una cartulina doblándose):
+    // el fondo va hacia un lado y el contenido hacia el contrario,
+    // que es como el ojo interpreta la distancia de verdad.
+    const heroEl   = document.querySelector('.hero');
     const heroBgEl = document.getElementById('heroBg');
-    if (window.innerWidth > 820) {
+    const heroTxt  = document.querySelector('.hero-content');
+    // La insignia se queda fuera: ya tiene su animación flotante propia
+    // y si le tocamos la posición desde aquí se anulan entre ellas.
+
+    if (heroEl && window.matchMedia('(hover:hover) and (min-width:821px)').matches) {
+      let destX = 0, destY = 0, actX = 0, actY = 0, activo = false;
+
       heroEl.addEventListener('mousemove', (e)=>{
         const r = heroEl.getBoundingClientRect();
-        const px = (e.clientX - r.left) / r.width - 0.5;
-        const py = (e.clientY - r.top) / r.height - 0.5;
-        gsap.to(heroBgEl, { duration:.9, rotateY: px*5, rotateX: -py*5, scale:1.045, ease:'power2.out' });
+        destX = (e.clientX - r.left) / r.width  - 0.5;
+        destY = (e.clientY - r.top)  / r.height - 0.5;
+        activo = true;
       });
-      heroEl.addEventListener('mouseleave', ()=>{
-        gsap.to(heroBgEl, { duration:.8, rotateY:0, rotateX:0, scale:1, ease:'power2.out' });
+      heroEl.addEventListener('mouseleave', ()=>{ destX = 0; destY = 0; });
+
+      gsap.ticker.add(()=>{
+        if(!activo) return;
+        actX += (destX - actX) * 0.055;   // suavizado: sin tirones
+        actY += (destY - actY) * 0.055;
+        // Fondo: lejos, se mueve poco y en sentido contrario al ratón
+        gsap.set(heroBgEl, { x: actX * -26, y: actY * -16 });
+        // Texto: cerca, se mueve más y hacia el ratón
+        if(heroTxt) gsap.set(heroTxt, { x: actX * 16, y: actY * 9 });
       });
     }
 
@@ -577,6 +1078,110 @@
 
     ScrollTrigger.refresh();
   }
+
+  // ===== VISTA 360 =====
+  // Son panorámicas anchas, no esferas completas: se limita el giro
+  // al ángulo real de la foto para que no aparezca ninguna costura.
+  const PANOS = {
+    hab:     { img:'assets/pano-hab.webp',     haov:150, vaov:63.6, yaw:0 },
+    terraza: { img:'assets/pano-terraza.webp', haov:150, vaov:63.6, yaw:0 }
+  };
+  let panoView = null, panoActual = 'hab';
+  const panoStage = document.getElementById('panoStage');
+  const panoCover = document.getElementById('panoCover');
+
+  // Calcula el encuadre para que NUNCA se vea el borde de la foto.
+  // La clave: el alto visible del visor debe caber dentro del alto real
+  // de la panorámica, dejando margen para poder mirar arriba y abajo.
+  function encuadrePano(p){
+    const rect = panoStage.getBoundingClientRect();
+    const aspecto = (rect.width || 1) / (rect.height || 1);
+    const grados = r => r * 180 / Math.PI;
+    const rad    = g => g * Math.PI / 180;
+    // Enseñamos solo la mitad del alto de la foto: la otra mitad es
+    // margen para poder girar a gusto sin llegar nunca al borde.
+    const vfov = p.vaov * 0.5;
+    let hfov = grados(2 * Math.atan(Math.tan(rad(vfov / 2)) * aspecto));
+    hfov = Math.min(hfov, p.haov * 0.9, 110);
+    // Recalcula el alto real que ocupa ese hfov ya recortado
+    const vfovReal = grados(2 * Math.atan(Math.tan(rad(hfov / 2)) / aspecto));
+    const margenV = Math.max(0, (p.vaov - vfovReal) / 2);
+    const margenH = Math.max(0, (p.haov - hfov) / 2);
+    return { hfov, margenV, margenH };
+  }
+
+  function abrirPano(clave){
+    const p = PANOS[clave];
+    if(!p || typeof pannellum === 'undefined') return;
+    if(panoView){ panoView.destroy(); panoView = null; }
+    const enc = encuadrePano(p);
+    panoView = pannellum.viewer('panoViewer', {
+      type:'equirectangular',
+      panorama:p.img,
+      haov:p.haov, vaov:p.vaov, vOffset:0,
+      minYaw:-enc.margenH, maxYaw:enc.margenH,
+      minPitch:-enc.margenV, maxPitch:enc.margenV,
+      yaw:p.yaw, pitch:0,
+      hfov:enc.hfov, minHfov:enc.hfov, maxHfov:enc.hfov,
+      autoLoad:true, showControls:false, showZoomCtrl:false,
+      showFullscreenCtrl:false, keyboardZoom:false, mouseZoom:false,
+      backgroundColor:[0.09,0.08,0.07]
+    });
+    panoStage.classList.add('live');
+    panoCover.style.display = 'none';
+    anchoPano = Math.round(panoStage.getBoundingClientRect().width);
+  }
+
+  // Recalcular el encuadre al cambiar el tamaño de la ventana.
+  // Solo si el ancho cambia de verdad: si no, el visor se recreaba
+  // una y otra vez y se quedaba tieso al arrastrar.
+  let panoTimer, anchoPano = 0;
+  window.addEventListener('resize', ()=>{
+    if(!panoStage || !panoStage.classList.contains('live')) return;
+    const ancho = Math.round(panoStage.getBoundingClientRect().width);
+    if(Math.abs(ancho - anchoPano) < 40) return;   // cambio insignificante
+    anchoPano = ancho;
+    clearTimeout(panoTimer);
+    panoTimer = setTimeout(()=> abrirPano(panoActual), 300);
+  });
+
+  if(panoCover){
+    panoCover.addEventListener('click', ()=> abrirPano(panoActual));
+  }
+  document.querySelectorAll('.pano-tab').forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      document.querySelectorAll('.pano-tab').forEach(t=>{
+        t.classList.remove('active'); t.setAttribute('aria-selected','false');
+      });
+      tab.classList.add('active'); tab.setAttribute('aria-selected','true');
+      panoActual = tab.dataset.pano;
+      if(panoStage.classList.contains('live')){
+        abrirPano(panoActual);            // ya está abierto: cambia de escena
+      } else {
+        panoCover.style.backgroundImage = `url('${PANOS[panoActual].img}')`;
+      }
+    });
+  });
+
+  // ===== FAQ (acordeón) =====
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', ()=>{
+      const abierto = item.classList.contains('open');
+      // Cierra los demás
+      document.querySelectorAll('.faq-item.open').forEach(o=>{
+        if(o!==item){
+          o.classList.remove('open');
+          o.querySelector('.faq-a').style.maxHeight = null;
+          o.querySelector('.faq-q').setAttribute('aria-expanded','false');
+        }
+      });
+      item.classList.toggle('open', !abierto);
+      q.setAttribute('aria-expanded', String(!abierto));
+      a.style.maxHeight = !abierto ? a.scrollHeight + 'px' : null;
+    });
+  });
 
   // Smooth in-page anchor scroll (works pre/post lenis init)
   document.querySelectorAll('a[href^="#"]').forEach(a=>{
