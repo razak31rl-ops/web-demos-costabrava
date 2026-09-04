@@ -367,6 +367,23 @@
 
   .reveal{opacity:0;transform:translateY(28px);}
 
+  /* ===== AJUSTES DE MÓVIL =====
+     En pantallas pequeñas el espaciado de ordenador deja huecos enormes
+     y alarga la página sin motivo. Y algunas etiquetas se quedan cortas. */
+  @media (max-width:720px){
+    .about, .rooms, .offers, .moments, .around,
+    .tailored, .cta-final{padding:64px 0;}
+    .services, .reviews, .faq, .contact{padding:58px 0;}
+    .moments-head, .tailored-head{margin-bottom:30px;}
+    .room-body{padding:26px 22px;}
+    .room{margin-bottom:18px;}
+    .offer{padding:26px 22px;}
+    .bf label{font-size:.72rem;}
+    .bookbar-note{font-size:.74rem;}
+    .rv-score{margin-bottom:30px;}
+    .around-grid{gap:26px;}
+  }
+
   /* ===== PROFUNDIDAD DEL HERO + INSIGNIA ===== */
   .hero-bg{will-change:transform;}
   .hero-content{will-change:transform;}
