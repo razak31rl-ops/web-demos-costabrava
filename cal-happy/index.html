@@ -97,6 +97,21 @@ h2{font-family:var(--display);font-weight:700;font-size:clamp(1.8rem,4.6vw,3rem)
 .faq details[open] summary::after{transform:rotate(45deg)}
 .faq p{margin:0 0 1.4rem;color:var(--tinta-tenue);max-width:60ch}
 
+/* imagenes */
+.banda-img{position:relative;z-index:1;margin-top:clamp(2.6rem,6vw,4rem);width:100%;overflow:hidden}
+.banda-img img{width:100%;aspect-ratio:16/9;max-height:64vh;object-fit:cover;display:block}
+.banda-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,transparent 60%,var(--crema) 100%);pointer-events:none}
+.foto-card{padding:0!important;overflow:hidden}
+.foto-card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.foto-card .txt{padding:1.5rem 1.5rem 1.7rem}
+.foto-card .etq{z-index:2}
+.galeria{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2.6rem}
+.galeria figure{margin:0;overflow:hidden;border-radius:10px;position:relative}
+.galeria img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.galeria figure:hover img{transform:scale(1.04)}
+.galeria figcaption{margin-top:.75rem;font-size:.88rem;opacity:.72}
+@media(prefers-reduced-motion:reduce){.galeria img{transition:none}.galeria figure:hover img{transform:none}}
+
 footer{position:relative;z-index:1;border-top:1px solid var(--linea);padding:2.6rem 0 3.4rem;font-size:.82rem;color:var(--tinta-tenue)}
 footer p{margin:.5rem 0;max-width:72ch}
 
@@ -140,6 +155,9 @@ footer p{margin:.5rem 0;max-width:72ch}
       <div><span class="n">00:00</span><span class="t">cerramos</span></div>
     </div>
   </div>
+  <div class="banda-img rv">
+    <img src="assets/barra.webp" width="1920" height="1080" alt="Barra de bar de tapas con cazuelitas, copas de vino y lámparas cálidas" loading="eager" decoding="async">
+  </div>
 </header>
 
 <section id="tapas">
@@ -163,6 +181,11 @@ footer p{margin:.5rem 0;max-width:72ch}
       <div class="tarjeta rv"><span class="etq">Popular</span><h3>Paella marinera</h3><p>El plato grande de la casa, marcado como popular en Google.</p></div>
       <div class="tarjeta rv"><h3>Sangría blanca</h3><p>Hay quien escribe que es la mejor que ha bebido.</p></div>
       <div class="tarjeta rv"><h3>Cerveza</h3><p>Aquí también se viene a tomar algo, no solo a comer.</p></div>
+    </div>
+    <div class="galeria">
+      <figure class="rv"><img src="assets/tapas.webp" width="1000" height="750" alt="Tabla de tapas caseras: pimientos rellenos, tortilla, olivas y montaditos" loading="lazy" decoding="async"><figcaption>Tapas variadas</figcaption></figure>
+      <figure class="rv"><img src="assets/sangria-blanca.webp" width="1000" height="750" alt="Sangría blanca con manzana, melocotón y hierbabuena" loading="lazy" decoding="async"><figcaption>Sangría blanca</figcaption></figure>
+      <figure class="rv"><img src="assets/paella.webp" width="1000" height="750" alt="Paella marinera servida en la barra" loading="lazy" decoding="async"><figcaption>Paella marinera</figcaption></figure>
     </div>
   </div>
 </section>
@@ -244,7 +267,8 @@ footer p{margin:.5rem 0;max-width:72ch}
     <p><strong>Esto es una propuesta de página web, no la web oficial de Cal Happy.</strong></p>
     <p>Valoración, número de opiniones, temas más citados, platos populares, dirección, código Plus, teléfono, horario, servicios y rango de precio salen de la ficha pública de Google Maps del local, consultada el 5 de septiembre de 2026.</p>
     <p><strong>Las opiniones son reales</strong> y van con su autor y su fecha, incluida la más antigua. Estaban escritas en francés y se han traducido al español manteniendo el sentido íntegro.</p>
-    <p><strong>No se publican precios de carta</strong> porque no hay ninguna carta pública con importes verificables. <strong>No se usan fotografías del local:</strong> todo el fondo está dibujado con código.</p>
+    <p><strong>Las imágenes son de ambiente y están generadas para esta propuesta.</strong> No son fotografías del local ni de sus platos: se han hecho para enseñar cómo quedaría la página, y al contratar se sustituyen por fotos vuestras.</p>
+    <p><strong>No se publican precios de carta</strong> porque no hay ninguna carta pública con importes verificables.</p>
   </div>
 </footer>
 

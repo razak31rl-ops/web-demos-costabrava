@@ -99,6 +99,21 @@ h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.7rem,4.2vw,2.9rem)
 .faq details[open] summary::after{transform:rotate(45deg)}
 .faq p{margin:0 0 1.4rem;color:var(--marino-tenue);max-width:60ch}
 
+/* imagenes */
+.banda-img{position:relative;z-index:1;margin-top:clamp(2.6rem,6vw,4rem);width:100%;overflow:hidden}
+.banda-img img{width:100%;aspect-ratio:16/9;max-height:64vh;object-fit:cover;display:block}
+.banda-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,transparent 60%,var(--arena) 100%);pointer-events:none}
+.foto-card{padding:0!important;overflow:hidden}
+.foto-card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.foto-card .txt{padding:1.5rem 1.5rem 1.7rem}
+.foto-card .etq{z-index:2}
+.galeria{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2.6rem}
+.galeria figure{margin:0;overflow:hidden;border-radius:10px;position:relative}
+.galeria img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.galeria figure:hover img{transform:scale(1.04)}
+.galeria figcaption{margin-top:.75rem;font-size:.88rem;opacity:.72}
+@media(prefers-reduced-motion:reduce){.galeria img{transition:none}.galeria figure:hover img{transform:none}}
+
 footer{position:relative;z-index:1;border-top:1px solid var(--linea);padding:2.6rem 0 3.4rem;font-size:.82rem;color:var(--marino-tenue)}
 footer p{margin:.5rem 0;max-width:72ch}
 
@@ -145,6 +160,9 @@ footer p{margin:.5rem 0;max-width:72ch}
       <div class="cifra"><span class="n">23:00</span><span class="t">cerramos</span></div>
     </div>
   </div>
+  <div class="banda-img rv">
+    <img src="assets/playa.webp" width="1920" height="1080" alt="Terraza de restaurante a pie de playa con sombrillas y el mar detrás" loading="eager" decoding="async">
+  </div>
 </header>
 
 <section id="casa">
@@ -173,6 +191,11 @@ footer p{margin:.5rem 0;max-width:72ch}
       <div class="sabor rv">Patatas bravas</div>
       <div class="sabor rv"><b>Crema catalana</b></div>
       <div class="sabor rv">Sangría</div>
+    </div>
+    <div class="galeria">
+      <figure class="rv"><img src="assets/arros-negre.webp" width="1000" height="750" alt="Arròs negre con calamar, gambas y alioli" loading="lazy" decoding="async"><figcaption>Arròs negre</figcaption></figure>
+      <figure class="rv"><img src="assets/arros-caldoso.webp" width="1000" height="750" alt="Arròs caldoso de marisco en cazuela de barro" loading="lazy" decoding="async"><figcaption>Arròs caldoso</figcaption></figure>
+      <figure class="rv"><img src="assets/crema.webp" width="1000" height="750" alt="Crema catalana con la costra de azúcar caramelizada" loading="lazy" decoding="async"><figcaption>Crema catalana</figcaption></figure>
     </div>
   </div>
 </section>
@@ -266,7 +289,8 @@ footer p{margin:.5rem 0;max-width:72ch}
     <p><strong>Esto es una propuesta de página web, no la web oficial de La Caravel·la.</strong></p>
     <p>Valoración, número de opiniones, temas más citados, platos populares, dirección, código Plus, teléfono, horario y rango de precio salen de la ficha pública de Google Maps del restaurante, consultada el 5 de septiembre de 2026.</p>
     <p><strong>Las opiniones son reales y van con su autor y su fecha.</strong> Estaban escritas en francés y se han traducido al español manteniendo el sentido íntegro.</p>
-    <p><strong>No se publican precios de carta</strong> porque no hay ninguna carta pública con importes verificables. <strong>No se usan fotografías del local:</strong> todo el fondo está dibujado con código.</p>
+    <p><strong>Las imágenes son de ambiente y están generadas para esta propuesta.</strong> No son fotografías del local ni de sus platos: se han hecho para enseñar cómo quedaría la página, y al contratar se sustituyen por fotos vuestras.</p>
+    <p><strong>No se publican precios de carta</strong> porque no hay ninguna carta pública con importes verificables.</p>
   </div>
 </footer>
 

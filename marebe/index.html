@@ -99,6 +99,21 @@ h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.7rem,4.2vw,2.8rem)
 .faq details[open] summary::after{transform:rotate(45deg)}
 .faq p{margin:0 0 1.4rem;color:var(--tinta-tenue);max-width:60ch}
 
+/* imagenes */
+.banda-img{position:relative;z-index:1;margin-top:clamp(2.6rem,6vw,4rem);width:100%;overflow:hidden}
+.banda-img img{width:100%;aspect-ratio:16/9;max-height:64vh;object-fit:cover;display:block}
+.banda-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,transparent 60%,var(--nieve) 100%);pointer-events:none}
+.foto-card{padding:0!important;overflow:hidden}
+.foto-card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.foto-card .txt{padding:1.5rem 1.5rem 1.7rem}
+.foto-card .etq{z-index:2}
+.galeria{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2.6rem}
+.galeria figure{margin:0;overflow:hidden;border-radius:10px;position:relative}
+.galeria img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.galeria figure:hover img{transform:scale(1.04)}
+.galeria figcaption{margin-top:.75rem;font-size:.88rem;opacity:.72}
+@media(prefers-reduced-motion:reduce){.galeria img{transition:none}.galeria figure:hover img{transform:none}}
+
 footer{position:relative;z-index:1;border-top:1px solid var(--linea);padding:2.6rem 0 3.4rem;font-size:.82rem;color:var(--tinta-tenue)}
 footer p{margin:.5rem 0;max-width:72ch}
 
@@ -144,6 +159,9 @@ footer p{margin:.5rem 0;max-width:72ch}
       <div class="medalla"><span class="n">20–30 €</span><span class="t">por persona</span></div>
     </div>
   </div>
+  <div class="banda-img rv">
+    <img src="assets/mesa.webp" width="1920" height="1080" alt="Mesa larga puesta junto al mar para comer en familia" loading="eager" decoding="async">
+  </div>
 </header>
 
 <section id="casa">
@@ -171,6 +189,11 @@ footer p{margin:.5rem 0;max-width:72ch}
       <div class="plato rv"><b>Escalope empanado</b><span>De los platos que más fotografía la gente.</span></div>
       <div class="plato rv"><b>Ratatouille</b><span>Verdura de la casa.</span></div>
       <div class="plato rv"><b>Patatas fritas</b><span>Guarnición de siempre.</span></div>
+    </div>
+    <div class="galeria">
+      <figure class="rv"><img src="assets/paella.webp" width="1000" height="750" alt="Paella llena con pollo, gambas y verduras" loading="lazy" decoding="async"><figcaption>La paella de la casa</figcaption></figure>
+      <figure class="rv"><img src="assets/pizza.webp" width="1000" height="750" alt="Pizza margarita recién salida del horno de leña" loading="lazy" decoding="async"><figcaption>Pizza</figcaption></figure>
+      <figure class="rv"><img src="assets/sangria.webp" width="1000" height="750" alt="Jarra de sangría con fruta y dos vasos servidos" loading="lazy" decoding="async"><figcaption>Sangría</figcaption></figure>
     </div>
   </div>
 </section>
@@ -250,7 +273,8 @@ footer p{margin:.5rem 0;max-width:72ch}
     <p><strong>Esto es una propuesta de página web, no la web oficial de Marebe.</strong></p>
     <p>Valoración, número de opiniones, temas más citados, platos populares, dirección, código Plus, teléfono, horario y rango de precio salen de la ficha pública de Google Maps del restaurante, consultada el 5 de septiembre de 2026.</p>
     <p><strong>Las opiniones y la respuesta de la casa son reales</strong> y van con su autor y su fecha. Estaban escritas en francés y se han traducido al español manteniendo el sentido íntegro.</p>
-    <p><strong>No se publican precios de carta</strong> porque no hay ninguna carta pública con importes verificables. <strong>No se usan fotografías del local:</strong> todo el fondo está dibujado con código.</p>
+    <p><strong>Las imágenes son de ambiente y están generadas para esta propuesta.</strong> No son fotografías del local ni de sus platos: se han hecho para enseñar cómo quedaría la página, y al contratar se sustituyen por fotos vuestras.</p>
+    <p><strong>No se publican precios de carta</strong> porque no hay ninguna carta pública con importes verificables.</p>
   </div>
 </footer>
 

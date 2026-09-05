@@ -100,6 +100,21 @@ h2{font-family:var(--serif);font-size:clamp(1.8rem,4.5vw,3.1rem);margin:0 0 1.3r
 .faq details[open] summary::after{transform:rotate(45deg)}
 .faq p{margin:0 0 1.4rem;color:var(--hueso-tenue);max-width:60ch}
 
+/* imagenes */
+.banda-img{position:relative;z-index:1;margin-top:clamp(2.6rem,6vw,4rem);width:100%;overflow:hidden}
+.banda-img img{width:100%;aspect-ratio:16/9;max-height:64vh;object-fit:cover;display:block}
+.banda-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,transparent 60%,var(--mar) 100%);pointer-events:none}
+.foto-card{padding:0!important;overflow:hidden}
+.foto-card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.foto-card .txt{padding:1.5rem 1.5rem 1.7rem}
+.foto-card .etq{z-index:2}
+.galeria{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2.6rem}
+.galeria figure{margin:0;overflow:hidden;border-radius:10px;position:relative}
+.galeria img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.galeria figure:hover img{transform:scale(1.04)}
+.galeria figcaption{margin-top:.75rem;font-size:.88rem;opacity:.72}
+@media(prefers-reduced-motion:reduce){.galeria img{transition:none}.galeria figure:hover img{transform:none}}
+
 footer{position:relative;z-index:1;border-top:1px solid var(--linea);padding:2.6rem 0 3.4rem;font-size:.82rem;color:var(--hueso-tenue)}
 footer p{margin:.5rem 0;max-width:72ch}
 
@@ -147,6 +162,9 @@ footer p{margin:.5rem 0;max-width:72ch}
       <div class="medalla"><span class="n">23:00</span><span class="t">cerramos</span></div>
     </div>
   </div>
+  <div class="banda-img rv">
+    <img src="assets/puerto.webp" width="1920" height="1080" alt="Barcas de pesca amarradas en el puerto al atardecer" loading="eager" decoding="async">
+  </div>
 </header>
 
 <section id="casa">
@@ -168,6 +186,10 @@ footer p{margin:.5rem 0;max-width:72ch}
       <li class="rv"><span class="num">03</span><div><h3>Marisco</h3><p>Producto del puerto de al lado, servido al momento.</p></div></li>
       <li class="rv"><span class="num">04</span><div><h3>Mejillones</h3><p>De los que aparecen una y otra vez en las fotos de los clientes.</p></div></li>
     </ol>
+    <div class="galeria">
+      <figure class="rv"><img src="assets/paella.webp" width="1000" height="750" alt="Paella marinera con langostinos, mejillones y almejas" loading="lazy" decoding="async"><figcaption>Paella marinera</figcaption></figure>
+      <figure class="rv"><img src="assets/entremes.webp" width="1000" height="750" alt="Entremès de peix con gambas, almejas, pulpo y vieira" loading="lazy" decoding="async"><figcaption>Entremès de peix</figcaption></figure>
+    </div>
   </div>
 </section>
 
@@ -203,6 +225,10 @@ footer p{margin:.5rem 0;max-width:72ch}
     </div>
   </div>
 </section>
+
+<div class="banda-img rv" style="margin-top:0">
+  <img src="assets/terraza.webp" width="1920" height="1080" alt="Mesas de la terraza junto al muelle del puerto" loading="lazy" decoding="async">
+</div>
 
 <section id="llegar">
   <div class="wrap dos">
@@ -247,7 +273,8 @@ footer p{margin:.5rem 0;max-width:72ch}
     <p><strong>Esto es una propuesta de página web, no la web oficial de La Clota.</strong></p>
     <p>Valoración, número de opiniones, temas más citados, platos populares, dirección, código Plus, teléfono, horario y rango de precio salen de la ficha pública de Google Maps del restaurante, consultada el 5 de septiembre de 2026.</p>
     <p><strong>La opinión citada es real</strong> y va con su autor. Estaba escrita en francés y se ha traducido al español manteniendo el sentido íntegro. Se cita solo una porque es la única reciente de valoración alta que la ficha muestra completa.</p>
-    <p><strong>No se publican precios de carta</strong> porque no hay ninguna carta pública con importes verificables. <strong>No se usan fotografías del local:</strong> todo el fondo está dibujado con código.</p>
+    <p><strong>Las imágenes son de ambiente y están generadas para esta propuesta.</strong> No son fotografías del local ni de sus platos: se han hecho para enseñar cómo quedaría la página, y al contratar se sustituyen por fotos vuestras.</p>
+    <p><strong>No se publican precios de carta</strong> porque no hay ninguna carta pública con importes verificables.</p>
   </div>
 </footer>
 
