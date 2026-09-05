@@ -54,8 +54,17 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,4.4vw,2.9re
 .texto{max-width:60ch;color:var(--luz-tenue);font-size:1.02rem;font-weight:300}
 .texto strong{color:var(--luz);font-weight:500}
 
-.reloj{background:linear-gradient(135deg,var(--noche-2),var(--noche-3));border:1px solid var(--linea);border-radius:18px;padding:clamp(2.2rem,5vw,3.6rem);margin-top:2.6rem;text-align:center;position:relative;overflow:hidden}
+.reloj{background:linear-gradient(180deg,rgba(10,7,20,.78),rgba(10,7,20,.93)),url("assets/terraza.webp") center/cover no-repeat;border:1px solid var(--linea);border-radius:18px;padding:clamp(3rem,7vw,5rem) clamp(2.2rem,5vw,3.6rem);margin-top:2.6rem;text-align:center;position:relative;overflow:hidden}
 .reloj::after{content:"";position:absolute;inset:-40% -10% auto;height:80%;background:radial-gradient(ellipse at center,rgba(79,227,214,.18),transparent 70%);pointer-events:none}
+
+/* imagenes */
+.banda-img{position:relative;z-index:1;margin-top:clamp(2.6rem,6vw,4rem);width:100%;overflow:hidden}
+.banda-img img{width:100%;aspect-ratio:16/9;max-height:64vh;object-fit:cover;display:block}
+.banda-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,7,20,.5) 0%,rgba(10,7,20,0) 26%,rgba(10,7,20,0) 62%,var(--noche) 100%);pointer-events:none}
+.plato.foto{padding:0;overflow:hidden}
+.plato.foto img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.plato.foto .txt{padding:1.4rem 1.5rem 1.6rem}
+.plato.foto .etq{top:.9rem;right:.9rem;z-index:2}
 .reloj .h{font-family:var(--display);font-weight:800;font-size:clamp(3rem,14vw,7rem);line-height:1;letter-spacing:-.05em;background:linear-gradient(96deg,var(--cian),var(--magenta));-webkit-background-clip:text;background-clip:text;color:transparent;position:relative}
 .reloj p{margin:1.2rem auto 0;max-width:44ch;color:var(--luz-tenue);position:relative;font-weight:300}
 
@@ -150,6 +159,9 @@ footer p{margin:.5rem 0;max-width:72ch}
       <div><span class="n">02:00</span><span class="t">cerramos</span></div>
     </div>
   </div>
+  <div class="banda-img rv">
+    <img src="assets/atardecer.webp" width="1920" height="1080" alt="Puesta de sol sobre el mar vista desde una terraza frente al agua" loading="eager" decoding="async">
+  </div>
 </header>
 
 <section id="casa">
@@ -172,9 +184,20 @@ footer p{margin:.5rem 0;max-width:72ch}
     <p class="eyebrow rv">Cocina y barra</p>
     <h2 class="rv">Lo que se pide</h2>
     <div class="platos">
-      <div class="plato rv"><span class="etq">Popular</span><b>Tapas</b><span>Marcadas como lo más popular de la casa. 22 menciones.</span></div>
-      <div class="plato rv"><span class="etq">Popular</span><b>Mejillones a la marinera</b><span>El otro plato que Google señala como popular.</span></div>
-      <div class="plato rv"><b>Mojito</b><span>Hay quien lo describe como una maravilla.</span></div>
+      <div class="plato foto rv">
+        <span class="etq">Popular</span>
+        <img src="assets/tapas.webp" width="900" height="676" alt="Tabla de tapas variadas servidas en cazuelas de barro" loading="lazy" decoding="async">
+        <div class="txt"><b>Tapas</b><span>Marcadas como lo más popular de la casa. 22 menciones.</span></div>
+      </div>
+      <div class="plato foto rv">
+        <span class="etq">Popular</span>
+        <img src="assets/mejillones.webp" width="900" height="676" alt="Plato de mejillones a la marinera con perejil, limón y pan" loading="lazy" decoding="async">
+        <div class="txt"><b>Mejillones a la marinera</b><span>El otro plato que Google señala como popular.</span></div>
+      </div>
+      <div class="plato foto rv">
+        <img src="assets/mojito.webp" width="1100" height="826" alt="Mojito con hierbabuena en una terraza de noche frente al mar" loading="lazy" decoding="async">
+        <div class="txt"><b>Mojito</b><span>Hay quien lo describe como una maravilla.</span></div>
+      </div>
       <div class="plato rv"><b>Tartar de salmón</b><span>De los platos que la gente nombra por su nombre.</span></div>
       <div class="plato rv"><b>Cerveza</b><span>Esto también es un bar, y se nota en las fotos.</span></div>
     </div>
@@ -254,7 +277,8 @@ footer p{margin:.5rem 0;max-width:72ch}
     <p><strong>Esto es una propuesta de página web, no la web oficial de Medusa Lounge Bar i Àpats.</strong></p>
     <p>Valoración, número de opiniones, temas más citados, platos populares, dirección, código Plus, teléfono, horario, servicios y rango de precio salen de la ficha pública de Google Maps del local, consultada el 5 de septiembre de 2026.</p>
     <p><strong>Las opiniones son reales</strong> y van con su autor y su fecha. Estaban escritas en francés y se han traducido al español manteniendo el sentido íntegro.</p>
-    <p><strong>No se publican precios de carta</strong> porque no hay ninguna carta pública con importes verificables. <strong>No se usan fotografías del local:</strong> todo el fondo está dibujado con código.</p>
+    <p><strong>Las imágenes son de ambiente y están generadas para esta propuesta.</strong> No son fotografías del local ni de sus platos: se han hecho para enseñar cómo quedaría la página, y al contratar se sustituyen por fotos vuestras.</p>
+    <p><strong>No se publican precios de carta</strong> porque no hay ninguna carta pública con importes verificables.</p>
   </div>
 </footer>
 
