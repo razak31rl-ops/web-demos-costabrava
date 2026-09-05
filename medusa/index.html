@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Medusa Lounge Bar i Àpats · L'Escala</title>
+<meta name="description" content="Lounge bar y cocina en el Carrer del Cargol, L'Escala. Abierto hasta las dos de la madrugada.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Sora:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noche:#0a0714; --noche-2:#120d22; --noche-3:#1b1433;
+  --cian:#4fe3d6; --cian-osc:#1fb5a8;
+  --magenta:#c56bff; --magenta-claro:#e0a9ff;
+  --luz:#ece8f5; --luz-tenue:rgba(236,232,245,.6);
+  --linea:rgba(79,227,214,.22);
+  --display:'Unbounded',system-ui,sans-serif;
+  --sans:'Sora',system-ui,-apple-system,Segoe UI,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--noche);color:var(--luz);font-family:var(--sans);font-weight:200;line-height:1.66;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%}
+.wrap{width:min(1120px,92vw);margin-inline:auto}
+
+.fondo{position:fixed;inset:0;z-index:0;pointer-events:none}
+.fondo svg{width:100%;height:100%}
+
+nav{position:sticky;top:0;z-index:20;background:rgba(10,7,20,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--linea)}
+.nav-in{display:flex;align-items:center;gap:1.4rem;padding:.85rem 0}
+.marca{font-family:var(--display);font-weight:600;font-size:1.02rem;letter-spacing:-.01em;white-space:nowrap}
+.marca span{color:var(--cian)}
+.nav-links{display:flex;gap:1.5rem;margin-left:auto;font-size:.8rem;letter-spacing:.09em;text-transform:uppercase;font-weight:400}
+.nav-links a{text-decoration:none;color:var(--luz-tenue);transition:color .25s}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--cian)}
+.btn-tel{border:1px solid var(--cian);color:var(--cian);padding:.52rem 1.15rem;border-radius:999px;text-decoration:none;font-size:.8rem;font-weight:400;white-space:nowrap;transition:.25s}
+.btn-tel:hover,.btn-tel:focus-visible{background:var(--cian);color:var(--noche);box-shadow:0 0 24px rgba(79,227,214,.45)}
+@media(max-width:860px){.nav-links{display:none}.btn-tel{margin-left:auto}}
+
+header{position:relative;z-index:1;padding:clamp(4rem,11vw,7.5rem) 0 clamp(2.5rem,6vw,4rem)}
+.chip{display:inline-flex;align-items:center;gap:.6rem;border:1px solid var(--linea);border-radius:999px;padding:.44rem 1.1rem;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cian);margin-bottom:1.8rem}
+h1{font-family:var(--display);font-weight:800;margin:0;font-size:clamp(2.6rem,10vw,6.4rem);line-height:.94;letter-spacing:-.035em}
+h1 span{background:linear-gradient(96deg,var(--cian),var(--magenta));-webkit-background-clip:text;background-clip:text;color:transparent}
+.bajada{font-size:clamp(1.02rem,2vw,1.3rem);max-width:36ch;margin:1.9rem 0 0;color:var(--luz-tenue);font-weight:300}
+.tira{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;margin-top:3rem;background:var(--linea);border:1px solid var(--linea);border-radius:12px;overflow:hidden}
+.tira div{background:var(--noche-2);padding:1.3rem 1.3rem}
+.tira .n{font-family:var(--display);font-weight:600;font-size:clamp(1.35rem,3vw,1.95rem);color:var(--cian);display:block;line-height:1.1;letter-spacing:-.02em}
+.tira .t{font-size:.71rem;letter-spacing:.12em;text-transform:uppercase;color:var(--luz-tenue)}
+
+section{position:relative;z-index:1;padding:clamp(3rem,7vw,5.4rem) 0}
+.eyebrow{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--magenta);margin:0 0 1rem}
+h2{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,4.4vw,2.9rem);margin:0 0 1.3rem;line-height:1.12;letter-spacing:-.03em}
+.texto{max-width:60ch;color:var(--luz-tenue);font-size:1.02rem;font-weight:300}
+.texto strong{color:var(--luz);font-weight:500}
+
+.reloj{background:linear-gradient(135deg,var(--noche-2),var(--noche-3));border:1px solid var(--linea);border-radius:18px;padding:clamp(2.2rem,5vw,3.6rem);margin-top:2.6rem;text-align:center;position:relative;overflow:hidden}
+.reloj::after{content:"";position:absolute;inset:-40% -10% auto;height:80%;background:radial-gradient(ellipse at center,rgba(79,227,214,.18),transparent 70%);pointer-events:none}
+.reloj .h{font-family:var(--display);font-weight:800;font-size:clamp(3rem,14vw,7rem);line-height:1;letter-spacing:-.05em;background:linear-gradient(96deg,var(--cian),var(--magenta));-webkit-background-clip:text;background-clip:text;color:transparent;position:relative}
+.reloj p{margin:1.2rem auto 0;max-width:42ch;color:var(--luz-tenue);position:relative;font-weight:300}
+
+.cifras{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.2rem;margin-top:2.4rem}
+.cifra{background:var(--noche-2);border:1px solid var(--linea);border-radius:14px;padding:1.8rem 1.6rem;transition:border-color .3s,transform .3s}
+.cifra:hover{border-color:var(--cian);transform:translateY(-4px)}
+.cifra .n{font-family:var(--display);font-weight:600;font-size:2rem;color:var(--cian);display:block;line-height:1.05;letter-spacing:-.03em}
+.cifra .t{font-size:.78rem;color:var(--luz-tenue);margin-top:.35rem;display:block}
+
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+@media(max-width:800px){.dos{grid-template-columns:1fr;gap:2.2rem}}
+.ficha{background:var(--noche-2);border:1px solid var(--linea);border-radius:16px;padding:2rem 1.9rem}
+.ficha dt{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--magenta);margin-top:1.5rem}
+.ficha dt:first-of-type{margin-top:0}
+.ficha dd{margin:.3rem 0 0;font-size:1.02rem;font-weight:300}
+.ficha a{color:var(--luz);text-underline-offset:4px}
+.cta{display:inline-block;margin-top:2.1rem;background:linear-gradient(96deg,var(--cian),var(--magenta));color:var(--noche);padding:.95rem 2.1rem;border-radius:999px;text-decoration:none;font-weight:500;font-size:.95rem;transition:.25s}
+.cta:hover,.cta:focus-visible{transform:translateY(-2px);box-shadow:0 12px 34px rgba(79,227,214,.3)}
+
+footer{position:relative;z-index:1;border-top:1px solid var(--linea);padding:2.6rem 0 3.4rem;font-size:.82rem;color:var(--luz-tenue)}
+footer p{margin:.5rem 0;max-width:72ch}
+
+.rv{opacity:1}
+.js .rv{opacity:0;transform:translateY(22px)}
+.js .rv.on{opacity:1;transform:none;transition:opacity .75s ease,transform .75s cubic-bezier(.22,1,.36,1)}
+@media(prefers-reduced-motion:reduce){.js .rv,.js .rv.on{opacity:1!important;transform:none!important;transition:none!important}html{scroll-behavior:auto}}
+:focus-visible{outline:2px solid var(--cian);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<div class="fondo" aria-hidden="true">
+  <svg viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <radialGradient id="n1"><stop offset="0" stop-color="#4fe3d6" stop-opacity=".22"/><stop offset="1" stop-color="#4fe3d6" stop-opacity="0"/></radialGradient>
+      <radialGradient id="n2"><stop offset="0" stop-color="#c56bff" stop-opacity=".22"/><stop offset="1" stop-color="#c56bff" stop-opacity="0"/></radialGradient>
+    </defs>
+    <circle cx="200" cy="180" r="330" fill="url(#n1)"/>
+    <circle cx="1000" cy="720" r="380" fill="url(#n2)"/>
+    <g fill="none" stroke="#4fe3d6" stroke-opacity=".12" stroke-width="1">
+      <path d="M-50 480 q 160 -90 320 0 t 320 0 t 320 0 t 320 0"/>
+      <path d="M-50 540 q 160 -90 320 0 t 320 0 t 320 0 t 320 0"/>
+      <path d="M-50 600 q 160 -90 320 0 t 320 0 t 320 0 t 320 0"/>
+    </g>
+  </svg>
+</div>
+
+<nav>
+  <div class="wrap nav-in">
+    <div class="marca">Medusa <span>Lounge</span></div>
+    <div class="nav-links">
+      <a href="#casa">La casa</a>
+      <a href="#noche">La noche</a>
+      <a href="#opiniones">Opiniones</a>
+      <a href="#visitar">Visitarnos</a>
+    </div>
+    <a class="btn-tel" href="tel:+34872984209">872 98 42 09</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <div class="chip rv">Carrer del Cargol · L'Escala</div>
+    <h1 class="rv">Lounge bar<br><span>i àpats</span></h1>
+    <p class="bajada rv">Copas y cocina en el Carrer del Cargol. De los pocos sitios de L'Escala donde la noche no se acaba a las once.</p>
+    <div class="tira rv">
+      <div><span class="n">4,2</span><span class="t">sobre 5 en Google</span></div>
+      <div><span class="n">992</span><span class="t">opiniones</span></div>
+      <div><span class="n">20–30 €</span><span class="t">por persona</span></div>
+      <div><span class="n">02:00</span><span class="t">cerramos</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="casa">
+  <div class="wrap">
+    <p class="eyebrow rv">La casa</p>
+    <h2 class="rv">Bar y cocina,<br>en el mismo sitio</h2>
+    <p class="texto rv">Medusa está en el <strong>Carrer del Cargol, 3A</strong>, en L'Escala. Es lounge bar y es cocina — de ahí lo de <em>bar i àpats</em>: se puede venir a tomar algo o a cenar, y quedarse.</p>
+    <p class="texto rv" style="margin-top:1.1rem"><strong>992 personas</strong> han dejado su opinión en Google, con una media de <strong>4,2 sobre 5</strong>.</p>
+  </div>
+</section>
+
+<section id="noche">
+  <div class="wrap">
+    <p class="eyebrow rv">La noche</p>
+    <h2 class="rv">Hasta las dos</h2>
+    <div class="reloj rv">
+      <div class="h">02:00</div>
+      <p>Cuando el resto del pueblo ya ha cerrado, aquí todavía se sirve. Y eso, ahora mismo, no lo sabe nadie que no haya pasado por delante.</p>
+    </div>
+  </div>
+</section>
+
+<section id="opiniones">
+  <div class="wrap">
+    <p class="eyebrow rv">Opiniones</p>
+    <h2 class="rv">Los números</h2>
+    <div class="cifras">
+      <div class="cifra rv"><span class="n">4,2</span><span class="t">valoración media sobre 5</span></div>
+      <div class="cifra rv"><span class="n">992</span><span class="t">opiniones publicadas</span></div>
+      <div class="cifra rv"><span class="n">156</span><span class="t">confirman el rango de precio</span></div>
+      <div class="cifra rv"><span class="n">02:00</span><span class="t">hora de cierre</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="visitar">
+  <div class="wrap dos">
+    <div class="rv">
+      <p class="eyebrow">Visitarnos</p>
+      <h2>Dónde estamos</h2>
+      <p class="texto">En el Carrer del Cargol, en L'Escala. En sala y a domicilio.</p>
+      <a class="cta" href="tel:+34872984209">Llamar ahora</a>
+    </div>
+    <dl class="ficha rv">
+      <dt>Dirección</dt>
+      <dd>Carrer del Cargol, 3A<br>17130 L'Escala, Girona</dd>
+      <dt>Teléfono</dt>
+      <dd><a href="tel:+34872984209">872 98 42 09</a></dd>
+      <dt>Horario</dt>
+      <dd>Abierto hasta las 02:00</dd>
+      <dt>Servicios</dt>
+      <dd>En sala · A domicilio</dd>
+    </dl>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Esto es una propuesta de página web, no la web oficial de Medusa Lounge Bar i Àpats.</strong></p>
+    <p>Valoración, número de opiniones, dirección, teléfono, horario, servicios y rango de precio salen de la ficha pública de Google Maps del local, consultada el 5 de septiembre de 2026.</p>
+    <p><strong>No se publican precios de carta</strong> porque no hay ninguna carta pública con importes verificables. <strong>No se usan fotografías del local:</strong> todo el fondo está dibujado con código.</p>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var items=[].slice.call(document.querySelectorAll('.rv'));
+  function todo(){items.forEach(function(el){el.classList.add('on');});}
+  if(!('IntersectionObserver' in window)){todo();return;}
+  var io=new IntersectionObserver(function(es){var n=0;es.forEach(function(e){if(e.isIntersecting){var el=e.target,i=n++;setTimeout(function(){el.classList.add('on');},Math.min(i,6)*66);io.unobserve(el);}});},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  items.forEach(function(el){io.observe(el);});
+  setTimeout(todo,3000);
+})();
+</script>
+</body>
+</html>
