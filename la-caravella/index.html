@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cafè Restaurant La Caravel·la · L'Escala</title>
-<meta name="description" content="Cafè restaurant a pie de playa en L'Escala. Arròs caldoso, paella, arròs negre y crema catalana en el Carrer la Platja.">
+<meta name="description" content="Cafè restaurant a pie de playa en L'Escala. Arròs caldoso, arròs negre, paella y crema catalana en el Carrer la Platja.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -19,27 +19,23 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{
-  margin:0;background:var(--arena);color:var(--marino);
-  font-family:var(--sans);font-weight:300;line-height:1.68;
-  -webkit-font-smoothing:antialiased;overflow-x:hidden;
-}
+body{margin:0;background:var(--arena);color:var(--marino);font-family:var(--sans);font-weight:300;line-height:1.68;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{max-width:100%}
 .wrap{width:min(1140px,92vw);margin-inline:auto}
 
 .fondo{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55}
 .fondo svg{width:100%;height:100%}
 
-nav{position:sticky;top:0;z-index:20;background:rgba(246,241,231,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--linea)}
-.nav-in{display:flex;align-items:center;gap:1.4rem;padding:.9rem 0}
+nav{position:sticky;top:0;z-index:20;background:rgba(246,241,231,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--linea)}
+.nav-in{display:flex;align-items:center;gap:1.3rem;padding:.9rem 0}
 .marca{font-family:var(--serif);font-size:1.02rem;letter-spacing:.02em;white-space:nowrap}
 .marca b{color:var(--vela);font-weight:700}
-.nav-links{display:flex;gap:1.5rem;margin-left:auto;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.nav-links{display:flex;gap:1.3rem;margin-left:auto;font-size:.79rem;letter-spacing:.09em;text-transform:uppercase;font-weight:500}
 .nav-links a{text-decoration:none;color:var(--marino-tenue);transition:color .25s}
 .nav-links a:hover,.nav-links a:focus-visible{color:var(--vela)}
-.btn-tel{background:var(--marino);color:var(--papel);padding:.55rem 1.15rem;border-radius:4px;text-decoration:none;font-size:.82rem;font-weight:500;letter-spacing:.03em;white-space:nowrap;transition:.25s}
+.btn-tel{background:var(--marino);color:var(--papel);padding:.55rem 1.15rem;border-radius:4px;text-decoration:none;font-size:.82rem;font-weight:500;white-space:nowrap;transition:.25s}
 .btn-tel:hover,.btn-tel:focus-visible{background:var(--vela)}
-@media(max-width:840px){.nav-links{display:none}.btn-tel{margin-left:auto}}
+@media(max-width:980px){.nav-links{display:none}.btn-tel{margin-left:auto}}
 
 header{position:relative;z-index:1;padding:clamp(3.5rem,10vw,7rem) 0 clamp(2.5rem,6vw,4rem)}
 .kicker{font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;color:var(--vela);font-weight:600;margin:0 0 1.4rem}
@@ -52,8 +48,9 @@ h1 i{font-style:italic;color:var(--marino-2)}
 
 section{position:relative;z-index:1;padding:clamp(3rem,7vw,5.5rem) 0}
 .franja{background:var(--marino);color:var(--arena)}
-.franja .texto,.franja .kicker{color:rgba(246,241,231,.78)}
+.franja .texto{color:rgba(246,241,231,.78)}
 .franja .kicker{color:#f0b429}
+.franja h2{color:var(--arena)}
 h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.7rem,4.2vw,2.9rem);margin:0 0 1.3rem;line-height:1.15}
 .texto{max-width:62ch;color:var(--marino-tenue);font-size:1.02rem}
 .texto strong{color:var(--marino);font-weight:600}
@@ -63,6 +60,16 @@ h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.7rem,4.2vw,2.9rem)
 .sabor{border:1px solid rgba(246,241,231,.3);border-radius:999px;padding:.6rem 1.25rem;font-size:.95rem;transition:.25s}
 .sabor:hover{background:rgba(246,241,231,.12);border-color:rgba(246,241,231,.6)}
 .sabor b{font-weight:600;color:#f0b429}
+.sabor em{font-style:normal;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:#f0b429;margin-left:.5rem}
+
+/* reseñas */
+.resenas{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem;margin-top:2.6rem}
+.resena{background:var(--papel);border:1px solid var(--linea);border-radius:6px;padding:1.9rem 1.7rem;display:flex;flex-direction:column;box-shadow:0 10px 34px rgba(18,58,92,.06)}
+.resena .est{color:var(--oro);letter-spacing:.15em;font-size:.92rem;margin-bottom:.9rem}
+.resena p{margin:0 0 1.4rem;font-size:1rem;font-style:italic;line-height:1.6}
+.resena .quien{margin-top:auto;border-top:1px solid var(--linea);padding-top:1rem}
+.resena .quien b{display:block;font-weight:600;font-size:.94rem}
+.resena .quien span{font-size:.78rem;color:var(--marino-tenue)}
 
 .malla{display:grid;grid-template-columns:1.15fr 1fr;gap:3.2rem;align-items:start}
 @media(max-width:800px){.malla{grid-template-columns:1fr;gap:2.2rem}}
@@ -80,6 +87,17 @@ h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.7rem,4.2vw,2.9rem)
 .tarjeta a{color:var(--marino);text-underline-offset:4px}
 .cta{display:inline-block;margin-top:1.9rem;background:var(--vela);color:#fff;padding:.9rem 2rem;border-radius:4px;text-decoration:none;font-weight:600;font-size:.95rem;transition:.25s}
 .cta:hover,.cta:focus-visible{background:var(--marino);transform:translateY(-2px)}
+.cta.hueca{background:transparent;border:1px solid var(--marino);color:var(--marino);margin-left:.7rem}
+.cta.hueca:hover{background:var(--marino);color:#fff}
+@media(max-width:520px){.cta.hueca{margin-left:0;margin-top:.7rem}}
+
+.faq{margin-top:2.4rem;border-top:1px solid var(--linea)}
+.faq details{border-bottom:1px solid var(--linea)}
+.faq summary{cursor:pointer;padding:1.3rem 2.5rem 1.3rem 0;font-family:var(--serif);font-size:1.1rem;position:relative;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:.4rem;top:1.05rem;font-size:1.5rem;color:var(--vela);transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{margin:0 0 1.4rem;color:var(--marino-tenue);max-width:60ch}
 
 footer{position:relative;z-index:1;border-top:1px solid var(--linea);padding:2.6rem 0 3.4rem;font-size:.82rem;color:var(--marino-tenue)}
 footer p{margin:.5rem 0;max-width:72ch}
@@ -87,10 +105,7 @@ footer p{margin:.5rem 0;max-width:72ch}
 .rv{opacity:1}
 .js .rv{opacity:0;transform:translateY(20px)}
 .js .rv.on{opacity:1;transform:none;transition:opacity .75s ease,transform .75s cubic-bezier(.22,1,.36,1)}
-@media(prefers-reduced-motion:reduce){
-  .js .rv,.js .rv.on{opacity:1!important;transform:none!important;transition:none!important}
-  .pista i{transition:none} html{scroll-behavior:auto}
-}
+@media(prefers-reduced-motion:reduce){.js .rv,.js .rv.on{opacity:1!important;transform:none!important;transition:none!important}.pista i{transition:none}html{scroll-behavior:auto}}
 :focus-visible{outline:2px solid var(--vela);outline-offset:3px}
 </style>
 </head>
@@ -99,15 +114,11 @@ footer p{margin:.5rem 0;max-width:72ch}
 <div class="fondo" aria-hidden="true">
   <svg viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
     <g fill="none" stroke="#123a5c" stroke-opacity=".13" stroke-width="1.2">
-      <path d="M-50 640 q 150 -60 300 0 t 300 0 t 300 0 t 300 0"/>
-      <path d="M-50 690 q 150 -60 300 0 t 300 0 t 300 0 t 300 0"/>
-      <path d="M-50 740 q 150 -60 300 0 t 300 0 t 300 0 t 300 0"/>
-      <path d="M-50 790 q 150 -60 300 0 t 300 0 t 300 0 t 300 0"/>
+      <path d="M-50 640 q 150 -60 300 0 t 300 0 t 300 0 t 300 0"/><path d="M-50 690 q 150 -60 300 0 t 300 0 t 300 0 t 300 0"/>
+      <path d="M-50 740 q 150 -60 300 0 t 300 0 t 300 0 t 300 0"/><path d="M-50 790 q 150 -60 300 0 t 300 0 t 300 0 t 300 0"/>
       <path d="M-50 840 q 150 -60 300 0 t 300 0 t 300 0 t 300 0"/>
     </g>
-    <g fill="none" stroke="#c8442f" stroke-opacity=".16" stroke-width="1.4">
-      <path d="M1000 120 l 0 380 M1000 150 q 130 90 0 190 M1000 160 q -120 80 0 170"/>
-    </g>
+    <g fill="none" stroke="#c8442f" stroke-opacity=".16" stroke-width="1.4"><path d="M1000 120 l 0 380 M1000 150 q 130 90 0 190 M1000 160 q -120 80 0 170"/></g>
     <circle cx="210" cy="200" r="150" fill="#b8863b" fill-opacity=".07"/>
   </svg>
 </div>
@@ -116,10 +127,7 @@ footer p{margin:.5rem 0;max-width:72ch}
   <div class="wrap nav-in">
     <div class="marca">Cafè Restaurant <b>La Caravel·la</b></div>
     <div class="nav-links">
-      <a href="#casa">La casa</a>
-      <a href="#cocina">Cocina</a>
-      <a href="#opiniones">Opiniones</a>
-      <a href="#visitar">Visitarnos</a>
+      <a href="#casa">La casa</a><a href="#cocina">Cocina</a><a href="#opiniones">Opiniones</a><a href="#llegar">Cómo llegar</a><a href="#faq">Preguntas</a>
     </div>
     <a class="btn-tel" href="tel:+34972774043">972 77 40 43</a>
   </div>
@@ -144,19 +152,21 @@ footer p{margin:.5rem 0;max-width:72ch}
     <p class="kicker rv">La casa</p>
     <h2 class="rv">Mil ochocientas setenta y tres personas<br>han escrito sobre esta terraza</h2>
     <p class="texto rv">La Caravel·la está en el <strong>Carrer la Platja</strong>, a pie de arena. De todo lo que la gente cuenta, hay tres cosas que se repiten por encima del resto: la <strong>paella</strong>, que aparece en 94 opiniones; la <strong>playa</strong>, en 71; y la <strong>terraza</strong>, en 28.</p>
-    <p class="texto rv" style="margin-top:1.1rem">Es una casa de arroces. Y de las que la gente vuelve a nombrar año tras año.</p>
+    <p class="texto rv" style="margin-top:1.1rem">Es una casa de arroces. Y de las que la gente vuelve a nombrar año tras año — hay quien escribe que ya ha venido varias veces y que nunca se ha ido decepcionado.</p>
   </div>
 </section>
 
 <section id="cocina" class="franja">
   <div class="wrap">
     <p class="kicker rv">Cocina</p>
-    <h2 class="rv" style="color:var(--arena)">De la olla a la mesa</h2>
-    <p class="texto rv">Los platos que la gente nombra cuando habla de esta casa.</p>
+    <h2 class="rv">De la olla a la mesa</h2>
+    <p class="texto rv">Los platos que la gente nombra cuando habla de esta casa. Los dos marcados son los que Google señala como platos populares.</p>
     <div class="sabores">
-      <div class="sabor rv"><b>Arròs caldoso</b></div>
+      <div class="sabor rv"><b>Arròs caldoso</b><em>Popular</em></div>
+      <div class="sabor rv"><b>Tarta de queso</b><em>Popular</em></div>
       <div class="sabor rv"><b>Paella</b></div>
       <div class="sabor rv"><b>Arròs negre</b></div>
+      <div class="sabor rv">Brocheta de rape y sepia</div>
       <div class="sabor rv">Marisco</div>
       <div class="sabor rv">Mejillones</div>
       <div class="sabor rv">Arancini</div>
@@ -168,9 +178,33 @@ footer p{margin:.5rem 0;max-width:72ch}
 </section>
 
 <section id="opiniones">
+  <div class="wrap">
+    <p class="kicker rv">Lo que dicen</p>
+    <h2 class="rv">Escrito por quien ha venido</h2>
+    <div class="resenas">
+      <div class="resena rv">
+        <div class="est" aria-hidden="true">★★★★★</div>
+        <p>Servicio rápido, platos excelentes, personal muy amable. Ya hemos venido varias veces y nunca nos hemos ido decepcionados: aperitivo, entrante, plato y postre.</p>
+        <div class="quien"><b>Christian Bouche</b><span>Local Guide · 29 opiniones · hace 4 meses</span></div>
+      </div>
+      <div class="resena rv">
+        <div class="est" aria-hidden="true">★★★★★</div>
+        <p>Encontramos refugio en una noche de lluvia. El servicio de Rebecca fue estupendo, los platos deliciosos —arroz negro y brocheta de rape y sepia— y un ambiente alegre.</p>
+        <div class="quien"><b>Florence Perucaud</b><span>Local Guide · 13 opiniones · hace 3 meses</span></div>
+      </div>
+      <div class="resena rv">
+        <div class="est" aria-hidden="true">★★★★★</div>
+        <p>Sitio estratégico, perfecto frente al mar. Ideal para comer y relajarse. Platos excelentes de la entrada al postre. Lo recomiendo al 200 %.</p>
+        <div class="quien"><b>Ancatherine Boisdenghien</b><span>4 opiniones · hace 4 meses</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="numeros">
   <div class="wrap malla">
     <div class="rv">
-      <p class="kicker">Opiniones</p>
+      <p class="kicker">Los números</p>
       <h2>Lo que más se repite</h2>
       <p class="texto">De las 1.873 opiniones publicadas en Google, estos son los temas que más veces aparecen escritos.</p>
       <div class="temas" style="margin-top:1.8rem">
@@ -191,17 +225,20 @@ footer p{margin:.5rem 0;max-width:72ch}
   </div>
 </section>
 
-<section id="visitar">
+<section id="llegar">
   <div class="wrap malla">
     <div class="rv">
-      <p class="kicker">Visitarnos</p>
+      <p class="kicker">Cómo llegar</p>
       <h2>Dónde y cuándo</h2>
       <p class="texto">En primera línea de playa, en el Carrer la Platja. Reservas y pedidos por teléfono.</p>
       <a class="cta" href="tel:+34972774043">Llamar ahora</a>
+      <a class="cta hueca" href="https://www.google.com/maps/search/?api=1&amp;query=La%20Caravel%C2%B7la%2C%20Carrer%20la%20Platja%201%2C%20L%27Escala" target="_blank" rel="noopener">Abrir en Maps</a>
     </div>
     <dl class="tarjeta rv">
       <dt>Dirección</dt>
       <dd>Carrer la Platja, 1<br>17130 L'Escala, Girona</dd>
+      <dt>Código Plus</dt>
+      <dd>44GM+FF L'Escala</dd>
       <dt>Teléfono</dt>
       <dd><a href="tel:+34972774043">972 77 40 43</a></dd>
       <dt>Horario</dt>
@@ -210,10 +247,25 @@ footer p{margin:.5rem 0;max-width:72ch}
   </div>
 </section>
 
+<section id="faq">
+  <div class="wrap">
+    <p class="kicker rv">Preguntas frecuentes</p>
+    <h2 class="rv">Lo que más se pregunta</h2>
+    <div class="faq rv">
+      <details><summary>¿Estáis a pie de playa?</summary><p>Sí, en el Carrer la Platja, en primera línea. La playa aparece nombrada en 71 opiniones y la terraza en 28.</p></details>
+      <details><summary>¿Hasta qué hora servís?</summary><p>Servimos hasta las 23:00.</p></details>
+      <details><summary>¿Cuánto cuesta comer aquí?</summary><p>El rango habitual es de 20 a 40 € por persona, confirmado por 465 personas en Google.</p></details>
+      <details><summary>¿Cuál es el plato de la casa?</summary><p>Los arroces. La paella se nombra en 94 opiniones, y el arròs caldoso está marcado como plato popular junto con la tarta de queso.</p></details>
+      <details><summary>¿Servís a domicilio?</summary><p>Sí. Se puede comer en sala, en la terraza, o pedir a domicilio.</p></details>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     <p><strong>Esto es una propuesta de página web, no la web oficial de La Caravel·la.</strong></p>
-    <p>Valoración, número de opiniones, temas más citados, platos nombrados, dirección, teléfono, horario y rango de precio salen de la ficha pública de Google Maps del restaurante, consultada el 5 de septiembre de 2026.</p>
+    <p>Valoración, número de opiniones, temas más citados, platos populares, dirección, código Plus, teléfono, horario y rango de precio salen de la ficha pública de Google Maps del restaurante, consultada el 5 de septiembre de 2026.</p>
+    <p><strong>Las opiniones son reales y van con su autor y su fecha.</strong> Estaban escritas en francés y se han traducido al español manteniendo el sentido íntegro.</p>
     <p><strong>No se publican precios de carta</strong> porque no hay ninguna carta pública con importes verificables. <strong>No se usan fotografías del local:</strong> todo el fondo está dibujado con código.</p>
   </div>
 </footer>
@@ -224,15 +276,9 @@ document.documentElement.classList.add('js');
   var items=[].slice.call(document.querySelectorAll('.rv'));
   var barras=[].slice.call(document.querySelectorAll('.pista i'));
   barras.forEach(function(b){b.dataset.w=b.style.getPropertyValue('--w');b.style.setProperty('--w','0');});
-  function mostrar(el,i){
-    setTimeout(function(){
-      el.classList.add('on');
-      el.querySelectorAll('.pista i').forEach(function(b){b.style.setProperty('--w',b.dataset.w);});
-    },Math.min(i,6)*65);
-  }
   function todo(){items.forEach(function(el){el.classList.add('on');});barras.forEach(function(b){b.style.setProperty('--w',b.dataset.w);});}
   if(!('IntersectionObserver' in window)){todo();return;}
-  var io=new IntersectionObserver(function(es){var n=0;es.forEach(function(e){if(e.isIntersecting){mostrar(e.target,n++);io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  var io=new IntersectionObserver(function(es){var n=0;es.forEach(function(e){if(e.isIntersecting){var el=e.target,i=n++;setTimeout(function(){el.classList.add('on');el.querySelectorAll('.pista i').forEach(function(b){b.style.setProperty('--w',b.dataset.w);});},Math.min(i,6)*65);io.unobserve(el);}});},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
   items.forEach(function(el){io.observe(el);});
   setTimeout(todo,3000);
 })();

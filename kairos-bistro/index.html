@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kairos Bistró · L'Escala</title>
-<meta name="description" content="Bistró en el Passeig de la Riba, L'Escala. Paella, fideuà, steak tartare y tarta tatin casera frente al mar.">
+<meta name="description" content="Bistró en el Passeig de la Riba, L'Escala. Paella, fideuà, tapas, steak tartare y tarta tatin casera frente al mar.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -19,84 +19,55 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{
-  margin:0;background:var(--verde);color:var(--crema);
-  font-family:var(--sans);font-weight:300;line-height:1.65;
-  -webkit-font-smoothing:antialiased;overflow-x:hidden;
-}
+body{margin:0;background:var(--verde);color:var(--crema);font-family:var(--sans);font-weight:300;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{max-width:100%}
-a{color:inherit}
 .wrap{width:min(1120px,92vw);margin-inline:auto}
 
-/* fondo */
 .fondo{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5}
 .fondo svg{width:100%;height:100%}
 
-/* nav */
-nav{
-  position:sticky;top:0;z-index:20;
-  background:rgba(14,38,32,.86);backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--linea);
-}
+nav{position:sticky;top:0;z-index:20;background:rgba(14,38,32,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--linea)}
 .nav-in{display:flex;align-items:center;gap:1.5rem;padding:.85rem 0}
 .marca{font-family:var(--serif);font-size:1.15rem;letter-spacing:.04em;white-space:nowrap}
 .marca span{color:var(--laton)}
-.nav-links{display:flex;gap:1.4rem;margin-left:auto;font-size:.82rem;letter-spacing:.09em;text-transform:uppercase}
+.nav-links{display:flex;gap:1.3rem;margin-left:auto;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
 .nav-links a{text-decoration:none;color:var(--crema-tenue);transition:color .25s}
 .nav-links a:hover,.nav-links a:focus-visible{color:var(--laton-claro)}
-.btn-tel{
-  border:1px solid var(--laton);color:var(--laton-claro);
-  padding:.5rem 1.05rem;border-radius:999px;text-decoration:none;
-  font-size:.8rem;letter-spacing:.06em;white-space:nowrap;transition:.25s;
-}
+.btn-tel{border:1px solid var(--laton);color:var(--laton-claro);padding:.5rem 1.05rem;border-radius:999px;text-decoration:none;font-size:.8rem;letter-spacing:.06em;white-space:nowrap;transition:.25s}
 .btn-tel:hover,.btn-tel:focus-visible{background:var(--laton);color:var(--verde)}
-@media(max-width:820px){.nav-links{display:none}.btn-tel{margin-left:auto}}
+@media(max-width:960px){.nav-links{display:none}.btn-tel{margin-left:auto}}
 
-/* hero */
 header{position:relative;z-index:1;padding:clamp(4rem,11vw,8rem) 0 clamp(3rem,7vw,5rem)}
-.sello{
-  display:inline-flex;align-items:center;gap:.6rem;
-  border:1px solid var(--linea);border-radius:999px;
-  padding:.4rem 1rem;font-size:.76rem;letter-spacing:.13em;
-  text-transform:uppercase;color:var(--laton-claro);margin-bottom:1.8rem;
-}
-h1{
-  font-family:var(--serif);font-weight:500;margin:0;
-  font-size:clamp(2.9rem,9vw,6.4rem);line-height:.98;letter-spacing:-.015em;
-}
+.sello{display:inline-flex;align-items:center;gap:.6rem;border:1px solid var(--linea);border-radius:999px;padding:.4rem 1rem;font-size:.76rem;letter-spacing:.13em;text-transform:uppercase;color:var(--laton-claro);margin-bottom:1.8rem}
+h1{font-family:var(--serif);font-weight:500;margin:0;font-size:clamp(2.9rem,9vw,6.4rem);line-height:.98;letter-spacing:-.015em}
 h1 em{font-style:italic;color:var(--laton)}
-.bajada{
-  font-size:clamp(1.02rem,2.1vw,1.3rem);max-width:34ch;
-  margin:1.6rem 0 0;color:var(--crema-tenue);font-weight:300;
-}
-.nota-rapida{
-  display:flex;flex-wrap:wrap;gap:1.6rem;margin-top:2.6rem;
-  padding-top:1.6rem;border-top:1px solid var(--linea);
-}
+.bajada{font-size:clamp(1.02rem,2.1vw,1.3rem);max-width:36ch;margin:1.6rem 0 0;color:var(--crema-tenue);font-weight:300}
+.nota-rapida{display:flex;flex-wrap:wrap;gap:1.6rem;margin-top:2.6rem;padding-top:1.6rem;border-top:1px solid var(--linea)}
 .dato .n{font-family:var(--serif);font-size:1.75rem;color:var(--laton-claro);display:block;line-height:1.1}
 .dato .t{font-size:.74rem;letter-spacing:.11em;text-transform:uppercase;color:var(--crema-tenue)}
 
-/* secciones */
 section{position:relative;z-index:1;padding:clamp(3.5rem,8vw,6rem) 0}
-h2{
-  font-family:var(--serif);font-weight:500;font-size:clamp(1.8rem,4.4vw,3rem);
-  margin:0 0 1.4rem;line-height:1.12;
-}
-.eyebrow{
-  font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--laton);margin:0 0 .8rem;
-}
+h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.8rem,4.4vw,3rem);margin:0 0 1.4rem;line-height:1.12}
+.eyebrow{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--laton);margin:0 0 .8rem}
 .texto{max-width:60ch;color:var(--crema-tenue);font-size:1.02rem}
 .texto strong{color:var(--crema);font-weight:500}
 
-/* platos */
 .platos{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--linea);border:1px solid var(--linea);margin-top:2.4rem}
-.plato{background:var(--verde-2);padding:1.7rem 1.5rem;transition:background .3s}
+.plato{background:var(--verde-2);padding:1.7rem 1.5rem;transition:background .3s;position:relative}
 .plato:hover{background:var(--verde-3)}
 .plato h3{font-family:var(--serif);font-weight:500;font-size:1.32rem;margin:0 0 .45rem;color:var(--crema)}
 .plato p{margin:0;font-size:.9rem;color:var(--crema-tenue)}
+.etq{position:absolute;top:1rem;right:1rem;font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;color:var(--verde);background:var(--laton);padding:.22rem .55rem;border-radius:99px;font-weight:600}
 
 /* reseñas */
+.resenas{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.4rem;margin-top:2.6rem}
+.resena{background:var(--verde-2);border:1px solid var(--linea);border-left:3px solid var(--laton);padding:1.9rem 1.7rem;display:flex;flex-direction:column}
+.resena .comilla{font-family:var(--serif);font-size:2.6rem;line-height:.6;color:var(--laton);opacity:.5;margin-bottom:.7rem}
+.resena p{margin:0 0 1.4rem;font-size:1rem;color:var(--crema);font-style:italic;line-height:1.6}
+.resena .quien{margin-top:auto;border-top:1px solid var(--linea);padding-top:1rem}
+.resena .quien b{display:block;font-weight:500;font-size:.94rem}
+.resena .quien span{font-size:.78rem;color:var(--crema-tenue)}
+
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2.2rem;margin-top:2.4rem}
 .gran{font-family:var(--serif);font-size:clamp(3.4rem,10vw,5.5rem);line-height:1;color:var(--laton-claro)}
 .estrellas{letter-spacing:.18em;color:var(--laton);font-size:1.05rem;margin-top:.4rem}
@@ -107,32 +78,34 @@ h2{
 .barra-fila b{font-weight:500;color:var(--crema)}
 .barra-fila span{color:var(--crema-tenue);font-variant-numeric:tabular-nums}
 
-/* visitar */
 .dos{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
 @media(max-width:760px){.dos{grid-template-columns:1fr;gap:2.2rem}}
 .ficha dt{font-size:.74rem;letter-spacing:.13em;text-transform:uppercase;color:var(--laton);margin-top:1.5rem}
 .ficha dt:first-child{margin-top:0}
 .ficha dd{margin:.35rem 0 0;font-size:1.05rem}
 .ficha a{color:var(--crema);text-decoration-color:var(--linea);text-underline-offset:4px}
-.cta{
-  display:inline-block;margin-top:2.4rem;background:var(--laton);color:var(--verde);
-  padding:.95rem 2.1rem;border-radius:999px;text-decoration:none;
-  font-weight:600;font-size:.95rem;letter-spacing:.03em;transition:.25s;
-}
+.cta{display:inline-block;margin-top:2.4rem;background:var(--laton);color:var(--verde);padding:.95rem 2.1rem;border-radius:999px;text-decoration:none;font-weight:600;font-size:.95rem;letter-spacing:.03em;transition:.25s}
 .cta:hover,.cta:focus-visible{background:var(--laton-claro);transform:translateY(-2px)}
+.cta.hueca{background:transparent;border:1px solid var(--laton);color:var(--laton-claro);margin-left:.7rem}
+.cta.hueca:hover{background:var(--laton);color:var(--verde)}
+@media(max-width:520px){.cta.hueca{margin-left:0;margin-top:.8rem}}
+
+/* faq */
+.faq{margin-top:2.4rem;border-top:1px solid var(--linea)}
+.faq details{border-bottom:1px solid var(--linea)}
+.faq summary{cursor:pointer;padding:1.3rem 2.5rem 1.3rem 0;font-family:var(--serif);font-size:1.18rem;position:relative;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:.4rem;top:1.15rem;font-size:1.5rem;color:var(--laton);transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{margin:0 0 1.4rem;color:var(--crema-tenue);max-width:60ch}
 
 footer{position:relative;z-index:1;border-top:1px solid var(--linea);padding:2.6rem 0 3.4rem;font-size:.82rem;color:var(--crema-tenue)}
-footer p{margin:.5rem 0;max-width:70ch}
+footer p{margin:.5rem 0;max-width:72ch}
 
-/* reveal — visible por defecto, el JS oculta justo antes de animar */
 .rv{opacity:1}
 .js .rv{opacity:0;transform:translateY(22px)}
 .js .rv.on{opacity:1;transform:none;transition:opacity .8s ease,transform .8s cubic-bezier(.22,1,.36,1)}
-@media(prefers-reduced-motion:reduce){
-  .js .rv,.js .rv.on{opacity:1!important;transform:none!important;transition:none!important}
-  .barra i{transition:none}
-  html{scroll-behavior:auto}
-}
+@media(prefers-reduced-motion:reduce){.js .rv,.js .rv.on{opacity:1!important;transform:none!important;transition:none!important}.barra i{transition:none}html{scroll-behavior:auto}}
 :focus-visible{outline:2px solid var(--laton-claro);outline-offset:3px}
 </style>
 </head>
@@ -140,21 +113,12 @@ footer p{margin:.5rem 0;max-width:70ch}
 
 <div class="fondo" aria-hidden="true">
   <svg viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
-    <defs>
-      <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#c9a227" stop-opacity=".16"/>
-        <stop offset="1" stop-color="#c9a227" stop-opacity="0"/>
-      </linearGradient>
-    </defs>
+    <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c9a227" stop-opacity=".16"/><stop offset="1" stop-color="#c9a227" stop-opacity="0"/></linearGradient></defs>
     <circle cx="980" cy="180" r="460" fill="url(#g1)"/>
     <g stroke="#c9a227" stroke-opacity=".13" fill="none" stroke-width="1">
-      <path d="M-100 700 Q 300 560 700 690 T 1400 620"/>
-      <path d="M-100 760 Q 300 620 700 750 T 1400 680"/>
-      <path d="M-100 820 Q 300 680 700 810 T 1400 740"/>
+      <path d="M-100 700 Q 300 560 700 690 T 1400 620"/><path d="M-100 760 Q 300 620 700 750 T 1400 680"/><path d="M-100 820 Q 300 680 700 810 T 1400 740"/>
     </g>
-    <g stroke="#c9a227" stroke-opacity=".1" fill="none" stroke-width="1">
-      <circle cx="180" cy="240" r="120"/><circle cx="180" cy="240" r="170"/>
-    </g>
+    <g stroke="#c9a227" stroke-opacity=".1" fill="none" stroke-width="1"><circle cx="180" cy="240" r="120"/><circle cx="180" cy="240" r="170"/></g>
   </svg>
 </div>
 
@@ -162,10 +126,7 @@ footer p{margin:.5rem 0;max-width:70ch}
   <div class="wrap nav-in">
     <div class="marca">Kairos <span>Bistró</span></div>
     <div class="nav-links">
-      <a href="#casa">La casa</a>
-      <a href="#cocina">Cocina</a>
-      <a href="#opiniones">Opiniones</a>
-      <a href="#visitar">Visitarnos</a>
+      <a href="#casa">La casa</a><a href="#cocina">Cocina</a><a href="#opiniones">Opiniones</a><a href="#llegar">Cómo llegar</a><a href="#faq">Preguntas</a>
     </div>
     <a class="btn-tel" href="tel:+34972040508">972 04 05 08</a>
   </div>
@@ -198,21 +159,41 @@ footer p{margin:.5rem 0;max-width:70ch}
   <div class="wrap">
     <p class="eyebrow rv">Cocina</p>
     <h2 class="rv">Lo que la gente nombra</h2>
-    <p class="texto rv">Estos son los platos que aparecen una y otra vez en las opiniones de la casa.</p>
+    <p class="texto rv">Los platos que aparecen una y otra vez en las opiniones y en las fotos de la casa.</p>
     <div class="platos">
+      <div class="plato rv"><span class="etq">Popular</span><h3>Fideuà</h3><p>Marcada como plato popular de la casa en Google. 14 menciones.</p></div>
+      <div class="plato rv"><span class="etq">Popular</span><h3>Tarta tatin casera</h3><p>Hecha en casa. El postre que cierra la comida.</p></div>
       <div class="plato rv"><h3>Paella</h3><p>El plato más citado de la casa, en 36 opiniones distintas.</p></div>
       <div class="plato rv"><h3>Tapas</h3><p>Empatadas con la paella: otras 36 menciones.</p></div>
-      <div class="plato rv"><h3>Fideuà</h3><p>La alternativa de la casa al arroz. 14 menciones.</p></div>
       <div class="plato rv"><h3>Steak tartare</h3><p>El plato de bistró que nadie espera encontrar en el paseo.</p></div>
       <div class="plato rv"><h3>Pescado frito</h3><p>Producto del día, hecho al momento.</p></div>
-      <div class="plato rv"><h3>Tarta tatin casera</h3><p>Hecha en casa. El postre que cierra la comida.</p></div>
+      <div class="plato rv"><h3>Tarta de queso</h3><p>De las que más fotografía la gente.</p></div>
     </div>
   </div>
 </section>
 
 <section id="opiniones">
   <div class="wrap">
-    <p class="eyebrow rv">Opiniones</p>
+    <p class="eyebrow rv">Lo que dicen</p>
+    <h2 class="rv">Escrito por quien ha venido</h2>
+    <div class="resenas">
+      <div class="resena rv">
+        <div class="comilla" aria-hidden="true">&ldquo;</div>
+        <p>Comida excelente de principio a fin. Todos los platos estaban deliciosos y la presentación especialmente cuidada, con platos bonitos. Servicio acogedor y atento.</p>
+        <div class="quien"><b>Olivier H</b><span>Local Guide · 310 opiniones · hace 5 meses</span></div>
+      </div>
+      <div class="resena rv">
+        <div class="comilla" aria-hidden="true">&ldquo;</div>
+        <p>Vaya buena dirección. Muy buena acogida y muy buen servicio. Buenos platos, y bravo por la paella.</p>
+        <div class="quien"><b>Patrick Issaly</b><span>Local Guide · 400 opiniones · hace 5 meses</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="numeros">
+  <div class="wrap">
+    <p class="eyebrow rv">Los números</p>
     <h2 class="rv">Qué se repite</h2>
     <div class="stats">
       <div class="rv">
@@ -230,17 +211,20 @@ footer p{margin:.5rem 0;max-width:70ch}
   </div>
 </section>
 
-<section id="visitar">
+<section id="llegar">
   <div class="wrap dos">
     <div class="rv">
-      <p class="eyebrow">Visitarnos</p>
-      <h2>Dónde y cuándo</h2>
-      <p class="texto">En el paseo, a pie de mar. Sala, terraza, para llevar y a domicilio.</p>
+      <p class="eyebrow">Cómo llegar</p>
+      <h2>En el paseo,<br>a pie de mar</h2>
+      <p class="texto">En el Passeig de la Riba, el paseo marítimo de L'Escala. Sala, terraza, para llevar y a domicilio.</p>
       <a class="cta" href="tel:+34972040508">Llamar ahora</a>
+      <a class="cta hueca" href="https://www.google.com/maps/search/?api=1&amp;query=Kairos%20Bistr%C3%B3%2C%20Passeig%20de%20la%20Riba%203%2C%20L%27Escala" target="_blank" rel="noopener">Abrir en Maps</a>
     </div>
     <dl class="ficha rv">
       <dt>Dirección</dt>
       <dd>Passeig de la Riba, 3<br>17130 L'Escala, Girona</dd>
+      <dt>Código Plus</dt>
+      <dd>44GM+QJ L'Escala</dd>
       <dt>Teléfono</dt>
       <dd><a href="tel:+34972040508">972 04 05 08</a></dd>
       <dt>Horario</dt>
@@ -251,10 +235,25 @@ footer p{margin:.5rem 0;max-width:70ch}
   </div>
 </section>
 
+<section id="faq">
+  <div class="wrap">
+    <p class="eyebrow rv">Preguntas frecuentes</p>
+    <h2 class="rv">Lo que más se pregunta</h2>
+    <div class="faq rv">
+      <details><summary>¿Hasta qué hora servís?</summary><p>La cocina cierra a las 23:00.</p></details>
+      <details><summary>¿Se puede pedir para llevar?</summary><p>Sí. Se puede comer en sala, pedir para llevar o pedir a domicilio.</p></details>
+      <details><summary>¿Cuánto cuesta comer aquí?</summary><p>El rango habitual es de 20 a 30 € por persona. Lo han confirmado 285 personas en Google.</p></details>
+      <details><summary>¿Cuál es el plato de la casa?</summary><p>La paella y las tapas son lo más nombrado, empatadas en 36 opiniones cada una. La fideuà y la tarta tatin casera están marcadas como platos populares.</p></details>
+      <details><summary>¿Hace falta reservar?</summary><p>Lo más seguro es llamar al 972 04 05 08, sobre todo en temporada alta.</p></details>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     <p><strong>Esto es una propuesta de página web, no la web oficial de Kairos Bistró.</strong></p>
-    <p>Los datos (valoración, número de opiniones, temas más citados, dirección, teléfono, horario y rango de precio) se han tomado de la ficha pública de Google Maps del restaurante, consultada el 5 de septiembre de 2026.</p>
+    <p>Valoración, número de opiniones, temas más citados, platos populares, dirección, código Plus, teléfono, horario y rango de precio se han tomado de la ficha pública de Google Maps del restaurante, consultada el 5 de septiembre de 2026.</p>
+    <p><strong>Las opiniones son reales y van con su autor y su fecha.</strong> Estaban escritas en francés y se han traducido al español manteniendo el sentido íntegro.</p>
     <p><strong>No se publican precios de carta:</strong> no hay ninguna carta pública con importes verificables, así que no se ha inventado ninguno. <strong>No se usan fotografías del local</strong> por el mismo motivo: todo el fondo está dibujado con código.</p>
   </div>
 </footer>
@@ -265,20 +264,11 @@ document.documentElement.classList.add('js');
   var items=[].slice.call(document.querySelectorAll('.rv'));
   var barras=[].slice.call(document.querySelectorAll('.barra i'));
   barras.forEach(function(b){b.dataset.w=b.style.getPropertyValue('--w');b.style.setProperty('--w','0');});
-  function revelar(el,i){
-    setTimeout(function(){
-      el.classList.add('on');
-      el.querySelectorAll('.barra i').forEach(function(b){b.style.setProperty('--w',b.dataset.w);});
-    }, Math.min(i,6)*70);
-  }
-  if(!('IntersectionObserver' in window)){items.forEach(function(el){el.classList.add('on');});barras.forEach(function(b){b.style.setProperty('--w',b.dataset.w);});return;}
-  var io=new IntersectionObserver(function(es){
-    var n=0;
-    es.forEach(function(e){ if(e.isIntersecting){ revelar(e.target,n++); io.unobserve(e.target);} });
-  },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  function todo(){items.forEach(function(el){el.classList.add('on');});barras.forEach(function(b){b.style.setProperty('--w',b.dataset.w);});}
+  if(!('IntersectionObserver' in window)){todo();return;}
+  var io=new IntersectionObserver(function(es){var n=0;es.forEach(function(e){if(e.isIntersecting){var el=e.target,i=n++;setTimeout(function(){el.classList.add('on');el.querySelectorAll('.barra i').forEach(function(b){b.style.setProperty('--w',b.dataset.w);});},Math.min(i,6)*70);io.unobserve(el);}});},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
   items.forEach(function(el){io.observe(el);});
-  // red de seguridad
-  setTimeout(function(){items.forEach(function(el){el.classList.add('on');});barras.forEach(function(b){b.style.setProperty('--w',b.dataset.w);});},3000);
+  setTimeout(todo,3000);
 })();
 </script>
 </body>
