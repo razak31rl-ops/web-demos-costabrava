@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ô Di Vin · Empuriabrava</title>
+<meta name="description" content="Cocina de aire francés en Empuriabrava. Tartar de ternera, croquetas, marisco y una bodega cuidada. El número 2 de 128 restaurantes del pueblo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --tinta:#180f14; --tinta-2:#231620; --tinta-3:#31202c;
+  --vino:#7d2142; --vino-viu:#a83358;
+  --champan:#e3c290; --champan-clar:#f2ddb9;
+  --marfil:#f4ede4; --marfil-suau:rgba(244,237,228,.64);
+  --vora:rgba(227,194,144,.22);
+  --serif:'Instrument Serif',Georgia,serif;
+  --sans:'Figtree',system-ui,-apple-system,Segoe UI,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--tinta);color:var(--marfil);font-family:var(--sans);font-weight:300;line-height:1.66;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%}
+.env{width:min(1120px,92vw);margin-inline:auto}
+
+.fons{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.6}
+.fons svg{width:100%;height:100%}
+
+nav{position:sticky;top:0;z-index:20;background:rgba(24,15,20,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--vora)}
+.nav-in{display:flex;align-items:center;gap:1.3rem;padding:.9rem 0}
+.marca{font-family:var(--serif);font-size:1.35rem;letter-spacing:.01em;white-space:nowrap}
+.marca span{color:var(--champan)}
+.nav-links{display:flex;gap:1.3rem;margin-left:auto;font-size:.79rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.nav-links a{text-decoration:none;color:var(--marfil-suau);transition:color .25s}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--champan)}
+.btn-tel{background:var(--vino);color:var(--marfil);padding:.55rem 1.2rem;border-radius:999px;text-decoration:none;font-size:.82rem;font-weight:500;white-space:nowrap;transition:.25s}
+.btn-tel:hover,.btn-tel:focus-visible{background:var(--champan);color:var(--tinta)}
+@media(max-width:980px){.nav-links{display:none}.btn-tel{margin-left:auto}}
+
+header{position:relative;z-index:1;padding:clamp(4rem,11vw,7.5rem) 0 0}
+.medalla-top{display:inline-flex;align-items:center;gap:.7rem;border:1px solid var(--champan);border-radius:999px;padding:.45rem 1.2rem;font-size:.76rem;letter-spacing:.13em;text-transform:uppercase;color:var(--champan);margin-bottom:1.8rem;font-weight:500}
+h1{font-family:var(--serif);font-weight:400;margin:0;font-size:clamp(3rem,10vw,7rem);line-height:1;letter-spacing:-.01em}
+h1 i{font-style:italic;color:var(--champan)}
+.entrada{font-size:clamp(1.05rem,2.1vw,1.32rem);max-width:38ch;margin:1.8rem 0 0;color:var(--marfil-suau)}
+.xifres{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.6rem;margin-top:3rem;padding-top:1.9rem;border-top:1px solid var(--vora)}
+.xifra .n{font-family:var(--serif);font-size:clamp(1.9rem,3.6vw,2.5rem);color:var(--champan-clar);display:block;line-height:1.05}
+.xifra .t{font-size:.73rem;letter-spacing:.12em;text-transform:uppercase;color:var(--marfil-suau);font-weight:500}
+
+section{position:relative;z-index:1;padding:clamp(3rem,7vw,5.4rem) 0}
+.sobre{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--vino-viu);margin:0 0 1rem;font-weight:600}
+h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,4.6vw,3.1rem);margin:0 0 1.3rem;line-height:1.12}
+.text{max-width:60ch;color:var(--marfil-suau);font-size:1.03rem}
+.text strong{color:var(--marfil);font-weight:500}
+
+.plats{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.3rem;margin-top:2.6rem}
+.plat{background:var(--tinta-2);border:1px solid var(--vora);border-radius:12px;overflow:hidden;transition:border-color .35s,transform .35s}
+.plat:hover{border-color:var(--champan);transform:translateY(-4px)}
+.plat img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.plat .cos{padding:1.5rem 1.4rem}
+.plat h3{font-family:var(--serif);font-weight:400;font-size:1.42rem;margin:0 0 .4rem;color:var(--champan-clar)}
+.plat p{margin:0;font-size:.92rem;color:var(--marfil-suau)}
+
+.banda-img{position:relative;z-index:1;margin-top:clamp(2.6rem,6vw,4rem);width:100%;overflow:hidden}
+.banda-img img{width:100%;aspect-ratio:16/9;max-height:62vh;object-fit:cover;display:block}
+.banda-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,transparent 58%,var(--tinta) 100%);pointer-events:none}
+
+.podi{background:linear-gradient(135deg,var(--tinta-2),var(--tinta-3));border:1px solid var(--vora);border-radius:16px;padding:clamp(2.4rem,5vw,3.6rem);margin-top:2.6rem;text-align:center}
+.podi .lloc{font-family:var(--serif);font-size:clamp(3.4rem,13vw,6.5rem);line-height:1;color:var(--champan);display:block}
+.podi .de{font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--marfil-suau);margin-top:.6rem}
+.podi p{margin:1.5rem auto 0;max-width:46ch;color:var(--marfil-suau)}
+
+.dues{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+@media(max-width:800px){.dues{grid-template-columns:1fr;gap:2.2rem}}
+.fitxa{background:var(--tinta-2);border:1px solid var(--vora);border-radius:14px;padding:2rem 1.9rem}
+.fitxa dt{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--vino-viu);margin-top:1.5rem;font-weight:600}
+.fitxa dt:first-of-type{margin-top:0}
+.fitxa dd{margin:.3rem 0 0;font-size:1.02rem}
+.fitxa a{color:var(--marfil);text-underline-offset:4px}
+.cta{display:inline-block;margin-top:2.1rem;background:var(--vino);color:var(--marfil);padding:.95rem 2.1rem;border-radius:999px;text-decoration:none;font-weight:600;font-size:.95rem;transition:.25s}
+.cta:hover,.cta:focus-visible{background:var(--champan);color:var(--tinta);transform:translateY(-2px)}
+.cta.buida{background:transparent;border:1px solid var(--champan);color:var(--champan);margin-left:.7rem}
+.cta.buida:hover{background:var(--champan);color:var(--tinta)}
+@media(max-width:520px){.cta.buida{margin-left:0;margin-top:.7rem}}
+
+.faq{margin-top:2.4rem;border-top:1px solid var(--vora)}
+.faq details{border-bottom:1px solid var(--vora)}
+.faq summary{cursor:pointer;padding:1.3rem 2.5rem 1.3rem 0;font-family:var(--serif);font-size:1.3rem;position:relative;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:.4rem;top:1.15rem;font-size:1.5rem;color:var(--champan);transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{margin:0 0 1.4rem;color:var(--marfil-suau);max-width:60ch}
+
+footer{position:relative;z-index:1;border-top:1px solid var(--vora);padding:2.6rem 0 3.4rem;font-size:.82rem;color:var(--marfil-suau)}
+footer p{margin:.5rem 0;max-width:72ch}
+
+.rv{opacity:1}
+.js .rv{opacity:0;transform:translateY(22px)}
+.js .rv.on{opacity:1;transform:none;transition:opacity .78s ease,transform .78s cubic-bezier(.22,1,.36,1)}
+@media(prefers-reduced-motion:reduce){.js .rv,.js .rv.on{opacity:1!important;transform:none!important;transition:none!important}html{scroll-behavior:auto}}
+:focus-visible{outline:2px solid var(--champan);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<div class="fons" aria-hidden="true">
+  <svg viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+    <defs><radialGradient id="v1"><stop offset="0" stop-color="#a83358" stop-opacity=".26"/><stop offset="1" stop-color="#a83358" stop-opacity="0"/></radialGradient></defs>
+    <circle cx="950" cy="180" r="420" fill="url(#v1)"/>
+    <g fill="none" stroke="#e3c290" stroke-opacity=".13" stroke-width="1">
+      <circle cx="220" cy="640" r="130"/><circle cx="220" cy="640" r="190"/><circle cx="220" cy="640" r="250"/>
+    </g>
+    <g stroke="#e3c290" stroke-opacity=".1" stroke-width="1" fill="none">
+      <path d="M-40 300 H1240 M-40 360 H1240"/>
+    </g>
+  </svg>
+</div>
+
+<nav>
+  <div class="env nav-in">
+    <div class="marca">Ô <span>Di Vin</span></div>
+    <div class="nav-links">
+      <a href="#casa">La casa</a><a href="#cuina">Cocina</a><a href="#posicio">La posición</a><a href="#arribar">Cómo llegar</a><a href="#faq">Preguntas</a>
+    </div>
+    <a class="btn-tel" href="tel:+34622513709">622 51 37 09</a>
+  </div>
+</nav>
+
+<header>
+  <div class="env">
+    <div class="medalla-top rv">Certificado de Excelencia · Empuriabrava</div>
+    <h1 class="rv">Cocina<br><i>de aire francés</i></h1>
+    <p class="entrada rv">Avinguda d'Europa, 2. Marisco de primera, tapas cuidadas y una bodega que se nota — lejos del restaurante de paso.</p>
+    <div class="xifres rv">
+      <div class="xifra"><span class="n">4,6</span><span class="t">sobre 5</span></div>
+      <div class="xifra"><span class="n">1.068</span><span class="t">opiniones</span></div>
+      <div class="xifra"><span class="n">nº 2</span><span class="t">de 128 en el pueblo</span></div>
+      <div class="xifra"><span class="n">267</span><span class="t">opiniones en TripAdvisor</span></div>
+    </div>
+  </div>
+  <div class="banda-img rv">
+    <img src="assets/sala.webp" width="1600" height="900" alt="Comedor con mesas vestidas de blanco y una pared de botellas al fondo" loading="eager" decoding="async">
+  </div>
+</header>
+
+<section id="casa">
+  <div class="env">
+    <p class="sobre rv">La casa</p>
+    <h2 class="rv">El segundo mejor valorado<br>de ciento veintiocho</h2>
+    <p class="text rv">Ô Di Vin está en la <strong>Avinguda d'Europa, 2</strong>, en Empuriabrava. Cocina con acento francés y producto de mar, servida sin ceremonia pero sin descuidar nada.</p>
+    <p class="text rv" style="margin-top:1.1rem">De lo que escribe la gente se repiten tres cosas: que las <strong>tapas están muy por encima de lo que cuestan</strong>, que el servicio es amable y profesional, y que no se parece al restaurante turístico de paso. Eso, en un pueblo con 128 restaurantes, es lo que separa el número 2 del número 60.</p>
+  </div>
+</section>
+
+<section id="cuina">
+  <div class="env">
+    <p class="sobre rv">Cocina</p>
+    <h2 class="rv">Lo que se pide</h2>
+    <p class="text rv">Los platos que aparecen citados una y otra vez cuando alguien habla de esta casa.</p>
+    <div class="plats">
+      <div class="plat rv">
+        <img src="assets/tartar.webp" width="900" height="675" alt="Tartar de ternera con yema, alcaparras y pan tostado" loading="lazy" decoding="async">
+        <div class="cos"><h3>Tartar de ternera</h3><p>De los platos más nombrados de la carta, junto con el filet américain.</p></div>
+      </div>
+      <div class="plat rv">
+        <img src="assets/croquetas.webp" width="900" height="675" alt="Croquetas doradas con el interior cremoso a la vista" loading="lazy" decoding="async">
+        <div class="cos"><h3>Croquetas</h3><p>Las que la gente repite cuando dice que aquí las tapas están por encima de su precio.</p></div>
+      </div>
+      <div class="plat rv" style="display:flex;align-items:center">
+        <div class="cos"><h3>Marisco</h3><p>Producto de primera, que es por lo que la casa se hizo un nombre. Y detrás, una bodega escogida con criterio: el vino no es un añadido aquí, está en el nombre.</p></div>
+      </div>
+      <div class="plat rv" style="display:flex;align-items:center">
+        <div class="cos"><h3>Parfait y pastel de frutas</h3><p>Los dos postres que se citan por su nombre en las opiniones.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="posicio">
+  <div class="env">
+    <p class="sobre rv">La posición</p>
+    <h2 class="rv">Dónde estáis en el pueblo</h2>
+    <div class="podi rv">
+      <span class="lloc">2</span>
+      <div class="de">de 128 restaurantes de Empuriabrava</div>
+      <p>Con <strong style="color:var(--marfil)">Certificado de Excelencia</strong>, un 4,6 sobre 5 y más de mil opiniones acumuladas entre las distintas plataformas. Eso no lo consigue un sitio de temporada.</p>
+    </div>
+  </div>
+</section>
+
+<section id="arribar">
+  <div class="env dues">
+    <div class="rv">
+      <p class="sobre">Cómo llegar</p>
+      <h2>Dónde y cuándo</h2>
+      <p class="text">En la Avinguda d'Europa, en Empuriabrava. Para reservar, mejor llamar o escribir por WhatsApp.</p>
+      <a class="cta" href="tel:+34622513709">Llamar ahora</a>
+      <a class="cta buida" href="https://www.google.com/maps/search/?api=1&amp;query=%C3%94%20Di%20Vin%2C%20Avinguda%20d%27Europa%202%2C%20Empuriabrava" target="_blank" rel="noopener">Abrir en Maps</a>
+    </div>
+    <dl class="fitxa rv">
+      <dt>Dirección</dt>
+      <dd>Avinguda d'Europa, 2<br>17487 Empuriabrava, Girona</dd>
+      <dt>Teléfono</dt>
+      <dd><a href="tel:+34622513709">622 51 37 09</a></dd>
+      <dt>Valoración</dt>
+      <dd>4,6 sobre 5 · 1.068 opiniones</dd>
+      <dt>Posición</dt>
+      <dd>Nº 2 de 128 en Empuriabrava</dd>
+    </dl>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="env">
+    <p class="sobre rv">Preguntas frecuentes</p>
+    <h2 class="rv">Lo que más se pregunta</h2>
+    <div class="faq rv">
+      <details><summary>¿Qué tipo de cocina hacéis?</summary><p>Cocina con acento francés y producto de mar, con una bodega cuidada. Las tapas y los entrantes son de lo más nombrado.</p></details>
+      <details><summary>¿Cuál es el plato de la casa?</summary><p>El tartar de ternera y el filet américain son los más citados, junto con las croquetas.</p></details>
+      <details><summary>¿Es caro?</summary><p>Lo que más repite la gente es justo lo contrario: que la calidad está muy por encima de lo que se paga.</p></details>
+      <details><summary>¿Hace falta reservar?</summary><p>En temporada, mejor sí. Se puede llamar o escribir al 622 51 37 09.</p></details>
+      <details><summary>¿Dónde estáis exactamente?</summary><p>En la Avinguda d'Europa, 2, en Empuriabrava (Castelló d'Empúries).</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="env">
+    <p><strong>Esto es una propuesta de página web, no la web oficial de Ô Di Vin.</strong></p>
+    <p>Valoración, número de opiniones, posición en el ranking, Certificado de Excelencia, platos citados, dirección y teléfono se han tomado de las fichas públicas del restaurante en Restaurant Guru y TripAdvisor, consultadas el 7 de septiembre de 2026.</p>
+    <p><strong>No se citan opiniones concretas</strong> porque no se ha podido verificar el texto completo de ninguna con su autor y su fecha. Lo que aparece descrito son los temas que más se repiten, no una cita literal.</p>
+    <p><strong>Las imágenes son de ambiente y están generadas para esta propuesta.</strong> No son fotografías del local ni de sus platos: se han hecho para enseñar cómo quedaría la página, y al contratar se sustituyen por fotos vuestras.</p>
+    <p><strong>No se publican precios de carta</strong> porque no hay ninguna carta pública con importes verificables.</p>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var items=[].slice.call(document.querySelectorAll('.rv'));
+  function tot(){items.forEach(function(el){el.classList.add('on');});}
+  if(!('IntersectionObserver' in window)){tot();return;}
+  var io=new IntersectionObserver(function(es){var n=0;es.forEach(function(e){if(e.isIntersecting){var el=e.target,i=n++;setTimeout(function(){el.classList.add('on');},Math.min(i,6)*68);io.unobserve(el);}});},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  items.forEach(function(el){io.observe(el);});
+  setTimeout(tot,3000);
+})();
+</script>
+</body>
+</html>
