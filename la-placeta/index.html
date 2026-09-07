@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Placeta de la Muralla · Sant Pere Pescador</title>
+<meta name="description" content="Cocina catalana en el Carrer Mar de Sant Pere Pescador. Arroz con azafrán, calamares a la andaluza y croquetas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,600;1,400&family=Familjen+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --calc:#faf6ef; --calc-2:#f0e9dd; --blanc:#fff;
+  --rajol:#9c4a2f; --rajol-viu:#c26a45;
+  --sajolida:#5f6f52; --sajolida-clar:#8b9a7c;
+  --tinta:#33291f; --tinta-suau:rgba(51,41,31,.66);
+  --vora:rgba(51,41,31,.14);
+  --serif:'Petrona',Georgia,serif;
+  --sans:'Familjen Grotesk',system-ui,-apple-system,Segoe UI,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--calc);color:var(--tinta);font-family:var(--sans);font-weight:400;line-height:1.66;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%}
+.env{width:min(1080px,92vw);margin-inline:auto}
+
+.fons{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.7}
+.fons svg{width:100%;height:100%}
+
+nav{position:sticky;top:0;z-index:20;background:rgba(250,246,239,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--vora)}
+.nav-in{display:flex;align-items:center;gap:1.3rem;padding:.9rem 0}
+.marca{font-family:var(--serif);font-weight:600;font-size:1.18rem;white-space:nowrap;letter-spacing:-.01em}
+.marca span{color:var(--rajol)}
+.nav-links{display:flex;gap:1.3rem;margin-left:auto;font-size:.79rem;letter-spacing:.07em;font-weight:500}
+.nav-links a{text-decoration:none;color:var(--tinta-suau);transition:color .25s}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--rajol)}
+.btn-tel{background:var(--rajol);color:var(--calc);padding:.55rem 1.2rem;border-radius:5px;text-decoration:none;font-size:.82rem;font-weight:600;white-space:nowrap;transition:.25s}
+.btn-tel:hover,.btn-tel:focus-visible{background:var(--sajolida)}
+@media(max-width:980px){.nav-links{display:none}.btn-tel{margin-left:auto}}
+
+header{position:relative;z-index:1;padding:clamp(3.8rem,10vw,6.8rem) 0 0}
+.lloc{font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sajolida);margin:0 0 1.4rem;font-weight:600}
+h1{font-family:var(--serif);font-weight:400;margin:0;font-size:clamp(2.5rem,8.5vw,5.6rem);line-height:1.04;letter-spacing:-.025em}
+h1 i{font-style:italic;color:var(--rajol)}
+.entrada{font-size:clamp(1.04rem,2.1vw,1.3rem);max-width:40ch;margin:1.7rem 0 0;color:var(--tinta-suau)}
+.xifres{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1.6rem;margin-top:2.9rem;padding-top:1.8rem;border-top:2px solid var(--rajol)}
+.xifra .n{font-family:var(--serif);font-weight:600;font-size:clamp(1.8rem,3.5vw,2.4rem);display:block;line-height:1.05;color:var(--rajol)}
+.xifra .t{font-size:.73rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tinta-suau);font-weight:500}
+
+section{position:relative;z-index:1;padding:clamp(3rem,7vw,5.2rem) 0}
+.sobre{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sajolida);margin:0 0 1rem;font-weight:600}
+h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,4.4vw,2.9rem);margin:0 0 1.3rem;line-height:1.14;letter-spacing:-.02em}
+.text{max-width:60ch;color:var(--tinta-suau);font-size:1.03rem}
+.text strong{color:var(--tinta);font-weight:600}
+
+.banda-img{position:relative;z-index:1;margin-top:clamp(2.6rem,6vw,4rem);width:100%;overflow:hidden}
+.banda-img img{width:100%;aspect-ratio:16/9;max-height:62vh;object-fit:cover;display:block}
+.banda-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,transparent 62%,var(--calc) 100%);pointer-events:none}
+
+.noms{background:var(--sajolida);color:var(--calc);border-radius:18px;padding:clamp(2.2rem,5vw,3.4rem);margin-top:2.4rem;text-align:center}
+.noms .duo-nom{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,7vw,3.6rem);line-height:1.1;letter-spacing:-.02em}
+.noms p{margin:1.3rem auto 0;max-width:48ch;color:rgba(250,246,239,.85)}
+
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-top:2.6rem}
+@media(max-width:760px){.duo{grid-template-columns:1fr}}
+.tarja{background:var(--blanc);border:1px solid var(--vora);border-radius:14px;overflow:hidden;box-shadow:0 14px 40px rgba(51,41,31,.06)}
+.tarja img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.tarja .cos{padding:1.7rem 1.6rem}
+.tarja h3{font-family:var(--serif);font-weight:600;font-size:1.4rem;margin:0 0 .45rem;letter-spacing:-.015em}
+.tarja p{margin:0;font-size:.93rem;color:var(--tinta-suau)}
+
+.llista{list-style:none;padding:0;margin:2.4rem 0 0;border-top:1px solid var(--vora)}
+.llista li{display:flex;justify-content:space-between;align-items:baseline;gap:1.4rem;padding:1.2rem 0;border-bottom:1px solid var(--vora)}
+.llista b{font-family:var(--serif);font-weight:600;font-size:1.15rem}
+.llista span{font-size:.9rem;color:var(--tinta-suau);text-align:right}
+
+.dues{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+@media(max-width:800px){.dues{grid-template-columns:1fr;gap:2.2rem}}
+.fitxa{background:var(--blanc);border:1px solid var(--vora);border-radius:14px;padding:2rem 1.9rem}
+.fitxa dt{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sajolida);margin-top:1.5rem;font-weight:600}
+.fitxa dt:first-of-type{margin-top:0}
+.fitxa dd{margin:.3rem 0 0;font-size:1.02rem}
+.fitxa a{color:var(--rajol);text-underline-offset:4px}
+.cta{display:inline-block;margin-top:2rem;background:var(--rajol);color:var(--calc);padding:.95rem 2.1rem;border-radius:5px;text-decoration:none;font-weight:600;font-size:.95rem;transition:.25s}
+.cta:hover,.cta:focus-visible{background:var(--sajolida);transform:translateY(-2px)}
+.cta.buida{background:transparent;border:1px solid var(--rajol);color:var(--rajol);margin-left:.7rem}
+.cta.buida:hover{background:var(--rajol);color:var(--calc)}
+@media(max-width:520px){.cta.buida{margin-left:0;margin-top:.7rem}}
+
+.faq{margin-top:2.4rem;border-top:1px solid var(--vora)}
+.faq details{border-bottom:1px solid var(--vora)}
+.faq summary{cursor:pointer;padding:1.3rem 2.5rem 1.3rem 0;font-family:var(--serif);font-weight:600;font-size:1.12rem;position:relative;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:.4rem;top:1.1rem;font-size:1.5rem;color:var(--rajol);transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{margin:0 0 1.4rem;color:var(--tinta-suau);max-width:60ch}
+
+footer{position:relative;z-index:1;border-top:1px solid var(--vora);padding:2.6rem 0 3.4rem;font-size:.82rem;color:var(--tinta-suau)}
+footer p{margin:.5rem 0;max-width:72ch}
+
+.rv{opacity:1}
+.js .rv{opacity:0;transform:translateY(20px)}
+.js .rv.on{opacity:1;transform:none;transition:opacity .75s ease,transform .75s cubic-bezier(.22,1,.36,1)}
+@media(prefers-reduced-motion:reduce){.js .rv,.js .rv.on{opacity:1!important;transform:none!important;transition:none!important}html{scroll-behavior:auto}}
+:focus-visible{outline:2px solid var(--rajol);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<div class="fons" aria-hidden="true">
+  <svg viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+    <circle cx="1050" cy="160" r="250" fill="#c26a45" fill-opacity=".08"/>
+    <circle cx="140" cy="720" r="240" fill="#5f6f52" fill-opacity=".07"/>
+    <g fill="none" stroke="#33291f" stroke-opacity=".07" stroke-width="1">
+      <rect x="80" y="120" width="160" height="240" rx="80"/>
+      <rect x="960" y="520" width="160" height="240" rx="80"/>
+    </g>
+  </svg>
+</div>
+
+<nav>
+  <div class="env nav-in">
+    <div class="marca">La Placeta <span>de la Muralla</span></div>
+    <div class="nav-links">
+      <a href="#casa">La casa</a><a href="#equip">El equipo</a><a href="#cuina">Cocina</a><a href="#arribar">Cómo llegar</a><a href="#faq">Preguntas</a>
+    </div>
+    <a class="btn-tel" href="tel:+34972520371">972 52 03 71</a>
+  </div>
+</nav>
+
+<header>
+  <div class="env">
+    <p class="lloc rv">Carrer Mar · Sant Pere Pescador</p>
+    <h1 class="rv">Cocina catalana<br><i>en el pueblo</i></h1>
+    <p class="entrada rv">En el Carrer Mar, a un paso de la muralla. Arroz con azafrán, calamares a la andaluza y croquetas — y una sala donde a la gente le da por acordarse de los nombres.</p>
+    <div class="xifres rv">
+      <div class="xifra"><span class="n">8,6</span><span class="t">sobre 10 en Guiacat</span></div>
+      <div class="xifra"><span class="n">35 €</span><span class="t">precio medio</span></div>
+      <div class="xifra"><span class="n">Martes</span><span class="t">día de cierre</span></div>
+    </div>
+  </div>
+  <div class="banda-img rv">
+    <img src="assets/placa.webp" width="1600" height="900" alt="Plaza de pueblo con mesas puestas al atardecer" loading="eager" decoding="async">
+  </div>
+</header>
+
+<section id="casa">
+  <div class="env">
+    <p class="sobre rv">La casa</p>
+    <h2 class="rv">Cocina catalana,<br>sin adornos</h2>
+    <p class="text rv">La Placeta de la Muralla está en el <strong>Carrer Mar, 15</strong>, en Sant Pere Pescador. Cocina catalana de la de siempre, con un <strong>8,6 sobre 10</strong> en Guiacat y un precio medio de unos 35 € por persona.</p>
+    <p class="text rv" style="margin-top:1.1rem">Lo que más repiten los clientes es que <strong>los precios están por debajo de lo que la calidad del plato haría esperar</strong>. Y cierran los martes, que conviene saberlo antes de plantarse en la puerta.</p>
+  </div>
+</section>
+
+<section id="equip">
+  <div class="env">
+    <p class="sobre rv">El equipo</p>
+    <h2 class="rv">Lo que casi ningún restaurante consigue</h2>
+    <div class="noms rv">
+      <div class="duo-nom">Omar <span style="opacity:.6">y</span> Adrià</div>
+      <p>Los clientes los nombran por su nombre en las opiniones, y hablan de su amabilidad y de lo bien que llevan la sala. Que alguien se acuerde de cómo te llamas después de una cena es la mejor reseña que existe — y ahora mismo eso solo lo sabe quien ya ha entrado.</p>
+    </div>
+  </div>
+</section>
+
+<section id="cuina">
+  <div class="env">
+    <p class="sobre rv">Cocina</p>
+    <h2 class="rv">Lo que la gente nombra</h2>
+    <div class="duo">
+      <div class="tarja rv">
+        <img src="assets/arros.webp" width="900" height="675" alt="Arroz con azafrán en cazuela de barro" loading="lazy" decoding="async">
+        <div class="cos"><h3>Arroz con azafrán</h3><p>De los platos que aparecen citados por su nombre en las opiniones.</p></div>
+      </div>
+      <div class="tarja rv">
+        <img src="assets/calamares.webp" width="900" height="675" alt="Calamares a la andaluza con limón y alioli" loading="lazy" decoding="async">
+        <div class="cos"><h3>Calamares a la andaluza</h3><p>Rebozado fino y frito al momento.</p></div>
+      </div>
+    </div>
+    <ul class="llista">
+      <li><b>Croquetas</b><span>De las que se repiten</span></li>
+      <li><b>Cocina catalana de temporada</b><span>Producto de la zona</span></li>
+      <li><b>Precio medio</b><span>Unos 35 € por persona</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="arribar">
+  <div class="env dues">
+    <div class="rv">
+      <p class="sobre">Cómo llegar</p>
+      <h2>Dónde y cuándo</h2>
+      <p class="text">En el Carrer Mar, 15, en Sant Pere Pescador. Cerramos los martes.</p>
+      <a class="cta" href="tel:+34972520371">Llamar ahora</a>
+      <a class="cta buida" href="https://www.google.com/maps/search/?api=1&amp;query=La%20Placeta%20de%20la%20Muralla%2C%20Carrer%20Mar%2015%2C%20Sant%20Pere%20Pescador" target="_blank" rel="noopener">Abrir en Maps</a>
+    </div>
+    <dl class="fitxa rv">
+      <dt>Dirección</dt>
+      <dd>Carrer Mar, 15<br>17470 Sant Pere Pescador, Girona</dd>
+      <dt>Teléfono</dt>
+      <dd><a href="tel:+34972520371">972 52 03 71</a></dd>
+      <dt>Valoración</dt>
+      <dd>8,6 sobre 10 en Guiacat</dd>
+      <dt>Cierre</dt>
+      <dd>Martes</dd>
+    </dl>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="env">
+    <p class="sobre rv">Preguntas frecuentes</p>
+    <h2 class="rv">Lo que más se pregunta</h2>
+    <div class="faq rv">
+      <details><summary>¿Qué día cerráis?</summary><p>Los martes.</p></details>
+      <details><summary>¿Cuánto cuesta comer aquí?</summary><p>El precio medio ronda los 35 € por persona. Lo que más repiten los clientes es que la calidad está por encima de eso.</p></details>
+      <details><summary>¿Qué tipo de cocina hacéis?</summary><p>Cocina catalana. Los platos más nombrados son el arroz con azafrán, los calamares a la andaluza y las croquetas.</p></details>
+      <details><summary>¿Hace falta reservar?</summary><p>En temporada, mejor llamar antes al 972 52 03 71.</p></details>
+      <details><summary>¿Dónde estáis exactamente?</summary><p>En el Carrer Mar, 15, en Sant Pere Pescador.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="env">
+    <p><strong>Esto es una propuesta de página web, no la web oficial de La Placeta de la Muralla.</strong></p>
+    <p>Valoración, precio medio, día de cierre, platos citados, nombres del personal, dirección y teléfono se han tomado de las fichas públicas del restaurante en Guiacat, TripAdvisor y Gastroranking, consultadas el 7 de septiembre de 2026.</p>
+    <p><strong>No se citan opiniones concretas</strong> porque no se ha podido verificar el texto completo de ninguna con su autor y su fecha. Lo que aparece descrito son los temas que más se repiten, no citas literales.</p>
+    <p><strong>Las imágenes son de ambiente y están generadas para esta propuesta.</strong> No son fotografías del local ni de sus platos: se han hecho para enseñar cómo quedaría la página, y al contratar se sustituyen por fotos vuestras.</p>
+    <p><strong>No se publican precios de carta</strong> porque no hay ninguna carta pública con importes verificables.</p>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var items=[].slice.call(document.querySelectorAll('.rv'));
+  function tot(){items.forEach(function(el){el.classList.add('on');});}
+  if(!('IntersectionObserver' in window)){tot();return;}
+  var io=new IntersectionObserver(function(es){var n=0;es.forEach(function(e){if(e.isIntersecting){var el=e.target,i=n++;setTimeout(function(){el.classList.add('on');},Math.min(i,6)*66);io.unobserve(el);}});},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  items.forEach(function(el){io.observe(el);});
+  setTimeout(tot,3000);
+})();
+</script>
+</body>
+</html>
