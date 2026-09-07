@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Restaurante Can Felix · Empuriabrava</title>
+<meta name="description" content="Menú del día con siete u ocho primeros y paella o fideuà de segundo, en Empuriabrava. 2.295 opiniones y un 4,4 en Google.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Epilogue:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fbf9f4; --paper-2:#f1eee5; --blanc:#fff;
+  --indi:#2b3a67; --indi-clar:#44588f; --indi-tenue:rgba(43,58,103,.66);
+  --ambre:#e08a1e; --ambre-clar:#f5bb6b;
+  --vora:rgba(43,58,103,.15);
+  --serif:'Literata',Georgia,serif;
+  --sans:'Epilogue',system-ui,-apple-system,Segoe UI,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--indi);font-family:var(--sans);font-weight:300;line-height:1.68;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%}
+.env{width:min(1100px,92vw);margin-inline:auto}
+
+.fons{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.7}
+.fons svg{width:100%;height:100%}
+
+nav{position:sticky;top:0;z-index:20;background:rgba(251,249,244,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--vora)}
+.nav-in{display:flex;align-items:center;gap:1.3rem;padding:.9rem 0}
+.marca{font-family:var(--serif);font-weight:600;font-size:1.22rem;white-space:nowrap;letter-spacing:-.01em}
+.marca span{color:var(--ambre)}
+.nav-links{display:flex;gap:1.3rem;margin-left:auto;font-size:.79rem;letter-spacing:.06em;font-weight:500}
+.nav-links a{text-decoration:none;color:var(--indi-tenue);transition:color .25s}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--ambre)}
+.btn-tel{background:var(--indi);color:var(--paper);padding:.55rem 1.2rem;border-radius:999px;text-decoration:none;font-size:.82rem;font-weight:500;white-space:nowrap;transition:.25s}
+.btn-tel:hover,.btn-tel:focus-visible{background:var(--ambre);color:var(--indi)}
+@media(max-width:980px){.nav-links{display:none}.btn-tel{margin-left:auto}}
+
+header{position:relative;z-index:1;padding:clamp(3.8rem,10vw,6.8rem) 0 0;text-align:center}
+.lloc{font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ambre);margin:0 0 1.4rem;font-weight:600}
+h1{font-family:var(--serif);font-weight:400;margin:0;font-size:clamp(2.6rem,9vw,5.8rem);line-height:1.04;letter-spacing:-.03em}
+h1 i{font-style:italic;color:var(--indi-clar)}
+.entrada{font-size:clamp(1.04rem,2.1vw,1.3rem);max-width:44ch;margin:1.7rem auto 0;color:var(--indi-tenue)}
+.xifres{display:flex;flex-wrap:wrap;justify-content:center;gap:2.6rem;margin-top:2.9rem;padding-top:1.9rem;border-top:1px solid var(--vora)}
+.xifra .n{font-family:var(--serif);font-weight:600;font-size:clamp(1.9rem,3.6vw,2.5rem);display:block;line-height:1.05}
+.xifra .t{font-size:.73rem;letter-spacing:.11em;text-transform:uppercase;color:var(--indi-tenue);font-weight:500}
+
+section{position:relative;z-index:1;padding:clamp(3rem,7vw,5.2rem) 0}
+.sobre{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ambre);margin:0 0 1rem;font-weight:600}
+h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,4.4vw,2.9rem);margin:0 0 1.3rem;line-height:1.14;letter-spacing:-.025em}
+.text{max-width:60ch;color:var(--indi-tenue);font-size:1.03rem}
+.text strong{color:var(--indi);font-weight:600}
+
+.banda-img{position:relative;z-index:1;margin-top:clamp(2.6rem,6vw,4rem);width:100%;overflow:hidden}
+.banda-img img{width:100%;aspect-ratio:16/9;max-height:62vh;object-fit:cover;display:block}
+.banda-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,transparent 62%,var(--paper) 100%);pointer-events:none}
+
+.gran{background:var(--indi);color:var(--paper);border-radius:20px;padding:clamp(2.4rem,5vw,3.8rem);margin-top:2.4rem;text-align:center}
+.gran .n{font-family:var(--serif);font-weight:600;font-size:clamp(3.6rem,15vw,7.5rem);line-height:1;color:var(--ambre-clar);display:block;letter-spacing:-.04em}
+.gran .t{font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;margin-top:.7rem;color:rgba(251,249,244,.72)}
+.gran p{margin:1.5rem auto 0;max-width:46ch;color:rgba(251,249,244,.82)}
+
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-top:2.6rem}
+@media(max-width:760px){.duo{grid-template-columns:1fr}}
+.tarja{background:var(--blanc);border:1px solid var(--vora);border-radius:16px;overflow:hidden;box-shadow:0 14px 40px rgba(43,58,103,.06)}
+.tarja img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.tarja .cos{padding:1.7rem 1.6rem}
+.tarja h3{font-family:var(--serif);font-weight:600;font-size:1.4rem;margin:0 0 .45rem;letter-spacing:-.015em}
+.tarja p{margin:0;font-size:.93rem;color:var(--indi-tenue)}
+
+.detalls{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.1rem;margin-top:2.4rem}
+.detall{background:var(--blanc);border:1px solid var(--vora);border-radius:14px;padding:1.6rem 1.4rem}
+.detall b{font-family:var(--serif);font-weight:600;font-size:1.14rem;display:block;margin-bottom:.3rem}
+.detall span{font-size:.9rem;color:var(--indi-tenue)}
+
+.dues{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+@media(max-width:800px){.dues{grid-template-columns:1fr;gap:2.2rem}}
+.fitxa{background:var(--blanc);border:1px solid var(--vora);border-radius:16px;padding:2rem 1.9rem}
+.fitxa dt{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ambre);margin-top:1.5rem;font-weight:600}
+.fitxa dt:first-of-type{margin-top:0}
+.fitxa dd{margin:.3rem 0 0;font-size:1.02rem}
+.fitxa a{color:var(--indi);text-underline-offset:4px}
+.cta{display:inline-block;margin-top:2rem;background:var(--indi);color:var(--paper);padding:.95rem 2.1rem;border-radius:999px;text-decoration:none;font-weight:500;font-size:.95rem;transition:.25s}
+.cta:hover,.cta:focus-visible{background:var(--ambre);color:var(--indi);transform:translateY(-2px)}
+.cta.buida{background:transparent;border:1px solid var(--indi);color:var(--indi);margin-left:.7rem}
+.cta.buida:hover{background:var(--indi);color:var(--paper)}
+@media(max-width:520px){.cta.buida{margin-left:0;margin-top:.7rem}}
+
+.faq{margin-top:2.4rem;border-top:1px solid var(--vora)}
+.faq details{border-bottom:1px solid var(--vora)}
+.faq summary{cursor:pointer;padding:1.3rem 2.5rem 1.3rem 0;font-family:var(--serif);font-weight:600;font-size:1.12rem;position:relative;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:.4rem;top:1.1rem;font-size:1.5rem;color:var(--ambre);transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{margin:0 0 1.4rem;color:var(--indi-tenue);max-width:60ch}
+
+footer{position:relative;z-index:1;border-top:1px solid var(--vora);padding:2.6rem 0 3.4rem;font-size:.82rem;color:var(--indi-tenue)}
+footer p{margin:.5rem 0;max-width:72ch}
+
+.rv{opacity:1}
+.js .rv{opacity:0;transform:translateY(20px)}
+.js .rv.on{opacity:1;transform:none;transition:opacity .75s ease,transform .75s cubic-bezier(.22,1,.36,1)}
+@media(prefers-reduced-motion:reduce){.js .rv,.js .rv.on{opacity:1!important;transform:none!important;transition:none!important}html{scroll-behavior:auto}}
+:focus-visible{outline:2px solid var(--ambre);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<div class="fons" aria-hidden="true">
+  <svg viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+    <circle cx="1060" cy="150" r="270" fill="#e08a1e" fill-opacity=".09"/>
+    <circle cx="120" cy="740" r="260" fill="#2b3a67" fill-opacity=".06"/>
+    <g fill="none" stroke="#2b3a67" stroke-opacity=".08" stroke-width="1">
+      <path d="M-40 380 H1240 M-40 440 H1240 M-40 500 H1240"/>
+    </g>
+  </svg>
+</div>
+
+<nav>
+  <div class="env nav-in">
+    <div class="marca">Can <span>Felix</span></div>
+    <div class="nav-links">
+      <a href="#casa">La casa</a><a href="#menu">El menú</a><a href="#familia">En familia</a><a href="#arribar">Cómo llegar</a><a href="#faq">Preguntas</a>
+    </div>
+    <a class="btn-tel" href="tel:+34972452456">972 45 24 56</a>
+  </div>
+</nav>
+
+<header>
+  <div class="env">
+    <p class="lloc rv">Carrer Tamariu · Empuriabrava</p>
+    <h1 class="rv">Dos mil doscientas<br><i>noventa y cinco opiniones</i></h1>
+    <p class="entrada rv">Menú del día con siete u ocho primeros y paella o fideuà de segundo. Raciones generosas y precio de los de siempre.</p>
+    <div class="xifres rv">
+      <div class="xifra"><span class="n">4,4</span><span class="t">sobre 5 en Google</span></div>
+      <div class="xifra"><span class="n">2.295</span><span class="t">opiniones</span></div>
+      <div class="xifra"><span class="n">7 u 8</span><span class="t">primeros a elegir</span></div>
+    </div>
+  </div>
+  <div class="banda-img rv">
+    <img src="assets/sala.webp" width="1600" height="900" alt="Comedor amplio de restaurante familiar preparado para el servicio" loading="eager" decoding="async">
+  </div>
+</header>
+
+<section id="casa">
+  <div class="env">
+    <p class="sobre rv">La casa</p>
+    <h2 class="rv">La cifra que no tiene<br>ningún otro del pueblo</h2>
+    <p class="text rv">Can Felix está en el <strong>Carrer Tamariu, 30</strong>, en Empuriabrava. Es una casa de menú: de las que llenan a mediodía porque la gente sabe lo que va a encontrar.</p>
+    <p class="text rv" style="margin-top:1.1rem">Y hay un dato que cuesta de igualar: <strong>2.295 opiniones en Google, con un 4,4 de media</strong>. Para hacerse una idea, ningún restaurante de los que hemos mirado en L'Escala llega a la mitad. Eso no lo consigue un sitio de una temporada.</p>
+    <div class="gran rv">
+      <span class="n">2.295</span>
+      <div class="t">personas han dejado su opinión</div>
+      <p>Y la media sigue en 4,4. Mantener la nota con ese volumen es mucho más difícil que tener un 4,8 con veinte opiniones.</p>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="env">
+    <p class="sobre rv">El menú</p>
+    <h2 class="rv">Siete u ocho primeros,<br>y arroz de segundo</h2>
+    <p class="text rv">El menú del día es lo que define la casa: variedad para elegir de verdad, y de segundo <strong>paella o fideuà</strong>. Bien presentado y abundante, que es lo que más repite la gente.</p>
+    <div class="duo">
+      <div class="tarja rv">
+        <img src="assets/fideua.webp" width="900" height="675" alt="Fideuà de marisco en su paellera, con gambas, mejillones y alioli" loading="lazy" decoding="async">
+        <div class="cos"><h3>Paella y fideuà</h3><p>El segundo del menú. El motivo por el que mucha gente viene precisamente a mediodía.</p></div>
+      </div>
+      <div class="tarja rv">
+        <img src="assets/menu.webp" width="900" height="675" alt="Varios primeros del menú del día servidos en el pase" loading="lazy" decoding="async">
+        <div class="cos"><h3>Los primeros</h3><p>Siete u ocho a elegir, bien presentados y con raciones que se notan.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="familia">
+  <div class="env">
+    <p class="sobre rv">En familia</p>
+    <h2 class="rv">Pensado para venir con niños</h2>
+    <div class="detalls">
+      <div class="detall rv"><b>Menú infantil</b><span>Carta propia para los pequeños.</span></div>
+      <div class="detall rv"><b>Tronas</b><span>Disponibles en sala.</span></div>
+      <div class="detall rv"><b>Raciones generosas</b><span>De lo que más se repite en las opiniones.</span></div>
+      <div class="detall rv"><b>Buena relación de precios</b><span>Es una casa de menú, y se nota en la cuenta.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="arribar">
+  <div class="env dues">
+    <div class="rv">
+      <p class="sobre">Cómo llegar</p>
+      <h2>Dónde estamos</h2>
+      <p class="text">En el Carrer Tamariu, en Empuriabrava. Para reservar mesa, mejor llamar.</p>
+      <a class="cta" href="tel:+34972452456">Llamar ahora</a>
+      <a class="cta buida" href="https://www.google.com/maps/search/?api=1&amp;query=Restaurante%20Can%20Felix%2C%20Carrer%20Tamariu%2030%2C%20Empuriabrava" target="_blank" rel="noopener">Abrir en Maps</a>
+    </div>
+    <dl class="fitxa rv">
+      <dt>Dirección</dt>
+      <dd>Carrer Tamariu, 30<br>17487 Empuriabrava, Girona</dd>
+      <dt>Teléfono</dt>
+      <dd><a href="tel:+34972452456">972 45 24 56</a></dd>
+      <dt>Valoración</dt>
+      <dd>4,4 sobre 5 · 2.295 opiniones en Google</dd>
+      <dt>Para familias</dt>
+      <dd>Menú infantil · tronas disponibles</dd>
+    </dl>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="env">
+    <p class="sobre rv">Preguntas frecuentes</p>
+    <h2 class="rv">Lo que más se pregunta</h2>
+    <div class="faq rv">
+      <details><summary>¿Tenéis menú del día?</summary><p>Sí, con siete u ocho primeros a elegir y paella o fideuà de segundo.</p></details>
+      <details><summary>¿Se puede venir con niños?</summary><p>Sí. Hay menú infantil y tronas disponibles.</p></details>
+      <details><summary>¿Las raciones son grandes?</summary><p>Generosas — es de lo que más se habla en las opiniones, junto con la presentación.</p></details>
+      <details><summary>¿Hace falta reservar?</summary><p>A mediodía en temporada conviene llamar antes, al 972 45 24 56.</p></details>
+      <details><summary>¿Dónde estáis exactamente?</summary><p>En el Carrer Tamariu, 30, en Empuriabrava (Castelló d'Empúries).</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="env">
+    <p><strong>Esto es una propuesta de página web, no la web oficial de Can Felix.</strong></p>
+    <p>Valoración, número de opiniones, descripción del menú, servicios para familias, dirección y teléfono se han tomado de las fichas públicas del restaurante en Google, TripAdvisor y Gastroranking, consultadas el 7 de septiembre de 2026.</p>
+    <p><strong>No se citan opiniones concretas</strong> porque no se ha podido verificar el texto completo de ninguna con su autor y su fecha. Lo que aparece descrito son los temas que más se repiten, no citas literales.</p>
+    <p><strong>Las imágenes son de ambiente y están generadas para esta propuesta.</strong> No son fotografías del local ni de sus platos: se han hecho para enseñar cómo quedaría la página, y al contratar se sustituyen por fotos vuestras.</p>
+    <p><strong>No se publican precios de carta</strong> porque no hay ninguna carta pública con importes verificables.</p>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var items=[].slice.call(document.querySelectorAll('.rv'));
+  function tot(){items.forEach(function(el){el.classList.add('on');});}
+  if(!('IntersectionObserver' in window)){tot();return;}
+  var io=new IntersectionObserver(function(es){var n=0;es.forEach(function(e){if(e.isIntersecting){var el=e.target,i=n++;setTimeout(function(){el.classList.add('on');},Math.min(i,6)*66);io.unobserve(el);}});},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  items.forEach(function(el){io.observe(el);});
+  setTimeout(tot,3000);
+})();
+</script>
+</body>
+</html>
