@@ -169,6 +169,16 @@ h2 em{font-style:italic;color:var(--accent)}
 .plat::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--accent);transform:scaleY(0);transform-origin:bottom;transition:transform .5s var(--suau)}
 .plat:hover{transform:translateY(-8px);border-color:var(--vora-forta);background:var(--bg-3)}
 .plat:hover::before{transform:scaleY(1)}
+/* imagenes */
+.banda-img{position:relative;width:100%;overflow:hidden}
+.banda-img img{width:100%;aspect-ratio:16/9;max-height:62vh;object-fit:cover;display:block}
+.banda-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--bg) 0%,transparent 22%,transparent 60%,var(--bg) 100%);pointer-events:none}
+.plat.amb-foto{padding:0}
+.plat.amb-foto img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.plat-cos{padding:clamp(20px,2.4vw,28px);display:flex;flex-direction:column;flex:1}
+.plat.amb-foto .plat-num{margin-bottom:10px}
+.plat.amb-foto h3{margin:6px 0 10px}
+
 .plat-num{font-family:'Fraunces',Georgia,serif;font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.18em;display:block;margin-bottom:auto}
 .plat h3{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:clamp(21px,1.5vw + 15px,29px);line-height:1.1;margin:24px 0 12px;letter-spacing:-.025em}
 .plat p{margin:0;font-size:14px;color:var(--tinta-suau);line-height:1.62}
@@ -309,6 +319,10 @@ footer{padding-block:clamp(44px,6vw,72px) clamp(28px,4vw,40px);border-top:1px so
   <div class="cue" aria-hidden="true"><span></span>Baja</div>
 </header>
 
+<div class="banda-img rev">
+  <img src="assets/puerto.webp" width="1600" height="900" alt="Veleros amarrados en el puerto al anochecer" loading="eager" decoding="async">
+</div>
+
 <section class="slab">
   <h2 class="slab-mot rev"><em>AZZURRO</em></h2>
   <div class="slab-peu rev">
@@ -387,10 +401,22 @@ footer{padding-block:clamp(44px,6vw,72px) clamp(28px,4vw,40px);border-top:1px so
     </div>
   </div>
   <div class="pista" id="pista" tabindex="0" role="region" aria-label="Carta de platos, lista desplazable horizontalmente">
-    <article class="plat rev"><span class="plat-num">01</span><h3>Filetto di manzo a la piedra</h3><p>Filete de ternera que llega a la mesa sobre piedra caliente. Roger W. lo describe en julio de 2026 como la carne más tierna que había comido en España.</p></article>
-    <article class="plat rev"><span class="plat-num">02</span><h3>Pinsa romana</h3><p>La especialidad de la casa: masa alargada de alta hidratación, distinta de la pizza. Es el plato más citado de todas las reseñas.</p></article>
-    <article class="plat rev"><span class="plat-num">03</span><h3>Pulpo</h3><p>Del capítulo de mar, uno de los platos que los clientes mencionan por su nombre.</p></article>
-    <article class="plat rev"><span class="plat-num">04</span><h3>Selección de vinos</h3><p>«El vino, excelente», resume Estelle Rogge en julio de 2026. La carta de vinos aparece repetidamente en las opiniones.</p></article>
+    <article class="plat amb-foto rev">
+      <img src="assets/filete.webp" width="900" height="675" alt="Filete de ternera cortado sobre piedra caliente con sus salsas" loading="lazy" decoding="async">
+      <div class="plat-cos"><span class="plat-num">01</span><h3>Filetto di manzo a la piedra</h3><p>Filete de ternera que llega a la mesa sobre piedra caliente. Roger W. lo describe en julio de 2026 como la carne más tierna que había comido en España.</p></div>
+    </article>
+    <article class="plat amb-foto rev">
+      <img src="assets/pinsa.webp" width="900" height="675" alt="Pinsa romana alargada con mozzarella, tomate y albahaca" loading="lazy" decoding="async">
+      <div class="plat-cos"><span class="plat-num">02</span><h3>Pinsa romana</h3><p>La especialidad de la casa: masa alargada de alta hidratación, distinta de la pizza. Es el plato más citado de todas las reseñas.</p></div>
+    </article>
+    <article class="plat amb-foto rev">
+      <img src="assets/pulpo.webp" width="900" height="675" alt="Pulpo a la brasa con patata, pimentón y aceite de oliva" loading="lazy" decoding="async">
+      <div class="plat-cos"><span class="plat-num">03</span><h3>Pulpo</h3><p>Del capítulo de mar, uno de los platos que los clientes mencionan por su nombre.</p></div>
+    </article>
+    <article class="plat amb-foto rev">
+      <img src="assets/vinos.webp" width="900" height="675" alt="Dos copas de vino, tinto y blanco, a la luz de las velas" loading="lazy" decoding="async">
+      <div class="plat-cos"><span class="plat-num">04</span><h3>Selección de vinos</h3><p>«El vino, excelente», resume Estelle Rogge en julio de 2026. La carta de vinos aparece repetidamente en las opiniones.</p></div>
+    </article>
   </div>
 </section>
 
@@ -525,6 +551,7 @@ footer{padding-block:clamp(44px,6vw,72px) clamp(28px,4vw,40px);border-top:1px so
       <p><strong>Precios.</strong> Esta página no publica precios ni carta con importes, porque no se ha localizado ninguna carta oficial con precios verificables.</p>
       <p><strong>Reseñas.</strong> Las citas son reseñas reales de clientes publicadas en TripAdvisor, reproducidas en el idioma en que se encontraron.</p>
       <p style="margin-top:16px;opacity:.7">Propuesta de página web · Maqueta de demostración</p>
+      <p style="margin-top:10px;opacity:.7;max-width:70ch"><strong>Las imágenes son de ambiente y están generadas para esta propuesta.</strong> No son fotografías del local ni de sus platos: se han hecho para enseñar cómo quedaría la página, y al contratar se sustituyen por fotos vuestras.</p>
     </div>
   </div>
 </footer>
