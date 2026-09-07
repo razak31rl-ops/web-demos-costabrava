@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bodega El Toro · Roses</title>
+<meta name="description" content="Bodega de tapas tradicionales en Roses. Género fresco cada día, croquetas y calamares. Carrer de Sant Sebastià, 12.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --nit:#12100d; --nit-2:#1d1915; --nit-3:#2a231c;
+  --toro:#a32a1e; --toro-viu:#d4472f;
+  --or:#d9a441; --or-clar:#f0cd8a;
+  --palla:#f0e7d6; --palla-suau:rgba(240,231,214,.62);
+  --vora:rgba(217,164,65,.24);
+  --display:'Alfa Slab One',Georgia,serif;
+  --sans:'Sarabun',system-ui,-apple-system,Segoe UI,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--nit);color:var(--palla);font-family:var(--sans);font-weight:300;line-height:1.66;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%}
+.env{width:min(1100px,92vw);margin-inline:auto}
+
+.fons{position:fixed;inset:0;z-index:0;pointer-events:none}
+.fons svg{width:100%;height:100%}
+
+nav{position:sticky;top:0;z-index:20;background:rgba(18,16,13,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--vora)}
+.nav-in{display:flex;align-items:center;gap:1.3rem;padding:.85rem 0}
+.marca{font-family:var(--display);font-size:1.05rem;letter-spacing:.01em;white-space:nowrap}
+.marca span{color:var(--toro-viu)}
+.nav-links{display:flex;gap:1.3rem;margin-left:auto;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;font-weight:500}
+.nav-links a{text-decoration:none;color:var(--palla-suau);transition:color .25s}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--or)}
+.btn-tel{background:var(--toro);color:var(--palla);padding:.55rem 1.2rem;border-radius:4px;text-decoration:none;font-size:.82rem;font-weight:600;white-space:nowrap;transition:.25s}
+.btn-tel:hover,.btn-tel:focus-visible{background:var(--or);color:var(--nit)}
+@media(max-width:980px){.nav-links{display:none}.btn-tel{margin-left:auto}}
+
+header{position:relative;z-index:1;padding:clamp(3.6rem,10vw,6.6rem) 0 0}
+.segell{display:inline-flex;align-items:center;gap:.6rem;background:var(--toro);color:var(--palla);border-radius:4px;padding:.44rem 1.1rem;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.7rem;font-weight:600}
+h1{font-family:var(--display);margin:0;font-size:clamp(2.6rem,10vw,6rem);line-height:1;letter-spacing:-.02em}
+h1 span{color:var(--or);display:block}
+.entrada{font-size:clamp(1.04rem,2.1vw,1.3rem);max-width:38ch;margin:1.7rem 0 0;color:var(--palla-suau)}
+.tres{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;margin-top:2.8rem;background:var(--vora);border:1px solid var(--vora)}
+.tres div{background:var(--nit-2);padding:1.3rem}
+.tres b{font-family:var(--display);font-size:1.25rem;color:var(--or-clar);display:block;line-height:1.2}
+.tres span{font-size:.73rem;letter-spacing:.1em;text-transform:uppercase;color:var(--palla-suau)}
+
+section{position:relative;z-index:1;padding:clamp(3rem,7vw,5.2rem) 0}
+.sobre{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--toro-viu);margin:0 0 1rem;font-weight:600}
+h2{font-family:var(--display);font-size:clamp(1.6rem,4.6vw,2.8rem);margin:0 0 1.3rem;line-height:1.14;letter-spacing:-.02em}
+.text{max-width:60ch;color:var(--palla-suau);font-size:1.03rem}
+.text strong{color:var(--palla);font-weight:600}
+
+.banda-img{position:relative;z-index:1;margin-top:clamp(2.6rem,6vw,4rem);width:100%;overflow:hidden}
+.banda-img img{width:100%;aspect-ratio:16/9;max-height:62vh;object-fit:cover;display:block}
+.banda-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,transparent 58%,var(--nit) 100%);pointer-events:none}
+
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem;margin-top:2.6rem}
+@media(max-width:760px){.duo{grid-template-columns:1fr}}
+.tapa{background:var(--nit-2);border:1px solid var(--vora);border-radius:8px;overflow:hidden;transition:border-color .35s,transform .35s}
+.tapa:hover{border-color:var(--or);transform:translateY(-4px)}
+.tapa img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.tapa .cos{padding:1.6rem 1.5rem}
+.tapa h3{font-family:var(--display);font-size:1.25rem;margin:0 0 .45rem;color:var(--or-clar);letter-spacing:-.01em}
+.tapa p{margin:0;font-size:.92rem;color:var(--palla-suau)}
+
+.crit{background:linear-gradient(135deg,#2a0f0b,#3d1610);border:1px solid var(--vora);border-left:5px solid var(--toro-viu);border-radius:6px;padding:clamp(2rem,5vw,3rem);margin-top:2.6rem}
+.crit h3{font-family:var(--display);font-size:clamp(1.4rem,4vw,2.2rem);margin:0 0 .9rem;color:var(--or-clar);letter-spacing:-.02em}
+.crit p{margin:0;color:var(--palla-suau);max-width:54ch}
+
+.dues{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+@media(max-width:800px){.dues{grid-template-columns:1fr;gap:2.2rem}}
+.fitxa{background:var(--nit-2);border:1px solid var(--vora);border-radius:8px;padding:2rem 1.9rem}
+.fitxa dt{font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--toro-viu);margin-top:1.5rem;font-weight:600}
+.fitxa dt:first-of-type{margin-top:0}
+.fitxa dd{margin:.3rem 0 0;font-size:1.02rem}
+.fitxa a{color:var(--palla);text-underline-offset:4px}
+.cta{display:inline-block;margin-top:2rem;background:var(--toro);color:var(--palla);padding:.95rem 2.1rem;border-radius:4px;text-decoration:none;font-weight:600;font-size:.95rem;transition:.25s}
+.cta:hover,.cta:focus-visible{background:var(--or);color:var(--nit);transform:translateY(-2px)}
+.cta.buida{background:transparent;border:1px solid var(--or);color:var(--or);margin-left:.7rem}
+.cta.buida:hover{background:var(--or);color:var(--nit)}
+@media(max-width:520px){.cta.buida{margin-left:0;margin-top:.7rem}}
+
+.faq{margin-top:2.4rem;border-top:1px solid var(--vora)}
+.faq details{border-bottom:1px solid var(--vora)}
+.faq summary{cursor:pointer;padding:1.3rem 2.5rem 1.3rem 0;font-family:var(--display);font-size:1.02rem;position:relative;list-style:none;letter-spacing:-.01em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:.4rem;top:1.05rem;font-size:1.5rem;color:var(--or);transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{margin:0 0 1.4rem;color:var(--palla-suau);max-width:60ch}
+
+footer{position:relative;z-index:1;border-top:1px solid var(--vora);padding:2.6rem 0 3.4rem;font-size:.82rem;color:var(--palla-suau)}
+footer p{margin:.5rem 0;max-width:72ch}
+
+.rv{opacity:1}
+.js .rv{opacity:0;transform:translateY(22px)}
+.js .rv.on{opacity:1;transform:none;transition:opacity .74s ease,transform .74s cubic-bezier(.22,1,.36,1)}
+@media(prefers-reduced-motion:reduce){.js .rv,.js .rv.on{opacity:1!important;transform:none!important;transition:none!important}html{scroll-behavior:auto}}
+:focus-visible{outline:2px solid var(--or);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<div class="fons" aria-hidden="true">
+  <svg viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+    <defs><radialGradient id="t1"><stop offset="0" stop-color="#a32a1e" stop-opacity=".3"/><stop offset="1" stop-color="#a32a1e" stop-opacity="0"/></radialGradient></defs>
+    <ellipse cx="200" cy="160" rx="380" ry="260" fill="url(#t1)"/>
+    <ellipse cx="1020" cy="760" rx="360" ry="240" fill="url(#t1)" opacity=".7"/>
+    <g stroke="#d9a441" stroke-opacity=".1" stroke-width="1.5" fill="none">
+      <path d="M-40 380 H1240 M-40 430 H1240 M-40 480 H1240"/>
+    </g>
+  </svg>
+</div>
+
+<nav>
+  <div class="env nav-in">
+    <div class="marca">Bodega <span>El Toro</span></div>
+    <div class="nav-links">
+      <a href="#casa">La casa</a><a href="#tapes">Las tapas</a><a href="#reserva">Reservar</a><a href="#arribar">Cómo llegar</a><a href="#faq">Preguntas</a>
+    </div>
+    <a class="btn-tel" href="tel:+34682174715">682 17 47 15</a>
+  </div>
+</nav>
+
+<header>
+  <div class="env">
+    <div class="segell rv">Carrer de Sant Sebastià · Roses</div>
+    <h1 class="rv">Tapas<span>de las de siempre</span></h1>
+    <p class="entrada rv">Bodega de barrio en Roses. Género fresco cada día, raciones que se notan y un dueño que la gente nombra en las opiniones.</p>
+    <div class="tres rv">
+      <div><b>Cada día</b><span>género fresco</span></div>
+      <div><b>Croquetas</b><span>y calamares, lo más pedido</span></div>
+      <div><b>Se llena</b><span>mejor reservar</span></div>
+    </div>
+  </div>
+  <div class="banda-img rv">
+    <img src="assets/bodega.webp" width="1600" height="900" alt="Interior de bodega tradicional con barra de madera y cazuelitas de tapas" loading="eager" decoding="async">
+  </div>
+</header>
+
+<section id="casa">
+  <div class="env">
+    <p class="sobre rv">La casa</p>
+    <h2 class="rv">Aquí la gente<br>nombra al dueño</h2>
+    <p class="text rv">Bodega El Toro está en el <strong>Carrer de Sant Sebastià, 12</strong>, en Roses. Tapas tradicionales hechas con género que entra fresco cada día — no congelado, no de la semana pasada.</p>
+    <p class="text rv" style="margin-top:1.1rem">Y hay un detalle que se repite en lo que escribe la gente y que no se puede comprar: <strong>nombran al dueño</strong>. Hablan de lo amable que es, de la acogida, del trato. En hostelería, eso vale más que cualquier campaña.</p>
+  </div>
+</section>
+
+<section id="tapes">
+  <div class="env">
+    <p class="sobre rv">Las tapas</p>
+    <h2 class="rv">Lo que más sale de la cocina</h2>
+    <div class="duo">
+      <div class="tapa rv">
+        <img src="assets/croquetas.webp" width="900" height="675" alt="Croquetas doradas con el interior cremoso" loading="lazy" decoding="async">
+        <div class="cos"><h3>Croquetas</h3><p>De las que se piden en todas las mesas, y de las que se repiten.</p></div>
+      </div>
+      <div class="tapa rv">
+        <img src="assets/calamares.webp" width="900" height="675" alt="Calamares fritos con limón y alioli" loading="lazy" decoding="async">
+        <div class="cos"><h3>Calamares</h3><p>Frescos del día, rebozados al momento.</p></div>
+      </div>
+    </div>
+    <div class="duo" style="margin-top:1.3rem">
+      <div class="tapa rv">
+        <img src="assets/tapas.webp" width="900" height="675" alt="Surtido de tapas tradicionales en cazuelitas de barro" loading="lazy" decoding="async">
+        <div class="cos"><h3>El surtido</h3><p>Raciones generosas y bien hechas. Es lo que más se repite en las opiniones.</p></div>
+      </div>
+      <div class="tapa rv" style="display:flex;align-items:center">
+        <div class="cos"><h3>Género fresco cada día</h3><p>No es una frase de escaparate: es lo que los clientes destacan cuando explican por qué vuelven. La calidad y la cantidad, las dos.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reserva">
+  <div class="env">
+    <p class="sobre rv">Reservar</p>
+    <h2 class="rv">Un problema bueno</h2>
+    <div class="crit rv">
+      <h3>Se llena, y hay que reservar</h3>
+      <p>Lo dicen los propios clientes: conviene reservar para tener mesa. Eso es una buena señal — y a la vez el motivo por el que hace falta un sitio propio donde alguien pueda ver la casa y llamar antes de plantarse en la puerta.</p>
+    </div>
+  </div>
+</section>
+
+<section id="arribar">
+  <div class="env dues">
+    <div class="rv">
+      <p class="sobre">Cómo llegar</p>
+      <h2>Dónde estamos</h2>
+      <p class="text">En el Carrer de Sant Sebastià, en Roses. Para reservar, llamada o WhatsApp.</p>
+      <a class="cta" href="tel:+34682174715">Llamar ahora</a>
+      <a class="cta buida" href="https://www.google.com/maps/search/?api=1&amp;query=Bodega%20El%20Toro%2C%20Carrer%20de%20Sant%20Sebasti%C3%A0%2012%2C%20Roses" target="_blank" rel="noopener">Abrir en Maps</a>
+    </div>
+    <dl class="fitxa rv">
+      <dt>Dirección</dt>
+      <dd>Carrer de Sant Sebastià, 12<br>17480 Roses, Girona</dd>
+      <dt>Teléfono</dt>
+      <dd><a href="tel:+34682174715">682 17 47 15</a></dd>
+      <dt>Cocina</dt>
+      <dd>Tapas tradicionales · género fresco a diario</dd>
+      <dt>Reservas</dt>
+      <dd>Recomendable, sobre todo en temporada</dd>
+    </dl>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="env">
+    <p class="sobre rv">Preguntas frecuentes</p>
+    <h2 class="rv">Lo que más se pregunta</h2>
+    <div class="faq rv">
+      <details><summary>¿Hace falta reservar?</summary><p>Es recomendable. Los propios clientes lo dicen: se llena y conviene asegurar mesa.</p></details>
+      <details><summary>¿Qué es lo más pedido?</summary><p>Las croquetas y los calamares, y en general el surtido de tapas.</p></details>
+      <details><summary>¿El género es fresco?</summary><p>Sí, entra fresco cada día. Es de lo que más destacan los clientes.</p></details>
+      <details><summary>¿Las raciones son grandes?</summary><p>Generosas — es una de las cosas que más se repite en las opiniones.</p></details>
+      <details><summary>¿Dónde estáis exactamente?</summary><p>En el Carrer de Sant Sebastià, 12, en Roses.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="env">
+    <p><strong>Esto es una propuesta de página web, no la web oficial de Bodega El Toro.</strong></p>
+    <p>Dirección, teléfono, tipo de cocina, platos más citados y los temas que se repiten en las opiniones se han tomado de las fichas públicas del restaurante en TripAdvisor y Bravíssima, consultadas el 7 de septiembre de 2026.</p>
+    <p><strong>No se citan opiniones concretas</strong> porque no se ha podido verificar el texto completo de ninguna con su autor y su fecha. Lo que aparece descrito son los temas que más se repiten, no citas literales. <strong>Tampoco se publica una valoración numérica</strong>, por el mismo motivo.</p>
+    <p><strong>Las imágenes son de ambiente y están generadas para esta propuesta.</strong> No son fotografías del local ni de sus platos: se han hecho para enseñar cómo quedaría la página, y al contratar se sustituyen por fotos vuestras.</p>
+    <p><strong>No se publican precios de carta</strong> porque no hay ninguna carta pública con importes verificables.</p>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var items=[].slice.call(document.querySelectorAll('.rv'));
+  function tot(){items.forEach(function(el){el.classList.add('on');});}
+  if(!('IntersectionObserver' in window)){tot();return;}
+  var io=new IntersectionObserver(function(es){var n=0;es.forEach(function(e){if(e.isIntersecting){var el=e.target,i=n++;setTimeout(function(){el.classList.add('on');},Math.min(i,6)*66);io.unobserve(el);}});},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  items.forEach(function(el){io.observe(el);});
+  setTimeout(tot,3000);
+})();
+</script>
+</body>
+</html>
