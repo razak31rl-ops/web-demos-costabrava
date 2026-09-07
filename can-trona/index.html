@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Can Trona · Sant Pere Pescador</title>
+<meta name="description" content="Restaurante en la Plaça Major de Sant Pere Pescador. 8,6 sobre 10 en Guiacat.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --nit:#141414; --nit-2:#1f1e1c; --nit-3:#2b2926;
+  --coure:#b56b3c; --coure-viu:#d98d5c;
+  --blat:#e9e2d5; --blat-suau:rgba(233,226,213,.62);
+  --vora:rgba(181,107,60,.26);
+  --display:'Gloock',Georgia,serif;
+  --sans:'Hanken Grotesk',system-ui,-apple-system,Segoe UI,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--nit);color:var(--blat);font-family:var(--sans);font-weight:300;line-height:1.68;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%}
+.env{width:min(1000px,92vw);margin-inline:auto}
+
+.fons{position:fixed;inset:0;z-index:0;pointer-events:none}
+.fons svg{width:100%;height:100%}
+
+nav{position:sticky;top:0;z-index:20;background:rgba(20,20,20,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--vora)}
+.nav-in{display:flex;align-items:center;gap:1.3rem;padding:.9rem 0}
+.marca{font-family:var(--display);font-size:1.32rem;white-space:nowrap}
+.marca span{color:var(--coure-viu)}
+.nav-links{display:flex;gap:1.4rem;margin-left:auto;font-size:.79rem;letter-spacing:.08em;text-transform:uppercase;font-weight:500}
+.nav-links a{text-decoration:none;color:var(--blat-suau);transition:color .25s}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--coure-viu)}
+.btn-tel{border:1px solid var(--coure);color:var(--coure-viu);padding:.53rem 1.15rem;border-radius:999px;text-decoration:none;font-size:.81rem;white-space:nowrap;transition:.25s}
+.btn-tel:hover,.btn-tel:focus-visible{background:var(--coure);color:var(--nit)}
+@media(max-width:900px){.nav-links{display:none}.btn-tel{margin-left:auto}}
+
+header{position:relative;z-index:1;padding:clamp(4rem,11vw,7.5rem) 0 0}
+.lloc{font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:var(--coure-viu);margin:0 0 1.5rem;font-weight:500}
+h1{font-family:var(--display);margin:0;font-size:clamp(3rem,11vw,7rem);line-height:1;letter-spacing:-.02em}
+h1 span{color:var(--coure-viu)}
+.entrada{font-size:clamp(1.05rem,2.1vw,1.32rem);max-width:38ch;margin:1.8rem 0 0;color:var(--blat-suau)}
+.nota{display:flex;flex-wrap:wrap;gap:2.6rem;margin-top:2.9rem;padding-top:1.9rem;border-top:1px solid var(--vora)}
+.nota .n{font-family:var(--display);font-size:clamp(1.9rem,3.6vw,2.5rem);color:var(--coure-viu);display:block;line-height:1.05}
+.nota .t{font-size:.73rem;letter-spacing:.11em;text-transform:uppercase;color:var(--blat-suau)}
+
+.banda-img{position:relative;z-index:1;margin-top:clamp(2.6rem,6vw,4rem);width:100%;overflow:hidden}
+.banda-img img{width:100%;aspect-ratio:16/9;max-height:62vh;object-fit:cover;display:block}
+.banda-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,transparent 58%,var(--nit) 100%);pointer-events:none}
+
+section{position:relative;z-index:1;padding:clamp(3rem,7vw,5.2rem) 0}
+.sobre{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--coure);margin:0 0 1rem;font-weight:600}
+h2{font-family:var(--display);font-size:clamp(1.9rem,4.6vw,3rem);margin:0 0 1.3rem;line-height:1.14;letter-spacing:-.02em}
+.text{max-width:60ch;color:var(--blat-suau);font-size:1.04rem}
+.text strong{color:var(--blat);font-weight:500}
+
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem;margin-top:2.6rem}
+@media(max-width:760px){.duo{grid-template-columns:1fr}}
+.tarja{border:1px solid var(--vora);border-radius:10px;overflow:hidden;background:var(--nit-2)}
+.tarja img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.tarja .cos{padding:1.6rem 1.5rem}
+.tarja h3{font-family:var(--display);font-size:1.35rem;margin:0 0 .4rem;color:var(--coure-viu)}
+.tarja p{margin:0;font-size:.93rem;color:var(--blat-suau)}
+
+.placa{background:linear-gradient(135deg,var(--nit-2),var(--nit-3));border:1px solid var(--vora);border-radius:16px;padding:clamp(2.2rem,5vw,3.4rem);margin-top:2.6rem;text-align:center}
+.placa .n{font-family:var(--display);font-size:clamp(2.6rem,9vw,4.6rem);color:var(--coure-viu);line-height:1;display:block}
+.placa .t{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--blat-suau);margin-top:.7rem}
+.placa p{margin:1.4rem auto 0;max-width:46ch;color:var(--blat-suau)}
+
+.dues{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+@media(max-width:800px){.dues{grid-template-columns:1fr;gap:2.2rem}}
+.fitxa{background:var(--nit-2);border:1px solid var(--vora);border-radius:14px;padding:2rem 1.9rem}
+.fitxa dt{font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--coure);margin-top:1.5rem;font-weight:600}
+.fitxa dt:first-of-type{margin-top:0}
+.fitxa dd{margin:.3rem 0 0;font-size:1.02rem}
+.fitxa a{color:var(--blat);text-underline-offset:4px}
+.cta{display:inline-block;margin-top:2rem;background:var(--coure);color:var(--nit);padding:.95rem 2.1rem;border-radius:999px;text-decoration:none;font-weight:600;font-size:.95rem;transition:.25s}
+.cta:hover,.cta:focus-visible{background:var(--coure-viu);transform:translateY(-2px)}
+.cta.buida{background:transparent;border:1px solid var(--coure);color:var(--coure-viu);margin-left:.7rem}
+.cta.buida:hover{background:var(--coure);color:var(--nit)}
+@media(max-width:520px){.cta.buida{margin-left:0;margin-top:.7rem}}
+
+.faq{margin-top:2.4rem;border-top:1px solid var(--vora)}
+.faq details{border-bottom:1px solid var(--vora)}
+.faq summary{cursor:pointer;padding:1.3rem 2.5rem 1.3rem 0;font-family:var(--display);font-size:1.16rem;position:relative;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:.4rem;top:1.12rem;font-size:1.5rem;color:var(--coure-viu);transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{margin:0 0 1.4rem;color:var(--blat-suau);max-width:60ch}
+
+footer{position:relative;z-index:1;border-top:1px solid var(--vora);padding:2.6rem 0 3.4rem;font-size:.82rem;color:var(--blat-suau)}
+footer p{margin:.5rem 0;max-width:72ch}
+
+.rv{opacity:1}
+.js .rv{opacity:0;transform:translateY(20px)}
+.js .rv.on{opacity:1;transform:none;transition:opacity .75s ease,transform .75s cubic-bezier(.22,1,.36,1)}
+@media(prefers-reduced-motion:reduce){.js .rv,.js .rv.on{opacity:1!important;transform:none!important;transition:none!important}html{scroll-behavior:auto}}
+:focus-visible{outline:2px solid var(--coure-viu);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<div class="fons" aria-hidden="true">
+  <svg viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+    <defs><radialGradient id="c1"><stop offset="0" stop-color="#b56b3c" stop-opacity=".28"/><stop offset="1" stop-color="#b56b3c" stop-opacity="0"/></radialGradient></defs>
+    <circle cx="880" cy="200" r="400" fill="url(#c1)"/>
+    <g fill="none" stroke="#b56b3c" stroke-opacity=".12" stroke-width="1">
+      <path d="M120 900 V520 a90 90 0 0 1 180 0 V900"/>
+      <path d="M340 900 V520 a90 90 0 0 1 180 0 V900"/>
+      <path d="M560 900 V520 a90 90 0 0 1 180 0 V900"/>
+    </g>
+  </svg>
+</div>
+
+<nav>
+  <div class="env nav-in">
+    <div class="marca">Can <span>Trona</span></div>
+    <div class="nav-links">
+      <a href="#casa">La casa</a><a href="#placa">La plaza</a><a href="#arribar">Cómo llegar</a><a href="#faq">Preguntas</a>
+    </div>
+    <a class="btn-tel" href="tel:+34972520034">972 52 00 34</a>
+  </div>
+</nav>
+
+<header>
+  <div class="env">
+    <p class="lloc rv">Plaça Major · Sant Pere Pescador</p>
+    <h1 class="rv">Can <span>Trona</span></h1>
+    <p class="entrada rv">En la plaza del pueblo, en el número 9. De los sitios que no hace falta buscar: se llega solo.</p>
+    <div class="nota rv">
+      <div><span class="n">8,6</span><span class="t">sobre 10 en Guiacat</span></div>
+      <div><span class="n">Plaça Major</span><span class="t">el centro del pueblo</span></div>
+    </div>
+  </div>
+  <div class="banda-img rv">
+    <img src="assets/poble.webp" width="1600" height="900" alt="Plaza mayor de un pueblo del interior al anochecer" loading="eager" decoding="async">
+  </div>
+</header>
+
+<section id="casa">
+  <div class="env">
+    <p class="sobre rv">La casa</p>
+    <h2 class="rv">Un 8,6 y una dirección<br>que lo dice todo</h2>
+    <p class="text rv">Can Trona está en la <strong>Plaça Major, 9</strong>, en Sant Pere Pescador, con un <strong>8,6 sobre 10</strong> en Guiacat. Estar en la plaza mayor de un pueblo no es una dirección cualquiera: es el sitio por donde pasa todo el mundo y donde la gente queda sin tener que explicar dónde.</p>
+    <div class="duo">
+      <div class="tarja rv">
+        <img src="assets/sala.webp" width="900" height="675" alt="Interior de restaurante de pueblo con paredes de piedra y vigas de madera" loading="lazy" decoding="async">
+        <div class="cos"><h3>La sala</h3><p>Restaurante de pueblo, de los de toda la vida.</p></div>
+      </div>
+      <div class="tarja rv">
+        <img src="assets/taula.webp" width="900" height="675" alt="Mesa con pan, aceite de oliva, tomates y una copa de vino" loading="lazy" decoding="async">
+        <div class="cos"><h3>La mesa</h3><p>Pan, aceite y producto de la tierra. Lo de siempre, bien hecho.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="placa">
+  <div class="env">
+    <p class="sobre rv">La plaza</p>
+    <h2 class="rv">Estar en el número 9</h2>
+    <div class="placa rv">
+      <span class="n">Plaça Major, 9</span>
+      <div class="t">Sant Pere Pescador</div>
+      <p>Quien busca dónde comer en Sant Pere y no conoce el pueblo no llega a la plaza por internet: llega andando, si pasa por delante. Un sitio propio en la red es lo que hace que también llegue el que todavía está decidiendo desde el coche.</p>
+    </div>
+  </div>
+</section>
+
+<section id="arribar">
+  <div class="env dues">
+    <div class="rv">
+      <p class="sobre">Cómo llegar</p>
+      <h2>Dónde estamos</h2>
+      <p class="text">En la Plaça Major, 9, en Sant Pere Pescador. Para reservar, mejor llamar.</p>
+      <a class="cta" href="tel:+34972520034">Llamar ahora</a>
+      <a class="cta buida" href="https://www.google.com/maps/search/?api=1&amp;query=Can%20Trona%2C%20Pla%C3%A7a%20Major%209%2C%20Sant%20Pere%20Pescador" target="_blank" rel="noopener">Abrir en Maps</a>
+    </div>
+    <dl class="fitxa rv">
+      <dt>Dirección</dt>
+      <dd>Plaça Major, 9<br>17470 Sant Pere Pescador, Girona</dd>
+      <dt>Teléfono</dt>
+      <dd><a href="tel:+34972520034">972 52 00 34</a></dd>
+      <dt>Valoración</dt>
+      <dd>8,6 sobre 10 en Guiacat</dd>
+    </dl>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="env">
+    <p class="sobre rv">Preguntas frecuentes</p>
+    <h2 class="rv">Lo que más se pregunta</h2>
+    <div class="faq rv">
+      <details><summary>¿Dónde estáis exactamente?</summary><p>En la Plaça Major, 9, en el centro de Sant Pere Pescador.</p></details>
+      <details><summary>¿Cómo se reserva?</summary><p>Llamando al 972 52 00 34.</p></details>
+      <details><summary>¿Qué valoración tenéis?</summary><p>Un 8,6 sobre 10 en Guiacat.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="env">
+    <p><strong>Esto es una propuesta de página web, no la web oficial de Can Trona.</strong></p>
+    <p><strong>Esta página es más corta que las demás a propósito.</strong> De Can Trona hay muy poca información pública en internet: valoración, dirección y teléfono, y poco más. No se ha inventado nada para rellenarla — ni carta, ni platos, ni horarios, ni opiniones. Lo que falta se añade con los datos que dé el restaurante.</p>
+    <p>La valoración, la dirección y el teléfono se han tomado de las fichas públicas del restaurante en Guiacat y Bravíssima, consultadas el 7 de septiembre de 2026.</p>
+    <p><strong>Las imágenes son de ambiente y están generadas para esta propuesta.</strong> No son fotografías del local: se han hecho para enseñar cómo quedaría la página, y al contratar se sustituyen por fotos vuestras. Tampoco se muestra ningún plato concreto, porque no consta cuál es su carta.</p>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var items=[].slice.call(document.querySelectorAll('.rv'));
+  function tot(){items.forEach(function(el){el.classList.add('on');});}
+  if(!('IntersectionObserver' in window)){tot();return;}
+  var io=new IntersectionObserver(function(es){var n=0;es.forEach(function(e){if(e.isIntersecting){var el=e.target,i=n++;setTimeout(function(){el.classList.add('on');},Math.min(i,6)*66);io.unobserve(el);}});},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  items.forEach(function(el){io.observe(el);});
+  setTimeout(tot,3000);
+})();
+</script>
+</body>
+</html>
