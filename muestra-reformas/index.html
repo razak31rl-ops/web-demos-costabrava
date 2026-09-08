@@ -4,11 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>MESTRAL — Entra en la villa · Reformas de autor, Costa Brava</title>
-<meta name="description" content="Página de muestra: cruzas la puerta de la villa y atraviesas cada habitación, viéndola antes y después.">
+<meta name="description" content="Página de muestra: cruzas la puerta de la villa y recorres una galería donde cada estancia se ve antes y después.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#08080a">
-<!-- Tarjeta de vista previa: al pegar el enlace en WhatsApp o Instagram
-     sale la villa en vez de un enlace pelado. -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="MESTRAL — Entra en la villa">
 <meta property="og:description" content="Cruza la puerta y recorre la casa habitación por habitación, viendo cada una antes y después de la reforma.">
@@ -23,8 +21,9 @@
     --void:#08080a;
     --cream:#f2ece4;
     --sand:#c9b394;
-    --gold:#b98a4a;
-    --muted:rgba(242,236,228,.58);
+    --gold:#a9762f;
+    --ink:#2b2620;
+    --muted:rgba(43,38,32,.62);
     --line:rgba(242,236,228,.14);
     --ease:cubic-bezier(.16,1,.3,1);
   }
@@ -38,28 +37,23 @@
   }
   body.gated{overflow:hidden;height:100vh;}
   h1,h2,h3{margin:0;font-weight:400;}
-  p{margin:0;line-height:1.75;color:var(--muted);}
+  p{margin:0;line-height:1.75;}
   a{color:inherit;text-decoration:none;}
-  ::selection{background:var(--gold);color:#14100c;}
-  .eyebrow{
-    display:inline-block;font-size:.62rem;font-weight:600;letter-spacing:.3em;
-    text-transform:uppercase;color:var(--gold);text-shadow:0 2px 18px rgba(0,0,0,.95);
-  }
+  ::selection{background:var(--gold);color:#fff;}
 
   #driver{height:1500vh;pointer-events:none;}
   #scene{position:fixed;inset:0;width:100%;height:100%;z-index:1;display:block;}
+  /* Viñeta muy suave: la sala es clara, no queremos ensuciarla */
   .vignette{
     position:fixed;inset:0;z-index:2;pointer-events:none;
-    background:radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(0,0,0,.55) 100%);
+    background:radial-gradient(ellipse at 50% 48%, transparent 62%, rgba(40,30,18,.30) 100%);
   }
   .grain{
-    position:fixed;inset:-100%;z-index:3;pointer-events:none;opacity:.026;
+    position:fixed;inset:-100%;z-index:3;pointer-events:none;opacity:.018;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
     animation:grain 700ms steps(3) infinite;
   }
   @keyframes grain{0%{transform:translate(0,0);}33%{transform:translate(-3%,2%);}66%{transform:translate(2%,-3%);}100%{transform:translate(0,0);}}
-
-  /* Fundido a negro para cruzar la puerta, como un corte de cine */
   .cross{position:fixed;inset:0;z-index:70;background:#000;pointer-events:none;opacity:0;}
 
   /* ============ LOADER ============ */
@@ -73,10 +67,10 @@
     font-family:'Bodoni Moda',serif;font-size:clamp(2.4rem,7vw,4.4rem);
     letter-spacing:.34em;text-indent:.34em;color:var(--cream);
   }
-  .mark-sub{font-size:.6rem;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);}
+  .mark-sub{font-size:.6rem;letter-spacing:.42em;text-transform:uppercase;color:#c9954a;}
   .bar{width:min(240px,52vw);height:1px;background:var(--line);position:relative;overflow:hidden;}
   .bar i{position:absolute;inset:0;width:0%;background:var(--cream);transition:width .35s var(--ease);}
-  .pct{font-size:.62rem;letter-spacing:.28em;color:var(--muted);font-variant-numeric:tabular-nums;}
+  .pct{font-size:.62rem;letter-spacing:.28em;color:rgba(242,236,228,.55);font-variant-numeric:tabular-nums;}
   .enter{
     margin-top:6px;padding:15px 40px;border:1px solid var(--line);border-radius:999px;
     font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;font-weight:600;
@@ -88,6 +82,7 @@
   .enter:hover{background:var(--cream);color:var(--void);border-color:var(--cream);}
 
   /* ============ HUD ============ */
+  /* Sobre sala clara el HUD va en tinta oscura, como en las galerías buenas */
   .hud{position:fixed;inset:0;z-index:10;pointer-events:none;opacity:0;transition:opacity 1.2s var(--ease) .2s;}
   .hud.on{opacity:1;}
   .hud a,.hud button,.nav span{pointer-events:auto;}
@@ -96,29 +91,36 @@
     position:absolute;top:0;left:0;right:0;
     display:flex;align-items:center;justify-content:space-between;
     padding:clamp(16px,2.6vw,26px) clamp(20px,4vw,46px);
-    mix-blend-mode:difference;
+    color:var(--ink);
   }
   .logo{font-family:'Bodoni Moda',serif;font-size:.95rem;letter-spacing:.34em;text-indent:.34em;}
-  .nav{display:flex;gap:clamp(12px,2vw,26px);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;}
-  .nav span{opacity:.5;transition:opacity .3s;cursor:pointer;}
+  .nav{display:flex;gap:clamp(12px,2vw,26px);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;}
+  .nav span{opacity:.42;transition:opacity .3s;cursor:pointer;}
   .nav span:hover,.nav span.active{opacity:1;}
   @media (max-width:900px){ .nav span:not(.always){display:none;} }
 
   .rail{
     position:absolute;right:clamp(14px,2.2vw,24px);top:50%;transform:translateY(-50%);
-    width:1px;height:min(260px,30vh);background:var(--line);
+    width:1px;height:min(260px,30vh);background:rgba(43,38,32,.18);
   }
   .rail i{position:absolute;top:0;left:-1px;width:3px;background:var(--gold);height:0%;transition:height .12s linear;}
   @media (max-width:900px){ .rail{display:none;} }
 
+  /* Fuera es de noche: ahí el HUD tiene que ir en claro. Dentro de la
+     galería, que es clara, va en tinta oscura. */
+  .hud.nocturno .topbar{color:var(--cream);}
+  .hud.nocturno .rail{background:rgba(242,236,228,.22);}
+  .topbar,.rail{transition:color .6s var(--ease),background-color .6s var(--ease);}
+
   .hint{
     position:absolute;left:50%;bottom:26px;transform:translateX(-50%);
     display:flex;flex-direction:column;align-items:center;gap:10px;
-    font-size:.57rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);
+    font-size:.57rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(242,236,228,.75);
+    text-shadow:0 2px 14px rgba(0,0,0,.8);
     transition:opacity .6s var(--ease);
   }
   .hint.gone{opacity:0;}
-  .hint .track{width:1px;height:36px;background:var(--line);position:relative;overflow:hidden;}
+  .hint .track{width:1px;height:36px;background:rgba(242,236,228,.3);position:relative;overflow:hidden;}
   .hint .track::after{
     content:'';position:absolute;left:0;top:-36px;width:1px;height:36px;background:var(--cream);
     animation:drop 2.1s var(--ease) infinite;
@@ -129,40 +131,55 @@
   .stage{position:absolute;inset:0;}
   .cap{
     position:absolute;left:50%;transform:translate(-50%,24px);
-    bottom:12vh;width:min(760px,88vw);text-align:center;
+    bottom:11vh;width:min(760px,88vw);text-align:center;
     opacity:0;transition:opacity .85s var(--ease),transform .85s var(--ease);
   }
   .cap.on{opacity:1;transform:translate(-50%,0);}
-  .cap::before{
+  .cap.dark::before{
     content:'';position:absolute;inset:-60px -16%;z-index:-1;pointer-events:none;
     background:radial-gradient(ellipse at 50% 55%, rgba(8,8,10,.92) 16%, rgba(8,8,10,0) 76%);
   }
   .cap h2{
     font-family:'Bodoni Moda',serif;
     font-size:clamp(1.9rem,5vw,3.5rem);line-height:1.06;letter-spacing:-.01em;margin:14px 0 14px;
-    text-shadow:0 2px 28px rgba(0,0,0,.95);
   }
-  .cap h2 em{font-style:italic;color:var(--sand);}
-  .cap p{
-    font-size:clamp(.88rem,1.4vw,1rem);max-width:46ch;margin:0 auto;
-    color:rgba(242,236,228,.88);text-shadow:0 2px 22px rgba(0,0,0,.95);
+  .cap h2 em{font-style:italic;}
+  .cap p{font-size:clamp(.88rem,1.4vw,1rem);max-width:46ch;margin:0 auto;}
+  .cap .eyebrow{
+    display:inline-block;font-size:.62rem;font-weight:600;letter-spacing:.3em;
+    text-transform:uppercase;color:#d9a75c;
+  }
+  /* el de la entrada va sobre la fachada nocturna: texto claro */
+  .cap.dark{color:var(--cream);}
+  .cap.dark h2{text-shadow:0 2px 28px rgba(0,0,0,.95);}
+  .cap.dark h2 em{color:var(--sand);}
+  .cap.dark p{color:rgba(242,236,228,.9);text-shadow:0 2px 22px rgba(0,0,0,.95);}
+  /* el del final va sobre sala clara: tinta oscura */
+  .cap.light{color:var(--ink);}
+  .cap.light h2 em{color:#8a5a1e;}
+  .cap.light p{color:var(--muted);}
+  .cap.light .eyebrow{color:#8a5a1e;}
+  .cap.light::before{
+    content:'';position:absolute;inset:-56px -14%;z-index:-1;pointer-events:none;
+    background:radial-gradient(ellipse at 50% 55%, rgba(247,242,234,.94) 20%, rgba(247,242,234,0) 78%);
   }
 
-  /* ficha de estancia: arriba a la izquierda, para no tapar la foto */
+  /* cartel de sala, como en un museo */
   .room{
-    position:absolute;left:clamp(20px,4vw,46px);top:clamp(96px,14vh,132px);
-    display:flex;flex-direction:column;gap:5px;padding:14px 20px;
-    border-left:1px solid var(--gold);background:rgba(8,8,10,.5);backdrop-filter:blur(9px);
-    opacity:0;transform:translateY(-14px);
+    position:absolute;left:clamp(20px,4vw,52px);bottom:clamp(80px,13vh,120px);
+    display:flex;flex-direction:column;gap:5px;padding:15px 22px;
+    border-left:2px solid var(--gold);background:rgba(250,246,240,.82);
+    backdrop-filter:blur(10px);box-shadow:0 12px 40px rgba(60,45,25,.14);
+    opacity:0;transform:translateY(14px);
     transition:opacity .7s var(--ease),transform .7s var(--ease);
   }
   .room.on{opacity:1;transform:none;}
-  .room b{font-size:.86rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--cream);}
-  .room span{font-size:.62rem;letter-spacing:.16em;color:var(--muted);}
-  .room i{font-style:normal;font-size:.6rem;letter-spacing:.2em;color:#e2b877;margin-top:2px;}
+  .room b{font-size:.84rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);}
+  .room span{font-size:.62rem;letter-spacing:.14em;color:var(--muted);}
+  .room i{font-style:normal;font-size:.6rem;letter-spacing:.18em;color:#8a5a1e;margin-top:2px;}
   @media (max-width:760px){
-    .room{left:50%;transform:translate(-50%,-14px);align-items:center;text-align:center;
-          border-left:0;border-top:1px solid var(--gold);top:auto;bottom:15vh;}
+    .room{left:50%;transform:translate(-50%,14px);align-items:center;text-align:center;
+          border-left:0;border-top:2px solid var(--gold);bottom:16vh;}
     .room.on{transform:translate(-50%,0);}
   }
 
@@ -173,45 +190,46 @@
   }
   .ba-ui.on{opacity:1;}
   .ba-ui b{
-    font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;font-weight:600;opacity:.42;
-    transition:color .3s,opacity .3s;text-shadow:0 2px 14px rgba(0,0,0,.95);
+    font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;font-weight:700;
+    color:var(--ink);opacity:.38;transition:color .3s,opacity .3s;
   }
-  .ba-ui b.hot{opacity:1;color:var(--gold);}
-  .ba-ui .sl{width:min(210px,42vw);height:1px;background:rgba(242,236,228,.4);position:relative;}
+  .ba-ui b.hot{opacity:1;color:#8a5a1e;}
+  .ba-ui .sl{width:min(210px,42vw);height:2px;background:rgba(43,38,32,.2);position:relative;border-radius:2px;}
   .ba-ui .sl i{
-    position:absolute;top:-4px;width:9px;height:9px;border-radius:50%;background:var(--gold);
-    transform:translateX(-50%);box-shadow:0 0 14px rgba(185,138,74,.9);
+    position:absolute;top:-4px;width:10px;height:10px;border-radius:50%;background:var(--gold);
+    transform:translateX(-50%);box-shadow:0 0 0 4px rgba(169,118,47,.18);
   }
 
   .cta{display:flex;gap:13px;margin-top:26px;justify-content:center;flex-wrap:wrap;}
   .btn{
     display:inline-flex;align-items:center;padding:16px 34px;border-radius:999px;
-    font-size:.65rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
-    border:1px solid var(--cream);transition:.35s var(--ease);cursor:pointer;
+    font-size:.65rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;
+    border:1px solid var(--ink);transition:.35s var(--ease);cursor:pointer;
   }
-  .btn-solid{background:var(--cream);color:var(--void);}
-  .btn-solid:hover{background:var(--gold);border-color:var(--gold);color:#14100c;transform:translateY(-2px);}
-  .btn-ghost:hover{background:var(--cream);color:var(--void);transform:translateY(-2px);}
+  .btn-solid{background:var(--ink);color:#f7f2ea;}
+  .btn-solid:hover{background:#8a5a1e;border-color:#8a5a1e;transform:translateY(-2px);}
+  .btn-ghost{color:var(--ink);}
+  .btn-ghost:hover{background:var(--ink);color:#f7f2ea;transform:translateY(-2px);}
 
   .foot{
     position:absolute;left:0;right:0;bottom:0;
     display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
-    padding:16px clamp(20px,4vw,46px);font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
+    padding:16px clamp(20px,4vw,46px);font-size:.56rem;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--muted);
     opacity:0;transition:opacity .8s var(--ease);
   }
   .foot.on{opacity:1;}
 
   .demo{
     position:fixed;top:clamp(52px,7vh,70px);left:clamp(20px,4vw,46px);z-index:60;
-    background:var(--cream);color:var(--void);font-size:.54rem;font-weight:700;
+    background:var(--ink);color:#f7f2ea;font-size:.54rem;font-weight:700;
     letter-spacing:.16em;text-transform:uppercase;padding:7px 14px;border-radius:999px;
-    display:flex;align-items:center;gap:7px;box-shadow:0 10px 30px rgba(0,0,0,.5);
+    display:flex;align-items:center;gap:7px;box-shadow:0 8px 24px rgba(60,45,25,.3);
     opacity:0;transition:opacity .6s var(--ease) 1.4s;
   }
-  .demo.on{opacity:.92;}
-  .demo i{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:blink 1.9s infinite;}
+  .demo.on{opacity:.9;}
+  .demo i{width:6px;height:6px;border-radius:50%;background:#d9a75c;animation:blink 1.9s infinite;}
   @keyframes blink{0%,100%{opacity:1;}50%{opacity:.25;}}
-  /* en móvil el control antes/después vive abajo, así que el sello se queda arriba */
 
   .fallback{display:none;position:relative;z-index:20;padding:12vh clamp(20px,6vw,80px);}
   body.nowebgl #driver,body.nowebgl #scene,body.nowebgl .hud,body.nowebgl .vignette{display:none;}
@@ -229,7 +247,7 @@
     <div class="mark-sub" style="margin-top:14px">Reformas de autor · Costa Brava</div>
   </div>
   <div class="bar"><i id="barFill"></i></div>
-  <div class="pct" id="pct">PREPARANDO LA VILLA · 0%</div>
+  <div class="pct" id="pct">PREPARANDO LA GALERÍA · 0%</div>
   <button class="enter" id="enterBtn">Entrar en la villa</button>
 </div>
 
@@ -257,13 +275,13 @@
   <div class="rail"><i id="railFill"></i></div>
 
   <div class="stage">
-    <div class="cap" data-from="0" data-to="0.055">
+    <div class="cap dark" data-from="0" data-to="0.055">
       <span class="eyebrow">Villa privada · Sant Martí d'Empúries</span>
-      <h2>Entra en la casa<br>y <em>atraviésala</em></h2>
-      <p>Cruza la puerta y ve pasando de una habitación a otra. En cada una verás exactamente cómo estaba y cómo quedó.</p>
+      <h2>Entra en la casa<br>y <em>recórrela</em></h2>
+      <p>Cruza la puerta y ve pasando de una sala a otra. En cada una verás exactamente cómo estaba y cómo quedó.</p>
     </div>
 
-    <div class="cap" data-from="0.972" data-to="1.01">
+    <div class="cap light" data-from="0.972" data-to="1.01">
       <span class="eyebrow">Presupuesto sin compromiso</span>
       <h2>¿Empezamos por <em>tu</em> casa?</h2>
       <p>Cuéntanos qué quieres cambiar y te damos una cifra real en 72 horas.</p>
@@ -294,7 +312,7 @@
 
 <div class="fallback">
   <div class="mark" style="font-size:2rem">MESTRAL</div>
-  <p style="margin-top:20px">Tu navegador no admite gráficos 3D (WebGL). Aquí tienes la villa en imágenes.</p>
+  <p style="margin-top:20px;color:rgba(242,236,228,.7)">Tu navegador no admite gráficos 3D (WebGL). Aquí tienes la villa en imágenes.</p>
   <h3>Salón</h3>
   <img data-src="assets/salon-antes.webp" alt="Salón antes de la reforma">
   <img data-src="assets/salon.webp" alt="Salón después de la reforma">
@@ -330,9 +348,6 @@
     document.body.classList.add('nowebgl');
     document.body.classList.remove('gated');
     document.getElementById('loader').classList.add('done');
-    // Las fotos de respaldo sólo se descargan aquí. Con <img src> normal
-    // el navegador se las bajaba siempre, aunque estuvieran ocultas, y
-    // duplicaba el peso de la página.
     var imgs = document.querySelectorAll('.fallback img[data-src]');
     for(var i=0;i<imgs.length;i++) imgs[i].src = imgs[i].getAttribute('data-src');
     return;
@@ -349,45 +364,57 @@
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.02;
+  renderer.toneMappingExposure = 0.92;
 
   var scene = new THREE.Scene();
   scene.background = new THREE.Color(0x07070a);
-  scene.fog = new THREE.FogExp2(0x07070a, 0.0075);
+  scene.fog = new THREE.Fog(0xe4d9c6, 34, 96);
 
-  var FOV = 56;
+  var FOV = 58;
   var camera = new THREE.PerspectiveCamera(FOV, window.innerWidth/window.innerHeight, 0.1, 400);
   camera.rotation.order = 'YXZ';
 
-  var EYE_Y = 1.75;      // altura de los ojos y centro de cada fotografía
-  var FLOOR_Y = -2.45;   // el suelo queda por debajo del borde inferior
+  var EYE_Y = 1.68;
 
   /* =============================================================
-     2 · Guion de la villa
-        Cada estancia es UNA FOTOGRAFÍA COMPLETA que llena la
-        pantalla y que la cámara acaba atravesando.
+     2 · La galería
+        Salas encadenadas: suelo, techo y paredes de verdad. Al fondo
+        de cada una, la pared entera es la fotografía. Se sale por un
+        hueco lateral, alternando lado — como en una galería real.
   ============================================================= */
-  var GAP = 26;   // separación entre fotografías (se recalcula según la pantalla)
+  var HALL_W = 11.4;        // ancho de sala
+  var HALL_H = 4.25;        // altura libre
+  var ROOM_LEN = 17;        // separación entre paredes
+  var PH_H = 3.35;          // altura de la fotografía
+  var PH_Y = 1.92;          // centro de la fotografía
+  var GAP_W = 2.9;          // ancho del hueco de paso
+
+  // El relato de la casa: es lo que convierte una galería en un caso de obra.
   var ROOMS = [
-    {key:'salon',      name:'Salón principal',      meta:'Microcemento · vigas de roble · 62 m²', days:'184 días de obra'},
-    {key:'comedor',    name:'Comedor',              meta:'Roble macizo · ventanal de acero',      days:'Se tiró un tabique'},
-    {key:'cocina',     name:'Cocina abierta',       meta:'Mármol Calacatta · isla de 3,2 m',      days:'Antes eran dos cuartos'},
-    {key:'habitacion', name:'Dormitorio principal', meta:'Salida directa a la terraza',           days:'Ventanal nuevo de suelo a techo'},
-    {key:'bano',       name:'Baño principal',       meta:'Microcemento continuo · ducha de obra', days:'La bañera vieja ya no está'},
-    {key:'dron',       name:'La villa entera',      meta:'Vista de dron · Costa Brava',           days:'11 meses de obra'}
+    {key:'salon', name:'Salón principal', meta:'Microcemento · vigas de roble · 62 m²', days:'Mes 1 al 6',
+     story:'Aquí no entraba la luz. Al tirar el falso techo aparecieron las vigas de roble, tapadas desde 1968.'},
+    {key:'comedor', name:'Comedor', meta:'Roble macizo · ventanal de acero', days:'Mes 4',
+     story:'Era un cuarto cerrado con una vitrina heredada. Cayó el tabique y ahora caben catorce a la mesa.'},
+    {key:'cocina', name:'Cocina abierta', meta:'Mármol Calacatta · isla de 3,2 m', days:'Mes 5 al 7',
+     story:'Eran dos habitaciones separadas por un muro de carga. Hubo que meter una viga de hierro de seis metros.'},
+    {key:'habitacion', name:'Dormitorio principal', meta:'Salida directa a la terraza', days:'Mes 7',
+     story:'El papel pintado escondía humedad en tres paredes. Se picó hasta el ladrillo y se abrió el ventanal.'},
+    {key:'bano', name:'Baño principal', meta:'Microcemento continuo · ducha de obra', days:'Mes 8',
+     story:'La bañera llevaba años sin usarse. En su sitio hay dos metros de ducha de obra sin un solo escalón.'},
+    {key:'dron', name:'La villa entera', meta:'Vista de dron · Costa Brava', days:'Mes 11',
+     story:'Once meses. Por fuera sigue siendo la misma casa de siempre, y eso era exactamente lo que pedían.'}
   ];
-  ROOMS.forEach(function(r,i){ r.z = -(GAP*(i+1)); });
+  ROOMS.forEach(function(r,i){
+    r.side    = (i % 2 === 0) ? 1 : -1;                   // lado del hueco
+    r.z       = -(ROOM_LEN * (i + 1));
+    r.gapX    = r.side * (HALL_W/2 - GAP_W/2 - 0.15);     // hueco pegado a una pared
+    r.photoX  = -r.side * 1.35;                            // foto desplazada al lado opuesto
+  });
 
   var Z_FACADE = 0;
-  var BASE_H = 7.2;      // altura de las fotografías de estancia
-
-  // Fachada: la foto frontal de la villa con el hueco de la puerta
-  // recortado justo encima de la puerta real de la fotografía.
   var FACADE = {
-    w: 19.7, h: 11.1,
-    yBase: -3.77,                 // baja la foto para que su suelo quede en y = 0
-    doorX: 0, doorW: 1.5, doorH: 3.06,
-    doorY: 3.77
+    w: 19.7, h: 11.1, yBase: -3.77,
+    doorX: 0, doorW: 1.5, doorH: 3.06, doorY: 3.77
   };
 
   /* =============================================================
@@ -399,8 +426,12 @@
     var t = texLoader.load(src);
     t.encoding = THREE.sRGBEncoding;
     t.anisotropy = renderer.capabilities.getMaxAnisotropy();
-    t.generateMipmaps = false;
-    t.minFilter = THREE.LinearFilter;
+    // CON mipmaps. Sin ellos, una foto de 1920 px mostrada a 700 px
+    // elige píxeles distintos en cada fotograma y la imagen entera
+    // hormiguea. Era el temblor del borde que se veía en el móvil.
+    t.generateMipmaps = true;
+    t.minFilter = THREE.LinearMipmapLinearFilter;
+    t.magFilter = THREE.LinearFilter;
     return t;
   }
   var T = {};
@@ -413,16 +444,13 @@
   /* =============================================================
      4 · Utilidades
   ============================================================= */
-  // Recorte "cover": la foto llena su marco sin deformarse.
-  function coverFit(img, wallW, wallH){
+  function coverFit(img, w, h){
     if(!img || !img.width) return {rx:1, ox:0, ry:1, oy:0};
-    var ia = img.width/img.height, wa = wallW/wallH;
+    var ia = img.width/img.height, wa = w/h;
     if(ia > wa){ var rx = wa/ia; return {rx:rx, ox:(1-rx)/2, ry:1, oy:0}; }
     var ry = ia/wa; return {rx:1, ox:0, ry:ry, oy:(1-ry)/2};
   }
 
-  // Trozo de pared con las UV recalculadas: los cuatro trozos que
-  // rodean el hueco reconstruyen la fotografía completa, sin costuras.
   function piece(mat, wallW, wallH, x0, x1, y0, y1, z, fit, yBase){
     yBase = yBase || 0;
     var g = new THREE.PlaneGeometry(x1-x0, y1-y0);
@@ -458,21 +486,114 @@
     scene.add(m); return m;
   }
 
-  var glowTex = (function(){
+  function box(w,h,d,x,y,z,mat){
+    var m = new THREE.Mesh(new THREE.BoxGeometry(w,h,d), mat);
+    m.position.set(x,y,z); scene.add(m); return m;
+  }
+
+  function noiseTexture(base, contrast, repeat){
+    var size = 512, c = document.createElement('canvas'); c.width = c.height = size;
+    var x = c.getContext('2d');
+    x.fillStyle = base; x.fillRect(0,0,size,size);
+    var img = x.getImageData(0,0,size,size), d = img.data;
+    for(var i=0;i<d.length;i+=4){
+      var n = (Math.random()-0.5)*contrast;
+      d[i]=Math.max(0,Math.min(255,d[i]+n));
+      d[i+1]=Math.max(0,Math.min(255,d[i+1]+n));
+      d[i+2]=Math.max(0,Math.min(255,d[i+2]+n));
+    }
+    x.putImageData(img,0,0);
+    for(var k=0;k<18;k++){
+      var r=50+Math.random()*150, gx=Math.random()*size, gy=Math.random()*size;
+      var g=x.createRadialGradient(gx,gy,0,gx,gy,r);
+      g.addColorStop(0,'rgba(120,100,70,'+(0.012+Math.random()*0.022)+')');
+      g.addColorStop(1,'rgba(120,100,70,0)');
+      x.fillStyle=g; x.beginPath(); x.arc(gx,gy,r,0,6.283); x.fill();
+    }
+    var t = new THREE.CanvasTexture(c);
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    t.repeat.set(repeat,repeat);
+    t.encoding = THREE.sRGBEncoding;
+    t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    return t;
+  }
+
+  // Óvalo de luz: es LA firma visual de la referencia.
+  var poolTex = (function(){
     var c=document.createElement('canvas'); c.width=c.height=256;
     var x=c.getContext('2d');
-    var g=x.createRadialGradient(128,128,0,128,128,128);
-    g.addColorStop(0,'rgba(255,232,196,.92)');
-    g.addColorStop(.5,'rgba(255,232,196,.26)');
-    g.addColorStop(1,'rgba(255,232,196,0)');
+    var g=x.createRadialGradient(128,110,4,128,128,126);
+    g.addColorStop(0.00,'rgba(255,240,214,.95)');
+    g.addColorStop(0.30,'rgba(255,236,205,.55)');
+    g.addColorStop(0.62,'rgba(255,230,195,.18)');
+    g.addColorStop(1.00,'rgba(255,228,190,0)');
     x.fillStyle=g; x.fillRect(0,0,256,256);
     var t=new THREE.CanvasTexture(c); t.encoding=THREE.sRGBEncoding; return t;
   })();
+  function poolMat(op){
+    return new THREE.MeshBasicMaterial({
+      map:poolTex, transparent:true, opacity:op,
+      blending:THREE.AdditiveBlending, depthWrite:false
+    });
+  }
+
+  var glowTex = poolTex;
+
+  // Sombra de contacto: sin esto los muebles parecen flotar sobre el suelo.
+  var shadowTex = (function(){
+    var c=document.createElement('canvas'); c.width=c.height=128;
+    var x=c.getContext('2d');
+    var g=x.createRadialGradient(64,64,2,64,64,64);
+    g.addColorStop(0.00,'rgba(40,32,22,.85)');
+    g.addColorStop(0.45,'rgba(40,32,22,.38)');
+    g.addColorStop(1.00,'rgba(40,32,22,0)');
+    x.fillStyle=g; x.fillRect(0,0,128,128);
+    return new THREE.CanvasTexture(c);
+  })();
+  function contactShadow(x, z, w, d, op){
+    var m = new THREE.Mesh(new THREE.PlaneGeometry(w, d),
+      new THREE.MeshBasicMaterial({map:shadowTex, transparent:true, opacity:op, depthWrite:false}));
+    m.rotation.x = -Math.PI/2;
+    m.position.set(x, 0.012, z);
+    m.renderOrder = 6;
+    scene.add(m);
+    return m;
+  }
+
+  // Texto en vinilo sobre la pared, como las cartelas de un museo.
+  function wallText(title, body, num){
+    var W = 1024, H = 512;
+    var c = document.createElement('canvas'); c.width = W; c.height = H;
+    var x = c.getContext('2d');
+    x.clearRect(0,0,W,H);
+    if(num){
+      x.fillStyle = 'rgba(43,38,32,.20)';
+      x.font = '700 190px Inter, Helvetica, sans-serif';
+      x.textAlign = 'left'; x.textBaseline = 'top';
+      x.fillText(num, 12, 6);
+    }
+    x.textAlign = 'left'; x.textBaseline = 'top';
+    x.fillStyle = '#8a5a1e';
+    x.font = '700 34px Inter, Helvetica, sans-serif';
+    x.fillText(title.toUpperCase().split('').join(String.fromCharCode(8202)), 14, 214);
+    x.fillStyle = 'rgba(43,38,32,.9)';
+    x.font = '400 42px "Bodoni Moda", Georgia, serif';
+    var words = body.split(' '), line = '', y = 276;
+    for(var i=0;i<words.length;i++){
+      var probe = line ? line + ' ' + words[i] : words[i];
+      if(x.measureText(probe).width > W - 40 && line){
+        x.fillText(line, 14, y); y += 54; line = words[i];
+      } else { line = probe; }
+    }
+    if(line) x.fillText(line, 14, y);
+    var t = new THREE.CanvasTexture(c);
+    t.encoding = THREE.sRGBEncoding;
+    t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    return t;
+  }
 
   /* =============================================================
      5 · Material ANTES / DESPUÉS
-        uProg 0 = toda ANTES · uProg 1 = toda DESPUÉS
-        uAlpha permite desvanecer la foto justo al atravesarla.
   ============================================================= */
   var VS = [
     'varying vec2 vUv;',
@@ -487,17 +608,21 @@
     '  float m = 1.0 - smoothstep(e-0.009, e+0.009, vUv.x);',
     '  vec4 c = mix(texture2D(tA,vUv), texture2D(tB,vUv), m);',
     '  float line = smoothstep(0.0042, 0.0, abs(vUv.x - e));',
-    '  c.rgb += line * vec3(1.0,0.80,0.52) * 1.35;',
+    // La línea sólo existe mientras el barrido está en marcha. Si no,
+    // en los extremos se quedaba aparcada en el canto de la foto y
+    // parecía un fallo del marco.
+    '  float viva = smoothstep(0.0, 0.05, e) * smoothstep(1.0, 0.95, e);',
+    '  c.rgb += line * viva * vec3(1.0,0.80,0.52) * 1.35;',
     '  gl_FragColor = vec4(c.rgb, uAlpha);',
     '}'
   ].join('\n');
 
-  function baMaterial(tA, tB){
-    var u = {tA:{value:tA}, tB:{value:tB}, uProg:{value:0}, uAlpha:{value:1}};
+  function baMaterial(tA, tB, alpha){
+    var u = {tA:{value:tA}, tB:{value:tB}, uProg:{value:0}, uAlpha:{value:alpha===undefined?1:alpha}};
     return {
       mat: new THREE.ShaderMaterial({
         uniforms:u, vertexShader:VS, fragmentShader:FS,
-        transparent:true, depthWrite:false, side:THREE.DoubleSide
+        transparent:(alpha!==undefined && alpha<1), depthWrite:!(alpha!==undefined && alpha<1)
       }),
       u:u
     };
@@ -509,42 +634,27 @@
   var built = false, doorPivot = null, dustGeo = null, DUST_N = 0;
   var facadeMats = [], facadeParts = [];
 
-  /* -------------------------------------------------------------
-     FACHADA FOTOGRÁFICA
-     La foto frontal de la villa con el hueco de la puerta recortado.
-     La hoja que gira es el propio trozo de la fotografía, así que
-     al abrirse parece que se abre la puerta de verdad.
-     Nunca nos acercamos tanto como para verla pixelada: el paso por
-     la puerta se resuelve con un fundido a negro.
-  ------------------------------------------------------------- */
   function buildFacade(){
     var F = FACADE;
     var fit = coverFit(T.fachada.image, F.w, F.h);
-
     var facadeMat = new THREE.MeshBasicMaterial({map:T.fachada, transparent:true, depthWrite:false});
     facadeMats.push(facadeMat);
     facadeParts = photoWall(facadeMat, Z_FACADE, F.doorX, fit, F.w, F.h,
                             F.doorW, F.doorH, F.yBase, F.doorY);
-    // Nada escribe profundidad, así que el orden de dibujado manda:
-    // la fachada debe tapar a las estancias hasta que la cruzamos.
-    facadeParts.forEach(function(m){ m.renderOrder = 10; });
+    facadeParts.forEach(function(m){ m.renderOrder = 20; });
 
-    // telón negro alrededor, para que la foto no flote en el vacío
     var edge = new THREE.MeshBasicMaterial({color:0x07070a, transparent:true, depthWrite:false});
     facadeMats.push(edge);
     var top = F.yBase + F.h;
-    plane(edge, 120, 40, [0, top + 20, Z_FACADE - 0.08], null, 9);
-    plane(edge, 50, 60, [-F.w/2 - 25, top - 12, Z_FACADE - 0.08], null, 9);
-    plane(edge, 50, 60, [ F.w/2 + 25, top - 12, Z_FACADE - 0.08], null, 9);
-    plane(edge, 120, 40, [0, F.yBase - 20, Z_FACADE - 0.08], null, 9);
+    // solapan un poco con la foto: si no, se cuela una franja de la sala
+    plane(edge, 140, 40, [0, top + 19.4, Z_FACADE - 0.08], null, 19);
+    plane(edge, 60, 70, [-F.w/2 - 29.4, top - 12, Z_FACADE - 0.08], null, 19);
+    plane(edge, 60, 70, [ F.w/2 + 29.4, top - 12, Z_FACADE - 0.08], null, 19);
+    plane(edge, 140, 40, [0, F.yBase - 19.4, Z_FACADE - 0.08], null, 19);
 
-    // luz cálida saliendo por la puerta abierta
-    plane(new THREE.MeshBasicMaterial({
-      map:glowTex, transparent:true, opacity:.38,
-      blending:THREE.AdditiveBlending, depthWrite:false
-    }), F.doorW*2.6, F.doorH*1.6, [F.doorX, F.doorH*0.45, Z_FACADE - 1.1], null, 8);
+    plane(poolMat(.42), F.doorW*2.6, F.doorH*1.6,
+          [F.doorX, F.doorH*0.45, Z_FACADE - 1.1], null, 18);
 
-    // la hoja de la puerta es el propio recorte de la fotografía
     var dL = F.doorX - F.doorW/2, dR = F.doorX + F.doorW/2;
     var leafMat = new THREE.MeshBasicMaterial({
       map:T.fachada, side:THREE.DoubleSide, transparent:true, depthWrite:false
@@ -552,7 +662,7 @@
     facadeMats.push(leafMat);
     var leaf = piece(leafMat, F.w, F.h, dL, dR, F.doorY, F.doorY + F.doorH,
                      Z_FACADE, fit, F.yBase);
-    leaf.renderOrder = 11;
+    leaf.renderOrder = 21;
     scene.remove(leaf);
     doorPivot = new THREE.Object3D();
     doorPivot.position.set(dL, 0, Z_FACADE + 0.02);
@@ -563,53 +673,253 @@
 
   function buildHouse(){
     if(built) return; built = true;
-
-    // ---- suelo: sólo para dar reflejo y suelo bajo los pies
-    var fmat = new THREE.MeshBasicMaterial({color:0x121214});
-    plane(fmat, 800, 900, [0, FLOOR_Y, -240], [-Math.PI/2,0,0]);
-
     buildFacade();
 
-    // ---- ESTANCIAS: una fotografía completa cada una
-    ROOMS.forEach(function(r){
-      var img = T[r.key].image;
-      var aspect = (img && img.width) ? img.width/img.height : 1.778;
-      r.w = BASE_H * aspect;
-      r.h = BASE_H;
+    var LEN  = ROOM_LEN * (ROOMS.length + 1);
+    // La galería arranca JUSTO detrás de la fachada. Si la dejaba
+    // sobresalir hacia la cámara, su suelo y su techo se veían por
+    // encima de la casa desde fuera.
+    var HALL_START = -0.5;
+    var hallLen = LEN + 20;
+    var midZ = HALL_START - hallLen/2;
 
-      var b = baMaterial(T[r.key+'-antes'], T[r.key]);
-      r.u = b.u; r.mat = b.mat;
-      r.mesh = plane(b.mat, r.w, r.h, [0, EYE_Y, r.z], null, 3);
+    // ---------- materiales de la sala: claros y cálidos ----------
+    var wallMat = new THREE.MeshStandardMaterial({
+      map:noiseTexture('#e9e0d1', 9, 5), roughness:.94, metalness:0
+    });
+    var ceilMat = new THREE.MeshStandardMaterial({color:0xf4efe6, roughness:1});
+    var floorMat = new THREE.MeshStandardMaterial({
+      map:noiseTexture('#cdc0ac', 7, 18), roughness:.26, metalness:.30,
+      transparent:true, opacity:.93
+    });
+    floorMat.depthWrite = true;
 
-      // reflejo en el suelo
-      var refU = {tA:b.u.tA, tB:b.u.tB, uProg:b.u.uProg, uAlpha:{value:0.16}};
-      r.refU = refU;
-      var refMat = new THREE.ShaderMaterial({
-        uniforms:refU, vertexShader:VS, fragmentShader:FS,
-        transparent:true, depthWrite:false, side:THREE.DoubleSide
-      });
-      r.ref = plane(refMat, r.w, r.h, [0, 2*FLOOR_Y - EYE_Y, r.z], null, 2);
-      r.ref.scale.y = -1;
+    // suelo, techo y paredes laterales corridas
+    var floor = plane(floorMat, HALL_W, hallLen, [0,0,midZ], [-Math.PI/2,0,0], 6);
+    plane(ceilMat, HALL_W, hallLen, [0,HALL_H,midZ], [Math.PI/2,0,0]);
+    plane(wallMat, hallLen, HALL_H, [-HALL_W/2, HALL_H/2, midZ], [0, Math.PI/2,0]);
+    plane(wallMat, hallLen, HALL_H, [ HALL_W/2, HALL_H/2, midZ], [0,-Math.PI/2,0]);
+    // Rodapié y cornisa: dos molduras finas que rompen la caja y le
+    // dan escala. Sin ellas pared, suelo y techo se funden en un cubo.
+    var trimMat = new THREE.MeshStandardMaterial({color:0xf3ede2, roughness:.85});
+    [-1, 1].forEach(function(sd){
+      var wx = sd * (HALL_W/2 - 0.045);
+      box(0.09, 0.16, hallLen, wx, 0.08, midZ, trimMat);              // rodapié
+      box(0.11, 0.13, hallLen, wx, HALL_H - 0.075, midZ, trimMat);    // cornisa
+    });
+    // junta de sombra a ras de suelo
+    var shade = new THREE.MeshBasicMaterial({color:0x6d6152});
+    plane(shade, hallLen, .03, [-HALL_W/2+.10, .17, midZ], [0, Math.PI/2,0]);
+    plane(shade, hallLen, .03, [ HALL_W/2-.10, .17, midZ], [0,-Math.PI/2,0]);
 
-      // halo detrás, para despegarla del negro
-      r.halo = plane(new THREE.MeshBasicMaterial({
-        map:glowTex, transparent:true, opacity:.20,
-        blending:THREE.AdditiveBlending, depthWrite:false
-      }), r.w*1.5, r.h*1.7, [0, EYE_Y, r.z + 0.6], null, 1);
+    // Oclusión falsa en las esquinas. En un sitio real la luz nunca
+    // llega igual al arranque de la pared que a la mitad; sin esto
+    // todo queda con el mismo tono y canta a render.
+    var aoTex = (function(){
+      var c=document.createElement('canvas'); c.width=4; c.height=256;
+      var x=c.getContext('2d');
+      var g=x.createLinearGradient(0,0,0,256);
+      g.addColorStop(0.00,'rgba(58,46,30,.34)');   // junto al techo
+      g.addColorStop(0.16,'rgba(58,46,30,0)');
+      g.addColorStop(0.70,'rgba(58,46,30,0)');
+      g.addColorStop(1.00,'rgba(48,38,24,.46)');   // junto al suelo
+      x.fillStyle=g; x.fillRect(0,0,4,256);
+      return new THREE.CanvasTexture(c);
+    })();
+    var aoMat = new THREE.MeshBasicMaterial({map:aoTex, transparent:true, depthWrite:false});
+    [-1,1].forEach(function(sd){
+      plane(aoMat, hallLen, HALL_H, [sd*(HALL_W/2 - 0.02), HALL_H/2, midZ],
+            [0, sd>0 ? -Math.PI/2 : Math.PI/2, 0], 4);
+    });
+    // y una sombra tendida en el suelo a lo largo de cada pared
+    var floorAO = (function(){
+      var c=document.createElement('canvas'); c.width=256; c.height=4;
+      var x=c.getContext('2d');
+      var g=x.createLinearGradient(0,0,256,0);
+      g.addColorStop(0.00,'rgba(48,38,24,.40)');
+      g.addColorStop(1.00,'rgba(48,38,24,0)');
+      x.fillStyle=g; x.fillRect(0,0,256,4);
+      return new THREE.CanvasTexture(c);
+    })();
+    [-1,1].forEach(function(sd){
+      var m = new THREE.Mesh(new THREE.PlaneGeometry(1.5, hallLen),
+        new THREE.MeshBasicMaterial({map:floorAO, transparent:true, depthWrite:false}));
+      m.rotation.x = -Math.PI/2;
+      m.rotation.z = sd > 0 ? -Math.PI/2 : Math.PI/2;
+      m.position.set(sd*(HALL_W/2 - 0.75), 0.008, midZ);
+      m.renderOrder = 5;
+      scene.add(m);
     });
 
-    // ---- polvo suspendido
-    var N = IS_MOBILE ? 300 : 800;
+    // ---------- luminarias del techo + óvalos en las paredes ----------
+    var fixture = new THREE.MeshBasicMaterial({color:0xfff3dd});
+    for(var z = -3; z > -LEN; z -= 4.2){
+      [-1,1].forEach(function(s){
+        var fx = s * (HALL_W/2 - 1.15);
+        box(0.16, 0.05, 0.16, fx, HALL_H - 0.04, z, fixture);
+        // el óvalo de luz sobre la pared: la firma de la referencia
+        var pool = plane(poolMat(.30), 2.7, 3.9,
+                         [s*(HALL_W/2 - 0.035), HALL_H - 1.75, z],
+                         [0, s>0 ? -Math.PI/2 : Math.PI/2, 0], 7);
+        pool.scale.set(1, 1, 1);
+        // charco tenue en el suelo, debajo
+        plane(poolMat(.13), 2.4, 3.2, [s*(HALL_W/2 - 1.0), 0.014, z], [-Math.PI/2,0,0], 7);
+      });
+    }
+
+    // ---------- cada sala: pared del fondo con la fotografía ----------
+    ROOMS.forEach(function(r, i){
+      var img = T[r.key].image;
+      var aspect = (img && img.width) ? img.width/img.height : 1.778;
+      r.h = PH_H;
+      r.w = PH_H * aspect;
+      if(r.w > HALL_W - GAP_W - 2.2){            // que quepa junto al hueco
+        r.w = HALL_W - GAP_W - 2.2;
+        r.h = r.w / aspect;
+      }
+
+      // Tabique con el paso EN ARCO. Un hueco rectangular deja la
+      // escena con aire de caja; el arco es lo que la vuelve
+      // arquitectura, y además da un intradós con grosor real.
+      var wallSeg = new THREE.MeshStandardMaterial({
+        map:noiseTexture('#e6dccb', 9, 0.32), roughness:.94
+      });
+      var shape = new THREE.Shape();
+      shape.moveTo(-HALL_W/2, 0);
+      shape.lineTo( HALL_W/2, 0);
+      shape.lineTo( HALL_W/2, HALL_H);
+      shape.lineTo(-HALL_W/2, HALL_H);
+      shape.closePath();
+
+      var rad = GAP_W/2, spring = 2.05;      // altura de arranque del arco
+      var hole = new THREE.Path();
+      hole.moveTo(r.gapX - rad, 0);
+      hole.lineTo(r.gapX - rad, spring);
+      hole.absarc(r.gapX, spring, rad, Math.PI, 0, true);
+      hole.lineTo(r.gapX + rad, 0);
+      hole.closePath();
+      // La última sala cierra el recorrido: si le dejo el arco, se ve
+      // un pasillo vacío detrás de la foto final.
+      if(i < ROOMS.length - 1) shape.holes.push(hole);
+
+      var part = new THREE.Mesh(
+        new THREE.ExtrudeGeometry(shape, {depth:0.32, bevelEnabled:false, curveSegments:28}),
+        wallSeg
+      );
+      part.position.set(0, 0, r.z - 0.16);
+      scene.add(part);
+
+      // la fotografía, montada sobre el tabique
+      var b = baMaterial(T[r.key+'-antes'], T[r.key]);
+      r.u = b.u;
+      // El tabique tiene 30 cm de grosor: la foto va DELANTE de su cara
+      // (hacia la cámara, que mira en -Z), no dentro del muro.
+      // Separación clara entre cara del muro (0.16), resplandor, marco y
+      // foto. El marco caía justo sobre la cara del tabique y las dos
+      // superficies se peleaban por el mismo plano.
+      r.mesh = plane(b.mat, r.w, r.h, [r.photoX, PH_Y, r.z + 0.19], null, 8);
+      // marco con cuerpo: a 4 cm el canto quedaba por debajo de un píxel
+      // en pantalla y también parpadeaba
+      plane(new THREE.MeshBasicMaterial({color:0x2a251e}), r.w + 0.19, r.h + 0.19,
+            [r.photoX, PH_Y, r.z + 0.175], null, 7);
+
+      // reflejo en el suelo pulido
+      var rb = baMaterial(T[r.key+'-antes'], T[r.key], 0.13);
+      rb.u.uProg = r.u.uProg;
+      r.refU = rb.u;
+      var ref = plane(rb.mat, r.w, r.h, [r.photoX, -PH_Y, r.z + 0.19], null, 5);
+      ref.scale.y = -1;
+
+      // dos focos lavando la fotografía
+      [-1, 1].forEach(function(s){
+        var lx = r.photoX + s * (r.w * 0.28);
+        box(0.16, 0.05, 0.16, lx, HALL_H - 0.04, r.z + 1.5, fixture);
+        // detrás de la foto: así el resplandor lava el muro alrededor
+        // y no queda una neblina por encima de la propia imagen
+        var beam = plane(poolMat(.20), r.w * 0.72, 2.6,
+                         [lx, PH_Y + r.h*0.40, r.z + 0.168], null, 9);
+        beam.scale.set(1,1,1);
+      });
+
+      // charco de luz que se escapa por el hueco
+      plane(poolMat(.18), GAP_W*1.4, 2.2, [r.gapX, 0.016, r.z - 1.4], [-Math.PI/2,0,0], 7);
+
+      // ---------- cartela de sala ----------
+      // En la pared lateral, antes de llegar: la lees mientras entras
+      // y llegas a la fotografía sabiendo qué estás mirando.
+      var tw = -r.side * (HALL_W/2 - 0.04);
+      var label = plane(
+        new THREE.MeshBasicMaterial({map:wallText(r.name, r.story, '0'+(i+1)), transparent:true}),
+        3.5, 1.75, [tw, 1.95, r.z + 7.4],
+        [0, r.side > 0 ? -Math.PI/2 : Math.PI/2, 0], 8
+      );
+      label.material.depthWrite = false;
+      // un foco propio sobre la cartela
+      box(0.14, 0.05, 0.14, tw * 0.82, HALL_H - 0.04, r.z + 7.4, fixture);
+      plane(poolMat(.16), 2.6, 3.4, [tw + r.side*0.02, HALL_H - 1.9, r.z + 7.4],
+            [0, r.side > 0 ? -Math.PI/2 : Math.PI/2, 0], 7);
+
+      // ---------- muebles ----------
+      // Van PEGADOS a las paredes laterales y detrás del punto de parada:
+      // en el borde del encuadre, nunca delante de la fotografía.
+      var woodMat  = new THREE.MeshStandardMaterial({color:0x9c7c52, roughness:.65});
+      var stoneMat = new THREE.MeshStandardMaterial({color:0xcfc5b2, roughness:.6, metalness:.05});
+      var leafMat2 = new THREE.MeshStandardMaterial({color:0x546b4a, roughness:.95});
+      var barkMat  = new THREE.MeshStandardMaterial({color:0x6b5b45, roughness:.95});
+
+      var bx = -r.side * (HALL_W/2 - 0.75);
+      var bz = r.z + 4.4;
+      box(0.52, 0.36, 2.4, bx, 0.18, bz, stoneMat);      // banco, largo pegado al muro
+      box(0.46, 0.05, 2.2, bx, 0.385, bz, woodMat);      // asiento de roble
+      contactShadow(bx, bz, 1.5, 3.2, .34);
+
+      var px2 = r.side * (HALL_W/2 - 0.7);
+      var pz2 = r.z + 7.6;
+      box(0.42, 0.46, 0.42, px2, 0.23, pz2, stoneMat);   // maceta
+      var trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.07, 0.8, 6), barkMat);
+      trunk.position.set(px2, 0.85, pz2); scene.add(trunk);
+      [[0,1.42,0,.42],[.22,1.68,.1,.3],[-.24,1.6,-.08,.28]].forEach(function(f){
+        var s2 = new THREE.Mesh(new THREE.IcosahedronGeometry(f[3], 1), leafMat2);
+        s2.position.set(px2 + f[0], f[1], pz2 + f[2]);
+        s2.scale.set(1, 1.15, 1);
+        scene.add(s2);
+      });
+      contactShadow(px2, pz2, 1.1, 1.1, .30);
+    });
+
+    // ---------- declaración de apertura, nada más cruzar la puerta ----------
+    var introTex = wallText(
+      'La casa',
+      'Una masía de 1968 en Sant Martí d’Empúries. Doce años cerrada. Once meses de obra. Esto es lo que había, sala por sala, y lo que hay ahora.',
+      ''
+    );
+    var intro = plane(new THREE.MeshBasicMaterial({map:introTex, transparent:true}),
+                      4.0, 2.0, [HALL_W/2 - 0.04, 2.0, -7.6], [0, -Math.PI/2, 0], 8);
+    intro.material.depthWrite = false;
+    box(0.14, 0.05, 0.14, (HALL_W/2 - 0.04)*0.82, HALL_H - 0.04, -7.6, fixture);
+    plane(poolMat(.16), 2.8, 3.6, [HALL_W/2 - 0.06, HALL_H - 1.9, -7.6], [0, -Math.PI/2, 0], 7);
+
+    // ---------- luz general: clara y cálida ----------
+    // Menos ambiente del que tenía: iba tan alto que aplanaba la sala y
+    // se comía los focos. La forma la dan ahora el direccional y los óvalos.
+    scene.add(new THREE.AmbientLight(0xffeeda, .52));
+    var key = new THREE.DirectionalLight(0xfff4e2, .62); key.position.set(3, 9, 7); scene.add(key);
+    var fillL = new THREE.DirectionalLight(0xcddcf5, .20); fillL.position.set(-6, 4, -12); scene.add(fillL);
+    var entry = new THREE.PointLight(0xffe9c6, .7, 22, 1.4);
+    entry.position.set(0, 2.6, -4); scene.add(entry);
+
+    // ---------- polvo en los haces ----------
+    var N = IS_MOBILE ? 260 : 700;
     var dp = new Float32Array(N*3);
     for(var k=0;k<N;k++){
-      dp[k*3]   = (Math.random()-0.5)*24;
-      dp[k*3+1] = FLOOR_Y + Math.random()*10;
-      dp[k*3+2] = 6 - Math.random()*430;
+      dp[k*3]   = (Math.random()-0.5)*(HALL_W-1);
+      dp[k*3+1] = Math.random()*HALL_H;
+      dp[k*3+2] = -Math.random()*LEN;
     }
     dustGeo = new THREE.BufferGeometry();
     dustGeo.setAttribute('position', new THREE.BufferAttribute(dp,3));
     scene.add(new THREE.Points(dustGeo, new THREE.PointsMaterial({
-      color:0xffe9c8, size:0.02, transparent:true, opacity:.4,
+      color:0xfff0d2, size:0.016, transparent:true, opacity:.42,
       blending:THREE.AdditiveBlending, depthWrite:false, sizeAttenuation:true
     })));
     DUST_N = N;
@@ -619,82 +929,66 @@
 
   /* =============================================================
      7 · Recorrido
-        La distancia de parada se calcula para que la foto quepa
-        ENTERA y llene la pantalla, sea cual sea el tamaño.
+        La parada se calcula para que la foto llene ~68% de la
+        pantalla: así se ve grande PERO sigue viéndose la sala.
   ============================================================= */
   function fitDistance(w, h){
     var vFov = FOV * Math.PI/180;
     var dH = (h/2) / Math.tan(vFov/2);
     var hFov = 2*Math.atan(Math.tan(vFov/2) * camera.aspect);
     var dW = (w/2) / Math.tan(hFov/2);
-    return Math.max(dH, dW) * 1.02;
+    return Math.max(dH, dW);
+  }
+  function viewDistance(w, h){
+    return Math.max(3.6, Math.min(fitDistance(w/0.68, h/0.68), ROOM_LEN - 4));
   }
 
-  var PATH = [], TRANS = [];
+  var PATH = [];
   function buildPath(){
     if(!ROOMS[0].w) return;
-    PATH = []; TRANS = [];
+    PATH = [];
 
-    // La separación depende de lo lejos que haya que ponerse para que
-    // la foto quepa entera: en una pantalla estrecha hace falta más sitio.
-    var maxD = 0;
-    for(var q=0;q<ROOMS.length;q++){
-      ROOMS[q].d = fitDistance(ROOMS[q].w, ROOMS[q].h);
-      if(ROOMS[q].d > maxD) maxD = ROOMS[q].d;
-    }
-    GAP = maxD * 1.42 + 3;
-    for(var q2=0;q2<ROOMS.length;q2++){
-      var rr = ROOMS[q2];
-      rr.z = -(GAP*(q2+1));
-      if(rr.mesh){
-        rr.mesh.position.z = rr.z;
-        rr.ref.position.z  = rr.z;
-        rr.halo.position.z = rr.z + 0.6;
-      }
-    }
-
-    // Encuadre de la fachada entera. No nos acercamos más allá de
-    // 0.62 de esa distancia: pasado ese punto la foto se ampliaría
-    // más de lo que da su resolución y empezaría a verse blanda.
     var fd = fitDistance(FACADE.w*0.66, FACADE.h*0.66);
+    PATH.push([0.000, Z_FACADE + fd,        0]);
+    PATH.push([0.072, Z_FACADE + fd*0.62,   0]);
+    PATH.push([0.104, Z_FACADE - 2.0,       0]);
 
-    PATH.push([0.000, Z_FACADE + fd]);
-    PATH.push([0.072, Z_FACADE + fd*0.62]);
-    PATH.push([0.104, Z_FACADE - 1.5]);
-
-    // cinco estancias que se atraviesan + la final
     var s = 0.115, seg = 0.148;
     for(var i=0;i<ROOMS.length;i++){
       var r = ROOMS[i];
-      var d = r.d;
+      var d = viewDistance(r.w, r.h);
       var last = (i === ROOMS.length-1);
 
       r.from = s + 0.012;
-      r.to   = last ? 1.01 : s + seg*0.86;
+      r.to   = last ? 1.01 : s + seg*0.88;
       r.wipe = [s + 0.030, s + (last ? 0.128 : 0.104)];
 
-      PATH.push([s + 0.022, r.z + d]);                       // llega y se para
-      PATH.push([s + (last ? 0.130 : 0.106), r.z + d*0.86]); // se acerca despacio
-      if(!last) PATH.push([s + seg, r.z - GAP*0.10]);        // la atraviesa
+      PATH.push([s + 0.024, r.z + d,        r.photoX]);          // llega y mira
+      PATH.push([s + (last ? 0.130 : 0.108), r.z + d*0.88, r.photoX]);
+      if(!last){
+        PATH.push([s + seg*0.94, r.z + 1.1, r.gapX]);            // se aparta al hueco
+        PATH.push([s + seg,      r.z - 1.6, r.gapX*0.55]);       // lo cruza
+      }
       s += seg;
     }
-    PATH.push([1.000, ROOMS[ROOMS.length-1].z + ROOMS[ROOMS.length-1].d*0.84]);
+    var lastR = ROOMS[ROOMS.length-1];
+    PATH.push([1.000, lastR.z + viewDistance(lastR.w, lastR.h)*0.86, lastR.photoX]);
     PATH.sort(function(a,b){ return a[0]-b[0]; });
   }
 
-  function zAt(p){
-    if(!PATH.length) return 20;
-    if(p <= PATH[0][0]) return PATH[0][1];
+  function sampleAt(p){
+    if(!PATH.length) return {z:20, x:0};
+    if(p <= PATH[0][0]) return {z:PATH[0][1], x:PATH[0][2]};
     for(var i=1;i<PATH.length;i++){
       if(p <= PATH[i][0]){
         var a=PATH[i-1], b=PATH[i];
         var span = (b[0]-a[0]) || 1;
-        var t=(p-a[0])/span;
-        t = t*t*(3-2*t);
-        return a[1] + (b[1]-a[1])*t;
+        var t=(p-a[0])/span; t = t*t*(3-2*t);
+        return {z: a[1] + (b[1]-a[1])*t, x: a[2] + (b[2]-a[2])*t};
       }
     }
-    return PATH[PATH.length-1][1];
+    var L = PATH[PATH.length-1];
+    return {z:L[1], x:L[2]};
   }
 
   /* =============================================================
@@ -702,11 +996,14 @@
   ============================================================= */
   var progress = 0, target = 0, mx = 0, my = 0, tmx = 0, tmy = 0;
 
+  // El alto de la página sólo cambia al redimensionar: si lo midiéramos
+  // en cada fotograma forzaríamos un recálculo de maquetación y eso
+  // también entrecorta el movimiento.
+  var scrollMax = 1;
+  function measure(){ scrollMax = Math.max(1, document.body.scrollHeight - window.innerHeight); }
   function readScroll(){
-    var max = document.body.scrollHeight - window.innerHeight;
-    target = max > 0 ? Math.min(1, Math.max(0, window.scrollY/max)) : 0;
+    target = Math.min(1, Math.max(0, window.scrollY / scrollMax));
   }
-  window.addEventListener('scroll', readScroll, {passive:true});
   window.addEventListener('mousemove', function(e){
     tmx = e.clientX/window.innerWidth - 0.5;
     tmy = e.clientY/window.innerHeight - 0.5;
@@ -716,6 +1013,7 @@
   var railFill = document.getElementById('railFill');
   var hintEl   = document.getElementById('hint');
   var crossEl  = document.getElementById('cross');
+  var hudEl2   = document.getElementById('hud');
   var footEl   = document.getElementById('foot');
   var baUI     = document.getElementById('baUI');
   var baDot    = document.getElementById('baDot');
@@ -736,7 +1034,6 @@
 
   var shownKey = null;
 
-  // Negro que entra, se mantiene un instante y sale.
   function blackAt(p, t0, t1){
     if(p <= t0 || p >= t1) return 0;
     var u = (p - t0)/(t1 - t0);
@@ -759,23 +1056,14 @@
       if(!R.u) continue;
       var bp = Math.min(1, Math.max(0, (p - R.wipe[0])/(R.wipe[1] - R.wipe[0])));
       R.u.uProg.value = bp;
-
-      // se desvanece justo antes de atravesarla, y también al alejarse
-      var d = camZ - R.z;                       // >0 delante, <0 ya pasada
-      var a = 1;
-      if(d < 4.0)  a = Math.max(0, (d - 0.4)/3.6);
-      if(d < 0)    a = 0;
-      R.u.uAlpha.value = a;
-      R.refU.uAlpha.value = a*0.16;
-      if(R.halo) R.halo.material.opacity = a*0.20;
-      R.mesh.visible = a > 0.002;
-      R.ref.visible  = a > 0.002;
-      if(R.halo) R.halo.visible = a > 0.002;
-
       if(p >= R.from && p <= R.to) active = {room:R, bp:bp};
     }
 
-    if(active){
+    // Al llegar al contacto se retiran la cartela y el control: si no,
+    // en el móvil se amontonaban encima del texto y de los botones.
+    var enContacto = p > 0.962;
+
+    if(active && !enContacto){
       if(shownKey !== active.room.key){
         shownKey = active.room.key;
         pName.textContent = active.room.name;
@@ -793,8 +1081,7 @@
       shownKey = null;
     }
 
-    // La fachada desaparece mientras la pantalla está en negro,
-    // así nadie llega a verla de cerca ni pixelada.
+    // la fachada se apaga mientras la pantalla está en negro
     var fa = camZ > 1.0 ? 1 : Math.max(0, (camZ + 1.4)/2.4);
     for(var m=0;m<facadeMats.length;m++){
       facadeMats[m].opacity = fa;
@@ -802,15 +1089,14 @@
     }
     if(doorPivot) doorPivot.visible = fa > 0.01;
 
-    // fundido a negro sólo al cruzar la puerta de entrada
     crossEl.style.opacity = blackAt(p, 0.062, 0.132).toFixed(3);
 
+    hudEl2.classList.toggle('nocturno', p < 0.105);
     railFill.style.height = (p*100).toFixed(2)+'%';
     hintEl.classList.toggle('gone', p > 0.015);
     footEl.classList.toggle('on', p > 0.972);
 
     if(doorPivot){
-      // la puerta termina de abrirse antes de que entre el negro
       var dp = Math.min(1, Math.max(0, (p - 0.022)/(0.070 - 0.022)));
       doorPivot.rotation.y = -(dp*dp*(3-2*dp)) * 1.58;
     }
@@ -826,21 +1112,36 @@
      9 · Bucle
   ============================================================= */
   var clock = new THREE.Clock();
+  var camX = 0, camVel = 0;
   function tick(){
     requestAnimationFrame(tick);
     var dt = Math.min(clock.getDelta(), 0.05);
     var t  = clock.getElapsedTime();
 
+    // Leemos el scroll AQUÍ, en cada fotograma, y no en el evento
+    // 'scroll'. En el móvil esos eventos llegan a golpes durante la
+    // inercia del dedo, y ese desfase era el temblor.
+    readScroll();
+
     progress += (target - progress) * Math.min(1, dt*3.2);
     mx += (tmx - mx) * Math.min(1, dt*2.5);
     my += (tmy - my) * Math.min(1, dt*2.5);
 
-    var z = zAt(progress);
-    camera.position.z = z;
-    camera.position.x = mx*0.42;
-    camera.position.y = EYE_Y + Math.sin(t*0.6)*0.024 - my*0.22;
-    camera.rotation.y = -mx*0.075;
-    camera.rotation.x = -my*0.045;
+    var s = sampleAt(progress);
+    var prevX = camX;
+    camX += (s.x - camX) * Math.min(1, dt*4.5);
+    // Velocidad lateral suavizada. Antes giraba la cámara con la
+    // diferencia cruda de un solo fotograma: en cuanto el móvil perdía
+    // cuadros eso se convertía en vibración.
+    camVel += (((camX - prevX) / Math.max(dt, 0.008)) * 0.016 - camVel) * Math.min(1, dt*7);
+
+    camera.position.z = s.z;
+    camera.position.x = camX + mx*0.45;
+    // en móvil quitamos el balanceo: sumado al scroll se nota como temblor
+    camera.position.y = EYE_Y + (IS_MOBILE ? 0 : Math.sin(t*0.6)*0.022) - my*0.20;
+    // una pizca de giro al desplazarse de lado: se siente como caminar
+    camera.rotation.y = -mx*0.09 - camVel * 1.0;
+    camera.rotation.x = -my*0.05;
 
     if(dustGeo){
       var pos = dustGeo.attributes.position.array;
@@ -851,7 +1152,7 @@
       dustGeo.attributes.position.needsUpdate = true;
     }
 
-    updateHUD(progress, z);
+    updateHUD(progress, s.z);
     renderer.render(scene, camera);
   }
 
@@ -868,7 +1169,7 @@
   manager.onProgress = function(url, loaded, total){
     var p = Math.round(loaded/total*100);
     barFill.style.width = p+'%';
-    pctEl.textContent = 'PREPARANDO LA VILLA · '+p+'%';
+    pctEl.textContent = 'PREPARANDO LA GALERÍA · '+p+'%';
   };
   manager.onLoad = function(){
     buildHouse();
@@ -892,10 +1193,12 @@
     camera.aspect = window.innerWidth/window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
-    buildPath();          // recalcula las paradas para el nuevo tamaño
+    measure();
+    buildPath();
   });
 
   camera.position.set(0, EYE_Y, 24);
+  measure();
   readScroll();
   tick();
 })();
