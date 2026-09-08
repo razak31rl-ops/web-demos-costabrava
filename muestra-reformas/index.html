@@ -689,10 +689,8 @@
     });
     var ceilMat = new THREE.MeshStandardMaterial({color:0xf4efe6, roughness:1});
     var floorMat = new THREE.MeshStandardMaterial({
-      map:noiseTexture('#cdc0ac', 7, 18), roughness:.26, metalness:.30,
-      transparent:true, opacity:.93
+      map:noiseTexture('#cdc0ac', 7, 18), roughness:.26, metalness:.30
     });
-    floorMat.depthWrite = true;
 
     // suelo, techo y paredes laterales corridas
     var floor = plane(floorMat, HALL_W, hallLen, [0,0,midZ], [-Math.PI/2,0,0], 6);
@@ -707,10 +705,10 @@
       box(0.09, 0.16, hallLen, wx, 0.08, midZ, trimMat);              // rodapié
       box(0.11, 0.13, hallLen, wx, HALL_H - 0.075, midZ, trimMat);    // cornisa
     });
-    // junta de sombra a ras de suelo
-    var shade = new THREE.MeshBasicMaterial({color:0x6d6152});
-    plane(shade, hallLen, .03, [-HALL_W/2+.10, .17, midZ], [0, Math.PI/2,0]);
-    plane(shade, hallLen, .03, [ HALL_W/2-.10, .17, midZ], [0,-Math.PI/2,0]);
+    // Aquí había dos juntas de sombra de 3 cm de alto. A distancia
+    // medían menos de un píxel y parpadeaban en cada fotograma: la
+    // geometría muy fina siempre acaba haciendo eso. El rodapié ya
+    // marca ese encuentro sin necesidad de una línea.
 
     // Oclusión falsa en las esquinas. En un sitio real la luz nunca
     // llega igual al arranque de la pared que a la mitad; sin esto
@@ -823,12 +821,10 @@
       plane(new THREE.MeshBasicMaterial({color:0x2a251e}), r.w + 0.19, r.h + 0.19,
             [r.photoX, PH_Y, r.z + 0.175], null, 7);
 
-      // reflejo en el suelo pulido
-      var rb = baMaterial(T[r.key+'-antes'], T[r.key], 0.13);
-      rb.u.uProg = r.u.uProg;
-      r.refU = rb.u;
-      var ref = plane(rb.mat, r.w, r.h, [r.photoX, -PH_Y, r.z + 0.19], null, 5);
-      ref.scale.y = -1;
+      // Sin reflejo en el suelo. Con el suelo al 93% de opacidad y el
+      // reflejo al 13% aportaba un 1% —invisible— pero su canto
+      // superior dibujaba una línea horizontal que se movía con la
+      // cámara. Todo inconveniente y ninguna ganancia.
 
       // dos focos lavando la fotografía
       [-1, 1].forEach(function(s){
