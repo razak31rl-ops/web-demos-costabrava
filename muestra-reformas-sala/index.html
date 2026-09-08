@@ -358,7 +358,7 @@
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.08;
+  renderer.toneMappingExposure = 0.92;
 
   var scene = new THREE.Scene();
   scene.background = new THREE.Color(0x07070a);
@@ -383,13 +383,20 @@
   var PH_Y = 1.92;          // centro de la fotografía
   var GAP_W = 2.9;          // ancho del hueco de paso
 
+  // El relato de la casa: es lo que convierte una galería en un caso de obra.
   var ROOMS = [
-    {key:'salon',      name:'Salón principal',      meta:'Microcemento · vigas de roble · 62 m²', days:'184 días de obra'},
-    {key:'comedor',    name:'Comedor',              meta:'Roble macizo · ventanal de acero',      days:'Se tiró un tabique'},
-    {key:'cocina',     name:'Cocina abierta',       meta:'Mármol Calacatta · isla de 3,2 m',      days:'Antes eran dos cuartos'},
-    {key:'habitacion', name:'Dormitorio principal', meta:'Salida directa a la terraza',           days:'Ventanal nuevo de suelo a techo'},
-    {key:'bano',       name:'Baño principal',       meta:'Microcemento continuo · ducha de obra', days:'La bañera vieja ya no está'},
-    {key:'dron',       name:'La villa entera',      meta:'Vista de dron · Costa Brava',           days:'11 meses de obra'}
+    {key:'salon', name:'Salón principal', meta:'Microcemento · vigas de roble · 62 m²', days:'Mes 1 al 6',
+     story:'Aquí no entraba la luz. Al tirar el falso techo aparecieron las vigas de roble, tapadas desde 1968.'},
+    {key:'comedor', name:'Comedor', meta:'Roble macizo · ventanal de acero', days:'Mes 4',
+     story:'Era un cuarto cerrado con una vitrina heredada. Cayó el tabique y ahora caben catorce a la mesa.'},
+    {key:'cocina', name:'Cocina abierta', meta:'Mármol Calacatta · isla de 3,2 m', days:'Mes 5 al 7',
+     story:'Eran dos habitaciones separadas por un muro de carga. Hubo que meter una viga de hierro de seis metros.'},
+    {key:'habitacion', name:'Dormitorio principal', meta:'Salida directa a la terraza', days:'Mes 7',
+     story:'El papel pintado escondía humedad en tres paredes. Se picó hasta el ladrillo y se abrió el ventanal.'},
+    {key:'bano', name:'Baño principal', meta:'Microcemento continuo · ducha de obra', days:'Mes 8',
+     story:'La bañera llevaba años sin usarse. En su sitio hay dos metros de ducha de obra sin un solo escalón.'},
+    {key:'dron', name:'La villa entera', meta:'Vista de dron · Costa Brava', days:'Mes 11',
+     story:'Once meses. Por fuera sigue siendo la misma casa de siempre, y eso era exactamente lo que pedían.'}
   ];
   ROOMS.forEach(function(r,i){
     r.side    = (i % 2 === 0) ? 1 : -1;                   // lado del hueco
@@ -522,6 +529,59 @@
 
   var glowTex = poolTex;
 
+  // Sombra de contacto: sin esto los muebles parecen flotar sobre el suelo.
+  var shadowTex = (function(){
+    var c=document.createElement('canvas'); c.width=c.height=128;
+    var x=c.getContext('2d');
+    var g=x.createRadialGradient(64,64,2,64,64,64);
+    g.addColorStop(0.00,'rgba(40,32,22,.85)');
+    g.addColorStop(0.45,'rgba(40,32,22,.38)');
+    g.addColorStop(1.00,'rgba(40,32,22,0)');
+    x.fillStyle=g; x.fillRect(0,0,128,128);
+    return new THREE.CanvasTexture(c);
+  })();
+  function contactShadow(x, z, w, d, op){
+    var m = new THREE.Mesh(new THREE.PlaneGeometry(w, d),
+      new THREE.MeshBasicMaterial({map:shadowTex, transparent:true, opacity:op, depthWrite:false}));
+    m.rotation.x = -Math.PI/2;
+    m.position.set(x, 0.012, z);
+    m.renderOrder = 6;
+    scene.add(m);
+    return m;
+  }
+
+  // Texto en vinilo sobre la pared, como las cartelas de un museo.
+  function wallText(title, body, num){
+    var W = 1024, H = 512;
+    var c = document.createElement('canvas'); c.width = W; c.height = H;
+    var x = c.getContext('2d');
+    x.clearRect(0,0,W,H);
+    if(num){
+      x.fillStyle = 'rgba(43,38,32,.20)';
+      x.font = '700 190px Inter, Helvetica, sans-serif';
+      x.textAlign = 'left'; x.textBaseline = 'top';
+      x.fillText(num, 12, 6);
+    }
+    x.textAlign = 'left'; x.textBaseline = 'top';
+    x.fillStyle = '#8a5a1e';
+    x.font = '700 34px Inter, Helvetica, sans-serif';
+    x.fillText(title.toUpperCase().split('').join(String.fromCharCode(8202)), 14, 214);
+    x.fillStyle = 'rgba(43,38,32,.9)';
+    x.font = '400 42px "Bodoni Moda", Georgia, serif';
+    var words = body.split(' '), line = '', y = 276;
+    for(var i=0;i<words.length;i++){
+      var probe = line ? line + ' ' + words[i] : words[i];
+      if(x.measureText(probe).width > W - 40 && line){
+        x.fillText(line, 14, y); y += 54; line = words[i];
+      } else { line = probe; }
+    }
+    if(line) x.fillText(line, 14, y);
+    var t = new THREE.CanvasTexture(c);
+    t.encoding = THREE.sRGBEncoding;
+    t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    return t;
+  }
+
   /* =============================================================
      5 · Material ANTES / DESPUÉS
   ============================================================= */
@@ -572,10 +632,11 @@
     var edge = new THREE.MeshBasicMaterial({color:0x07070a, transparent:true, depthWrite:false});
     facadeMats.push(edge);
     var top = F.yBase + F.h;
-    plane(edge, 120, 40, [0, top + 20, Z_FACADE - 0.08], null, 19);
-    plane(edge, 50, 60, [-F.w/2 - 25, top - 12, Z_FACADE - 0.08], null, 19);
-    plane(edge, 50, 60, [ F.w/2 + 25, top - 12, Z_FACADE - 0.08], null, 19);
-    plane(edge, 120, 40, [0, F.yBase - 20, Z_FACADE - 0.08], null, 19);
+    // solapan un poco con la foto: si no, se cuela una franja de la sala
+    plane(edge, 140, 40, [0, top + 19.4, Z_FACADE - 0.08], null, 19);
+    plane(edge, 60, 70, [-F.w/2 - 29.4, top - 12, Z_FACADE - 0.08], null, 19);
+    plane(edge, 60, 70, [ F.w/2 + 29.4, top - 12, Z_FACADE - 0.08], null, 19);
+    plane(edge, 140, 40, [0, F.yBase - 19.4, Z_FACADE - 0.08], null, 19);
 
     plane(poolMat(.42), F.doorW*2.6, F.doorH*1.6,
           [F.doorX, F.doorH*0.45, Z_FACADE - 1.1], null, 18);
@@ -601,7 +662,12 @@
     buildFacade();
 
     var LEN  = ROOM_LEN * (ROOMS.length + 1);
-    var midZ = -LEN/2;
+    // La galería arranca JUSTO detrás de la fachada. Si la dejaba
+    // sobresalir hacia la cámara, su suelo y su techo se veían por
+    // encima de la casa desde fuera.
+    var HALL_START = -0.5;
+    var hallLen = LEN + 20;
+    var midZ = HALL_START - hallLen/2;
 
     // ---------- materiales de la sala: claros y cálidos ----------
     var wallMat = new THREE.MeshStandardMaterial({
@@ -615,14 +681,14 @@
     floorMat.depthWrite = true;
 
     // suelo, techo y paredes laterales corridas
-    var floor = plane(floorMat, HALL_W, LEN + 30, [0,0,midZ], [-Math.PI/2,0,0], 6);
-    plane(ceilMat, HALL_W, LEN + 30, [0,HALL_H,midZ], [Math.PI/2,0,0]);
-    plane(wallMat, LEN + 30, HALL_H, [-HALL_W/2, HALL_H/2, midZ], [0, Math.PI/2,0]);
-    plane(wallMat, LEN + 30, HALL_H, [ HALL_W/2, HALL_H/2, midZ], [0,-Math.PI/2,0]);
+    var floor = plane(floorMat, HALL_W, hallLen, [0,0,midZ], [-Math.PI/2,0,0], 6);
+    plane(ceilMat, HALL_W, hallLen, [0,HALL_H,midZ], [Math.PI/2,0,0]);
+    plane(wallMat, hallLen, HALL_H, [-HALL_W/2, HALL_H/2, midZ], [0, Math.PI/2,0]);
+    plane(wallMat, hallLen, HALL_H, [ HALL_W/2, HALL_H/2, midZ], [0,-Math.PI/2,0]);
     // junta de sombra a ras de suelo
     var shade = new THREE.MeshBasicMaterial({color:0x6d6152});
-    plane(shade, LEN + 30, .045, [-HALL_W/2+.006, .022, midZ], [0, Math.PI/2,0]);
-    plane(shade, LEN + 30, .045, [ HALL_W/2-.006, .022, midZ], [0,-Math.PI/2,0]);
+    plane(shade, hallLen, .045, [-HALL_W/2+.006, .022, midZ], [0, Math.PI/2,0]);
+    plane(shade, hallLen, .045, [ HALL_W/2-.006, .022, midZ], [0,-Math.PI/2,0]);
 
     // ---------- luminarias del techo + óvalos en las paredes ----------
     var fixture = new THREE.MeshBasicMaterial({color:0xfff3dd});
@@ -693,29 +759,68 @@
       // charco de luz que se escapa por el hueco
       plane(poolMat(.18), GAP_W*1.4, 2.2, [r.gapX, 0.016, r.z - 1.4], [-Math.PI/2,0,0], 7);
 
-      // ---------- muebles: es lo que hace que parezca un sitio real ----------
-      var woodMat  = new THREE.MeshStandardMaterial({color:0xb99b6e, roughness:.7});
-      var stoneMat = new THREE.MeshStandardMaterial({color:0xd8cfbe, roughness:.55, metalness:.1});
-      var leafMat2 = new THREE.MeshStandardMaterial({color:0x4a6b48, roughness:.9});
+      // ---------- cartela de sala ----------
+      // En la pared lateral, antes de llegar: la lees mientras entras
+      // y llegas a la fotografía sabiendo qué estás mirando.
+      var tw = -r.side * (HALL_W/2 - 0.04);
+      var label = plane(
+        new THREE.MeshBasicMaterial({map:wallText(r.name, r.story, '0'+(i+1)), transparent:true}),
+        3.5, 1.75, [tw, 1.95, r.z + 7.4],
+        [0, r.side > 0 ? -Math.PI/2 : Math.PI/2, 0], 8
+      );
+      label.material.depthWrite = false;
+      // un foco propio sobre la cartela
+      box(0.14, 0.05, 0.14, tw * 0.82, HALL_H - 0.04, r.z + 7.4, fixture);
+      plane(poolMat(.16), 2.6, 3.4, [tw + r.side*0.02, HALL_H - 1.9, r.z + 7.4],
+            [0, r.side > 0 ? -Math.PI/2 : Math.PI/2, 0], 7);
 
-      var bx = r.photoX + (r.side > 0 ? -2.4 : 2.4);
-      // banco corrido delante de la foto
-      box(2.3, 0.4, 0.62, bx, 0.2, r.z + 3.2, stoneMat);
-      box(2.1, 0.06, 0.5, bx, 0.42, r.z + 3.2, woodMat);
-      // maceta con planta
-      var potX = -r.gapX * 0.72;
-      box(0.44, 0.5, 0.44, potX, 0.25, r.z + 2.2, stoneMat);
-      var foliage = new THREE.Mesh(new THREE.IcosahedronGeometry(0.52, 1), leafMat2);
-      foliage.position.set(potX, 1.0, r.z + 2.2);
-      foliage.scale.set(1, 1.35, 1);
-      scene.add(foliage);
+      // ---------- muebles ----------
+      // Van PEGADOS a las paredes laterales y detrás del punto de parada:
+      // en el borde del encuadre, nunca delante de la fotografía.
+      var woodMat  = new THREE.MeshStandardMaterial({color:0x9c7c52, roughness:.65});
+      var stoneMat = new THREE.MeshStandardMaterial({color:0xcfc5b2, roughness:.6, metalness:.05});
+      var leafMat2 = new THREE.MeshStandardMaterial({color:0x546b4a, roughness:.95});
+      var barkMat  = new THREE.MeshStandardMaterial({color:0x6b5b45, roughness:.95});
+
+      var bx = -r.side * (HALL_W/2 - 0.75);
+      var bz = r.z + 4.4;
+      box(0.52, 0.36, 2.4, bx, 0.18, bz, stoneMat);      // banco, largo pegado al muro
+      box(0.46, 0.05, 2.2, bx, 0.385, bz, woodMat);      // asiento de roble
+      contactShadow(bx, bz, 1.5, 3.2, .34);
+
+      var px2 = r.side * (HALL_W/2 - 0.7);
+      var pz2 = r.z + 7.6;
+      box(0.42, 0.46, 0.42, px2, 0.23, pz2, stoneMat);   // maceta
+      var trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.07, 0.8, 6), barkMat);
+      trunk.position.set(px2, 0.85, pz2); scene.add(trunk);
+      [[0,1.42,0,.42],[.22,1.68,.1,.3],[-.24,1.6,-.08,.28]].forEach(function(f){
+        var s2 = new THREE.Mesh(new THREE.IcosahedronGeometry(f[3], 1), leafMat2);
+        s2.position.set(px2 + f[0], f[1], pz2 + f[2]);
+        s2.scale.set(1, 1.15, 1);
+        scene.add(s2);
+      });
+      contactShadow(px2, pz2, 1.1, 1.1, .30);
     });
 
+    // ---------- declaración de apertura, nada más cruzar la puerta ----------
+    var introTex = wallText(
+      'La casa',
+      'Una masía de 1968 en Sant Martí d’Empúries. Doce años cerrada. Once meses de obra. Esto es lo que había, sala por sala, y lo que hay ahora.',
+      ''
+    );
+    var intro = plane(new THREE.MeshBasicMaterial({map:introTex, transparent:true}),
+                      4.0, 2.0, [HALL_W/2 - 0.04, 2.0, -7.6], [0, -Math.PI/2, 0], 8);
+    intro.material.depthWrite = false;
+    box(0.14, 0.05, 0.14, (HALL_W/2 - 0.04)*0.82, HALL_H - 0.04, -7.6, fixture);
+    plane(poolMat(.16), 2.8, 3.6, [HALL_W/2 - 0.06, HALL_H - 1.9, -7.6], [0, -Math.PI/2, 0], 7);
+
     // ---------- luz general: clara y cálida ----------
-    scene.add(new THREE.AmbientLight(0xfff0dc, 1.15));
-    var key = new THREE.DirectionalLight(0xfff4e2, .55); key.position.set(2, 8, 6); scene.add(key);
-    var fillL = new THREE.DirectionalLight(0xdce8ff, .28); fillL.position.set(-5, 4, -12); scene.add(fillL);
-    var entry = new THREE.PointLight(0xffe9c6, .8, 22, 1.4);
+    // Menos ambiente del que tenía: iba tan alto que aplanaba la sala y
+    // se comía los focos. La forma la dan ahora el direccional y los óvalos.
+    scene.add(new THREE.AmbientLight(0xffeeda, .52));
+    var key = new THREE.DirectionalLight(0xfff4e2, .62); key.position.set(3, 9, 7); scene.add(key);
+    var fillL = new THREE.DirectionalLight(0xcddcf5, .20); fillL.position.set(-6, 4, -12); scene.add(fillL);
+    var entry = new THREE.PointLight(0xffe9c6, .7, 22, 1.4);
     entry.position.set(0, 2.6, -4); scene.add(entry);
 
     // ---------- polvo en los haces ----------
