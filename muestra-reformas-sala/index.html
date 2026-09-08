@@ -426,8 +426,12 @@
     var t = texLoader.load(src);
     t.encoding = THREE.sRGBEncoding;
     t.anisotropy = renderer.capabilities.getMaxAnisotropy();
-    t.generateMipmaps = false;
-    t.minFilter = THREE.LinearFilter;
+    // CON mipmaps. Sin ellos, una foto de 1920 px mostrada a 700 px
+    // elige píxeles distintos en cada fotograma y la imagen entera
+    // hormiguea. Era el temblor del borde que se veía en el móvil.
+    t.generateMipmaps = true;
+    t.minFilter = THREE.LinearMipmapLinearFilter;
+    t.magFilter = THREE.LinearFilter;
     return t;
   }
   var T = {};
@@ -708,6 +712,45 @@
     plane(shade, hallLen, .03, [-HALL_W/2+.10, .17, midZ], [0, Math.PI/2,0]);
     plane(shade, hallLen, .03, [ HALL_W/2-.10, .17, midZ], [0,-Math.PI/2,0]);
 
+    // Oclusión falsa en las esquinas. En un sitio real la luz nunca
+    // llega igual al arranque de la pared que a la mitad; sin esto
+    // todo queda con el mismo tono y canta a render.
+    var aoTex = (function(){
+      var c=document.createElement('canvas'); c.width=4; c.height=256;
+      var x=c.getContext('2d');
+      var g=x.createLinearGradient(0,0,0,256);
+      g.addColorStop(0.00,'rgba(58,46,30,.34)');   // junto al techo
+      g.addColorStop(0.16,'rgba(58,46,30,0)');
+      g.addColorStop(0.70,'rgba(58,46,30,0)');
+      g.addColorStop(1.00,'rgba(48,38,24,.46)');   // junto al suelo
+      x.fillStyle=g; x.fillRect(0,0,4,256);
+      return new THREE.CanvasTexture(c);
+    })();
+    var aoMat = new THREE.MeshBasicMaterial({map:aoTex, transparent:true, depthWrite:false});
+    [-1,1].forEach(function(sd){
+      plane(aoMat, hallLen, HALL_H, [sd*(HALL_W/2 - 0.02), HALL_H/2, midZ],
+            [0, sd>0 ? -Math.PI/2 : Math.PI/2, 0], 4);
+    });
+    // y una sombra tendida en el suelo a lo largo de cada pared
+    var floorAO = (function(){
+      var c=document.createElement('canvas'); c.width=256; c.height=4;
+      var x=c.getContext('2d');
+      var g=x.createLinearGradient(0,0,256,0);
+      g.addColorStop(0.00,'rgba(48,38,24,.40)');
+      g.addColorStop(1.00,'rgba(48,38,24,0)');
+      x.fillStyle=g; x.fillRect(0,0,256,4);
+      return new THREE.CanvasTexture(c);
+    })();
+    [-1,1].forEach(function(sd){
+      var m = new THREE.Mesh(new THREE.PlaneGeometry(1.5, hallLen),
+        new THREE.MeshBasicMaterial({map:floorAO, transparent:true, depthWrite:false}));
+      m.rotation.x = -Math.PI/2;
+      m.rotation.z = sd > 0 ? -Math.PI/2 : Math.PI/2;
+      m.position.set(sd*(HALL_W/2 - 0.75), 0.008, midZ);
+      m.renderOrder = 5;
+      scene.add(m);
+    });
+
     // ---------- luminarias del techo + óvalos en las paredes ----------
     var fixture = new THREE.MeshBasicMaterial({color:0xfff3dd});
     for(var z = -3; z > -LEN; z -= 4.2){
@@ -775,7 +818,9 @@
       // foto. El marco caía justo sobre la cara del tabique y las dos
       // superficies se peleaban por el mismo plano.
       r.mesh = plane(b.mat, r.w, r.h, [r.photoX, PH_Y, r.z + 0.19], null, 8);
-      plane(new THREE.MeshBasicMaterial({color:0x2a251e}), r.w + 0.09, r.h + 0.09,
+      // marco con cuerpo: a 4 cm el canto quedaba por debajo de un píxel
+      // en pantalla y también parpadeaba
+      plane(new THREE.MeshBasicMaterial({color:0x2a251e}), r.w + 0.19, r.h + 0.19,
             [r.photoX, PH_Y, r.z + 0.175], null, 7);
 
       // reflejo en el suelo pulido
