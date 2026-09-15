@@ -711,5 +711,46 @@ footer{padding-block:clamp(44px,6vw,72px) clamp(28px,4vw,40px);border-top:1px so
   }
 })();
 </script>
+
+<!-- yo-muestra · aviso de página de muestra no oficial -->
+<style>
+.yo-muestra{position:fixed;left:14px;bottom:14px;z-index:2147483000;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+.yo-muestra *{box-sizing:border-box;}
+.yo-chapa{display:flex;align-items:center;gap:7px;background:#15130f;color:#f7f2ea;border:0;
+  cursor:pointer;font-family:inherit;font-size:10px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;padding:9px 15px;border-radius:999px;opacity:.92;
+  box-shadow:0 8px 24px rgba(0,0,0,.34);}
+.yo-chapa:hover{opacity:1;}
+.yo-chapa i{width:6px;height:6px;border-radius:50%;background:#c08f4d;display:block;
+  animation:yo-parpadeo 2s infinite;}
+@keyframes yo-parpadeo{0%,100%{opacity:1}50%{opacity:.25}}
+.yo-panel{display:none;margin-top:9px;max-width:330px;background:#15130f;
+  color:rgba(247,242,234,.86);border-radius:8px;padding:16px 18px;font-size:12.5px;
+  line-height:1.55;box-shadow:0 14px 40px rgba(0,0,0,.42);}
+.yo-panel.yo-abierto{display:block;}
+.yo-panel b{color:#f7f2ea;}
+.yo-panel a{color:#c08f4d;}
+@media(max-width:420px){.yo-muestra{left:10px;right:10px;bottom:10px;}.yo-panel{max-width:none;}}
+</style>
+<div class="yo-muestra">
+  <button class="yo-chapa" type="button" aria-expanded="false"><i></i> Muestra no oficial</button>
+  <div class="yo-panel">
+    <b>Esta no es la web oficial de este negocio.</b> Es una propuesta de diseño que he montado
+    por mi cuenta para enseñársela, sin que me la hayan encargado, y el negocio no tiene ninguna
+    relación con ella. Las fotos y los textos son provisionales.<br><br>
+    Si eres el dueño y no quieres que esté publicada, escríbeme y la quito el mismo día.<br><br>
+    Yoni Orfila · <a href="https://razak31rl-ops.github.io/web-demos-costabrava/">mi web</a>
+  </div>
+</div>
+<script>(function(){
+  var b=document.querySelector('.yo-chapa'), p=document.querySelector('.yo-panel');
+  if(!b||!p) return;
+  b.addEventListener('click', function(){
+    var a = p.classList.toggle('yo-abierto');
+    b.setAttribute('aria-expanded', a ? 'true' : 'false');
+  });
+})();</script>
+
 </body>
 </html>
