@@ -407,8 +407,8 @@
   ROOMS.forEach(function(r,i){
     r.side    = (i % 2 === 0) ? 1 : -1;                   // lado del hueco
     r.z       = -(ROOM_LEN * (i + 1));
-    r.gapX    = r.side * (HALL_W/2 - GAP_W/2 - 0.15);     // hueco pegado a una pared
-    r.photoX  = -r.side * 1.35;                            // foto desplazada al lado opuesto
+    r.gapX    = r.side * (HALL_W/2 - GAP_W/2 - 0.70);     // hueco con una jamba de verdad hasta la esquina
+    r.photoX  = -r.side * 1.55;                            // foto desplazada al lado opuesto
   });
 
   var Z_FACADE = 0;
@@ -697,18 +697,20 @@
     plane(ceilMat, HALL_W, hallLen, [0,HALL_H,midZ], [Math.PI/2,0,0]);
     plane(wallMat, hallLen, HALL_H, [-HALL_W/2, HALL_H/2, midZ], [0, Math.PI/2,0]);
     plane(wallMat, hallLen, HALL_H, [ HALL_W/2, HALL_H/2, midZ], [0,-Math.PI/2,0]);
-    // Rodapié y cornisa: dos molduras finas que rompen la caja y le
-    // dan escala. Sin ellas pared, suelo y techo se funden en un cubo.
+    // Cornisa: una moldura fina arriba que rompe la caja y le da
+    // escala. Sin ella pared y techo se funden en un cubo.
     var trimMat = new THREE.MeshStandardMaterial({color:0xf3ede2, roughness:.85});
     [-1, 1].forEach(function(sd){
       var wx = sd * (HALL_W/2 - 0.045);
-      box(0.09, 0.16, hallLen, wx, 0.08, midZ, trimMat);              // rodapié
+      // Sin rodapié: la moldura de abajo ensuciaba el encuentro con el
+      // suelo en vez de ordenarlo. El degradado de oclusión que baja por
+      // la pared ya marca esa junta sin necesidad de poner una pieza.
       box(0.11, 0.13, hallLen, wx, HALL_H - 0.075, midZ, trimMat);    // cornisa
     });
     // Aquí había dos juntas de sombra de 3 cm de alto. A distancia
     // medían menos de un píxel y parpadeaban en cada fotograma: la
-    // geometría muy fina siempre acaba haciendo eso. El rodapié ya
-    // marca ese encuentro sin necesidad de una línea.
+    // geometría muy fina siempre acaba haciendo eso. El degradado de
+    // oclusión marca ese encuentro sin poner nada allí.
 
     // Oclusión falsa en las esquinas. En un sitio real la luz nunca
     // llega igual al arranque de la pared que a la mitad; sin esto

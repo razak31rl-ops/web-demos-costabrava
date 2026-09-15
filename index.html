@@ -12,146 +12,204 @@
 <meta name="twitter:card" content="summary_large_image">
 <style>
   :root{
-    --cream:#f6f1e8;
-    --cream-2:#efe7da;
-    --ink:#1c1a17;
-    --ink-2:#4a453d;
-    --ink-3:#7d7669;
-    --gold:#b98a4a;
-    --line:#ddd2be;
-    --max:1080px;
+    --cream:#f6f1e8; --cream-2:#efe7da;
+    --ink:#15130f; --ink-2:#4a453d; --ink-3:#7d7669;
+    --gold:#c08f4d; --line:#ddd2be;
   }
   *{box-sizing:border-box;}
-  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+  html{-webkit-text-size-adjust:100%; scroll-behavior:smooth;}
   body{
     margin:0; background:var(--cream); color:var(--ink);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased;
+    font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
   }
-  .wrap{max-width:var(--max); margin:0 auto; padding:0 24px;}
-  h1,h2,h3{font-family:Georgia,"Times New Roman",serif; font-weight:400; letter-spacing:-.01em; margin:0;}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif; font-weight:400; margin:0; letter-spacing:-.015em;}
   a{color:inherit;}
   img{max-width:100%; display:block;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px;}
 
-  /* ---------- hero ---------- */
-  .hero{padding:78px 0 56px; border-bottom:1px solid var(--line);}
+  /* ============ HERO: antes / después a pantalla completa ============ */
+  .hero{
+    position:relative; height:100svh; min-height:540px; overflow:hidden;
+    background:var(--ink); cursor:ew-resize; user-select:none; touch-action:pan-y;
+  }
+  .hero .capa{position:absolute; inset:0;}
+  .hero .capa img{width:100%; height:100%; object-fit:cover;}
+  /* la de "después" se recorta por la izquierda según el tirador */
+  #capaDespues{clip-path:inset(0 0 0 var(--corte, 50%));}
+  .hero::after{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(180deg, rgba(10,9,7,.60) 0%, rgba(10,9,7,.12) 34%, rgba(10,9,7,.20) 62%, rgba(10,9,7,.86) 100%);
+  }
+
+  .linea{
+    position:absolute; top:0; bottom:0; width:2px; margin-left:-1px;
+    left:var(--corte, 50%); background:var(--gold);
+    box-shadow:0 0 22px rgba(192,143,77,.75); pointer-events:none; z-index:3;
+  }
+  .tirador{
+    position:absolute; top:50%; left:var(--corte, 50%);
+    transform:translate(-50%,-50%); z-index:4; pointer-events:none;
+    width:58px; height:58px; border-radius:50%;
+    border:1.5px solid rgba(246,241,232,.85); background:rgba(21,19,15,.34);
+    backdrop-filter:blur(3px);
+    display:flex; align-items:center; justify-content:center; gap:7px;
+    color:#f6f1e8; font-size:13px; letter-spacing:.06em;
+  }
+  .tirador span{opacity:.92;}
+  .etq{
+    position:absolute; top:calc(50% + 52px); z-index:4; pointer-events:none;
+    font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+    color:rgba(246,241,232,.78); transition:opacity .3s;
+  }
+  .etq-a{left:26px;} .etq-d{right:26px;}
+
+  .hero-txt{
+    position:absolute; z-index:5; left:0; right:0; bottom:0; padding:0 26px 46px;
+    pointer-events:none;
+  }
+  .hero-txt .inner{max-width:1080px; margin:0 auto;}
   .eyebrow{
-    font-size:12px; letter-spacing:.18em; text-transform:uppercase;
-    color:var(--gold); font-weight:600; margin-bottom:22px;
+    font-size:11px; letter-spacing:.24em; text-transform:uppercase;
+    color:var(--gold); font-weight:600; margin-bottom:16px;
   }
-  .hero h1{font-size:clamp(2.3rem,6.2vw,3.7rem); line-height:1.08;}
-  .hero h1 em{font-style:italic; color:var(--gold);}
-  .hero p{
-    font-size:clamp(1.05rem,2.4vw,1.28rem); color:var(--ink-2);
-    max-width:41ch; margin:24px 0 0;
+  .hero-txt h1{
+    color:#f6f1e8; font-size:clamp(2.35rem,7.4vw,5.1rem); line-height:1.02;
+    text-shadow:0 2px 40px rgba(0,0,0,.45);
   }
-  .cta-row{display:flex; flex-wrap:wrap; gap:12px; margin-top:34px; align-items:center;}
-  .btn{
-    display:inline-block; text-decoration:none; font-weight:600; font-size:.97rem;
-    padding:13px 26px; border-radius:2px; transition:transform .15s ease, background .15s ease;
+  .hero-txt h1 em{font-style:italic; color:var(--gold);}
+  .hero-txt p{
+    color:rgba(246,241,232,.82); max-width:34ch; margin:18px 0 0;
+    font-size:clamp(1rem,2.2vw,1.15rem);
   }
-  .btn-main{background:var(--ink); color:var(--cream);}
-  .btn-main:hover{background:var(--gold); transform:translateY(-1px);}
-  .btn-ghost{border:1px solid var(--line); color:var(--ink-2);}
-  .btn-ghost:hover{border-color:var(--ink); color:var(--ink);}
+  .pista{
+    position:absolute; z-index:5; left:50%; transform:translateX(-50%); bottom:14px;
+    font-size:10px; letter-spacing:.22em; text-transform:uppercase;
+    color:rgba(246,241,232,.5); pointer-events:none;
+    animation:respira 2.6s ease-in-out infinite;
+  }
+  @keyframes respira{0%,100%{opacity:.34;} 50%{opacity:.85;}}
 
-  /* ---------- secciones ---------- */
-  section{padding:66px 0; border-bottom:1px solid var(--line);}
-  .sec-head{margin-bottom:38px;}
-  .sec-head h2{font-size:clamp(1.55rem,3.6vw,2.1rem);}
-  .sec-head p{color:var(--ink-3); margin:12px 0 0; max-width:56ch; font-size:1rem;}
+  /* ============ secciones ============ */
+  section{padding:88px 0; border-bottom:1px solid var(--line);}
+  .sec-head{margin-bottom:44px; max-width:60ch;}
+  .sec-head h2{font-size:clamp(1.7rem,4.2vw,2.5rem);}
+  .sec-head p{color:var(--ink-3); margin:14px 0 0; font-size:1.02rem;}
 
-  /* ---------- trabajos ---------- */
-  .works{display:grid; gap:26px; grid-template-columns:1fr;}
-  @media(min-width:760px){
+  .rev{opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s ease;}
+  .rev.dentro{opacity:1; transform:none;}
+  @media(prefers-reduced-motion:reduce){ .rev{opacity:1; transform:none; transition:none;} }
+
+  /* ============ trabajos ============ */
+  .works{display:grid; gap:22px; grid-template-columns:1fr;}
+  @media(min-width:780px){
     .works{grid-template-columns:repeat(2,1fr);}
     .works a:first-child{grid-column:1 / -1;}
-    .works a:first-child .shot{aspect-ratio:21/9;}
+    .works a:first-child .shot{aspect-ratio:2.4/1;}
+    .works a:first-child .meta h3{font-size:1.75rem;}
   }
   .works a{
-    text-decoration:none; display:block; background:var(--cream-2);
-    border:1px solid var(--line); overflow:hidden;
-    transition:transform .2s ease, box-shadow .2s ease;
+    text-decoration:none; display:block; position:relative; overflow:hidden;
+    background:var(--ink); border-radius:3px;
   }
-  .works a:hover{transform:translateY(-3px); box-shadow:0 14px 34px rgba(28,26,23,.13);}
-  .shot{aspect-ratio:4/3; overflow:hidden; background:var(--ink);}
-  .shot img{width:100%; height:100%; object-fit:cover;}
-  .meta{padding:20px 22px 24px;}
-  .meta .tag{
-    font-size:11px; letter-spacing:.16em; text-transform:uppercase;
-    color:var(--gold); font-weight:600;
+  .shot{aspect-ratio:4/3; overflow:hidden;}
+  .shot img{
+    width:100%; height:100%; object-fit:cover;
+    transition:transform .9s cubic-bezier(.2,.7,.3,1), filter .5s;
+    filter:saturate(.96);
   }
-  .meta h3{font-size:1.25rem; margin:7px 0 8px;}
-  .meta p{margin:0; color:var(--ink-3); font-size:.94rem; line-height:1.55;}
+  .works a:hover .shot img{transform:scale(1.045); filter:saturate(1.06);}
+  .meta{
+    position:absolute; left:0; right:0; bottom:0; padding:26px 26px 24px; color:#f6f1e8;
+    background:linear-gradient(0deg, rgba(10,9,7,.92) 12%, rgba(10,9,7,.55) 58%, rgba(10,9,7,0) 100%);
+  }
+  .meta .tag{font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-weight:600;}
+  .meta h3{font-size:1.4rem; margin:8px 0 7px;}
+  .meta p{margin:0; color:rgba(246,241,232,.76); font-size:.93rem; line-height:1.5; max-width:56ch;}
   .aclara{
-    margin-top:28px; font-size:.9rem; color:var(--ink-3);
-    border-left:2px solid var(--line); padding-left:16px; max-width:62ch;
+    margin-top:30px; font-size:.9rem; color:var(--ink-3);
+    border-left:2px solid var(--gold); padding-left:16px; max-width:62ch;
   }
 
-  /* ---------- precios ---------- */
-  .precios{display:grid; gap:0; border:1px solid var(--line); background:var(--cream-2);}
+  /* ============ precios ============ */
+  .precios{border-top:1px solid var(--line);}
   .fila{
     display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline;
-    gap:10px 22px; padding:22px 24px; border-bottom:1px solid var(--line);
+    gap:8px 24px; padding:24px 4px; border-bottom:1px solid var(--line);
+    transition:padding-left .3s ease, background .3s ease;
   }
-  .fila:last-child{border-bottom:0;}
+  .fila:hover{padding-left:14px; background:rgba(192,143,77,.05);}
   .fila .qué{flex:1 1 300px;}
-  .fila .qué strong{font-size:1.06rem; font-weight:600; display:block;}
+  .fila .qué strong{font-size:1.1rem; font-weight:600; display:block;}
   .fila .qué span{color:var(--ink-3); font-size:.92rem; display:block; margin-top:4px;}
-  .fila .cuánto{
-    font-family:Georgia,serif; font-size:1.5rem; color:var(--gold); white-space:nowrap;
-  }
-  .nota-precio{margin-top:22px; color:var(--ink-2); font-size:.96rem; max-width:60ch;}
+  .fila .cuánto{font-family:Georgia,serif; font-size:1.65rem; color:var(--gold); white-space:nowrap;}
+  .nota-precio{margin-top:26px; color:var(--ink-2); font-size:.96rem; max-width:60ch;}
 
-  /* ---------- como trabajo ---------- */
-  .puntos{display:grid; gap:2px; grid-template-columns:1fr;}
+  /* ============ como trabajo ============ */
+  .puntos{display:grid; gap:1px; grid-template-columns:1fr; background:var(--line);}
   @media(min-width:700px){.puntos{grid-template-columns:1fr 1fr;}}
-  .punto{padding:22px 24px; background:var(--cream-2); border:1px solid var(--line);}
-  .punto strong{display:block; font-size:1.02rem; margin-bottom:5px;}
+  .punto{padding:26px; background:var(--cream);}
+  .punto strong{display:block; font-size:1.05rem; margin-bottom:6px;}
   .punto span{color:var(--ink-3); font-size:.93rem;}
 
-  /* ---------- contacto ---------- */
-  .contacto{text-align:center; padding:78px 0;}
-  .contacto h2{font-size:clamp(1.7rem,4.4vw,2.4rem);}
-  .contacto p{color:var(--ink-2); max-width:44ch; margin:16px auto 0;}
-  .contacto .cta-row{justify-content:center;}
-  .mail{
-    display:inline-block; margin-top:26px; color:var(--ink-3);
-    font-size:.95rem; text-decoration:none; border-bottom:1px solid var(--line);
+  /* ============ contacto ============ */
+  .contacto{background:var(--ink); color:#f6f1e8; text-align:center; padding:104px 0; border:0;}
+  .contacto h2{font-size:clamp(1.9rem,5.4vw,3rem); color:#f6f1e8;}
+  .contacto h2 em{font-style:italic; color:var(--gold);}
+  .contacto p{color:rgba(246,241,232,.72); max-width:42ch; margin:18px auto 0;}
+  .btn{
+    display:inline-block; margin-top:34px; text-decoration:none; font-weight:600;
+    font-size:1rem; padding:16px 34px; border-radius:2px;
+    background:var(--gold); color:#15130f;
+    transition:transform .18s ease, box-shadow .18s ease;
   }
-  .mail:hover{color:var(--ink); border-color:var(--gold);}
+  .btn:hover{transform:translateY(-2px); box-shadow:0 12px 30px rgba(192,143,77,.3);}
+  .mail{
+    display:inline-block; margin-top:26px; color:rgba(246,241,232,.6);
+    font-size:.95rem; text-decoration:none; border-bottom:1px solid rgba(246,241,232,.22);
+  }
+  .mail:hover{color:#f6f1e8;}
 
   footer{
-    padding:34px 0 48px; color:var(--ink-3); font-size:.85rem;
-    display:flex; flex-wrap:wrap; gap:8px 20px; justify-content:space-between;
+    background:var(--ink); color:rgba(246,241,232,.42); font-size:.82rem;
+    padding:0 0 42px;
   }
-  footer a{text-decoration:none;}
-  footer a:hover{color:var(--ink);}
+  footer .wrap{display:flex; flex-wrap:wrap; gap:8px 20px; justify-content:space-between;}
 </style>
 </head>
 <body>
 
-<header class="hero">
-  <div class="wrap">
-    <div class="eyebrow">L'Armentera · Alt Empordà</div>
-    <h1>Hago webs para<br>negocios de <em>aquí</em>.</h1>
-    <p>Restaurantes, hoteles, empresas de reformas. Páginas que enseñan lo que hacéis, no que lo cuentan.</p>
-    <div class="cta-row">
-      <a class="btn btn-main" href="https://wa.me/34686591519">Escríbeme por WhatsApp</a>
-      <a class="btn btn-ghost" href="#trabajos">Ver trabajos</a>
+<!-- ======================= HERO ======================= -->
+<header class="hero" id="hero">
+  <div class="capa"><img src="./assets/h-antes.webp" alt="Un salón antes de la reforma"></div>
+  <div class="capa" id="capaDespues"><img src="./assets/h-despues.webp" alt="El mismo salón después de la reforma"></div>
+
+  <div class="linea" id="linea"></div>
+  <div class="tirador" id="tirador"><span>◀</span><span>▶</span></div>
+  <div class="etq etq-a">Antes</div>
+  <div class="etq etq-d">Después</div>
+
+  <div class="hero-txt">
+    <div class="inner">
+      <div class="eyebrow">L'Armentera · Alt Empordà</div>
+      <h1>Hago webs para<br>negocios de <em>aquí</em>.</h1>
+      <p>Páginas que enseñan lo que hacéis. No que lo cuentan.</p>
     </div>
   </div>
+  <div class="pista">Arrastra · o baja</div>
 </header>
 
+<!-- ======================= TRABAJOS ======================= -->
 <section id="trabajos">
   <div class="wrap">
-    <div class="sec-head">
+    <div class="sec-head rev">
       <h2>Trabajos</h2>
       <p>Ábrelos desde el móvil, que es donde los va a ver vuestro cliente.</p>
     </div>
 
     <div class="works">
-      <a href="./muestra-reformas/">
+      <a class="rev" href="./muestra-reformas/">
         <div class="shot"><img src="./assets/w-reformas.jpg" alt="Galería 3D de una reforma, antes y después"></div>
         <div class="meta">
           <div class="tag">Empresa de reformas</div>
@@ -160,7 +218,7 @@
         </div>
       </a>
 
-      <a href="./muestra-hotel/">
+      <a class="rev" href="./muestra-hotel/">
         <div class="shot"><img src="./assets/w-hotel.webp" alt="Piscina de un hotel al atardecer"></div>
         <div class="meta">
           <div class="tag">Hotel</div>
@@ -169,7 +227,7 @@
         </div>
       </a>
 
-      <a href="./muestra-restaurante/">
+      <a class="rev" href="./muestra-restaurante/">
         <div class="shot"><img src="./assets/w-restaurante.webp" alt="Terraza de un restaurante junto al mar"></div>
         <div class="meta">
           <div class="tag">Restaurante</div>
@@ -179,18 +237,19 @@
       </a>
     </div>
 
-    <p class="aclara">Son muestras que he montado yo, con empresas de ejemplo, para que se vea el formato. Las fotos y los textos de vuestra web serían los vuestros.</p>
+    <p class="aclara rev">Son muestras que he montado yo, con empresas de ejemplo, para que se vea el formato. Las fotos y los textos de vuestra web serían los vuestros.</p>
   </div>
 </section>
 
+<!-- ======================= PRECIOS ======================= -->
 <section id="precios">
   <div class="wrap">
-    <div class="sec-head">
+    <div class="sec-head rev">
       <h2>Precios</h2>
       <p>Pago único. Sin cuotas mensuales, sin permanencia y sin letra pequeña.</p>
     </div>
 
-    <div class="precios">
+    <div class="precios rev">
       <div class="fila">
         <div class="qué"><strong>Web de una página</strong>
           <span>Todo en una: presentación, fotos, horarios, cómo llegar y contacto.</span></div>
@@ -218,14 +277,15 @@
       </div>
     </div>
 
-    <p class="nota-precio">El dominio va aparte, unos 15 € al año, y a nombre del cliente: es suyo, no mío.</p>
+    <p class="nota-precio rev">El dominio va aparte, unos 15 € al año, y a nombre del cliente: es suyo, no mío.</p>
   </div>
 </section>
 
+<!-- ======================= COMO TRABAJO ======================= -->
 <section id="como">
   <div class="wrap">
-    <div class="sec-head"><h2>Cómo trabajo</h2></div>
-    <div class="puntos">
+    <div class="sec-head rev"><h2>Cómo trabajo</h2></div>
+    <div class="puntos rev">
       <div class="punto"><strong>Se paga al final</strong><span>Cuando la web está montada y funcionando. No antes.</span></div>
       <div class="punto"><strong>Un mes de cambios incluido</strong><span>Desde la entrega. Después, retoques sueltos a 30 €.</span></div>
       <div class="punto"><strong>El dominio es vuestro</strong><span>A vuestro nombre. Si algún día queréis a otro, os lo lleváis.</span></div>
@@ -236,23 +296,79 @@
   </div>
 </section>
 
+<!-- ======================= CONTACTO ======================= -->
 <section class="contacto">
   <div class="wrap">
-    <h2>¿Lo vemos?</h2>
+    <h2>¿Lo <em>vemos</em>?</h2>
     <p>Cuéntame qué negocio tienes y te digo qué haría, sin compromiso.</p>
-    <div class="cta-row">
-      <a class="btn btn-main" href="https://wa.me/34686591519">WhatsApp · 686 59 15 19</a>
-    </div>
+    <a class="btn" href="https://wa.me/34686591519">WhatsApp · 686 59 15 19</a><br>
     <a class="mail" href="mailto:yoniorfila062@gmail.com">yoniorfila062@gmail.com</a>
   </div>
 </section>
 
-<div class="wrap">
-  <footer>
+<footer>
+  <div class="wrap">
     <span>Yoni Orfila · L'Armentera, Alt Empordà (Girona)</span>
-    <span>Esta web no usa cookies ni recoge ningún dato.</span>
-  </footer>
-</div>
+    <span><a href="./aviso-legal/" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(246,241,232,.22)">Aviso legal y privacidad</a> · Esta web no usa cookies ni recoge ningún dato.</span>
+  </div>
+</footer>
 
+<script>
+(function(){
+  /* ---------- antes / después ---------- */
+  var hero = document.getElementById('hero');
+  var linea = document.getElementById('linea');
+  var tirador = document.getElementById('tirador');
+  var etqA = document.querySelector('.etq-a');
+  var etqD = document.querySelector('.etq-d');
+  var manual = false;
+
+  function pon(pct){
+    pct = Math.max(3, Math.min(97, pct));
+    hero.style.setProperty('--corte', pct + '%');
+    linea.style.left = pct + '%';
+    tirador.style.left = pct + '%';
+    // la etiqueta se apaga cuando la línea se le echa encima
+    etqA.style.opacity = pct < 22 ? 0 : .78;
+    etqD.style.opacity = pct > 78 ? 0 : .78;
+  }
+
+  function desdeEvento(e){
+    var x = (e.touches ? e.touches[0].clientX : e.clientX);
+    var r = hero.getBoundingClientRect();
+    pon(((x - r.left) / r.width) * 100);
+  }
+
+  function arrastrar(e){ manual = true; desdeEvento(e); }
+
+  hero.addEventListener('mousemove', arrastrar);
+  hero.addEventListener('touchstart', arrastrar, {passive:true});
+  hero.addEventListener('touchmove', arrastrar, {passive:true});
+
+  /* Demostración sola al entrar: la línea hace un barrido para que se
+     entienda que aquello se toca. Se corta en cuanto el visitante
+     mueve el dedo o el ratón. */
+  var t0 = null;
+  function demo(t){
+    if(manual) return;
+    if(t0 === null) t0 = t;
+    var k = (t - t0) / 2600;
+    if(k >= 1){ pon(50); return; }
+    var e = k < .5 ? 4*k*k*k : 1 - Math.pow(-2*k + 2, 3)/2;   // suave a los dos lados
+    pon(50 + Math.sin(e * Math.PI * 2) * 34);
+    requestAnimationFrame(demo);
+  }
+  setTimeout(function(){ requestAnimationFrame(demo); }, 700);
+
+  /* ---------- aparecer al bajar ---------- */
+  var obs = new IntersectionObserver(function(filas){
+    filas.forEach(function(f){ if(f.isIntersecting){ f.target.classList.add('dentro'); obs.unobserve(f.target); } });
+  }, {rootMargin:'0px 0px -12% 0px'});
+  document.querySelectorAll('.rev').forEach(function(el, i){
+    el.style.transitionDelay = (i % 3) * 70 + 'ms';
+    obs.observe(el);
+  });
+})();
+</script>
 </body>
 </html>
