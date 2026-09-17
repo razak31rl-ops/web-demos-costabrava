@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NAVALLA Barber Studio — Web de muestra</title>
+<meta name="description" content="Página de muestra: así podría verse la web de tu barbería. Cita por WhatsApp, precios claros y todo pensado para el móvil.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0d0d0f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0d0d0f;
+    --coal:#151519;
+    --steel:#1e1e24;
+    --cream:#f4f1ea;
+    --brass:#c8973f;
+    --brass-dim:#9a7330;
+    --red:#b4342c;
+    --blue:#1f4f8f;
+    --muted:rgba(244,241,234,.58);
+    --line:rgba(244,241,234,.12);
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;background:var(--void);color:var(--cream);
+    font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{margin:0;font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;letter-spacing:.02em;line-height:.92;}
+  p{margin:0;line-height:1.7;}
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+  ::selection{background:var(--brass);color:#14100a;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
+  .eyebrow{
+    display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--brass);margin-bottom:14px;
+  }
+
+  /* ---------- aviso de muestra ---------- */
+  .demo-bar{
+    background:var(--brass);color:#14100a;text-align:center;
+    font-size:.74rem;font-weight:700;letter-spacing:.06em;padding:8px 16px;
+  }
+
+  /* ---------- cabecera ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(13,13,15,.86);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:66px;}
+  .brand{display:flex;align-items:center;gap:11px;}
+  .brand-name{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.14em;}
+  .nav-links{display:none;gap:30px;font-size:.86rem;font-weight:500;color:var(--muted);}
+  .nav-links a:hover{color:var(--cream);}
+  @media(min-width:860px){.nav-links{display:flex;}}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    padding:13px 22px;border-radius:999px;font-weight:700;font-size:.9rem;
+    border:2px solid transparent;cursor:pointer;transition:transform .25s var(--ease),background .25s;
+  }
+  .btn:active{transform:scale(.97);}
+  .btn-primary{background:var(--brass);color:#14100a;}
+  .btn-primary:hover{background:#dcaa4d;}
+  .btn-ghost{border-color:var(--line);color:var(--cream);}
+  .btn-ghost:hover{border-color:var(--brass);color:var(--brass);}
+  .btn-sm{padding:10px 18px;font-size:.82rem;}
+
+  /* ---------- poste de barbero ---------- */
+  .pole{width:17px;height:40px;border-radius:9px;overflow:hidden;position:relative;
+    box-shadow:inset 0 0 0 2px rgba(244,241,234,.22);flex:none;background:#fff;}
+  .pole i{
+    position:absolute;inset:-60% -40%;
+    background:repeating-linear-gradient(115deg,
+      var(--red) 0 9px,#fff 9px 18px,var(--blue) 18px 27px,#fff 27px 36px);
+    animation:spin 2.4s linear infinite;
+  }
+  @keyframes spin{to{transform:translateY(46%);}}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;padding:74px 0 66px;overflow:hidden;}
+  .hero::before{
+    content:"";position:absolute;top:-30%;left:50%;transform:translateX(-50%);
+    width:min(880px,130vw);aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle,rgba(200,151,63,.16),transparent 66%);
+    pointer-events:none;
+  }
+  .hero-inner{position:relative;}
+  .hero h1{font-size:clamp(3.4rem,15vw,7.4rem);}
+  .hero h1 .thin{display:block;color:var(--brass);}
+  .lede{margin-top:22px;max-width:44ch;font-size:1.06rem;color:var(--muted);}
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;}
+  .hero-stats{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:46px;
+    border-top:1px solid var(--line);padding-top:26px;max-width:560px;
+  }
+  .stat b{display:block;font-family:'Bebas Neue',sans-serif;font-size:2.1rem;color:var(--brass);}
+  .stat span{font-size:.76rem;color:var(--muted);letter-spacing:.04em;}
+
+  /* ---------- franja ---------- */
+  .ticker{
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:var(--coal);overflow:hidden;padding:13px 0;
+  }
+  .ticker-track{display:flex;gap:44px;width:max-content;animation:slide 26s linear infinite;}
+  .ticker-track span{
+    font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:.18em;
+    color:var(--muted);white-space:nowrap;
+  }
+  .ticker-track span::after{content:"\25C6";margin-left:44px;color:var(--brass-dim);}
+  @keyframes slide{to{transform:translateX(-50%);}}
+
+  /* ---------- secciones ---------- */
+  section{padding:76px 0;}
+  .sec-head{margin-bottom:38px;}
+  .sec-head h2{font-size:clamp(2.3rem,7vw,3.5rem);}
+  .sec-head p{margin-top:12px;color:var(--muted);max-width:52ch;}
+
+  /* precios */
+  .price-list{display:grid;gap:0;border-top:1px solid var(--line);}
+  .price-row{
+    display:flex;align-items:baseline;gap:16px;padding:20px 4px;
+    border-bottom:1px solid var(--line);transition:padding-left .3s var(--ease);
+  }
+  .price-row:hover{padding-left:14px;}
+  .price-row .nm{font-weight:600;font-size:1.02rem;}
+  .price-row .ds{display:block;font-weight:400;font-size:.84rem;color:var(--muted);margin-top:4px;}
+  .price-row .dots{flex:1;border-bottom:1px dotted rgba(244,241,234,.22);transform:translateY(-4px);}
+  .price-row .pr{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--brass);}
+  .price-tag{
+    display:inline-block;margin-left:10px;padding:3px 9px;border-radius:999px;
+    background:rgba(200,151,63,.15);color:var(--brass);font-size:.64rem;
+    font-weight:700;letter-spacing:.1em;text-transform:uppercase;vertical-align:middle;
+  }
+
+  /* equipo */
+  .team{display:grid;gap:18px;grid-template-columns:1fr;}
+  @media(min-width:700px){.team{grid-template-columns:repeat(3,1fr);}}
+  .card{
+    background:var(--coal);border:1px solid var(--line);border-radius:18px;padding:26px;
+    transition:transform .35s var(--ease),border-color .35s;
+  }
+  .card:hover{transform:translateY(-5px);border-color:rgba(200,151,63,.4);}
+  .avatar{
+    width:62px;height:62px;border-radius:50%;display:grid;place-items:center;
+    font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:#14100a;
+    background:linear-gradient(140deg,var(--brass),#e0b563);margin-bottom:16px;
+  }
+  .card h3{font-size:1.5rem;}
+  .card .role{font-size:.78rem;color:var(--brass);letter-spacing:.12em;text-transform:uppercase;margin:6px 0 12px;}
+  .card p{font-size:.92rem;color:var(--muted);}
+
+  /* galeria */
+  .grid-gal{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+  @media(min-width:760px){.grid-gal{grid-template-columns:repeat(4,1fr);}}
+  .tile{
+    aspect-ratio:3/4;border-radius:14px;position:relative;overflow:hidden;
+    border:1px solid var(--line);display:grid;place-items:center;
+  }
+  .tile span{
+    font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.2em;
+    color:rgba(244,241,234,.5);z-index:2;
+  }
+  .tile::before{content:"";position:absolute;inset:0;opacity:.9;}
+  .t1::before{background:linear-gradient(150deg,#26262e,#14141a);}
+  .t2::before{background:linear-gradient(150deg,#2e2a22,#16130f);}
+  .t3::before{background:linear-gradient(150deg,#1c2430,#0f141b);}
+  .t4::before{background:linear-gradient(150deg,#2a2028,#161016);}
+  .tile::after{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:repeating-linear-gradient(45deg,transparent 0 12px,rgba(244,241,234,.035) 12px 24px);
+  }
+  .gal-note{margin-top:16px;font-size:.84rem;color:var(--muted);}
+
+  /* horarios */
+  .two{display:grid;gap:26px;grid-template-columns:1fr;}
+  @media(min-width:820px){.two{grid-template-columns:1fr 1fr;gap:40px;}}
+  .hours-row{
+    display:flex;justify-content:space-between;padding:13px 0;
+    border-bottom:1px solid var(--line);font-size:.95rem;
+  }
+  .hours-row.today{color:var(--brass);font-weight:700;}
+  .hours-row span:last-child{color:var(--muted);}
+  .hours-row.today span:last-child{color:var(--brass);}
+  .info-line{display:flex;gap:13px;padding:14px 0;border-bottom:1px solid var(--line);align-items:flex-start;}
+  .info-line .ic{color:var(--brass);flex:none;width:20px;text-align:center;font-size:1rem;}
+  .info-line div{font-size:.95rem;}
+  .info-line small{display:block;color:var(--muted);margin-top:3px;font-size:.84rem;}
+
+  /* cta */
+  .cta{
+    background:linear-gradient(150deg,var(--steel),var(--coal));
+    border:1px solid var(--line);border-radius:24px;padding:52px 28px;text-align:center;
+  }
+  .cta h2{font-size:clamp(2.2rem,7vw,3.4rem);}
+  .cta p{margin:16px auto 0;max-width:46ch;color:var(--muted);}
+  .cta .hero-ctas{justify-content:center;}
+
+  /* pie */
+  footer{border-top:1px solid var(--line);padding:42px 0 34px;background:var(--coal);}
+  .foot-top{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center;}
+  .foot-note{
+    margin-top:30px;padding-top:22px;border-top:1px solid var(--line);
+    font-size:.82rem;color:var(--muted);line-height:1.7;
+  }
+  .foot-note b{color:var(--cream);}
+
+  /* barra movil fija */
+  .sticky-cta{
+    position:fixed;left:0;right:0;bottom:0;z-index:60;
+    background:rgba(13,13,15,.94);backdrop-filter:blur(14px);
+    border-top:1px solid var(--line);padding:11px 16px calc(11px + env(safe-area-inset-bottom));
+    display:flex;gap:10px;
+  }
+  .sticky-cta .btn{flex:1;}
+  @media(min-width:860px){.sticky-cta{display:none;}}
+  body{padding-bottom:78px;}
+  @media(min-width:860px){body{padding-bottom:0;}}
+
+  /* aparicion */
+  .rev{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+  .rev.in{opacity:1;transform:none;}
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;}
+    .rev{opacity:1;transform:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-bar">MUESTRA NO OFICIAL · Negocio inventado para enseñar el diseño</div>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <div class="pole"><i></i></div>
+      <div class="brand-name">NAVALLA</div>
+    </div>
+    <nav class="nav-links">
+      <a href="#precios">Precios</a>
+      <a href="#equipo">Equipo</a>
+      <a href="#local">Dónde estamos</a>
+    </nav>
+    <a class="btn btn-primary btn-sm" href="#cita">Pedir cita</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap hero-inner">
+    <span class="eyebrow">Barberia · Alt Empordà</span>
+    <h1>CORTE<span class="thin">Y NAVAJA</span></h1>
+    <p class="lede">
+      Barbería de barrio, sin prisa y sin postureo. Entras, te sientas y sales
+      con la cabeza como querías. Cita en treinta segundos por WhatsApp.
+    </p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#cita">Pedir cita por WhatsApp</a>
+      <a class="btn btn-ghost" href="#precios">Ver precios</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><b>4,9</b><span>en Google</span></div>
+      <div class="stat"><b>30 min</b><span>corte medio</span></div>
+      <div class="stat"><b>6</b><span>días abiertos</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="ticker">
+  <div class="ticker-track">
+    <span>CORTE CLÁSICO</span><span>DEGRADADO</span><span>AFEITADO A NAVAJA</span><span>ARREGLO DE BARBA</span>
+    <span>CORTE CLÁSICO</span><span>DEGRADADO</span><span>AFEITADO A NAVAJA</span><span>ARREGLO DE BARBA</span>
+  </div>
+</div>
+
+<section id="precios">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="eyebrow">Tarifas</span>
+      <h2>PRECIOS CLAROS</h2>
+      <p>Lo que cuesta, puesto donde se ve. Sin sorpresas al llegar a la caja.</p>
+    </div>
+    <div class="price-list rev">
+      <div class="price-row">
+        <div><span class="nm">Corte de pelo</span><span class="ds">Lavado, corte y peinado</span></div>
+        <div class="dots"></div><div class="pr">14 €</div>
+      </div>
+      <div class="price-row">
+        <div><span class="nm">Corte + barba<span class="price-tag">el más pedido</span></span><span class="ds">El pack completo, una hora para ti</span></div>
+        <div class="dots"></div><div class="pr">22 €</div>
+      </div>
+      <div class="price-row">
+        <div><span class="nm">Arreglo de barba</span><span class="ds">Perfilado, navaja y toalla caliente</span></div>
+        <div class="dots"></div><div class="pr">10 €</div>
+      </div>
+      <div class="price-row">
+        <div><span class="nm">Afeitado tradicional</span><span class="ds">A navaja, como toda la vida</span></div>
+        <div class="dots"></div><div class="pr">15 €</div>
+      </div>
+      <div class="price-row">
+        <div><span class="nm">Corte infantil</span><span class="ds">Hasta 12 años, con paciencia incluida</span></div>
+        <div class="dots"></div><div class="pr">11 €</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="equipo" style="background:var(--coal);">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="eyebrow">Quién te atiende</span>
+      <h2>EL EQUIPO</h2>
+      <p>Puedes pedir cita con quien quieras. Si te da igual, te toca el que antes quede libre.</p>
+    </div>
+    <div class="team">
+      <div class="card rev">
+        <div class="avatar">M</div>
+        <h3>MARC</h3>
+        <div class="role">Degradados</div>
+        <p>Doce años detrás de la silla. Si traes una foto, la borda.</p>
+      </div>
+      <div class="card rev">
+        <div class="avatar">A</div>
+        <h3>AITOR</h3>
+        <div class="role">Barba y navaja</div>
+        <p>El afeitado tradicional es lo suyo. Toalla caliente y cero prisa.</p>
+      </div>
+      <div class="card rev">
+        <div class="avatar">J</div>
+        <h3>JOANA</h3>
+        <div class="role">Corte clásico</div>
+        <p>Tijera, peine y buena conversación. También corta a los peques.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="eyebrow">Trabajos</span>
+      <h2>ANTES Y DESPUÉS</h2>
+      <p>Aquí irían vuestras fotos reales de Instagram, en esta misma rejilla.</p>
+    </div>
+    <div class="grid-gal rev">
+      <div class="tile t1"><span>FOTO 1</span></div>
+      <div class="tile t2"><span>FOTO 2</span></div>
+      <div class="tile t3"><span>FOTO 3</span></div>
+      <div class="tile t4"><span>FOTO 4</span></div>
+    </div>
+    <p class="gal-note">Los huecos son a propósito: no pongo fotos que no sean vuestras.</p>
+  </div>
+</section>
+
+<section id="local" style="background:var(--coal);">
+  <div class="wrap two">
+    <div class="rev">
+      <span class="eyebrow">Horario</span>
+      <h2 style="font-size:2.4rem;margin-bottom:22px;">CUÁNDO ABRIMOS</h2>
+      <div class="hours-row"><span>Lunes</span><span>Cerrado</span></div>
+      <div class="hours-row"><span>Martes</span><span>09:30 – 20:00</span></div>
+      <div class="hours-row today"><span>Miércoles</span><span>09:30 – 20:00</span></div>
+      <div class="hours-row"><span>Jueves</span><span>09:30 – 20:00</span></div>
+      <div class="hours-row"><span>Viernes</span><span>09:30 – 21:00</span></div>
+      <div class="hours-row"><span>Sábado</span><span>09:00 – 14:00</span></div>
+      <div class="hours-row"><span>Domingo</span><span>Cerrado</span></div>
+    </div>
+    <div class="rev">
+      <span class="eyebrow">Contacto</span>
+      <h2 style="font-size:2.4rem;margin-bottom:22px;">DÓNDE ESTAMOS</h2>
+      <div class="info-line"><div class="ic">&#9670;</div><div>Carrer de Mostra, 1 · Alt Empordà<small>A dos minutos andando del centro</small></div></div>
+      <div class="info-line"><div class="ic">&#9670;</div><div>WhatsApp 600 00 00 00<small>Cita en treinta segundos, sin llamar</small></div></div>
+      <div class="info-line"><div class="ic">&#9670;</div><div>Sin cita previa<small>Si hay hueco, entras. Si no, te decimos a qué hora volver.</small></div></div>
+      <div class="info-line"><div class="ic">&#9670;</div><div>Pago en efectivo y tarjeta<small>También Bizum</small></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="cita">
+  <div class="wrap">
+    <div class="cta rev">
+      <span class="eyebrow">Tu turno</span>
+      <h2>¿NOS VEMOS ESTA SEMANA?</h2>
+      <p>Escríbenos por WhatsApp con el día y la hora que te va bien. Te confirmamos en un momento.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#" onclick="return false;">Pedir cita por WhatsApp</a>
+        <a class="btn btn-ghost" href="#precios">Ver precios otra vez</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="brand">
+        <div class="pole"><i></i></div>
+        <div class="brand-name">NAVALLA</div>
+      </div>
+      <div style="font-size:.86rem;color:var(--muted);">Barberia · Alt Empordà</div>
+    </div>
+    <p class="foot-note">
+      <b>Esto es una muestra.</b> NAVALLA no existe: el nombre, el equipo, los precios y los
+      horarios son inventados para enseñar cómo quedaría el diseño. En la vuestra irían
+      vuestro nombre, vuestras fotos, vuestros precios y vuestro WhatsApp de verdad.
+    </p>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <a class="btn btn-primary" href="#cita">Pedir cita</a>
+  <a class="btn btn-ghost" href="#precios">Precios</a>
+</div>
+
+<script>
+  (function(){
+    var els=document.querySelectorAll('.rev');
+    if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');});return;}
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}
+      });
+    },{rootMargin:'0px 0px -12% 0px'});
+    els.forEach(function(e){io.observe(e);});
+  })();
+</script>
+</body>
+</html>
