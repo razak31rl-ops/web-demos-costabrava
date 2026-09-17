@@ -1,435 +1,1021 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>NAVALLA Barber Studio — Web de muestra</title>
-<meta name="description" content="Página de muestra: así podría verse la web de tu barbería. Cita por WhatsApp, precios claros y todo pensado para el móvil.">
-<meta name="robots" content="noindex">
-<meta name="theme-color" content="#0d0d0f">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --void:#0d0d0f;
-    --coal:#151519;
-    --steel:#1e1e24;
-    --cream:#f4f1ea;
-    --brass:#c8973f;
-    --brass-dim:#9a7330;
-    --red:#b4342c;
-    --blue:#1f4f8f;
-    --muted:rgba(244,241,234,.58);
-    --line:rgba(244,241,234,.12);
-    --ease:cubic-bezier(.16,1,.3,1);
-  }
-  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;background:var(--void);color:var(--cream);
-    font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  h1,h2,h3{margin:0;font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;letter-spacing:.02em;line-height:.92;}
-  p{margin:0;line-height:1.7;}
-  a{color:inherit;text-decoration:none;}
-  img,svg{display:block;max-width:100%;}
-  ::selection{background:var(--brass);color:#14100a;}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
-  .eyebrow{
-    display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.24em;
-    text-transform:uppercase;color:var(--brass);margin-bottom:14px;
-  }
-
-  /* ---------- aviso de muestra ---------- */
-  .demo-bar{
-    background:var(--brass);color:#14100a;text-align:center;
-    font-size:.74rem;font-weight:700;letter-spacing:.06em;padding:8px 16px;
-  }
-
-  /* ---------- cabecera ---------- */
-  header{
-    position:sticky;top:0;z-index:50;
-    background:rgba(13,13,15,.86);backdrop-filter:blur(14px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav{display:flex;align-items:center;justify-content:space-between;height:66px;}
-  .brand{display:flex;align-items:center;gap:11px;}
-  .brand-name{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.14em;}
-  .nav-links{display:none;gap:30px;font-size:.86rem;font-weight:500;color:var(--muted);}
-  .nav-links a:hover{color:var(--cream);}
-  @media(min-width:860px){.nav-links{display:flex;}}
-
-  .btn{
-    display:inline-flex;align-items:center;justify-content:center;gap:9px;
-    padding:13px 22px;border-radius:999px;font-weight:700;font-size:.9rem;
-    border:2px solid transparent;cursor:pointer;transition:transform .25s var(--ease),background .25s;
-  }
-  .btn:active{transform:scale(.97);}
-  .btn-primary{background:var(--brass);color:#14100a;}
-  .btn-primary:hover{background:#dcaa4d;}
-  .btn-ghost{border-color:var(--line);color:var(--cream);}
-  .btn-ghost:hover{border-color:var(--brass);color:var(--brass);}
-  .btn-sm{padding:10px 18px;font-size:.82rem;}
-
-  /* ---------- poste de barbero ---------- */
-  .pole{width:17px;height:40px;border-radius:9px;overflow:hidden;position:relative;
-    box-shadow:inset 0 0 0 2px rgba(244,241,234,.22);flex:none;background:#fff;}
-  .pole i{
-    position:absolute;inset:-60% -40%;
-    background:repeating-linear-gradient(115deg,
-      var(--red) 0 9px,#fff 9px 18px,var(--blue) 18px 27px,#fff 27px 36px);
-    animation:spin 2.4s linear infinite;
-  }
-  @keyframes spin{to{transform:translateY(46%);}}
-
-  /* ---------- hero ---------- */
-  .hero{position:relative;padding:74px 0 66px;overflow:hidden;}
-  .hero::before{
-    content:"";position:absolute;top:-30%;left:50%;transform:translateX(-50%);
-    width:min(880px,130vw);aspect-ratio:1;border-radius:50%;
-    background:radial-gradient(circle,rgba(200,151,63,.16),transparent 66%);
-    pointer-events:none;
-  }
-  .hero-inner{position:relative;}
-  .hero h1{font-size:clamp(3.4rem,15vw,7.4rem);}
-  .hero h1 .thin{display:block;color:var(--brass);}
-  .lede{margin-top:22px;max-width:44ch;font-size:1.06rem;color:var(--muted);}
-  .hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;}
-  .hero-stats{
-    display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:46px;
-    border-top:1px solid var(--line);padding-top:26px;max-width:560px;
-  }
-  .stat b{display:block;font-family:'Bebas Neue',sans-serif;font-size:2.1rem;color:var(--brass);}
-  .stat span{font-size:.76rem;color:var(--muted);letter-spacing:.04em;}
-
-  /* ---------- franja ---------- */
-  .ticker{
-    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-    background:var(--coal);overflow:hidden;padding:13px 0;
-  }
-  .ticker-track{display:flex;gap:44px;width:max-content;animation:slide 26s linear infinite;}
-  .ticker-track span{
-    font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:.18em;
-    color:var(--muted);white-space:nowrap;
-  }
-  .ticker-track span::after{content:"\25C6";margin-left:44px;color:var(--brass-dim);}
-  @keyframes slide{to{transform:translateX(-50%);}}
-
-  /* ---------- secciones ---------- */
-  section{padding:76px 0;}
-  .sec-head{margin-bottom:38px;}
-  .sec-head h2{font-size:clamp(2.3rem,7vw,3.5rem);}
-  .sec-head p{margin-top:12px;color:var(--muted);max-width:52ch;}
-
-  /* precios */
-  .price-list{display:grid;gap:0;border-top:1px solid var(--line);}
-  .price-row{
-    display:flex;align-items:baseline;gap:16px;padding:20px 4px;
-    border-bottom:1px solid var(--line);transition:padding-left .3s var(--ease);
-  }
-  .price-row:hover{padding-left:14px;}
-  .price-row .nm{font-weight:600;font-size:1.02rem;}
-  .price-row .ds{display:block;font-weight:400;font-size:.84rem;color:var(--muted);margin-top:4px;}
-  .price-row .dots{flex:1;border-bottom:1px dotted rgba(244,241,234,.22);transform:translateY(-4px);}
-  .price-row .pr{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--brass);}
-  .price-tag{
-    display:inline-block;margin-left:10px;padding:3px 9px;border-radius:999px;
-    background:rgba(200,151,63,.15);color:var(--brass);font-size:.64rem;
-    font-weight:700;letter-spacing:.1em;text-transform:uppercase;vertical-align:middle;
-  }
-
-  /* equipo */
-  .team{display:grid;gap:18px;grid-template-columns:1fr;}
-  @media(min-width:700px){.team{grid-template-columns:repeat(3,1fr);}}
-  .card{
-    background:var(--coal);border:1px solid var(--line);border-radius:18px;padding:26px;
-    transition:transform .35s var(--ease),border-color .35s;
-  }
-  .card:hover{transform:translateY(-5px);border-color:rgba(200,151,63,.4);}
-  .avatar{
-    width:62px;height:62px;border-radius:50%;display:grid;place-items:center;
-    font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:#14100a;
-    background:linear-gradient(140deg,var(--brass),#e0b563);margin-bottom:16px;
-  }
-  .card h3{font-size:1.5rem;}
-  .card .role{font-size:.78rem;color:var(--brass);letter-spacing:.12em;text-transform:uppercase;margin:6px 0 12px;}
-  .card p{font-size:.92rem;color:var(--muted);}
-
-  /* galeria */
-  .grid-gal{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
-  @media(min-width:760px){.grid-gal{grid-template-columns:repeat(4,1fr);}}
-  .tile{
-    aspect-ratio:3/4;border-radius:14px;position:relative;overflow:hidden;
-    border:1px solid var(--line);display:grid;place-items:center;
-  }
-  .tile span{
-    font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.2em;
-    color:rgba(244,241,234,.5);z-index:2;
-  }
-  .tile::before{content:"";position:absolute;inset:0;opacity:.9;}
-  .t1::before{background:linear-gradient(150deg,#26262e,#14141a);}
-  .t2::before{background:linear-gradient(150deg,#2e2a22,#16130f);}
-  .t3::before{background:linear-gradient(150deg,#1c2430,#0f141b);}
-  .t4::before{background:linear-gradient(150deg,#2a2028,#161016);}
-  .tile::after{
-    content:"";position:absolute;inset:0;z-index:1;
-    background:repeating-linear-gradient(45deg,transparent 0 12px,rgba(244,241,234,.035) 12px 24px);
-  }
-  .gal-note{margin-top:16px;font-size:.84rem;color:var(--muted);}
-
-  /* horarios */
-  .two{display:grid;gap:26px;grid-template-columns:1fr;}
-  @media(min-width:820px){.two{grid-template-columns:1fr 1fr;gap:40px;}}
-  .hours-row{
-    display:flex;justify-content:space-between;padding:13px 0;
-    border-bottom:1px solid var(--line);font-size:.95rem;
-  }
-  .hours-row.today{color:var(--brass);font-weight:700;}
-  .hours-row span:last-child{color:var(--muted);}
-  .hours-row.today span:last-child{color:var(--brass);}
-  .info-line{display:flex;gap:13px;padding:14px 0;border-bottom:1px solid var(--line);align-items:flex-start;}
-  .info-line .ic{color:var(--brass);flex:none;width:20px;text-align:center;font-size:1rem;}
-  .info-line div{font-size:.95rem;}
-  .info-line small{display:block;color:var(--muted);margin-top:3px;font-size:.84rem;}
-
-  /* cta */
-  .cta{
-    background:linear-gradient(150deg,var(--steel),var(--coal));
-    border:1px solid var(--line);border-radius:24px;padding:52px 28px;text-align:center;
-  }
-  .cta h2{font-size:clamp(2.2rem,7vw,3.4rem);}
-  .cta p{margin:16px auto 0;max-width:46ch;color:var(--muted);}
-  .cta .hero-ctas{justify-content:center;}
-
-  /* pie */
-  footer{border-top:1px solid var(--line);padding:42px 0 34px;background:var(--coal);}
-  .foot-top{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center;}
-  .foot-note{
-    margin-top:30px;padding-top:22px;border-top:1px solid var(--line);
-    font-size:.82rem;color:var(--muted);line-height:1.7;
-  }
-  .foot-note b{color:var(--cream);}
-
-  /* barra movil fija */
-  .sticky-cta{
-    position:fixed;left:0;right:0;bottom:0;z-index:60;
-    background:rgba(13,13,15,.94);backdrop-filter:blur(14px);
-    border-top:1px solid var(--line);padding:11px 16px calc(11px + env(safe-area-inset-bottom));
-    display:flex;gap:10px;
-  }
-  .sticky-cta .btn{flex:1;}
-  @media(min-width:860px){.sticky-cta{display:none;}}
-  body{padding-bottom:78px;}
-  @media(min-width:860px){body{padding-bottom:0;}}
-
-  /* aparicion */
-  .rev{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
-  .rev.in{opacity:1;transform:none;}
-  @media(prefers-reduced-motion:reduce){
-    *{animation:none!important;transition:none!important;}
-    .rev{opacity:1;transform:none;}
-    html{scroll-behavior:auto;}
-  }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0A0908">
+  <meta name="robots" content="noindex">
+  <!-- EDITAR: nombre, localidad y descripción de la barbería real. -->
+  <title>BARBERÍA OLMO — El oficio, sin prisa. | Barbería en Palamós</title>
+  <meta name="description" content="Corte, barba y afeitado a navaja en Palamós. BARBERÍA OLMO: el oficio, sin prisa, desde 2011. Consulta la carta y reserva por WhatsApp.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="BARBERÍA OLMO">
+  <meta property="og:title" content="BARBERÍA OLMO — El oficio, sin prisa.">
+  <meta property="og:description" content="Tu barbería en Palamós. Corte, barba y navaja desde 2011. Un rato para ti. Reserva por WhatsApp.">
+  <!-- EDITAR AL PUBLICAR: añadir og:url con el dominio real y og:image con una URL HTTPS pública de la foto elegida (1200×630). No se inventa un dominio para este archivo local. -->
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="BARBERÍA OLMO. El oficio, sin prisa. Palamós.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%230A0908'/%3E%3Ctext x='32' y='49' font-family='Georgia,serif' font-size='50' text-anchor='middle' fill='%23C9A227'%3EO%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600&family=Bodoni+Moda:opsz,wght@6..96,700;6..96,900&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"}}</script>
+  <!-- EDITAR: datos estructurados. Las coordenadas son del centro de Palamós, NO de un local real; sustituirlas antes de publicar. No se incorporan reseñas demo al schema. -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"HairSalon","name":"BARBERÍA OLMO","description":"Sitio de demostración. Negocio ficticio. Barbería en Palamós.","foundingDate":"2011","telephone":"+34 666 04 12 87","priceRange":"€€","address":{"@type":"PostalAddress","streetAddress":"Carrer de la Riera, 14","postalCode":"17230","addressLocality":"Palamós","addressRegion":"Girona","addressCountry":"ES"},"geo":{"@type":"GeoCoordinates","latitude":41.8489,"longitude":3.1291},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday"],"opens":"09:30","closes":"14:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday"],"opens":"16:00","closes":"20:30"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"09:00","closes":"15:00"}]}
+  </script>
+  <style>
+    :root{--carbon:#0A0908;--espresso:#18100C;--nogal:#2E1F16;--laton:#C9A227;--laton-claro:#E8CE7A;--pergamino:#EDE6D8;--burdeos:#6E2B2B;--humo:rgba(237,230,216,.07);--muted:#B2A799;--metal:linear-gradient(125deg,#8A6D1E 0%,#C9A227 17%,#E8CE7A 65%,#9C7A22 100%);--ease:cubic-bezier(.22,1,.36,1);--page:clamp(22px,5.5vw,90px);--space:clamp(90px,12vw,180px);--shadow:0 30px 70px -18px rgba(10,9,8,.9)}
+    *,*::before,*::after{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:100px}body{margin:0;background:var(--carbon);color:var(--pergamino);font-family:'Instrument Sans',sans-serif;font-size:clamp(1rem,1.2vw,1.125rem);line-height:1.6;overflow-x:clip}::selection{background:var(--laton);color:var(--carbon)}a{color:inherit;text-decoration:none}button{font:inherit}a,button{-webkit-tap-highlight-color:transparent}a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--laton-claro);outline-offset:6px}svg{display:block}figure,p,h1,h2,h3{margin:0}p{max-width:62ch}h1,h2,h3,.display{font-family:'Bodoni Moda',Georgia,serif;font-optical-sizing:auto;font-weight:700;letter-spacing:-.02em;line-height:.92}h2{font-size:clamp(2.8rem,6.6vw,6.5rem)}h3{font-size:clamp(2rem,3.4vw,3rem)}em{font-style:normal;color:var(--laton-claro)}.wrap{max-width:1380px;margin-inline:auto;width:calc(100% - var(--page)*2)}.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px}.eyebrow,.meta,.number,.price,.duration{font-family:'Archivo Narrow',sans-serif;font-size:clamp(.6875rem,.9vw,.75rem);font-weight:500;letter-spacing:.22em;line-height:1.5;text-transform:uppercase}.eyebrow{color:var(--laton-claro);display:flex;align-items:center;gap:18px;margin-bottom:clamp(24px,3vw,40px)}.eyebrow::before{content:'';width:30px;height:1px;background:var(--laton)}.muted{color:var(--muted)}.number{color:var(--laton-claro)}.section{padding-block:var(--space);position:relative}.section-head{align-items:end;margin-bottom:clamp(46px,6vw,86px)}.section-head>div:first-child{grid-column:1/8}.section-head>p{grid-column:9/13;color:var(--muted);font-size:clamp(1rem,1.2vw,1.125rem)}.rule{height:1px;background:linear-gradient(90deg,var(--laton),var(--nogal));transform-origin:left}.rule[data-reveal]{transition:transform .9s var(--ease)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.skip{position:fixed;left:20px;top:20px;z-index:100;padding:12px 20px;background:var(--pergamino);color:var(--carbon);transform:translateY(-160%)}.skip:focus{transform:none}.arrow{width:19px;height:19px;flex-shrink:0;stroke:currentColor;stroke-width:1.4;fill:none}
+    /* Texturas locales: todo sigue disponible sin red y sin WebGL. */
+    .grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.04;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23g)' d='M0 0h180v180H0z'/%3E%3C/svg%3E")}.marble-fallback{position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(ellipse at 75% 25%,rgba(46,31,22,.5),transparent 52%),repeating-linear-gradient(128deg,transparent 0 19%,rgba(201,162,39,.018) 19.1% 19.16%,transparent 19.3% 34%),var(--carbon)}#scene-canvas{position:fixed;inset:0;pointer-events:none;width:100%;height:100%;z-index:0;opacity:0;transition:opacity .9s var(--ease)}.webgl-ready #scene-canvas{opacity:1}main,footer{position:relative;z-index:1}main{pointer-events:none}main>*{pointer-events:auto}.symbol-library{position:absolute;width:0;height:0;overflow:hidden}.brass{background:var(--metal);background-size:200% 200%;background-position:40% 50%}
+    /* Navegación y reservas: enlaces funcionales incluso sin JavaScript. */
+    .nav{position:fixed;z-index:50;inset:0 0 auto;transition:transform .6s var(--ease),background .6s var(--ease);border-bottom:1px solid transparent}.nav.scrolled{background:rgba(10,9,8,.92);backdrop-filter:blur(18px);border-color:var(--nogal)}.nav.hidden{transform:translateY(-102%)}.nav:focus-within{transform:none}.nav-inner{height:clamp(76px,7.7vw,108px);display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;flex-direction:column;align-items:center;line-height:1}.brand strong{font-family:'Bodoni Moda',Georgia,serif;font-size:clamp(2rem,3vw,2.65rem);font-weight:900;letter-spacing:-.05em}.brand span{font-family:'Archivo Narrow',sans-serif;text-transform:uppercase;font-size:9px;letter-spacing:.38em;margin-top:5px;margin-right:-.38em}.nav-links{display:flex;align-items:center;gap:clamp(24px,3vw,45px)}.nav-links>a:not(.btn){font-size:13px;transition:color .3s}.nav-links>a:hover{color:var(--laton-claro)}.btn{--mx:50%;--my:50%;position:relative;isolation:isolate;display:inline-flex;align-items:center;justify-content:center;gap:clamp(18px,2vw,30px);min-height:58px;padding:16px 27px;border:1px solid var(--laton);overflow:hidden;font-size:clamp(.875rem,1vw,1rem);font-weight:600;line-height:1.3;transition:color .6s var(--ease),transform .6s var(--ease);cursor:pointer}.btn::before{content:'';position:absolute;inset:-1px;z-index:-1;background:var(--metal);background-size:200% 200%;background-position:50% 50%;clip-path:circle(0% at var(--mx) var(--my));transition:clip-path .6s var(--ease)}.btn:hover::before,.btn:focus-visible::before{clip-path:circle(150% at var(--mx) var(--my))}.btn:hover,.btn:focus-visible{color:var(--carbon)}.btn-primary{background:var(--metal);background-size:200% 200%;background-position:var(--metal-position,45%) 50%;color:var(--carbon);box-shadow:0 7px 30px rgba(201,162,39,.07)}.btn-primary::before{background-position:90% 50%}.btn-ghost{border-color:var(--nogal);background:rgba(10,9,8,.45)}.btn-small{min-height:43px;padding:10px 23px;font-size:12px}.text-link{display:inline-flex;gap:18px;align-items:center;min-height:48px;font-size:clamp(.875rem,1vw,1rem);border-bottom:1px solid var(--nogal);transition:color .3s,border-color .3s}.text-link:hover{color:var(--laton-claro);border-color:var(--laton)}
+    /* El primer encuadre permanece mientras se abre la hoja. */
+    #hero-scroll{height:200svh;min-height:1440px;position:relative;pointer-events:none}#hero{position:sticky;top:0;height:100svh;min-height:720px;overflow:hidden;pointer-events:auto}.hero-inner{height:100%;position:relative;padding-top:clamp(160px,19vh,230px);display:flex;flex-direction:column}.hero-copy{position:relative;z-index:3;width:62%;pointer-events:none}.hero-copy a{pointer-events:auto}.hero-copy .eyebrow{margin-bottom:clamp(30px,4vw,56px)}.hero-copy h1{font-size:clamp(3.5rem,8vw,6.5rem);line-height:.92;letter-spacing:-.02em}.hero-copy h1 em{display:block;margin-top:8px}.hero-copy>p{font-size:clamp(1rem,1.25vw,1.125rem);color:var(--muted);max-width:29ch;margin-top:clamp(25px,3vw,38px)}.hero-actions{display:flex;gap:12px;margin-top:clamp(25px,3vw,38px)}.hero-bottom{display:grid;grid-template-columns:1fr 1fr auto;gap:28px;align-items:end;margin-top:auto;padding-block:28px 36px;border-top:1px solid var(--nogal)}.hero-bottom .meta{letter-spacing:.14em;color:var(--muted)}.hero-bottom .meta strong{display:block;font-weight:500;color:var(--pergamino);margin-bottom:5px}.hero-bottom .down{display:flex;gap:17px;align-items:center;white-space:nowrap;font-family:'Archivo Narrow',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;min-height:44px}.down svg{transform:rotate(90deg)}.hero-stamp{position:absolute;right:1%;bottom:22%;font-family:'Bodoni Moda',Georgia,serif;font-size:clamp(80px,14vw,210px);font-weight:900;line-height:1;letter-spacing:-.055em;color:rgba(237,230,216,.025);pointer-events:none}.hero-detail{position:absolute;right:1%;top:24%;color:var(--muted);text-align:right;font-size:10px;letter-spacing:.2em;line-height:1.8}.hero-detail::before{content:'';display:block;width:60px;height:1px;background:var(--nogal);margin:0 0 16px auto}.razor-fallback{position:absolute;pointer-events:none;filter:drop-shadow(0 30px 18px rgba(0,0,0,.8));transition:opacity .6s var(--ease)}.hero-razor{right:-5%;top:27%;width:59%;height:46%;transform:rotate(-28deg)}.webgl-ready .razor-fallback{opacity:0}.svg-shine{transform:translateX(-700px);animation:blade-shine 1.1s var(--ease) 1.2s 1 forwards}@keyframes blade-shine{to{transform:translateX(800px)}}
+    .trust{position:relative;border-block:1px solid var(--nogal);background:rgba(10,9,8,.83)}.trust-inner{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;padding-block:28px;align-items:center}.trust-item{display:flex;gap:12px;align-items:baseline;padding-left:40px;border-left:1px solid var(--nogal)}.trust-item:first-child{padding-left:0;border:0}.trust-item strong{font-size:clamp(1.5rem,2.4vw,2.2rem);font-weight:400;line-height:1.1}.trust-item .meta{color:var(--muted);letter-spacing:.16em}.stars{color:var(--laton-claro);font-size:12px;letter-spacing:4px;white-space:nowrap}.stars span{opacity:1}.trust-score{display:flex;align-items:center;gap:15px}
+    #servicios{background:var(--espresso);border-bottom:1px solid var(--nogal)}#servicios::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%23EDE6D8' stroke-width='1'%3E%3Cpath d='M48 0 96 48 48 96 0 48Z M24 24h48v48H24Z M0 0l96 96M96 0 0 96'/%3E%3Ccircle cx='48' cy='48' r='17'/%3E%3C/g%3E%3C/svg%3E")}.menu-wrap{position:relative}.menu-layout{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px}.menu-aside{grid-column:1/4;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;padding-right:25px}.menu-aside p{color:var(--muted);font-size:16px}.menu-aside .large-asterisk{font-family:Georgia,serif;color:var(--laton);font-size:100px;line-height:1;margin-block:25px}.service-menu{grid-column:5/13}.menu-labels{display:flex;justify-content:space-between;padding:0 0 18px;color:var(--muted)}.menu-labels span:last-child{margin-left:auto}.service{display:flex;align-items:baseline;gap:18px;padding:25px 0;border-top:1px solid var(--nogal);position:relative;transition:color .3s}.service:last-of-type{border-bottom:1px solid var(--nogal)}.service:hover{color:var(--laton-claro)}.service-name{font-size:clamp(1rem,1.5vw,1.3rem);line-height:1.4;max-width:29ch}.service-name small{font-size:.72em;color:var(--muted);white-space:nowrap}.dots{flex:1;min-width:12px;border-bottom:1px dotted #77633C;transform:translateY(-5px);opacity:.6}.duration{color:var(--muted);letter-spacing:.05em;white-space:nowrap;min-width:55px;text-align:right}.price{font-size:clamp(1.3rem,2vw,1.85rem);letter-spacing:0;font-variant-numeric:tabular-nums;min-width:57px;text-align:right;transition:transform .4s var(--ease)}.service:hover .price{transform:translateX(-8px)}.menu-note{display:flex;align-items:center;gap:12px;margin-top:25px;color:var(--muted);font-size:12px}.seal-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--burdeos);flex-shrink:0}
+    #ritual{isolation:isolate}.ritual-layout{align-items:start}.ritual-heading{grid-column:2/7;position:sticky;top:145px}.ritual-heading h2{line-height:1}.ritual-heading h2 em{display:block}.ritual-heading>p{margin-top:32px;color:var(--muted);max-width:30ch}.ritual-price{display:flex;align-items:center;gap:22px;margin-top:38px}.ritual-price strong{font-family:'Bodoni Moda',Georgia,serif;font-size:clamp(2.6rem,4vw,4rem);font-weight:700;color:var(--laton-claro);line-height:1}.ritual-price .meta{color:var(--muted);max-width:130px}.ritual-steps{grid-column:8/13;list-style:none;margin:0;padding:0}.ritual-steps li{display:grid;grid-template-columns:30px 1fr;gap:20px;padding:32px 0 35px;border-top:1px solid var(--nogal)}.ritual-steps li:first-child{padding-top:20px}.ritual-steps .number{padding-top:5px}.ritual-steps h3{font-family:'Instrument Sans',sans-serif;font-size:clamp(1.125rem,1.6vw,1.4rem);letter-spacing:-.02em;font-weight:500;line-height:1.35;margin-bottom:9px}.ritual-steps p{font-size:15px;color:var(--muted)}.ritual-line{margin-top:70px}.ritual-tail{display:flex;justify-content:space-between;align-items:center;padding-top:25px;color:var(--muted)}.ritual-tail p{font-family:'Bodoni Moda',Georgia,serif;font-size:clamp(1.4rem,2.5vw,2rem);color:var(--pergamino)}
+    .marquee{padding:23px 0;border-block:1px solid var(--nogal);overflow:hidden;background:rgba(10,9,8,.8)}.marquee-track{width:max-content;display:flex;will-change:transform}.marquee-copy{font-family:'Archivo Narrow',sans-serif;text-transform:uppercase;letter-spacing:.25em;font-size:clamp(1rem,1.6vw,1.35rem);color:var(--laton-claro);white-space:nowrap}.marquee-copy span{margin-inline:28px;color:var(--laton)}
+    .team-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,42px)}.team-card:nth-child(2){margin-top:76px}.team-card:nth-child(3){margin-top:152px}.photo-frame{position:relative;isolation:isolate;overflow:hidden;display:grid;place-items:center;aspect-ratio:3/4;background:radial-gradient(ellipse at 45% 22%,rgba(109,76,45,.24),transparent 70%),linear-gradient(130deg,var(--espresso),var(--carbon));border:1px solid #756027;box-shadow:var(--shadow)}.photo-frame::before{content:'';position:absolute;inset:12px;border:1px solid var(--nogal);pointer-events:none;z-index:2}.photo-frame::after{content:'';position:absolute;inset:0;border:1px solid var(--laton-claro);clip-path:polygon(0 0,0 0,0 0,0 0);transition:clip-path .9s var(--ease);z-index:3;pointer-events:none}.team-card:has(a:hover) .photo-frame::after,.team-card:hover .photo-frame::after,.team-card:focus-within .photo-frame::after{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}.photo-frame .line-art{width:56%;height:56%;stroke:var(--laton-claro);fill:none;stroke-width:1;opacity:.6;filter:drop-shadow(0 1px 0 #000)}.photo-frame .photo-label{position:absolute;bottom:27px;left:20px;right:20px;text-align:center;font-family:'Archivo Narrow',sans-serif;font-size:clamp(.65rem,.8vw,.7rem);letter-spacing:.17em;color:var(--muted);text-transform:uppercase}.photo-frame .plate-number{position:absolute;left:28px;top:25px;font-family:'Bodoni Moda',Georgia,serif;font-size:20px;color:var(--laton-claro);opacity:.8}.photo-frame img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover;filter:grayscale(1) sepia(.22) contrast(1.08);mix-blend-mode:luminosity;transition:filter .9s var(--ease)}.photo-frame:has(img){background:var(--espresso)}.photo-frame:has(img) .line-art,.photo-frame:has(img) .photo-label{display:none}.team-card:hover img,.team-card:focus-within img,.photo-frame:hover img{filter:none;mix-blend-mode:normal}.team-info{padding-top:30px}.team-info h3{margin-bottom:18px}.team-info p{font-size:14px;color:var(--muted);line-height:1.7}.team-info p strong{font-weight:400;color:var(--pergamino)}.team-info .text-link{margin-top:20px;font-size:13px;width:100%;justify-content:space-between}.team-story{max-width:570px;margin-top:60px;padding-left:30px;border-left:1px solid var(--laton);color:var(--muted);font-size:clamp(1rem,1.2vw,1.125rem)}
+    #local{padding-top:clamp(40px,6vw,85px)}.local-heading{grid-column:6/13!important}.local-caption{grid-column:1/5!important;grid-row:1}.gallery{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:start}.gallery figure{margin:0}.gallery .photo-frame{aspect-ratio:auto;height:100%}.gallery figure:nth-child(1){grid-column:1/6;grid-row:1/3;height:620px}.gallery figure:nth-child(2){grid-column:6/10;grid-row:1;height:340px;margin-top:66px}.gallery figure:nth-child(3){grid-column:10/13;grid-row:1;height:260px;margin-top:146px}.gallery figure:nth-child(4){grid-column:6/9;grid-row:2;height:260px}.gallery figure:nth-child(5){grid-column:9/13;grid-row:2;height:340px}.gallery .line-art{width:65%;height:65%}.gallery .photo-label{font-size:10px;letter-spacing:.12em}.gallery-counter{display:flex;justify-content:space-between;align-items:center;margin-top:32px;color:var(--muted)}.gallery-counter .mobile-hint{display:none}.gallery-counter i{height:1px;max-width:110px;flex:1;margin:0 20px;background:var(--nogal)}
+    #opiniones{background:rgba(24,16,12,.65);border-block:1px solid var(--nogal)}.review-top{display:flex;justify-content:space-between;align-items:end;margin-bottom:60px}.review-top h2{max-width:640px;font-size:clamp(2.8rem,5.8vw,5.5rem)}.review-note{color:var(--muted);display:flex;align-items:center;gap:10px;margin-top:20px;font-size:12px}.review-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}.review{padding-top:24px;border-top:1px solid var(--nogal)}.review .stars{font-size:10px;margin-bottom:24px}.review blockquote{margin:0 0 25px;font-family:'Bodoni Moda',Georgia,serif;font-size:clamp(1.5rem,2.3vw,2.1rem);line-height:1.25;letter-spacing:-.02em}.review footer{display:flex;gap:15px;justify-content:space-between;color:var(--muted);font-size:12px}.review footer cite{font-style:normal;color:var(--pergamino)}
+    .visit-head{grid-column:1/6}.visit-details{grid-column:7/13}.address{font-style:normal;font-size:clamp(1rem,1.5vw,1.3rem);line-height:1.5;margin-bottom:24px}.address a{display:inline-block}.schedule{width:100%;border-collapse:collapse;font-size:clamp(.875rem,1vw,1rem);margin-top:30px}.schedule td,.schedule th{padding:16px 0;border-bottom:1px solid var(--nogal);font-weight:400;vertical-align:top}.schedule th{text-align:left;color:var(--muted)}.schedule td{text-align:right;font-variant-numeric:tabular-nums}.schedule tr.today td,.schedule tr.today th{color:var(--laton-claro)}.schedule .today-label{font-family:'Archivo Narrow',sans-serif;font-size:10px;letter-spacing:.1em;display:block;color:var(--laton-claro)}.walk-in{color:var(--muted);font-size:14px;margin-top:25px}.map{margin-top:70px;border:1px solid var(--nogal);height:320px;position:relative;background:var(--espresso)}.map iframe{display:block;width:100%;height:100%;border:0;filter:grayscale(1) invert(.91) contrast(.85);opacity:.8}.map-caption{display:flex;justify-content:space-between;gap:15px;align-items:center;color:var(--muted);padding-top:14px;font-size:11px}.map-caption .meta{font-size:10px}.visit-phone{display:inline-flex;margin-top:35px;align-items:center;gap:16px;color:var(--laton-claro);font-size:clamp(1.125rem,1.6vw,1.5rem)}
+    #final{min-height:720px;height:100svh;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;position:relative;overflow:hidden;background:rgba(10,9,8,.28);padding:200px var(--page) 100px}#final h2{font-size:clamp(3.6rem,10.5vw,10rem);max-width:11ch;line-height:.9}#final .btn{margin-top:48px;min-width:clamp(250px,26vw,370px);min-height:80px;font-size:clamp(1rem,1.5vw,1.3rem)}.final-razor{top:9%;left:50%;width:220px;height:110px;transform:translateX(-50%) rotate(-16deg)}.footer{background:var(--carbon);border-top:1px solid var(--nogal);padding-block:45px 30px}.footer-main{display:flex;align-items:center;justify-content:space-between;gap:35px;padding-bottom:35px}.footer .brand{align-items:start}.footer-main .brand span{padding-left:2px}.footer-links{display:flex;gap:30px;font-size:13px}.footer-links a{min-height:44px;display:inline-flex;align-items:center}.footer address{font-size:12px;font-style:normal;color:var(--muted)}.footer-bottom{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--nogal);padding-top:22px;font-size:11px;color:var(--muted)}.demo-note{display:flex;align-items:center;gap:10px}.mobile-booking{display:none}.custom-cursor{position:fixed;inset:0 auto auto 0;z-index:99;width:10px;height:10px;border-radius:50%;background:var(--pergamino);mix-blend-mode:difference;pointer-events:none;opacity:0;display:grid;place-items:center;transition:width .3s var(--ease),height .3s var(--ease);will-change:transform}.custom-cursor span{font-family:'Archivo Narrow',sans-serif;font-size:9px;letter-spacing:.03em;color:var(--carbon);opacity:0}.custom-cursor.active{width:56px;height:56px}.custom-cursor.active span{opacity:1}.word-mask{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.09em;margin-bottom:-.09em}.word{display:inline-block}.reveal-enabled [data-clip]{clip-path:inset(100% 0 0 0)}
+    @media(min-width:1600px){.hero-inner{padding-top:22vh}}
+    @media(max-width:1100px){.hero-copy{width:66%}.hero-razor{right:-15%;width:64%}.hero-detail{right:0;top:23%;max-width:130px}.trust-item{padding-left:20px}.trust-item .meta{letter-spacing:.08em}.menu-aside{grid-column:1/4}.service-menu{grid-column:4/13}.ritual-heading{grid-column:1/7}.ritual-steps{grid-column:8/13}.gallery figure:nth-child(1){height:510px}.gallery figure:nth-child(2){height:280px;margin-top:46px}.gallery figure:nth-child(3){height:230px;margin-top:96px}.gallery figure:nth-child(4){height:230px}.gallery figure:nth-child(5){height:280px}.footer-main{flex-wrap:wrap}.footer address{margin-left:auto}}
+    @media(max-width:767px){:root{--page:24px;--space:90px}html{scroll-padding-top:85px;scroll-padding-bottom:calc(96px + env(safe-area-inset-bottom))}.grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}.nav-inner{height:76px}.nav-links{gap:20px}.nav-links>a:not(.btn){display:none}.nav-links .btn{min-height:42px;padding:10px 20px}.brand strong{font-size:31px}.brand span{font-size:8px}.section-head>div:first-child,.section-head>p{grid-column:1/-1}.section-head>p{max-width:29ch;margin-top:10px}.eyebrow{font-size:11px;letter-spacing:.2em;margin-bottom:26px}#hero-scroll{min-height:1520px}#hero{min-height:760px}.hero-inner{padding-top:133px}.hero-copy{width:100%}.hero-copy h1{font-size:clamp(3.5rem,12.5vw,5.7rem);max-width:8ch}.hero-copy .eyebrow{font-size:10px;margin-bottom:33px;gap:12px}.hero-copy .eyebrow::before{width:20px}.hero-copy>p{font-size:16px;margin-top:24px;max-width:25ch}.hero-actions{gap:10px;margin-top:26px}.hero-actions .btn{min-height:54px;padding:15px 20px;gap:17px;font-size:13px}.hero-actions .btn-ghost{padding-inline:19px}.hero-detail{display:none}.hero-razor{width:88%;height:30%;right:-9%;top:54%;transform:rotate(-21deg)}.hero-stamp{font-size:112px;right:-4%;bottom:19%}.hero-bottom{grid-template-columns:1fr;gap:9px;padding-block:16px 102px;border:0}.hero-bottom .meta{font-size:10px;letter-spacing:.08em}.hero-bottom .meta strong{display:inline;font-weight:400;margin:0 8px 0 0}.hero-bottom .address-line{display:block}.hero-bottom .down{display:none}.trust-inner{grid-template-columns:1fr 1fr;row-gap:24px;padding-block:28px}.trust-item{padding-left:20px;gap:9px}.trust-item:nth-child(3){border:0;padding-left:0}.trust-item strong{font-size:24px}.trust-score{gap:8px;flex-wrap:wrap}.trust-item .meta{font-size:10px;letter-spacing:.09em}.trust-score .stars{font-size:8px;letter-spacing:2px}.menu-layout{display:block}.menu-aside{display:none}.menu-labels{font-size:10px;letter-spacing:.14em;padding-bottom:16px}.service{gap:9px;padding:24px 0;display:grid;grid-template-columns:minmax(0,1fr) auto 49px;align-items:center}.service-name{font-size:16px;max-width:none;line-height:1.4}.service-name small{display:block}.dots{display:none}.duration{font-size:10px;min-width:45px;letter-spacing:0}.price{min-width:49px;font-size:25px}.service:hover .price{transform:translateX(-4px)}.menu-note{font-size:11px;line-height:1.5}.ritual-heading{position:static;grid-column:1/-1}.ritual-heading h2{font-size:clamp(2.8rem,12vw,4.5rem)}.ritual-heading>p{font-size:16px;margin-top:28px}.ritual-price{margin-top:28px}.ritual-steps{grid-column:1/-1;margin-top:46px}.ritual-steps li{padding:25px 0;grid-template-columns:25px 1fr;gap:18px}.ritual-steps h3{font-size:19px}.ritual-steps p{font-size:14px}.ritual-line{margin-top:40px}.ritual-tail{align-items:start;gap:25px;flex-direction:column}.marquee{padding-block:18px}.marquee-copy{font-size:15px}.marquee-copy span{margin-inline:18px}.team-grid{grid-template-columns:1fr;gap:55px}.team-card{width:89%}.team-card:nth-child(2){margin-top:0;margin-left:auto}.team-card:nth-child(3){margin-top:0}.team-card .photo-frame{aspect-ratio:4/4.6}.team-info{padding-top:25px}.team-info h3{font-size:36px;margin-bottom:14px}.team-info p{font-size:15px}.team-info .text-link{font-size:14px;margin-top:16px}.team-story{padding-left:22px;margin-top:45px;font-size:16px}.local-heading,.local-caption{grid-column:1/-1!important;grid-row:auto!important}.local-caption{order:2}.gallery{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-color:var(--nogal) transparent;padding:0 0 22px;touch-action:pan-x pan-y}.gallery figure:nth-child(n){flex:0 0 82%;height:370px;margin-top:0;scroll-snap-align:start}.gallery figure:nth-child(even){height:310px;align-self:center}.gallery-counter{margin-top:8px}.gallery-counter .mobile-hint{display:inline}.gallery-counter .desktop-hint{display:none}.review-top{display:block;margin-bottom:38px}.review-top>.stars{margin-top:27px}.review-grid{grid-template-columns:1fr;gap:36px}.review blockquote{font-size:28px}.review .stars{margin-bottom:20px}.visit-head,.visit-details{grid-column:1/-1}.visit-details{margin-top:36px}.schedule{font-size:14px}.schedule th{max-width:90px}.schedule td{font-size:12px}.schedule td,.schedule th{padding-block:15px}.walk-in{font-size:14px}.map{margin-top:38px;height:280px}.map-caption{align-items:start;font-size:10px}.map-caption .meta{font-size:9px}#final{min-height:690px;padding-top:150px;padding-bottom:110px}#final h2{font-size:clamp(3.7rem,15vw,5.5rem)}#final .btn{min-height:70px;margin-top:36px;min-width:260px}.final-razor{width:180px;top:8%}.footer{padding-bottom:110px}.footer-main{gap:25px;align-items:flex-start}.footer-links{gap:20px;flex-wrap:wrap}.footer address{margin:0;flex-basis:100%}.footer-bottom{flex-wrap:wrap;gap:12px}.mobile-booking{position:fixed;display:flex;align-items:center;justify-content:center;z-index:55;inset:auto 0 0;padding:12px 16px max(12px,env(safe-area-inset-bottom));background:rgba(10,9,8,.88);backdrop-filter:blur(20px);border-top:1px solid var(--nogal)}.mobile-booking .btn{width:100%;min-height:54px;font-size:14px;justify-content:space-between;padding-inline:24px}.custom-cursor{display:none!important}}
+    @media(max-width:360px){:root{--page:19px}.hero-actions .btn{padding-inline:15px;font-size:12px}.hero-copy h1{font-size:54px}.service{gap:6px}.service-name{font-size:15px}.schedule td{font-size:11px}.hero-actions .btn-ghost{padding-inline:14px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.marquee-track{transform:none!important}.marquee{overflow:hidden}#hero-scroll{height:100svh;min-height:760px}.custom-cursor,#scene-canvas{display:none!important}.razor-fallback{opacity:1!important}.reveal-enabled [data-clip]{clip-path:none}.word{transform:none!important}.rule{transform:none!important}}
+    @media print{.nav,.mobile-booking,.grain,#scene-canvas,.marquee,.custom-cursor{display:none}body{background:white;color:black}#hero-scroll,#hero,#final{height:auto;min-height:0;position:static}.hero-inner{padding-top:30px}.section{padding:40px 0}.photo-frame{box-shadow:none}.hero-bottom{padding-bottom:20px}.wrap{width:92%}a{color:inherit}.razor-fallback{display:none}.word,[data-clip]{transform:none!important;clip-path:none!important}}
+  /* Ajustes de lectura y cursor: el disco se escala sin alterar el layout. */
+    body{font-size:clamp(1.125rem,1.2vw,1.125rem)}
+    .hero-copy>p,.ritual-heading>p,.team-story{font-size:18px}
+    .custom-cursor{width:56px;height:56px;background:transparent;transition:opacity .3s var(--ease)}
+    .custom-cursor::before{content:'';position:absolute;inset:0;border-radius:50%;background:var(--pergamino);transform:scale(.17857);transition:transform .3s var(--ease);z-index:-1}
+    .custom-cursor.active::before{transform:scale(1)}
+    @media(max-width:767px){.hero-copy>p{font-size:18px}.hero-bottom{padding-bottom:98px}.section-head>p{font-size:18px}.ritual-heading>p,.team-story{font-size:18px}}
+  </style>
 </head>
 <body>
-
-<div class="demo-bar">MUESTRA NO OFICIAL · Negocio inventado para enseñar el diseño</div>
-
-<header>
-  <div class="wrap nav">
-    <div class="brand">
-      <div class="pole"><i></i></div>
-      <div class="brand-name">NAVALLA</div>
-    </div>
-    <nav class="nav-links">
-      <a href="#precios">Precios</a>
-      <a href="#equipo">Equipo</a>
-      <a href="#local">Dónde estamos</a>
+<style>header{top:33px!important}body{padding-top:33px}</style><div style="position:fixed;top:0;left:0;right:0;z-index:100000;background:#c8973f;color:#14100a;text-align:center;font:700 .74rem/1.4 system-ui,sans-serif;letter-spacing:.06em;padding:8px 16px;">MUESTRA NO OFICIAL &middot; Barber&iacute;a inventada para ense&ntilde;ar el dise&ntilde;o</div>
+  <a class="skip" href="#servicios">Saltar a la carta de servicios</a>
+  <div class="marble-fallback" aria-hidden="true"></div>
+  <canvas id="scene-canvas" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="custom-cursor" aria-hidden="true"><span></span></div>
+  <!-- Dibujos originales: símbolos finos de útiles del oficio, reutilizados sin archivos externos. -->
+  <svg class="symbol-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <linearGradient id="metal-svg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8A6D1E"/><stop offset=".32" stop-color="#C9A227"/><stop offset=".67" stop-color="#E8CE7A"/><stop offset="1" stop-color="#9C7A22"/></linearGradient>
+    <linearGradient id="steel-svg" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#393A37"/><stop offset=".25" stop-color="#EDE6D8"/><stop offset=".32" stop-color="#747772"/><stop offset=".81" stop-color="#BEC0B6"/><stop offset=".9" stop-color="#F5F1E9"/><stop offset="1" stop-color="#747772"/></linearGradient>
+    <linearGradient id="shine-svg"><stop stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".8"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <symbol id="arrow" viewBox="0 0 24 24"><path d="M4 12h15M12 5l7 7-7 7"/></symbol>
+    <symbol id="icon-chair" viewBox="0 0 240 280"><g stroke-linecap="round" stroke-linejoin="round"><path d="M87 61V44q0-8 8-8h50q8 0 8 8v17M82 65q-7 0-7 8l6 85h78l6-85q0-8-8-8ZM92 73l4 70m48-70-4 70M83 161h74l16 25H67ZM55 128h23m84 0h23M60 128v52m120-52v52M67 187h106v13H67ZM114 201v34m12-34v34M84 247q0-13 36-13t36 13ZM156 202l18 29h-33M171 227h20v8h-20"/><path d="M90 84h61M92 137h57M71 193h98" opacity=".4"/></g></symbol>
+    <symbol id="icon-razor" viewBox="0 0 240 280"><g stroke-linecap="round" stroke-linejoin="round" transform="rotate(-28 120 140)"><path d="M119 150q-11 1-12 13l-5 76q1 15 12 16 10-1 11-16l7-76q0-11-13-13Z"/><path d="m119 153 4-26-11-8V39q0-14 14-17h22v108l-17 17-5 18M118 39h24v85l-10 10M113 168l-3 69m8-65-4 65"/><circle cx="120" cy="160" r="3"/><circle cx="114" cy="245" r="2"/></g></symbol>
+    <symbol id="icon-brush" viewBox="0 0 240 280"><g stroke-linecap="round" stroke-linejoin="round"><path d="M86 162q-19-35-19-68 0-20 12-28 9-13 21-10 16-11 29-3 15-7 24 4 16-1 21 14 11 12 4 35l-22 56ZM86 164h70v15H86ZM91 180q8 23-3 53-5 17 12 20h40q16-3 12-20-11-30-3-53Z"/><path d="m80 81 16 74m-2-89 12 89m9-92 0 92m22-92-11 92m30-83-21 83m32-68-20 67M98 189h43M98 241h45" opacity=".65"/></g></symbol>
+    <symbol id="icon-tile" viewBox="0 0 240 280"><g transform="translate(20 40)"><path d="M0 0h200v200H0ZM100 0l100 100-100 100L0 100ZM50 50h100v100H50ZM100 50l50 50-50 50-50-50Z"/><circle cx="100" cy="100" r="25"/><path d="M0 0l200 200M200 0 0 200M0 100h200M100 0v200" opacity=".4"/></g></symbol>
+    <symbol id="icon-mirror" viewBox="0 0 240 280"><path d="M58 196V87a62 62 0 0 1 124 0v109ZM69 184V87a51 51 0 0 1 102 0v97ZM44 204h152v10H44Zm10 10v29m132-29v29M89 155l58-77m-48 95 53-72"/><path d="M81 231h78M105 214v17m30-17v17" opacity=".5"/></symbol>
+    <symbol id="razor-open" viewBox="0 0 800 260"><g transform="translate(38 87)"><path d="M345 65 404 48 451 12 708 12q17 0 17 17v49q0 17-17 17H440l-48-31-47 17Z" fill="url(#steel-svg)" stroke="#A09B8C" stroke-width="1"/><path d="M449 17h258M444 90h268" stroke="#fff" stroke-opacity=".6"/><path d="M35 56Q9 57 8 78q1 22 29 23L342 92q27-1 27-20 0-22-28-21Z" fill="url(#metal-svg)" stroke="#E8CE7A" stroke-width="1"/><path d="m38 62 297-5q23 0 25 12L36 93q-18-1-20-16" fill="none" stroke="#6C5218" stroke-width="2"/><path d="M56 72 301 65" stroke="#E8CE7A" stroke-opacity=".6"/><circle cx="345" cy="72" r="10" fill="#18100C" stroke="#E8CE7A" stroke-width="3"/><circle cx="345" cy="72" r="4" fill="url(#metal-svg)"/><circle cx="30" cy="77" r="4" fill="#18100C" stroke="#E8CE7A"/><text x="188" y="82" text-anchor="middle" font-family="Georgia,serif" font-size="12" letter-spacing="6" fill="#4A3417">OLMO</text></g></symbol>
+    <symbol id="razor-closed" viewBox="0 0 500 170"><path d="m77 69 353-5 12 32-359 9Z" fill="url(#steel-svg)"/><path d="M56 71q-26 1-27 23 2 22 28 22l372-14q24-2 24-21 0-18-27-17Z" fill="url(#metal-svg)" stroke="#E8CE7A"/><path d="m58 77 363-8q19 1 21 12L59 108q-20 0-20-15" fill="none" stroke="#6E5117"/><circle cx="427" cy="84" r="8" fill="#18100C" stroke="#E8CE7A" stroke-width="3"/><circle cx="51" cy="93" r="3" fill="#18100C"/><text x="240" y="95" fill="#4A3417" font-family="Georgia,serif" font-size="12" letter-spacing="5" text-anchor="middle">OLMO</text></symbol>
+  </defs></svg>
+  <header class="nav" id="nav">
+    <nav class="wrap nav-inner" aria-label="Navegación principal">
+      <!-- EDITAR: nombre comercial y logotipo. -->
+      <a class="brand" href="#inicio" aria-label="BARBERÍA OLMO, inicio" data-cursor="ver"><strong>OLMO</strong><span>Barbería</span></a>
+      <div class="nav-links"><a href="#servicios" data-cursor="ver">Servicios</a><a href="#equipo" data-cursor="ver">Equipo</a><a href="#donde" data-cursor="ver">Dónde</a>
+        <!-- EDITAR: teléfono en todos los href wa.me y en CONTACTO dentro del script. -->
+        <a class="btn btn-primary btn-small" data-wa="nav" data-cursor="reservar" href="https://wa.me/34666041287?text=Hola%2C%20quiero%20reservar%20en%20Barber%C3%ADa%20Olmo." target="_blank" rel="noopener noreferrer">Reservar <svg class="arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+      </div>
     </nav>
-    <a class="btn btn-primary btn-sm" href="#cita">Pedir cita</a>
-  </div>
-</header>
-
-<div class="hero">
-  <div class="wrap hero-inner">
-    <span class="eyebrow">Barberia · Alt Empordà</span>
-    <h1>CORTE<span class="thin">Y NAVAJA</span></h1>
-    <p class="lede">
-      Barbería de barrio, sin prisa y sin postureo. Entras, te sientas y sales
-      con la cabeza como querías. Cita en treinta segundos por WhatsApp.
-    </p>
-    <div class="hero-ctas">
-      <a class="btn btn-primary" href="#cita">Pedir cita por WhatsApp</a>
-      <a class="btn btn-ghost" href="#precios">Ver precios</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat"><b>4,9</b><span>en Google</span></div>
-      <div class="stat"><b>30 min</b><span>corte medio</span></div>
-      <div class="stat"><b>6</b><span>días abiertos</span></div>
-    </div>
-  </div>
-</div>
-
-<div class="ticker">
-  <div class="ticker-track">
-    <span>CORTE CLÁSICO</span><span>DEGRADADO</span><span>AFEITADO A NAVAJA</span><span>ARREGLO DE BARBA</span>
-    <span>CORTE CLÁSICO</span><span>DEGRADADO</span><span>AFEITADO A NAVAJA</span><span>ARREGLO DE BARBA</span>
-  </div>
-</div>
-
-<section id="precios">
-  <div class="wrap">
-    <div class="sec-head rev">
-      <span class="eyebrow">Tarifas</span>
-      <h2>PRECIOS CLAROS</h2>
-      <p>Lo que cuesta, puesto donde se ve. Sin sorpresas al llegar a la caja.</p>
-    </div>
-    <div class="price-list rev">
-      <div class="price-row">
-        <div><span class="nm">Corte de pelo</span><span class="ds">Lavado, corte y peinado</span></div>
-        <div class="dots"></div><div class="pr">14 €</div>
+  </header>
+  <main id="inicio">
+    <div id="hero-scroll"><section id="hero" aria-labelledby="hero-title">
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <!-- EDITAR: claim, año y localidad. -->
+          <div class="eyebrow">Palamós · Desde 2011</div>
+          <h1 id="hero-title" data-split>El oficio,<br><em>sin prisa.</em></h1>
+          <p>Corte, barba y navaja en Palamós.<br>Un rato que es solo tuyo.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary magnetic" data-wa="hero" data-cursor="reservar" href="https://wa.me/34666041287?text=Hola%2C%20quiero%20reservar%20mi%20rato%20en%20Olmo.%20%C2%BFQu%C3%A9%20huecos%20ten%C3%A9is%3F" target="_blank" rel="noopener noreferrer">Reservar cita <svg class="arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+            <a class="btn btn-ghost" href="#servicios" data-cursor="ver">Ver la carta</a>
+          </div>
+        </div>
+        <div class="hero-detail meta" aria-hidden="true">Acero, latón.<br>Y una mano firme.</div>
+        <svg class="razor-fallback hero-razor" viewBox="0 0 800 260" aria-hidden="true"><use href="#razor-open"/><svg x="480" y="102" width="268" height="80" viewBox="0 0 268 80"><path class="svg-shine" fill="url(#shine-svg)" d="M0 0h55v80H0z"/></svg></svg>
+        <div class="hero-stamp" aria-hidden="true">OLMO</div>
+        <div class="hero-bottom">
+          <!-- EDITAR: dirección y horarios; actualizar también tabla, schema y HORARIO. -->
+          <div class="meta address-line"><strong>Carrer de la Riera, 14</strong>17230 Palamós (Girona)</div>
+          <div class="meta"><strong id="today-status">Martes a sábado</strong><span id="today-detail">Consulta el horario más abajo</span></div>
+          <a class="down" href="#servicios" aria-label="Bajar a la carta">Baja el ritmo <svg class="arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+        </div>
       </div>
-      <div class="price-row">
-        <div><span class="nm">Corte + barba<span class="price-tag">el más pedido</span></span><span class="ds">El pack completo, una hora para ti</span></div>
-        <div class="dots"></div><div class="pr">22 €</div>
+    </section></div>
+    <!-- EDITAR: puntuación y número de reseñas verificadas. Datos de demostración. -->
+    <aside class="trust" aria-label="4,9 de 5 en Google, 187 reseñas, desde 2011, 3 barberos">
+      <div class="wrap trust-inner"><div class="trust-item trust-score"><strong data-count="4.9" data-decimal="true">4,9</strong><span class="stars" aria-hidden="true"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></span><span class="meta">Google</span></div><div class="trust-item"><strong data-count="187">187</strong><span class="meta">Reseñas</span></div><div class="trust-item"><strong>2011</strong><span class="meta">Desde</span></div><div class="trust-item"><strong>3</strong><span class="meta">Barberos</span></div></div>
+    </aside>
+    <section class="section" id="servicios" aria-labelledby="menu-title">
+      <div class="wrap menu-wrap">
+        <header class="section-head grid"><div><div class="eyebrow">01 / Lo que hacemos</div><h2 id="menu-title" data-split>La carta.</h2></div><p>Las cosas claras.<br>El precio también.</p></header>
+        <div class="menu-layout"><aside class="menu-aside"><p>Elige lo tuyo.<br>Nosotros ponemos el oficio.</p><span class="large-asterisk" aria-hidden="true">✳</span><a href="#ritual" class="text-link" data-cursor="ver">Conoce el ritual <svg class="arrow" aria-hidden="true"><use href="#arrow"/></svg></a></aside>
+          <div class="service-menu"><div class="menu-labels meta"><span>Servicio</span><span>Tiempo / Precio</span></div>
+            <!-- EDITAR: nombres, precios, duraciones y mensaje de reserva de cada servicio. -->
+            <a class="service" data-wa="corte" data-cursor="reservar" href="https://wa.me/34666041287?text=Hola%2C%20quiero%20reservar%20un%20corte." target="_blank" rel="noopener noreferrer" aria-label="Reservar Corte, 18 euros, aproximadamente 35 minutos"><span class="service-name">Corte</span><span class="dots" aria-hidden="true"></span><span class="duration">~35 min</span><span class="price">18 €</span></a>
+            <a class="service" data-wa="barba" data-cursor="reservar" href="https://wa.me/34666041287?text=Hola%2C%20quiero%20reservar%20un%20arreglo%20de%20barba." target="_blank" rel="noopener noreferrer" aria-label="Reservar Arreglo de barba, 12 euros, aproximadamente 20 minutos"><span class="service-name">Arreglo de barba</span><span class="dots" aria-hidden="true"></span><span class="duration">~20 min</span><span class="price">12 €</span></a>
+            <a class="service" data-wa="combo" data-cursor="reservar" href="https://wa.me/34666041287?text=Hola%2C%20quiero%20reservar%20corte%20y%20barba." target="_blank" rel="noopener noreferrer" aria-label="Reservar Corte más barba, 26 euros, aproximadamente 50 minutos"><span class="service-name">Corte + barba</span><span class="dots" aria-hidden="true"></span><span class="duration">~50 min</span><span class="price">26 €</span></a>
+            <a class="service" data-wa="navaja" data-cursor="reservar" href="https://wa.me/34666041287?text=Hola%2C%20quiero%20reservar%20un%20afeitado%20a%20navaja%20con%20toalla%20caliente." target="_blank" rel="noopener noreferrer" aria-label="Reservar Afeitado a navaja con toalla caliente, 22 euros, aproximadamente 40 minutos"><span class="service-name">Afeitado a navaja<br>con toalla caliente</span><span class="dots" aria-hidden="true"></span><span class="duration">~40 min</span><span class="price">22 €</span></a>
+            <a class="service" data-wa="infantil" data-cursor="reservar" href="https://wa.me/34666041287?text=Hola%2C%20quiero%20reservar%20un%20corte%20infantil%20%28hasta%2012%20a%C3%B1os%29." target="_blank" rel="noopener noreferrer" aria-label="Reservar Corte infantil hasta 12 años, 13 euros, aproximadamente 25 minutos"><span class="service-name">Corte infantil <small>(hasta 12 años)</small></span><span class="dots" aria-hidden="true"></span><span class="duration">~25 min</span><span class="price">13 €</span></a>
+            <a class="service" data-wa="canas" data-cursor="reservar" href="https://wa.me/34666041287?text=Hola%2C%20quiero%20reservar%20un%20arreglo%20de%20canas." target="_blank" rel="noopener noreferrer" aria-label="Reservar Arreglo de canas, 25 euros, aproximadamente 45 minutos"><span class="service-name">Arreglo de canas</span><span class="dots" aria-hidden="true"></span><span class="duration">~45 min</span><span class="price">25 €</span></a>
+            <p class="menu-note"><span class="seal-dot" aria-hidden="true"></span>El tiempo es aproximado. La atención, toda tuya.</p>
+          </div>
+        </div>
       </div>
-      <div class="price-row">
-        <div><span class="nm">Arreglo de barba</span><span class="ds">Perfilado, navaja y toalla caliente</span></div>
-        <div class="dots"></div><div class="pr">10 €</div>
+    </section>
+    <section class="section" id="ritual" aria-labelledby="ritual-title"><div class="wrap">
+      <div class="grid ritual-layout"><div class="ritual-heading"><div class="eyebrow">02 / El ritual</div><h2 id="ritual-title" data-split>Fuera, el ruido.<br><em>Dentro, tú.</em></h2><p>El sillón se reclina. La calle se queda fuera. Estos cuarenta minutos son tuyos.</p><!-- EDITAR: precio y duración del ritual. --><div class="ritual-price"><strong>22 €</strong><span class="meta">Afeitado a navaja<br>~40 minutos</span></div></div>
+        <!-- EDITAR: pasos del servicio real. -->
+        <ol class="ritual-steps"><li><span class="number" aria-hidden="true">01</span><div><h3>Vapor y toalla caliente.</h3><p>Cierra los ojos. Ya estás aquí.</p></div></li><li><span class="number" aria-hidden="true">02</span><div><h3>Aceite pre-afeitado.</h3><p>Preparamos la piel. Sin atajos.</p></div></li><li><span class="number" aria-hidden="true">03</span><div><h3>Jabón batido a brocha.</h3><p>A mano. Hasta su punto.</p></div></li><li><span class="number" aria-hidden="true">04</span><div><h3>Navaja, a favor y a contra.</h3><p>Pulso firme. Pasada a pasada.</p></div></li><li><span class="number" aria-hidden="true">05</span><div><h3>Bálsamo frío y masaje.</h3><p>Y ahora sí. Vuelve cuando quieras.</p></div></li></ol>
+      </div><div class="rule ritual-line" data-reveal></div><div class="ritual-tail"><p>No es solo un afeitado.</p><a class="text-link" data-wa="ritual" data-cursor="reservar" href="https://wa.me/34666041287?text=Hola%2C%20quiero%20mis%20cuarenta%20minutos%3A%20una%20cita%20para%20el%20ritual%20de%20navaja." target="_blank" rel="noopener noreferrer">Reservar el ritual <svg class="arrow" aria-hidden="true"><use href="#arrow"/></svg></a></div>
+    </div></section>
+    <div class="marquee" aria-hidden="true"><div class="marquee-track"><div class="marquee-copy">Degradado <span>·</span> Navaja <span>·</span> Barba <span>·</span> Clásico <span>·</span> Toalla caliente <span>·</span> Sin prisa <span>·</span>&nbsp;</div><div class="marquee-copy">Degradado <span>·</span> Navaja <span>·</span> Barba <span>·</span> Clásico <span>·</span> Toalla caliente <span>·</span> Sin prisa <span>·</span>&nbsp;</div></div></div>
+    <section class="section" id="equipo" aria-labelledby="team-title"><div class="wrap">
+      <header class="section-head grid"><div><div class="eyebrow">03 / Buenas manos</div><h2 id="team-title" data-split>Elige tu sillón.<br>Y quién lo lleva.</h2></div><p>Tres formas de trabajar.<br>El mismo respeto por el oficio.</p></header>
+      <div class="team-grid">
+        <article class="team-card"><!-- EDITAR: sustituir por foto real de Rubén, 900×1200, tratamiento duotono aplicado por CSS; insertar img con loading="lazy" decoding="async" y alt descriptivo dentro del marco. --><div class="photo-frame" data-clip role="img" aria-label="Marco para el retrato de Rubén Olmo"><span class="plate-number" aria-hidden="true">01</span><svg class="line-art" aria-hidden="true"><use href="#icon-razor"/></svg><span class="photo-label">Retrato de Rubén · 900×1200</span></div><!-- EDITAR: nombre, especialidad, biografía y WhatsApp de Rubén. --><div class="team-info"><h3>Rubén Olmo</h3><p><strong>Degradados y navaja.</strong><br>14 años detrás del sillón.</p><a class="text-link" data-wa="ruben" data-cursor="reservar" href="https://wa.me/34666041287?text=Hola%2C%20me%20gustar%C3%ADa%20pedir%20cita%20con%20Rub%C3%A9n.%20%C2%BFCu%C3%A1ndo%20tiene%20hueco%3F" target="_blank" rel="noopener noreferrer">Pedir cita con Rubén <svg class="arrow" aria-hidden="true"><use href="#arrow"/></svg></a></div></article>
+        <article class="team-card"><!-- EDITAR: sustituir por foto real de Íker, 900×1200, tratamiento duotono aplicado por CSS; insertar img con loading="lazy" decoding="async" y alt descriptivo dentro del marco. --><div class="photo-frame" data-clip role="img" aria-label="Marco para el retrato de Íker Santos"><span class="plate-number" aria-hidden="true">02</span><svg class="line-art" aria-hidden="true"><use href="#icon-brush"/></svg><span class="photo-label">Retrato de Íker · 900×1200</span></div><!-- EDITAR: nombre, especialidad, biografía y WhatsApp de Íker. --><div class="team-info"><h3>Íker Santos</h3><p><strong>Barba, perfilado y ritual.</strong><br>Obsesionado con la simetría.</p><a class="text-link" data-wa="iker" data-cursor="reservar" href="https://wa.me/34666041287?text=Hola%2C%20me%20gustar%C3%ADa%20pedir%20cita%20con%20%C3%8Dker.%20%C2%BFCu%C3%A1ndo%20tiene%20hueco%3F" target="_blank" rel="noopener noreferrer">Pedir cita con Íker <svg class="arrow" aria-hidden="true"><use href="#arrow"/></svg></a></div></article>
+        <article class="team-card"><!-- EDITAR: sustituir por foto real de Nadia, 900×1200, tratamiento duotono aplicado por CSS; insertar img con loading="lazy" decoding="async" y alt descriptivo dentro del marco. --><div class="photo-frame" data-clip role="img" aria-label="Marco para el retrato de Nadia Ferrer"><span class="plate-number" aria-hidden="true">03</span><svg class="line-art" aria-hidden="true"><use href="#icon-chair"/></svg><span class="photo-label">Retrato de Nadia · 900×1200</span></div><!-- EDITAR: nombre, especialidad, biografía y WhatsApp de Nadia. --><div class="team-info"><h3>Nadia Ferrer</h3><p><strong>Tijera y corte clásico.</strong><br>Viene de peluquería de escena.</p><a class="text-link" data-wa="nadia" data-cursor="reservar" href="https://wa.me/34666041287?text=Hola%2C%20me%20gustar%C3%ADa%20pedir%20cita%20con%20Nadia.%20%C2%BFCu%C3%A1ndo%20tiene%20hueco%3F" target="_blank" rel="noopener noreferrer">Pedir cita con Nadia <svg class="arrow" aria-hidden="true"><use href="#arrow"/></svg></a></div></article>
+      </div><!-- EDITAR: historia del negocio. --><p class="team-story">Andrés Olmo abrió en 2011. Hoy lo lleva su hijo, Rubén. Cambian las manos. El oficio se queda.</p>
+    </div></section>
+    <section class="section" id="local" aria-labelledby="local-title"><div class="wrap">
+      <header class="section-head grid"><div class="local-heading"><div class="eyebrow">04 / Puertas adentro</div><h2 id="local-title" data-split>Tu pausa.<br>En el barrio.</h2></div><p class="local-caption">Latón, cuero y nogal.<br>Aquí las cosas tienen tacto.</p></header>
+      <div class="gallery" tabindex="0" role="region" aria-label="Galería del local, cinco marcos. En móvil, desliza para verlos.">
+        <!-- EDITAR: sustituir por foto real, 1200×1600, tratamiento duotono aplicado por CSS. --><figure><div class="photo-frame" role="img" aria-label="Marco para la foto del local"><span class="plate-number">I</span><svg class="line-art" aria-hidden="true"><use href="#icon-chair"/></svg><span class="photo-label">Foto del local · 1200×1600</span></div></figure>
+        <!-- EDITAR: sustituir por foto real, 1200×1000, tratamiento duotono aplicado por CSS. --><figure><div class="photo-frame" role="img" aria-label="Marco para la foto del espejo"><span class="plate-number">II</span><svg class="line-art" aria-hidden="true"><use href="#icon-mirror"/></svg><span class="photo-label">El espejo · 1200×1000</span></div></figure>
+        <!-- EDITAR: sustituir por foto real, 800×1000, tratamiento duotono aplicado por CSS. --><figure><div class="photo-frame" role="img" aria-label="Marco para la foto de los útiles"><span class="plate-number">III</span><svg class="line-art" aria-hidden="true"><use href="#icon-brush"/></svg><span class="photo-label">Los útiles · 800×1000</span></div></figure>
+        <!-- EDITAR: sustituir por foto real, 800×1000, tratamiento duotono aplicado por CSS. --><figure><div class="photo-frame" role="img" aria-label="Marco para la foto del azulejo"><span class="plate-number">IV</span><svg class="line-art" aria-hidden="true"><use href="#icon-tile"/></svg><span class="photo-label">El azulejo · 800×1000</span></div></figure>
+        <!-- EDITAR: sustituir por foto real, 1200×1000, tratamiento duotono aplicado por CSS. --><figure><div class="photo-frame" role="img" aria-label="Marco para la foto de la navaja"><span class="plate-number">V</span><svg class="line-art" aria-hidden="true"><use href="#icon-razor"/></svg><span class="photo-label">La navaja · 1200×1000</span></div></figure>
+      </div><div class="gallery-counter meta"><span>Carrer de la Riera, 14</span><i aria-hidden="true"></i><span class="desktop-hint">Palamós</span><span class="mobile-hint">Desliza →</span></div>
+    </div></section>
+    <section class="section" id="opiniones" aria-labelledby="reviews-title"><div class="wrap">
+      <div class="eyebrow">05 / Lo que se queda</div><div class="review-top"><div><h2 id="reviews-title" data-split>La mejor señal:<br>que vuelvas.</h2><p class="review-note"><span class="seal-dot" aria-hidden="true"></span>Reseñas de muestra para este sitio de demostración.</p></div><div class="stars" aria-hidden="true">★★★★★</div></div>
+      <div class="review-grid">
+        <!-- DEMO: sustituir por reseñas reales de Google antes de publicar -->
+        <article class="review" data-demo="true"><div class="stars" role="img" aria-label="5 estrellas">★★★★★</div><blockquote>«Le dije “como siempre” y quedó mejor que siempre. Rubén no falla.»</blockquote><footer><cite>Marc P.</cite><span>Hace 2 semanas</span></footer></article>
+        <!-- DEMO: sustituir por reseñas reales de Google antes de publicar -->
+        <article class="review" data-demo="true"><div class="stars" role="img" aria-label="5 estrellas">★★★★★</div><blockquote>«La toalla caliente y la navaja. Cuarenta minutos sin mirar el móvil.»</blockquote><footer><cite>David R.</cite><span>Hace 1 mes</span></footer></article>
+        <!-- DEMO: sustituir por reseñas reales de Google antes de publicar -->
+        <article class="review" data-demo="true"><div class="stars" role="img" aria-label="5 estrellas">★★★★★</div><blockquote>«Nadia entendió el corte a la primera. Buen trato y las cosas claras.»</blockquote><footer><cite>Àlex M.</cite><span>Hace 3 semanas</span></footer></article>
       </div>
-      <div class="price-row">
-        <div><span class="nm">Afeitado tradicional</span><span class="ds">A navaja, como toda la vida</span></div>
-        <div class="dots"></div><div class="pr">15 €</div>
-      </div>
-      <div class="price-row">
-        <div><span class="nm">Corte infantil</span><span class="ds">Hasta 12 años, con paciencia incluida</span></div>
-        <div class="dots"></div><div class="pr">11 €</div>
-      </div>
-    </div>
-  </div>
-</section>
+    </div></section>
+    <section class="section" id="donde" aria-labelledby="visit-title"><div class="wrap">
+      <div class="grid"><div class="visit-head"><div class="eyebrow">06 / Nos vemos aquí</div><h2 id="visit-title" data-split>A pie<br>de calle.</h2><!-- EDITAR: teléfono visible y enlace tel. --><a class="visit-phone" href="tel:+34666041287" data-cursor="llamar">+34 666 04 12 87 <svg class="arrow" aria-hidden="true"><use href="#arrow"/></svg></a></div><div class="visit-details">
+        <!-- EDITAR: dirección y destino de Google Maps. -->
+        <address class="address">Carrer de la Riera, 14<br>17230 Palamós (Girona)</address><a class="text-link" href="https://www.google.com/maps/search/?api=1&amp;query=Carrer%20de%20la%20Riera%2014%2C%2017230%20Palam%C3%B3s%2C%20Girona" target="_blank" rel="noopener noreferrer" data-cursor="ver">Cómo llegar <svg class="arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+        <!-- EDITAR: horario completo; mantener sincronizados HORARIO y JSON-LD. -->
+        <table class="schedule"><caption class="sr-only">Horario de apertura en Palamós</caption><tbody><tr data-days="2,3,4,5"><th scope="row">Martes a viernes</th><td>9:30–14:00 · 16:00–20:30</td></tr><tr data-days="6"><th scope="row">Sábado</th><td>9:00–15:00</td></tr><tr data-days="0,1"><th scope="row">Domingo y lunes</th><td>Cerrado</td></tr></tbody></table><p class="walk-in">Sin cita también atendemos, pero el sábado vuela.</p>
+      </div></div>
+      <!-- EDITAR: mapa centrado en Palamós. Añadir la ubicación exacta del local real; este negocio es ficticio. -->
+      <div class="map"><iframe title="Mapa de OpenStreetMap centrado en Palamós, ubicación orientativa" loading="lazy" referrerpolicy="no-referrer" src="https://www.openstreetmap.org/export/embed.html?bbox=3.1180%2C41.8420%2C3.1402%2C41.8558&amp;layer=mapnik"></iframe></div><div class="map-caption"><span>Palamós · Mapa orientativo del municipio</span><span class="meta">El oficio, sin prisa.</span></div>
+    </div></section>
+    <section id="final" aria-labelledby="final-title">
+      <svg class="razor-fallback final-razor" viewBox="0 0 500 170" aria-hidden="true"><use href="#razor-closed"/></svg>
+      <!-- EDITAR: titular y mensaje final de reserva. -->
+      <h2 id="final-title" data-split>Tu rato.<br><em>Tu sillón.</em></h2><a class="btn btn-primary magnetic" data-wa="final" data-cursor="reservar" href="https://wa.me/34666041287?text=Hola%2C%20me%20guardo%20un%20rato%20para%20m%C3%AD.%20Quiero%20reservar%20cita%20en%20Olmo." target="_blank" rel="noopener noreferrer">Reservar mi rato <svg class="arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+    </section>
+  </main>
+  <footer class="footer"><div class="wrap"><div class="footer-main"><a class="brand" href="#inicio" aria-label="BARBERÍA OLMO, volver al inicio"><strong>OLMO</strong><span>Barbería</span></a><!-- EDITAR: Instagram, WhatsApp y dirección. --><div class="footer-links"><a href="https://www.instagram.com/barberiaolmo/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Barbería Olmo, @barberiaolmo" data-cursor="ver">Instagram ↗</a><a data-wa="footer" data-cursor="reservar" href="https://wa.me/34666041287?text=Hola%2C%20he%20visto%20la%20web%20de%20Olmo%20y%20quiero%20pedir%20cita." target="_blank" rel="noopener noreferrer">WhatsApp ↗</a></div><address>Carrer de la Riera, 14 — 17230 Palamós (Girona)</address></div><div class="footer-bottom"><span>© <span id="year">2026</span> BARBERÍA OLMO</span><span class="demo-note"><span class="seal-dot" aria-hidden="true"></span>Sitio de demostración. Negocio ficticio.</span></div></div></footer>
+  <aside class="mobile-booking" aria-label="Reserva rápida"><!-- EDITAR: teléfono y mensaje de reserva móvil. --><a class="btn btn-primary" data-wa="mobile" href="https://wa.me/34666041287?text=Hola%2C%20quiero%20pedir%20cita%20en%20Olmo%20por%20WhatsApp.%20%C2%BFQu%C3%A9%20huecos%20ten%C3%A9is%3F" target="_blank" rel="noopener noreferrer">Reservar por WhatsApp <svg class="arrow" aria-hidden="true"><use href="#arrow"/></svg></a></aside>
+  <script type="module">
+    /* APP_SCRIPT */
+// EDITAR: teléfono internacional, mensajes y horario de la barbería real.
+// Los href del HTML también llevan estos datos para que reservar no dependa de JavaScript.
+const CONTACTO = '34666041287';
+const MENSAJES = {
+  nav: 'Hola, quiero reservar en Barbería Olmo.',
+  hero: 'Hola, quiero reservar mi rato en Olmo. ¿Qué huecos tenéis?',
+  corte: 'Hola, quiero reservar un corte.',
+  barba: 'Hola, quiero reservar un arreglo de barba.',
+  combo: 'Hola, quiero reservar corte y barba.',
+  navaja: 'Hola, quiero reservar un afeitado a navaja con toalla caliente.',
+  infantil: 'Hola, quiero reservar un corte infantil (hasta 12 años).',
+  canas: 'Hola, quiero reservar un arreglo de canas.',
+  ritual: 'Hola, quiero mis cuarenta minutos: una cita para el ritual de navaja.',
+  ruben: 'Hola, me gustaría pedir cita con Rubén. ¿Cuándo tiene hueco?',
+  iker: 'Hola, me gustaría pedir cita con Íker. ¿Cuándo tiene hueco?',
+  nadia: 'Hola, me gustaría pedir cita con Nadia. ¿Cuándo tiene hueco?',
+  final: 'Hola, me guardo un rato para mí. Quiero reservar cita en Olmo.',
+  footer: 'Hola, he visto la web de Olmo y quiero pedir cita.',
+  mobile: 'Hola, quiero pedir cita en Olmo por WhatsApp. ¿Qué huecos tenéis?'
+};
+document.querySelectorAll('[data-wa]').forEach(link => {
+  link.href = 'https://wa.me/' + CONTACTO + '?text=' + encodeURIComponent(MENSAJES[link.dataset.wa]);
+});
 
-<section id="equipo" style="background:var(--coal);">
-  <div class="wrap">
-    <div class="sec-head rev">
-      <span class="eyebrow">Quién te atiende</span>
-      <h2>EL EQUIPO</h2>
-      <p>Puedes pedir cita con quien quieras. Si te da igual, te toca el que antes quede libre.</p>
-    </div>
-    <div class="team">
-      <div class="card rev">
-        <div class="avatar">M</div>
-        <h3>MARC</h3>
-        <div class="role">Degradados</div>
-        <p>Doce años detrás de la silla. Si traes una foto, la borda.</p>
-      </div>
-      <div class="card rev">
-        <div class="avatar">A</div>
-        <h3>AITOR</h3>
-        <div class="role">Barba y navaja</div>
-        <p>El afeitado tradicional es lo suyo. Toalla caliente y cero prisa.</p>
-      </div>
-      <div class="card rev">
-        <div class="avatar">J</div>
-        <h3>JOANA</h3>
-        <div class="role">Corte clásico</div>
-        <p>Tijera, peine y buena conversación. También corta a los peques.</p>
-      </div>
-    </div>
-  </div>
-</section>
+// Horario en hora de Palamós: el huso del visitante nunca cambia la apertura anunciada.
+const HORARIO = [[], [], [[570,840],[960,1230]], [[570,840],[960,1230]], [[570,840],[960,1230]], [[570,840],[960,1230]], [[540,900]]];
+const DIAS = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+const clockFormat = new Intl.DateTimeFormat('en-GB', { timeZone:'Europe/Madrid', year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', hourCycle:'h23' });
+const hourLabel = minutes => Math.floor(minutes / 60) + ':' + String(minutes % 60).padStart(2, '0');
+function getOpeningState(now = new Date()) {
+  const parts = Object.fromEntries(clockFormat.formatToParts(now).map(part => [part.type, part.value]));
+  const day = new Date(Date.UTC(+parts.year, +parts.month - 1, +parts.day)).getUTCDay();
+  const minute = +parts.hour * 60 + +parts.minute;
+  const live = HORARIO[day].find(([start,end]) => minute >= start && minute < end);
+  if (live) return {day, status:'Hoy abierto hasta las ' + hourLabel(live[1]), detail:'Sin cita también atendemos.'};
+  for (let offset = 0; offset < 8; offset++) {
+    const nextDay = (day + offset) % 7;
+    const next = HORARIO[nextDay].find(([start]) => offset > 0 || start > minute);
+    if (next) return {day, status:'Hoy cerrado', detail:'Abrimos ' + (offset === 0 ? 'hoy' : offset === 1 ? 'mañana' : 'el ' + DIAS[nextDay]) + ' a las ' + hourLabel(next[0])};
+  }
+  return {day, status:'Hoy cerrado', detail:'Consulta el horario'};
+}
+function updateHours() {
+  const state = getOpeningState();
+  document.getElementById('today-status').textContent = state.status;
+  document.getElementById('today-detail').textContent = state.detail;
+  document.getElementById('year').textContent = new Date().getFullYear();
+  document.querySelectorAll('.schedule tr').forEach(row => {
+    const today = row.dataset.days.split(',').includes(String(state.day));
+    row.classList.toggle('today', today);
+    row.querySelector('.today-label')?.remove();
+    if (today) {
+      const badge = document.createElement('span');
+      badge.className = 'today-label';
+      badge.textContent = DIAS[state.day] + ' · hoy';
+      row.querySelector('th').append(badge);
+    }
+  });
+}
+updateHours();
+setInterval(updateHours, 60000);
 
-<section>
-  <div class="wrap">
-    <div class="sec-head rev">
-      <span class="eyebrow">Trabajos</span>
-      <h2>ANTES Y DESPUÉS</h2>
-      <p>Aquí irían vuestras fotos reales de Instagram, en esta misma rejilla.</p>
-    </div>
-    <div class="grid-gal rev">
-      <div class="tile t1"><span>FOTO 1</span></div>
-      <div class="tile t2"><span>FOTO 2</span></div>
-      <div class="tile t3"><span>FOTO 3</span></div>
-      <div class="tile t4"><span>FOTO 4</span></div>
-    </div>
-    <p class="gal-note">Los huecos son a propósito: no pongo fotos que no sean vuestras.</p>
-  </div>
-</section>
+const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
+let reducedMotion = motionPreference.matches;
+const finePointer = matchMedia('(hover:hover) and (pointer:fine)');
+const lowPower = (navigator.hardwareConcurrency || 4) < 4 || innerWidth < 768;
+let gsap, ScrollTrigger, lenis, scenes;
+let animationReady = false;
+let masterMode = '';
+let nativeRAF = 0;
+let lastTime = 0;
+let elapsed = 0;
+let lastScroll = scrollY;
+let scrollVelocity = 0;
+let scrollDirectionStart = scrollY;
+let lastDirection = 0;
+const nav = document.getElementById('nav');
+const cursor = document.querySelector('.custom-cursor');
+const pointer = { x:-100, y:-100, sx:-100, sy:-100, active:false, inside:false };
+const marquee = document.querySelector('.marquee');
+const marqueeTrack = document.querySelector('.marquee-track');
+let marqueeVisible = false;
+let marqueePosition = 0;
+let marqueeWidth = 1;
+new IntersectionObserver(entries => { marqueeVisible = entries[0].isIntersecting; }).observe(marquee);
+function measureMarquee() { marqueeWidth = marqueeTrack.firstElementChild.getBoundingClientRect().width || 1; }
+measureMarquee();
+document.fonts?.ready.then(measureMarquee);
 
-<section id="local" style="background:var(--coal);">
-  <div class="wrap two">
-    <div class="rev">
-      <span class="eyebrow">Horario</span>
-      <h2 style="font-size:2.4rem;margin-bottom:22px;">CUÁNDO ABRIMOS</h2>
-      <div class="hours-row"><span>Lunes</span><span>Cerrado</span></div>
-      <div class="hours-row"><span>Martes</span><span>09:30 – 20:00</span></div>
-      <div class="hours-row today"><span>Miércoles</span><span>09:30 – 20:00</span></div>
-      <div class="hours-row"><span>Jueves</span><span>09:30 – 20:00</span></div>
-      <div class="hours-row"><span>Viernes</span><span>09:30 – 21:00</span></div>
-      <div class="hours-row"><span>Sábado</span><span>09:00 – 14:00</span></div>
-      <div class="hours-row"><span>Domingo</span><span>Cerrado</span></div>
-    </div>
-    <div class="rev">
-      <span class="eyebrow">Contacto</span>
-      <h2 style="font-size:2.4rem;margin-bottom:22px;">DÓNDE ESTAMOS</h2>
-      <div class="info-line"><div class="ic">&#9670;</div><div>Carrer de Mostra, 1 · Alt Empordà<small>A dos minutos andando del centro</small></div></div>
-      <div class="info-line"><div class="ic">&#9670;</div><div>WhatsApp 600 00 00 00<small>Cita en treinta segundos, sin llamar</small></div></div>
-      <div class="info-line"><div class="ic">&#9670;</div><div>Sin cita previa<small>Si hay hueco, entras. Si no, te decimos a qué hora volver.</small></div></div>
-      <div class="info-line"><div class="ic">&#9670;</div><div>Pago en efectivo y tarjeta<small>También Bizum</small></div></div>
-    </div>
-  </div>
-</section>
+// El menú reaparece al invertir el sentido, también sin librerías y con teclado.
+window.addEventListener('scroll', () => {
+  const current = Math.max(0, scrollY);
+  const delta = current - lastScroll;
+  const direction = Math.sign(delta);
+  scrollVelocity = Math.min(100, Math.abs(delta));
+  if (direction && direction !== lastDirection) { scrollDirectionStart = current; lastDirection = direction; }
+  if (Math.abs(current - scrollDirectionStart) > 10 || current < 90) {
+    nav.classList.toggle('hidden', direction > 0 && current > 180 && !nav.contains(document.activeElement));
+  }
+  nav.classList.toggle('scrolled', current > 30);
+  lastScroll = current;
+}, {passive:true});
 
-<section id="cita">
-  <div class="wrap">
-    <div class="cta rev">
-      <span class="eyebrow">Tu turno</span>
-      <h2>¿NOS VEMOS ESTA SEMANA?</h2>
-      <p>Escríbenos por WhatsApp con el día y la hora que te va bien. Te confirmamos en un momento.</p>
-      <div class="hero-ctas">
-        <a class="btn btn-primary" href="#" onclick="return false;">Pedir cita por WhatsApp</a>
-        <a class="btn btn-ghost" href="#precios">Ver precios otra vez</a>
-      </div>
-    </div>
-  </div>
-</section>
+// El relleno nace en el punto de entrada; el magnetismo nunca desplaza más de 8 px.
+const magneticButtons = [...document.querySelectorAll('.magnetic')];
+document.querySelectorAll('.btn').forEach(button => {
+  button.addEventListener('pointerenter', event => {
+    const r = button.getBoundingClientRect();
+    button.style.setProperty('--mx', (event.clientX - r.left) + 'px');
+    button.style.setProperty('--my', (event.clientY - r.top) + 'px');
+  });
+});
+window.addEventListener('pointermove', event => {
+  if (reducedMotion || !finePointer.matches || event.pointerType === 'touch') return;
+  pointer.x = event.clientX; pointer.y = event.clientY; pointer.inside = true;
+  const interactive = event.target.closest('a,button,[tabindex="0"]');
+  const label = interactive?.dataset.cursor || (interactive ? 'ver' : '');
+  pointer.active = !!interactive;
+  cursor.classList.toggle('active', pointer.active);
+  cursor.querySelector('span').textContent = label;
+  cursor.style.opacity = '1';
+  magneticButtons.forEach(button => {
+    const r = button.getBoundingClientRect();
+    const dx = event.clientX - (r.left + r.width / 2);
+    const dy = event.clientY - (r.top + r.height / 2);
+    const distance = Math.hypot(dx, dy);
+    button.style.transform = distance < 70 ? 'translate(' + (dx / 70 * 8) + 'px,' + (dy / 70 * 8) + 'px)' : '';
+  });
+}, {passive:true});
+document.documentElement.addEventListener('pointerleave', () => {pointer.inside=false;cursor.style.opacity='0';magneticButtons.forEach(b=>b.style.transform='');});
+window.addEventListener('keydown', event => { if(event.key === 'Tab') {pointer.inside=false;cursor.style.opacity='0';} });
 
-<footer>
-  <div class="wrap">
-    <div class="foot-top">
-      <div class="brand">
-        <div class="pole"><i></i></div>
-        <div class="brand-name">NAVALLA</div>
-      </div>
-      <div style="font-size:.86rem;color:var(--muted);">Barberia · Alt Empordà</div>
-    </div>
-    <p class="foot-note">
-      <b>Esto es una muestra.</b> NAVALLA no existe: el nombre, el equipo, los precios y los
-      horarios son inventados para enseñar cómo quedaría el diseño. En la vuestra irían
-      vuestro nombre, vuestras fotos, vuestros precios y vuestro WhatsApp de verdad.
-    </p>
-  </div>
-</footer>
+// Todas las animaciones de escena, Lenis y microinteracciones comparten un único reloj.
+// Si GSAP carga, su ticker es la única fuente RAF. Si falla la CDN, usamos un RAF nativo.
+function tick(seconds) {
+  const delta = lastTime ? Math.min(0.05, Math.max(0, seconds - lastTime)) : 1/60;
+  lastTime = seconds;
+  if (document.hidden) return;
+  elapsed += delta;
+  lenis?.raf(seconds * 1000);
+  if (!reducedMotion) {
+    scenes?.update(elapsed, delta);
+    if (finePointer.matches && pointer.inside) {
+      const smoothing = 1 - Math.pow(0.75, delta * 60);
+      pointer.sx += (pointer.x - pointer.sx) * smoothing;
+      pointer.sy += (pointer.y - pointer.sy) * smoothing;
+      const radius = 28;
+      cursor.style.transform = 'translate3d(' + (pointer.sx - radius) + 'px,' + (pointer.sy - radius) + 'px,0)';
+    }
+    if (marqueeVisible) {
+      marqueePosition = (marqueePosition + delta * (22 + scrollVelocity * 1.1)) % marqueeWidth;
+      marqueeTrack.style.transform = 'translate3d(' + (-marqueePosition) + 'px,0,0)';
+    }
+    scrollVelocity *= Math.pow(0.9, delta*60);
+    if (scenes?.enabled) {
+      // Reflejo del latón: variación muy lenta de la textura, sin un segundo bucle CSS.
+      document.documentElement.style.setProperty('--metal-position', (45 + Math.sin(elapsed * .07) * 20) + '%');
+    }
+  }
+}
+function nativeLoop(milliseconds) { tick(milliseconds/1000); nativeRAF=requestAnimationFrame(nativeLoop); }
+function startClock() {
+  if (document.hidden || reducedMotion) return;
+  lastTime=0;
+  if(gsap) {
+    if(nativeRAF) cancelAnimationFrame(nativeRAF);
+    nativeRAF=0;
+    if(masterMode!=='gsap') gsap.ticker.add(tick);
+    masterMode='gsap';
+    gsap.ticker.wake();
+  } else if(!nativeRAF) { masterMode='native'; nativeRAF=requestAnimationFrame(nativeLoop); }
+}
+function stopClock() {
+  if(nativeRAF) cancelAnimationFrame(nativeRAF);
+  nativeRAF=0;
+  if(gsap) gsap.ticker.sleep();
+  lastTime=0;
+}
+document.addEventListener('visibilitychange', () => {
+  if(document.hidden) stopClock();
+  else {updateHours();startClock();}
+});
 
-<div class="sticky-cta">
-  <a class="btn btn-primary" href="#cita">Pedir cita</a>
-  <a class="btn btn-ghost" href="#precios">Precios</a>
-</div>
+// Mejora progresiva: el contenido, los enlaces y el horario ya están disponibles.
+function loadLibrary(src) {
+  return new Promise((resolve,reject) => {
+    const script=document.createElement('script');
+    script.src=src; script.async=true;
+    script.onload=resolve;
+    script.onerror=()=>reject(new Error('Biblioteca no disponible: '+src));
+    document.head.append(script);
+  });
+}
+function splitWords(heading) {
+  if(heading.dataset.splitReady) return [...heading.querySelectorAll('.word')];
+  heading.dataset.splitReady='true';
+  heading.setAttribute('aria-label', heading.innerText.replace(/\s+/g,' ').trim());
+  function walk(node) {
+    [...node.childNodes].forEach(child=>{
+      if(child.nodeType===Node.TEXT_NODE) {
+        const fragment=document.createDocumentFragment();
+        child.textContent.split(/(\s+)/).forEach(part=>{
+          if(!part.trim()) fragment.append(document.createTextNode(part));
+          else {
+            const mask=document.createElement('span'); mask.className='word-mask'; mask.setAttribute('aria-hidden','true');
+            const word=document.createElement('span'); word.className='word';word.textContent=part;
+            mask.append(word);fragment.append(mask);
+          }
+        });
+        child.replaceWith(fragment);
+      } else if(child.nodeType===Node.ELEMENT_NODE && child.tagName!=='BR') walk(child);
+    });
+  }
+  walk(heading);
+  return [...heading.querySelectorAll('.word')];
+}
+function setupReveals() {
+  if(reducedMotion || !gsap || !ScrollTrigger || animationReady) return;
+  animationReady=true;
+  gsap.defaults({duration:.9,ease:'power3.out'});
+  document.querySelectorAll('[data-split]').forEach(heading=>{
+    const words=splitWords(heading);
+    if(heading.getBoundingClientRect().top > innerHeight - 50) {
+      gsap.from(words,{yPercent:110,duration:.9,stagger:.05,scrollTrigger:{trigger:heading,start:'top 90%',once:true}});
+    }
+  });
+  document.querySelectorAll('[data-clip]').forEach(element=>{
+    if(element.getBoundingClientRect().top>innerHeight) {
+      gsap.fromTo(element,{clipPath:'inset(100% 0 0 0)'},{clipPath:'inset(0% 0 0 0)',duration:.9,scrollTrigger:{trigger:element,start:'top 93%',once:true}});
+    }
+  });
+  document.querySelectorAll('.rule[data-reveal]').forEach(rule=>{
+    gsap.from(rule,{scaleX:0,duration:.9,scrollTrigger:{trigger:rule,start:'top 95%',once:true}});
+  });
+  gsap.from('.service',{y:20,opacity:0,duration:.7,stagger:.06,scrollTrigger:{trigger:'.service-menu',start:'top 92%',once:true}});
+  document.querySelectorAll('.ritual-steps li').forEach(step=>{
+    gsap.from(step,{y:24,opacity:0,duration:.8,scrollTrigger:{trigger:step,start:'top 94%',once:true}});
+  });
+  ScrollTrigger.create({trigger:'.trust',start:'top 95%',once:true,onEnter:()=>{
+    document.querySelectorAll('[data-count]').forEach(element=>{
+      const counter={value:0}; const decimal=element.dataset.decimal==='true';
+      gsap.to(counter,{value:+element.dataset.count,duration:1.1,onUpdate:()=>{element.textContent=decimal?counter.value.toFixed(1).replace('.',','):Math.round(counter.value).toString();}});
+    });
+    gsap.fromTo('.trust .stars span',{opacity:.15},{opacity:1,stagger:.1,duration:.6});
+  }});
+  ScrollTrigger.refresh();
+}
+function configureAnchors() {
+  document.querySelectorAll('a[href^="#"]').forEach(link=>link.addEventListener('click',event=>{
+    const target=document.querySelector(link.getAttribute('href'));
+    if(!target) return;
+    event.preventDefault();
+    const top=target.getBoundingClientRect().top+scrollY- (target.id==='inicio'?0:76);
+    if(lenis&&!reducedMotion) lenis.scrollTo(Math.max(0,top),{duration:1.05,onComplete:()=>focusTarget(target)});
+    else {window.scrollTo({top:Math.max(0,top),behavior:reducedMotion?'instant':'smooth'});focusTarget(target);}
+    // Algunos navegadores restringen replaceState en file://; la navegación sigue funcionando.
+    try {history.replaceState(null,'',link.getAttribute('href'));}catch{}
+  }));
+}
+function focusTarget(target) {
+  const heading=target.querySelector('h1,h2')||target;
+  const hadTabindex=heading.hasAttribute('tabindex');
+  if(!hadTabindex) heading.setAttribute('tabindex','-1');
+  heading.focus({preventScroll:true});
+  if(!hadTabindex) heading.addEventListener('blur',()=>heading.removeAttribute('tabindex'),{once:true});
+}
+configureAnchors();
+window.addEventListener('resize',()=>{scenes?.resize();measureMarquee();},{passive:true});
+motionPreference.addEventListener('change',()=>{
+  reducedMotion=motionPreference.matches;
+  if(reducedMotion) {
+    stopClock();lenis?.destroy();lenis=null;scenes?.dispose();scenes=null;
+    ScrollTrigger?.getAll().forEach(trigger=>{trigger.animation?.progress(1);trigger.kill();});
+    gsap?.globalTimeline.getChildren().forEach(tween=>tween.progress(1));
+    document.querySelectorAll('.service,.ritual-steps li').forEach(e=>{e.style.opacity='1';e.style.transform='none';});
+    cursor.style.opacity='0';magneticButtons.forEach(b=>b.style.transform='');
+  } else location.reload();
+});
 
-<script>
-  (function(){
-    var els=document.querySelectorAll('.rev');
-    if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');});return;}
-    var io=new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}
-      });
-    },{rootMargin:'0px 0px -12% 0px'});
-    els.forEach(function(e){io.observe(e);});
+async function enhance() {
+  if(reducedMotion) return;
+  const animationLibraries=(async()=>{
+    try {
+      await loadLibrary('https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js');
+      gsap=window.gsap;
+      startClock(); // Transfiere el RAF nativo inmediatamente, incluso si otra CDN tarda.
+      await loadLibrary('https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js');
+      ScrollTrigger=window.ScrollTrigger;gsap.registerPlugin(ScrollTrigger);
+      setupReveals();
+    } catch(error) {console.info('OLMO: animaciones opcionales no disponibles.',error.message);}
   })();
-</script>
+  const smoothLibrary=(async()=>{
+    try {
+      const {default:Lenis}=await import('https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.mjs');
+      if(!reducedMotion) {
+        lenis=new Lenis({lerp:.085,autoRaf:false,smoothWheel:true,syncTouch:false});
+        lenis.on('scroll',()=>ScrollTrigger?.update());
+      }
+    }catch(error){console.info('OLMO: desplazamiento nativo activo.',error.message);}
+  })();
+  const threeLibrary=Promise.all([import('three'),import('three/addons/environments/RoomEnvironment.js')]).then(value=>({value}),error=>({error}));
+  // El texto se pinta primero. La capa 3D no entra antes de los 400 ms iniciales.
+  await Promise.allSettled([animationLibraries,smoothLibrary,new Promise(resolve=>setTimeout(resolve,Math.max(0,400-performance.now())))]);
+  startClock();
+  try {
+    const threeResult=await threeLibrary;
+    if(threeResult.error) throw threeResult.error;
+    const [THREE,{RoomEnvironment}]=threeResult.value;
+    if(!reducedMotion) scenes=await initThreeScenes({THREE,RoomEnvironment,gsap,ScrollTrigger,reducedMotion,lowPower});
+  }catch(error){document.documentElement.classList.remove('webgl-ready');console.info('OLMO: navaja SVG activa.',error.message);}
+  startClock();
+}
+enhance();
+
+// Un solo renderer y un solo reloj: el bucle principal de la página llama a update().
+async function initThreeScenes({ THREE, RoomEnvironment, gsap, ScrollTrigger, reducedMotion = false, lowPower = false }) {
+  const canvas = document.getElementById('scene-canvas');
+  const hero = document.getElementById('hero');
+  const ritual = document.getElementById('ritual');
+  const finale = document.getElementById('final');
+  const noop = { enabled: false, update() {}, resize() {}, dispose() {} };
+  if (reducedMotion || !canvas || !hero || !THREE || !RoomEnvironment) return noop;
+
+  let renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: !lowPower, powerPreference: lowPower ? 'low-power' : 'high-performance' });
+  } catch (error) {
+    console.info('OLMO: ilustración estática activa; WebGL no está disponible.', error);
+    return noop;
+  }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.setClearColor(0x0a0908, 0);
+  renderer.autoClear = false;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 0.94;
+
+  let width = innerWidth;
+  let height = innerHeight;
+  let lost = false;
+  let disposed = false;
+  let pageVisible = !document.hidden;
+  let canvasVisible = true;
+  let mobile = width < 768;
+  let lastSteamTime = 0;
+  const resources = new Set();
+  const cleanups = [];
+  const own = resource => (resources.add(resource), resource);
+  const clamp = THREE.MathUtils.clamp;
+  const lerp = THREE.MathUtils.lerp;
+
+  // La sala de reflexión hace que el latón y el acero tengan volumen, incluso sin luces directas.
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  pmrem.compileCubemapShader();
+  const room = new RoomEnvironment();
+  // Estudio oscuro con ventanas largas: sus bandas se reflejan sobre las superficies curvas.
+  // Un entorno blanco uniforme borraría el vaciado de la hoja y haría parecer plano el latón.
+  room.traverse(object => {
+    object.geometry?.dispose();
+    if (Array.isArray(object.material)) object.material.forEach(material => material.dispose());
+    else object.material?.dispose();
+  });
+  room.clear();
+  room.background = new THREE.Color(0x100c09);
+  function reflectionCard(w, h, x, y, z, radiance) {
+    const material = new THREE.MeshBasicMaterial({ color: new THREE.Color().setRGB(...radiance), side: THREE.DoubleSide });
+    const card = new THREE.Mesh(new THREE.PlaneGeometry(w, h), material);
+    card.position.set(x, y, z);
+    card.lookAt(0, 0, 0);
+    room.add(card);
+  }
+  reflectionCard(13, 2.1, 0, 4.1, 8, [3.8, 3.4, 2.65]);
+  reflectionCard(13, 1.4, 0, -3.4, 8, [2.5, 2.6, 2.45]);
+  reflectionCard(2.2, 13, -6.7, 0.7, 5, [2.6, 2.15, 1.45]);
+  reflectionCard(2.5, 12, 7, 0.5, 3, [1.4, 1.55, 1.6]);
+  reflectionCard(12, 9, 0, 1, -9, [0.27, 0.18, 0.11]);
+  const environmentTarget = pmrem.fromScene(room, 0.025);
+  room.dispose?.();
+  pmrem.dispose();
+
+  const metalScene = new THREE.Scene();
+  metalScene.environment = environmentTarget.texture;
+  metalScene.environmentIntensity = 1.05;
+  const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 60);
+  camera.position.set(0, 0.65, 9.7);
+  camera.lookAt(0, 0, 0);
+  const key = new THREE.DirectionalLight(0xffe8bd, 1.8);
+  key.position.set(-3, 5, 6);
+  metalScene.add(key);
+  const brassLight = new THREE.PointLight(0xc9a227, 17, 25, 2);
+  brassLight.position.set(3, -2, 4);
+  metalScene.add(brassLight);
+  const edgeLight = new THREE.DirectionalLight(0xe8ce7a, 1.7);
+  edgeLight.position.set(2, -4, -2);
+  metalScene.add(edgeLight);
+  const sweep = new THREE.DirectionalLight(0xfff6df, 0);
+  sweep.position.set(-6, 3, 5);
+  metalScene.add(sweep, sweep.target);
+
+  const brass = own(new THREE.MeshStandardMaterial({ color: 0xc9a227, metalness: 1, roughness: 0.28, envMapIntensity: 1.45 }));
+  const darkBrass = own(new THREE.MeshStandardMaterial({ color: 0x80631f, metalness: 1, roughness: 0.32 }));
+  const lightBrass = own(new THREE.MeshStandardMaterial({ color: 0xe8ce7a, metalness: 1, roughness: 0.2, envMapIntensity: 1.6 }));
+  const steel = own(new THREE.MeshStandardMaterial({ color: 0xd7d8d3, metalness: 1, roughness: lowPower || mobile ? 0.2 : 0.06, envMapIntensity: 1.6 }));
+  const groundSteel = own(new THREE.MeshStandardMaterial({ color: 0x939996, metalness: 1, roughness: lowPower || mobile ? 0.25 : 0.16 }));
+  const dark = own(new THREE.MeshStandardMaterial({ color: 0x19140d, metalness: 0.8, roughness: 0.32 }));
+
+  function curvedFaceNormals(geometry, strength = 2.7, centerY = -0.09) {
+    const positions = geometry.attributes.position;
+    const normals = geometry.attributes.normal;
+    const direction = new THREE.Vector3();
+    for (let i = 0; i < positions.count; i++) {
+      const nz = normals.getZ(i);
+      if (Math.abs(nz) < 0.94) continue;
+      // La curvatura de las cachas y el vaciado de la hoja alargan los reflejos.
+      direction.set(Math.sin((positions.getX(i) + 2.0) * 0.62) * 0.12, (positions.getY(i) - centerY) * strength, nz > 0 ? 1 : -1).normalize();
+      normals.setXYZ(i, direction.x, direction.y, direction.z);
+    }
+    normals.needsUpdate = true;
+    return geometry;
+  }
+  function extrusion(shape, depth, material, bevel = 0.024) {
+    const geometry = own(new THREE.ExtrudeGeometry(shape, {
+      depth, steps: 1, bevelEnabled: true, bevelSegments: 3,
+      bevelSize: bevel, bevelThickness: bevel, curveSegments: 24
+    }));
+    curvedFaceNormals(geometry, material === brass ? 3.2 : 2.1);
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.position.z = -depth / 2;
+    return mesh;
+  }
+  function tube(points, radius, material, segments = 48) {
+    return new THREE.Mesh(own(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points), segments, radius, 6, false)), material);
+  }
+  function screw(parent, x, y, z, radius = 0.065) {
+    const cylinder = new THREE.Mesh(own(new THREE.CylinderGeometry(radius, radius, 0.045, 24)), lightBrass);
+    cylinder.rotation.x = Math.PI / 2;
+    cylinder.position.set(x, y, z);
+    parent.add(cylinder);
+    const ring = new THREE.Mesh(own(new THREE.TorusGeometry(radius * 0.77, 0.006, 6, 24)), darkBrass);
+    ring.position.set(x, y, z + 0.025);
+    parent.add(ring);
+    const slot = new THREE.Mesh(own(new THREE.BoxGeometry(radius * 0.95, 0.010, 0.008)), dark);
+    slot.position.set(x, y, z + 0.028);
+    slot.rotation.z = -0.45;
+    parent.add(slot);
+  }
+
+  // Cachas curvas, biseles, remaches y separador: no se usan cajas como silueta.
+  const razor = new THREE.Group();
+  const handle = new THREE.Group();
+  const bladePivot = new THREE.Group();
+  razor.add(handle, bladePivot);
+  metalScene.add(razor);
+  const scaleShape = new THREE.Shape();
+  scaleShape.moveTo(0.18, 0.17);
+  scaleShape.bezierCurveTo(-0.26, 0.29, -1.1, 0.19, -2.15, 0.16);
+  scaleShape.bezierCurveTo(-3.18, 0.11, -4.1, 0.19, -4.36, 0.035);
+  scaleShape.bezierCurveTo(-4.58, -0.1, -4.39, -0.34, -4.08, -0.38);
+  scaleShape.bezierCurveTo(-3.1, -0.51, -1.75, -0.32, -0.68, -0.19);
+  scaleShape.bezierCurveTo(-0.21, -0.14, 0.2, -0.15, 0.25, 0.005);
+  scaleShape.quadraticCurveTo(0.29, 0.10, 0.18, 0.17);
+  scaleShape.closePath();
+  for (const z of [-0.14, 0.14]) {
+    const scale = extrusion(scaleShape, 0.095, brass, 0.031);
+    scale.position.z += z;
+    handle.add(scale);
+  }
+  const spacer = new THREE.Mesh(own(new THREE.CylinderGeometry(0.105, 0.105, 0.28, 24)), darkBrass);
+  spacer.rotation.x = Math.PI / 2;
+  spacer.position.set(-4.15, -0.12, 0);
+  handle.add(spacer);
+  screw(handle, 0, 0.015, 0.225, 0.077);
+  screw(handle, -4.13, -0.12, 0.225, 0.047);
+  // Un filete fresado recorre la cacha y atrapa el reflejo del entorno.
+  handle.add(tube([
+    new THREE.Vector3(-0.4, 0.11, 0.220), new THREE.Vector3(-1.6, 0.055, 0.220),
+    new THREE.Vector3(-2.8, 0.022, 0.220), new THREE.Vector3(-3.88, 0.04, 0.220)
+  ], 0.008, lightBrass));
+  handle.add(tube([
+    new THREE.Vector3(-0.42, -0.11, 0.217), new THREE.Vector3(-1.7, -0.25, 0.217),
+    new THREE.Vector3(-2.95, -0.33, 0.217), new THREE.Vector3(-3.88, -0.29, 0.217)
+  ], 0.006, darkBrass));
+
+  const engravingCanvas = document.createElement('canvas');
+  engravingCanvas.width = 1024;
+  engravingCanvas.height = 192;
+  const engravingContext = engravingCanvas.getContext('2d');
+  if (engravingContext) {
+    engravingContext.fillStyle = '#3f3015';
+    engravingContext.font = '500 91px Georgia, serif';
+    engravingContext.textAlign = 'center';
+    engravingContext.textBaseline = 'middle';
+    engravingContext.fillText('O L M O', 512, 82);
+    const engravingTexture = own(new THREE.CanvasTexture(engravingCanvas));
+    engravingTexture.colorSpace = THREE.SRGBColorSpace;
+    const engravingMaterial = own(new THREE.MeshBasicMaterial({ map: engravingTexture, transparent: true, depthWrite: false, opacity: 0.82, polygonOffset: true, polygonOffsetFactor: -1 }));
+    const engraving = new THREE.Mesh(own(new THREE.PlaneGeometry(1.36, 0.255)), engravingMaterial);
+    engraving.position.set(-2.21, -0.11, 0.22);
+    handle.add(engraving);
+  }
+
+  // Hoja vaciada con punta redonda, espiga y talón. La hoja gira sobre el remache.
+  const bladeShape = new THREE.Shape();
+  bladeShape.moveTo(0.16, 0.08);
+  bladeShape.bezierCurveTo(-0.12, 0.12, -0.45, 0.095, -0.75, 0.10);
+  bladeShape.lineTo(-0.98, 0.315);
+  bladeShape.lineTo(-3.88, 0.315);
+  bladeShape.bezierCurveTo(-4.12, 0.3, -4.30, 0.005, -4.28, -0.285);
+  bladeShape.bezierCurveTo(-3.54, -0.38, -1.97, -0.405, -1.05, -0.36);
+  bladeShape.quadraticCurveTo(-0.88, -0.335, -0.88, -0.18);
+  bladeShape.lineTo(-0.45, -0.16);
+  bladeShape.bezierCurveTo(-0.2, -0.17, 0.12, -0.17, 0.21, -0.03);
+  bladeShape.quadraticCurveTo(0.25, 0.04, 0.16, 0.08);
+  bladeShape.closePath();
+  bladePivot.add(extrusion(bladeShape, 0.060, steel, 0.007));
+  const grindShape = new THREE.Shape();
+  grindShape.moveTo(-1.06, 0.20);
+  grindShape.lineTo(-3.84, 0.20);
+  grindShape.quadraticCurveTo(-4.03, 0.10, -4.12, -0.20);
+  grindShape.bezierCurveTo(-3.3, -0.26, -1.97, -0.29, -1.10, -0.26);
+  grindShape.closePath();
+  const grind = new THREE.Mesh(own(curvedFaceNormals(new THREE.ShapeGeometry(grindShape, 24), -3.9, -0.025)), groundSteel);
+  grind.position.z = 0.038;
+  bladePivot.add(grind);
+  const edgeShape = new THREE.Shape();
+  edgeShape.moveTo(-1.05, -0.30);
+  edgeShape.bezierCurveTo(-2.0, -0.33, -3.53, -0.31, -4.23, -0.245);
+  edgeShape.lineTo(-4.27, -0.286);
+  edgeShape.bezierCurveTo(-3.53, -0.38, -1.97, -0.403, -1.05, -0.36);
+  edgeShape.closePath();
+  const bladeEdge = new THREE.Mesh(own(new THREE.ShapeGeometry(edgeShape, 24)), steel);
+  bladeEdge.position.z = 0.040;
+  bladePivot.add(bladeEdge);
+  bladePivot.add(tube([new THREE.Vector3(-1.07, 0.308, 0.035), new THREE.Vector3(-2.5, 0.308, 0.035), new THREE.Vector3(-3.83, 0.308, 0.035)], 0.013, steel));
+  for (let i = 0; i < 8; i++) {
+    const grip = new THREE.Mesh(own(new THREE.BoxGeometry(0.018, 0.075, 0.066)), groundSteel);
+    grip.position.set(-0.41 - i * 0.052, 0.09, 0);
+    bladePivot.add(grip);
+  }
+  const tail = new THREE.Shape();
+  tail.moveTo(0.08, 0.05);
+  tail.bezierCurveTo(0.35, 0.045, 0.55, 0.21, 0.72, 0.19);
+  tail.bezierCurveTo(0.68, -0.03, 0.37, -0.15, 0.14, -0.085);
+  tail.closePath();
+  bladePivot.add(extrusion(tail, 0.057, groundSteel, 0.008));
+
+  // Mármol negro: tres octavas, vetas largas y un movimiento de 0,03 unidades/segundo.
+  const marbleScene = new THREE.Scene();
+  const marbleCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+  const marbleUniforms = { uTime: { value: 0 }, uAspect: { value: width / height } };
+  const marbleMaterial = own(new THREE.ShaderMaterial({
+    uniforms: marbleUniforms, depthTest: false, depthWrite: false,
+    vertexShader: `varying vec2 vUv; void main(){vUv=uv;gl_Position=vec4(position.xy,0.0,1.0);}`,
+    fragmentShader: `precision highp float;
+      varying vec2 vUv; uniform float uTime; uniform float uAspect;
+      float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+      float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);}
+      float fbm(vec2 p){float n=0.0,a=0.5;for(int i=0;i<3;i++){n+=a*noise(p);p=mat2(1.6,1.2,-1.2,1.6)*p;a*=0.5;}return n;}
+      void main(){
+        vec2 p=(vUv-0.5)*vec2(uAspect,1.0)*3.0;
+        p+=vec2(uTime*0.03,uTime*0.008);
+        float f=fbm(p*1.3+fbm(p*0.7));
+        float contours=sin(p.x*1.9+p.y*2.7+f*8.0);
+        float vein=pow(1.0-abs(contours),26.0);
+        float hair=pow(1.0-abs(sin(p.x*1.9+p.y*2.7+f*8.0+0.12)),85.0);
+        vec3 c=vec3(0.031,0.026,0.021)+vec3(0.010,0.007,0.004)*f;
+        c+=vec3(0.0245,0.0189,0.0098)*vein+vec3(0.0343,0.0238,0.0063)*hair;
+        float vignette=1.0-smoothstep(0.17,0.81,length((vUv-0.5)*vec2(0.92,1.0)));
+        c*=0.52+vignette*0.48;
+        gl_FragColor=vec4(c,1.0);
+      }`
+  }));
+  marbleScene.add(new THREE.Mesh(own(new THREE.PlaneGeometry(2, 2)), marbleMaterial));
+
+  // Vapor: puntos con nacimiento y muerte suaves. Toda la turbulencia sucede en GPU.
+  const steamScene = new THREE.Scene();
+  const steamCamera = new THREE.PerspectiveCamera(42, 1, 0.1, 40);
+  steamCamera.position.z = 10;
+  const particleCount = lowPower || mobile ? 150 : 600;
+  const positions = new Float32Array(particleCount * 3);
+  const seeds = new Float32Array(particleCount);
+  const scales = new Float32Array(particleCount);
+  let randomState = 23014;
+  const random = () => { randomState = (randomState * 1664525 + 1013904223) >>> 0; return randomState / 4294967296; };
+  for (let i = 0; i < particleCount; i++) {
+    positions[i * 3] = (random() - 0.5) * 5.2;
+    positions[i * 3 + 1] = (random() - 0.5) * 7;
+    positions[i * 3 + 2] = (random() - 0.5) * 2.2;
+    seeds[i] = random();
+    scales[i] = random();
+  }
+  const steamGeometry = own(new THREE.BufferGeometry());
+  steamGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  steamGeometry.setAttribute('aSeed', new THREE.BufferAttribute(seeds, 1));
+  steamGeometry.setAttribute('aScale', new THREE.BufferAttribute(scales, 1));
+  const steamUniforms = { uTime: { value: 0 }, uDpr: { value: renderer.getPixelRatio() }, uOpacity: { value: 1 } };
+  const steamMaterial = own(new THREE.ShaderMaterial({
+    uniforms: steamUniforms, transparent: true, depthWrite: false, depthTest: false,
+    blending: THREE.AdditiveBlending,
+    vertexShader: `
+      attribute float aSeed; attribute float aScale;
+      uniform float uTime; uniform float uDpr;
+      varying float vOpacity;
+      float hash(vec3 p){return fract(sin(dot(p,vec3(127.1,311.7,74.7)))*43758.5453);}
+      float noise(vec3 p){vec3 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);
+        return mix(mix(mix(hash(i),hash(i+vec3(1,0,0)),f.x),mix(hash(i+vec3(0,1,0)),hash(i+vec3(1,1,0)),f.x),f.y),mix(mix(hash(i+vec3(0,0,1)),hash(i+vec3(1,0,1)),f.x),mix(hash(i+vec3(0,1,1)),hash(i+vec3(1,1,1)),f.x),f.y),f.z);}
+      void main(){
+        float life=fract(aSeed+uTime*(0.029+aScale*0.012));
+        vec3 p=position;
+        p.y=-4.1+life*8.8;
+        float n=noise(vec3(position.x*0.65,life*3.2,uTime*0.11+aSeed));
+        p.x+=(n-0.5)*(0.55+life*2.1);
+        p.z+=sin(life*6.283+aSeed*12.0)*0.32;
+        vec4 mv=modelViewMatrix*vec4(p,1.0);
+        gl_Position=projectionMatrix*mv;
+        gl_PointSize=(94.0+aScale*126.0)*uDpr*(5.0/-mv.z);
+        vOpacity=pow(sin(life*3.14159265),1.7)*0.35;
+      }`,
+    fragmentShader: `precision highp float; varying float vOpacity; uniform float uOpacity;
+      void main(){vec2 q=gl_PointCoord-0.5;float soft=pow(max(0.0,1.0-length(q)*2.0),2.8);
+      gl_FragColor=vec4(0.70,0.68,0.61,soft*vOpacity*uOpacity*0.22);}`
+  }));
+  const steam = new THREE.Points(steamGeometry, steamMaterial);
+  steam.frustumCulled = false;
+  steamScene.add(steam);
+
+  // El poste se reduce a un hilo de metal; su giro representa el avance de página.
+  const helixScene = new THREE.Scene();
+  helixScene.environment = environmentTarget.texture;
+  const helixCamera = new THREE.OrthographicCamera(-0.19, 0.19, 2.2, -2.2, 0.1, 20);
+  helixCamera.position.set(0, 0, 5);
+  const helixGroup = new THREE.Group();
+  helixScene.add(helixGroup);
+  const helixPoints = [];
+  for (let i = 0; i <= 160; i++) {
+    const t = i / 160;
+    helixPoints.push(new THREE.Vector3(Math.sin(t * Math.PI * 8) * 0.09, (t - 0.5) * 4.1, Math.cos(t * Math.PI * 8) * 0.09));
+  }
+  helixGroup.add(tube(helixPoints, 0.016, brass, 160));
+  const helixLight = new THREE.DirectionalLight(0xe8ce7a, 3);
+  helixLight.position.set(0, 3, 5);
+  helixScene.add(helixLight);
+
+  const motion = { open: 0, sweepX: -6, sweepIntensity: 0 };
+  let hasOpened = false;
+  let sweepTween;
+  let openingTrigger;
+  if (gsap && ScrollTrigger) {
+    gsap.registerPlugin(ScrollTrigger);
+    const openingTween = gsap.to(motion, {
+      open: 1, ease: 'none',
+      scrollTrigger: {
+        trigger: document.getElementById('hero-scroll') || hero,
+        start: 'top top', end: () => '+=' + innerHeight, scrub: 1.1,
+        invalidateOnRefresh: true
+      }
+    });
+    openingTrigger = openingTween.scrollTrigger;
+    cleanups.push(() => { openingTrigger?.kill(); openingTween.kill(); });
+  }
+
+  const pointer = { x: 0, y: 0, smoothX: 0, smoothY: 0 };
+  function onPointer(event) {
+    if (event.pointerType === 'touch') return;
+    pointer.x = (event.clientX / width - 0.5) * 0.1;
+    pointer.y = (event.clientY / height - 0.5) * 0.1;
+  }
+  function onPointerLeave() { pointer.x = 0; pointer.y = 0; }
+  window.addEventListener('pointermove', onPointer, { passive: true });
+  document.documentElement.addEventListener('pointerleave', onPointerLeave);
+  cleanups.push(() => window.removeEventListener('pointermove', onPointer));
+  cleanups.push(() => document.documentElement.removeEventListener('pointerleave', onPointerLeave));
+
+  const visibility = new Map([[hero, true], [ritual, false], [finale, false]]);
+  let observer;
+  if ('IntersectionObserver' in window) {
+    observer = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (entry.target === canvas) canvasVisible = entry.isIntersecting;
+        else visibility.set(entry.target, entry.isIntersecting);
+      }
+    }, { rootMargin: '0px', threshold: 0 });
+    for (const section of [hero, ritual, finale, canvas]) if (section) observer.observe(section);
+  }
+  function onVisibility() { pageVisible = !document.hidden; }
+  function onContextLost(event) {
+    event.preventDefault();
+    lost = true;
+    document.documentElement.classList.remove('webgl-ready');
+  }
+  function onContextRestored() {
+    lost = false;
+    resize();
+    document.documentElement.classList.add('webgl-ready');
+  }
+  document.addEventListener('visibilitychange', onVisibility);
+  canvas.addEventListener('webglcontextlost', onContextLost);
+  canvas.addEventListener('webglcontextrestored', onContextRestored);
+  cleanups.push(() => document.removeEventListener('visibilitychange', onVisibility));
+  cleanups.push(() => canvas.removeEventListener('webglcontextlost', onContextLost));
+  cleanups.push(() => canvas.removeEventListener('webglcontextrestored', onContextRestored));
+
+  function resize() {
+    width = innerWidth;
+    height = innerHeight;
+    mobile = width < 768;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setSize(width, height, false);
+    marbleUniforms.uAspect.value = width / height;
+    steamUniforms.uDpr.value = renderer.getPixelRatio();
+    steamGeometry.setDrawRange(0, lowPower || mobile ? Math.min(150, particleCount) : particleCount);
+    steel.roughness = lowPower || mobile ? 0.2 : 0.06;
+  }
+  // Viewport conserva la composición al salir de pantalla; scissor recorta sin deformarla.
+  function viewport(rect) {
+    const x = Math.round(rect.left), top = Math.round(rect.top);
+    const w = Math.max(1, Math.round(rect.width)), h = Math.max(1, Math.round(rect.height));
+    const clipL = Math.max(0, x), clipT = Math.max(0, top);
+    const clipR = Math.min(width, x + w), clipB = Math.min(height, top + h);
+    if (clipR <= clipL || clipB <= clipT) return false;
+    renderer.setViewport(x, height - top - h, w, h);
+    renderer.setScissor(clipL, height - clipB, clipR - clipL, clipB - clipT);
+    renderer.clearDepth();
+    return true;
+  }
+  function visible(section) {
+    if (!section) return false;
+    if (observer && visibility.get(section) === false) return false;
+    const rect = section.getBoundingClientRect();
+    return rect.bottom > 0 && rect.top < height ? rect : false;
+  }
+  function renderRazor(rect, time, final = false) {
+    let view;
+    if (final) {
+      view = { left: width * 0.24, top: rect.top + rect.height * 0.085, width: width * 0.52, height: rect.height * 0.28 };
+    } else if (mobile) {
+      view = { left: width * 0.25, top: rect.top + rect.height * 0.59, width: width * 0.75, height: rect.height * 0.28 };
+    } else {
+      view = { left: width * 0.53, top: rect.top + rect.height * 0.14, width: width * 0.46, height: rect.height * 0.69 };
+    }
+    if (!viewport(view)) return;
+    camera.aspect = view.width / view.height;
+    // Campo de visión horizontal constante: la silueta conserva su escala en pantallas estrechas.
+    camera.fov = THREE.MathUtils.radToDeg(2 * Math.atan(3.45 / camera.aspect / 9.7));
+    camera.updateProjectionMatrix();
+    const open = final ? 0 : motion.open;
+    bladePivot.rotation.z = open * THREE.MathUtils.degToRad(175);
+    const s = final ? (mobile ? 0.66 : 0.46) : lerp(1.12, 0.77, open);
+    razor.position.set(final ? 1.98 * s : lerp(1.98, 0.05, open), final ? -0.03 : 0.1, 0);
+    razor.scale.setScalar(s);
+    razor.rotation.set(0.16 + pointer.smoothY, -0.28 + Math.sin(time * 0.08) * 0.20 + pointer.smoothX, final ? -0.16 : -0.55 + Math.sin(time * 0.08) * 0.018);
+    sweep.intensity = final ? 0 : motion.sweepIntensity;
+    sweep.position.x = motion.sweepX;
+    renderer.render(metalScene, camera);
+  }
+  function update(timeSeconds, deltaSeconds = 1 / 60) {
+    if (disposed || lost || !pageVisible || !canvasVisible) return;
+    const time = Number.isFinite(timeSeconds) ? timeSeconds : 0;
+    const delta = clamp(deltaSeconds, 0, 0.1);
+    // Lerp de 0,05 a 60 Hz, estable también en pantallas de alta frecuencia.
+    const pointerLerp = 1 - Math.pow(0.95, delta * 60);
+    pointer.smoothX = lerp(pointer.smoothX, pointer.x, pointerLerp);
+    pointer.smoothY = lerp(pointer.smoothY, pointer.y, pointerLerp);
+    if (!openingTrigger) motion.open = clamp(window.scrollY / Math.max(height, 1), 0, 1);
+    if (motion.open > 0.997 && !hasOpened) {
+      hasOpened = true;
+      if (gsap) {
+        sweepTween?.kill();
+        motion.sweepX = -6;
+        motion.sweepIntensity = 0;
+        sweepTween = gsap.timeline()
+          .to(motion, { sweepX: 6, duration: 0.5, ease: 'power1.inOut' }, 0)
+          .to(motion, { sweepIntensity: 4.8, duration: 0.2, ease: 'power1.out' }, 0)
+          .to(motion, { sweepIntensity: 0, duration: 0.3, ease: 'power1.in' }, 0.2);
+      }
+    } else if (motion.open < 0.80) hasOpened = false;
+
+    renderer.setScissorTest(false);
+    renderer.setViewport(0, 0, width, height);
+    renderer.clear();
+    marbleUniforms.uTime.value = time;
+    renderer.render(marbleScene, marbleCamera);
+    renderer.setScissorTest(true);
+
+    const heroRect = visible(hero);
+    if (heroRect) renderRazor(heroRect, time);
+    const ritualRect = visible(ritual);
+    if (ritualRect) {
+      // El reloj del vapor se detiene cuando la sección deja de estar visible.
+      lastSteamTime += delta;
+      steamUniforms.uTime.value = lastSteamTime;
+      const view = { left: mobile ? -width * 0.2 : width * 0.025, top: ritualRect.top, width: mobile ? width * 1.4 : width * 0.59, height: ritualRect.height };
+      if (viewport(view)) {
+        steamCamera.aspect = view.width / view.height;
+        steamCamera.updateProjectionMatrix();
+        renderer.render(steamScene, steamCamera);
+      }
+    }
+    const finalRect = visible(finale);
+    if (finalRect) renderRazor(finalRect, time, true);
+    if (!mobile && !lowPower) {
+      const totalScroll = Math.max(1, document.documentElement.scrollHeight - height);
+      helixGroup.rotation.y = clamp(scrollY / totalScroll, 0, 1) * Math.PI * 8;
+      if (viewport({ left: width - 28, top: height * 0.30, width: 16, height: height * 0.40 })) renderer.render(helixScene, helixCamera);
+    }
+    renderer.setScissorTest(false);
+  }
+  function dispose() {
+    if (disposed) return;
+    disposed = true;
+    observer?.disconnect();
+    cleanups.forEach(cleanup => cleanup());
+    sweepTween?.kill();
+    for (const resource of resources) resource.dispose?.();
+    environmentTarget.dispose();
+    renderer.dispose();
+    document.documentElement.classList.remove('webgl-ready');
+  }
+  resize();
+  update(0, 0);
+  document.documentElement.classList.add('webgl-ready');
+  return { enabled: true, update, resize, dispose };
+}
+
+  </script>
 </body>
 </html>
