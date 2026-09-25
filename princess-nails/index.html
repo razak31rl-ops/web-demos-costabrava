@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Princess Nails &amp; Beauty · Empuriabrava</title>
+<meta name="description" content="Uñas, pedicura, pestañas, tratamientos faciales, masajes y depilación en Empuriabrava. Carrer Sant Maurici, 352. Llama al 972 45 40 76.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0c0b0d">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Princess Nails & Beauty · Empuriabrava">
+<meta property="og:description" content="Entra en el salón: uñas, pestañas, faciales, masajes y depilación en Carrer Sant Maurici, 352.">
+<meta property="og:image" content="https://razak31rl-ops.github.io/web-demos-costabrava/princess-nails/assets/fachada.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Great+Vibes&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"NailSalon","name":"Princess Nails & Beauty","telephone":"+34972454076",
+"address":{"@type":"PostalAddress","streetAddress":"Carrer Sant Maurici, 352","addressLocality":"Empuriabrava","postalCode":"17487","addressRegion":"Girona","addressCountry":"ES"},
+"sameAs":["https://www.instagram.com/princess.empuriabrava/"],
+"openingHoursSpecification":[
+{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:30","closes":"13:30"},
+{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"14:30","closes":"19:30"},
+{"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"09:30","closes":"13:30"}]}
+</script>
+<style>
+  :root{
+    --ink:#0c0b0d;
+    --paper:#fbf7f8;
+    --pink:#e2186f;
+    --pink-deep:#b80f57;
+    --blush:#f6c9da;
+    --soft:#fdeef4;
+    --muted:rgba(12,11,13,.6);
+    --line:rgba(12,11,13,.12);
+    --ease:cubic-bezier(.16,1,.3,1);
+    --stripes:repeating-linear-gradient(90deg,var(--ink) 0 22px,#fff 22px 44px);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  html{background:var(--ink);scroll-behavior:auto;}
+  body{background:var(--paper);color:var(--ink);font-family:'Jost',system-ui,sans-serif;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  body.lock{overflow:hidden;height:100vh;}
+  h1,h2,h3{margin:0;font-weight:400;}
+  p{margin:0;line-height:1.7;}
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  ::selection{background:var(--pink);color:#fff;}
+  .script{font-family:'Great Vibes',cursive;font-weight:400;}
+  .serif{font-family:'Bodoni Moda',serif;}
+  .eyebrow{font-size:.7rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--pink);}
+
+  /* ============ INTRO: telón de rayas ============ */
+  .curtain{position:fixed;inset:0;z-index:100;display:flex;pointer-events:none;}
+  .curtain i{flex:1;background:var(--ink);transform-origin:top;transition:transform 1.1s var(--ease);}
+  .curtain i:nth-child(even){background:#fff;transform-origin:bottom;}
+  .curtain.open i{transform:scaleY(0);}
+  .curtain i:nth-child(1){transition-delay:.00s}.curtain i:nth-child(2){transition-delay:.05s}
+  .curtain i:nth-child(3){transition-delay:.10s}.curtain i:nth-child(4){transition-delay:.15s}
+  .curtain i:nth-child(5){transition-delay:.20s}.curtain i:nth-child(6){transition-delay:.25s}
+  .curtain i:nth-child(7){transition-delay:.30s}.curtain i:nth-child(8){transition-delay:.35s}
+  .curtain i:nth-child(9){transition-delay:.40s}.curtain i:nth-child(10){transition-delay:.45s}
+  .brand-load{position:fixed;inset:0;z-index:101;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;pointer-events:none;transition:opacity .6s var(--ease);}
+  .brand-load .script{font-size:clamp(4rem,14vw,8rem);color:var(--pink);line-height:1;text-shadow:0 0 0 #fff,3px 3px 0 #fff;}
+  .brand-load small{font-size:.7rem;letter-spacing:.42em;text-transform:uppercase;color:var(--pink);background:#fff;padding:6px 14px;}
+  .brand-load.gone{opacity:0;}
+
+  /* ============ BARRA SUPERIOR ============ */
+  .top{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+       padding:14px clamp(16px,4vw,44px);color:#fff;transition:background .4s,color .4s,box-shadow .4s;}
+  .top.solid{background:rgba(251,247,248,.92);backdrop-filter:blur(12px);color:var(--ink);box-shadow:0 1px 0 var(--line);}
+  .logo{display:flex;align-items:baseline;gap:10px;}
+  .logo .script{font-size:2rem;line-height:1;color:var(--pink);}
+  .logo small{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;}
+  .top nav{display:flex;gap:26px;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;}
+  .top nav a{opacity:.8;transition:opacity .3s;}
+  .top nav a:hover{opacity:1;}
+  .pill{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;background:var(--pink);color:#fff;
+        font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;transition:background .3s,transform .3s var(--ease);}
+  .pill:hover{background:var(--pink-deep);transform:translateY(-1px);}
+  .pill svg{width:14px;height:14px;}
+  @media (max-width:860px){.top nav{display:none;}}
+
+  /* ============ RECORRIDO WEBGL ============ */
+  #tour{position:relative;height:720vh;background:var(--ink);}
+  .stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;}
+  #gl{position:absolute;inset:0;width:100%;height:100%;display:block;}
+  .fallback-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s;}
+  .fallback-img.on{opacity:1;}
+  .shade{position:absolute;inset:0;pointer-events:none;
+         background:linear-gradient(180deg,rgba(12,11,13,.55) 0%,rgba(12,11,13,0) 22%,rgba(12,11,13,0) 45%,rgba(12,11,13,.78) 100%);}
+  .cap{position:absolute;left:clamp(18px,5vw,64px);right:clamp(18px,5vw,64px);bottom:clamp(88px,12vh,120px);color:#fff;max-width:640px;
+       opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);pointer-events:none;}
+  .cap.on{opacity:1;transform:none;pointer-events:auto;}
+  .cap .num{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--blush);}
+  .cap h2{font-family:'Bodoni Moda',serif;font-size:clamp(2.2rem,6vw,4.2rem);line-height:1.02;margin:12px 0 14px;text-shadow:0 2px 30px rgba(0,0,0,.5);}
+  .cap h2 em{color:var(--blush);}
+  .cap p{font-size:clamp(.98rem,1.6vw,1.1rem);max-width:44ch;color:rgba(255,255,255,.9);text-shadow:0 1px 18px rgba(0,0,0,.6);}
+  .cap .from{display:inline-block;margin-top:16px;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;border:1px solid rgba(255,255,255,.4);padding:8px 14px;border-radius:999px;}
+  /* la fachada ya lleva el rótulo "Princess": el titular va abajo para no taparlo */
+  .cap.hero{left:50%;right:auto;transform:translate(-50%,22px);bottom:clamp(96px,15vh,150px);text-align:center;max-width:none;width:92vw;}
+  .cap.hero.on{transform:translate(-50%,0);}
+  .cap.hero h1{font-family:'Bodoni Moda',serif;font-size:clamp(2.4rem,6.4vw,5rem);line-height:1.02;text-shadow:0 4px 40px rgba(0,0,0,.55);}
+  .cap.hero h1 em{color:var(--blush);}
+  .cap.hero .sub{font-size:clamp(.72rem,1.4vw,.9rem);letter-spacing:.42em;text-transform:uppercase;margin-top:10px;}
+  .cap.hero .addr{margin-top:22px;font-size:.95rem;color:rgba(255,255,255,.85);}
+  .hint{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;
+        color:#fff;font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;transition:opacity .5s;}
+  .hint.gone{opacity:0;}
+  .hint .track{width:1px;height:40px;background:rgba(255,255,255,.3);position:relative;overflow:hidden;}
+  .hint .track::after{content:'';position:absolute;left:0;top:-40px;width:1px;height:40px;background:#fff;animation:drop 2s var(--ease) infinite;}
+  @keyframes drop{0%{top:-40px;}60%,100%{top:40px;}}
+  .dots{position:absolute;right:clamp(14px,2.4vw,28px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:12px;}
+  .dots button{width:9px;height:9px;padding:0;border-radius:50%;border:1px solid rgba(255,255,255,.7);background:transparent;cursor:pointer;transition:background .3s,transform .3s;}
+  .dots button.on{background:var(--pink);border-color:var(--pink);transform:scale(1.3);}
+  @media (max-width:640px){.dots{display:none;}}
+
+  /* ============ SECCIONES ============ */
+  section{position:relative;}
+  .wrap{width:min(1180px,100% - 32px);margin:0 auto;}
+  .band{height:14px;background:var(--stripes);}
+
+  .intro{padding:clamp(80px,12vw,140px) 0;text-align:center;}
+  .intro h2{font-family:'Bodoni Moda',serif;font-size:clamp(2rem,4.6vw,3.6rem);line-height:1.12;max-width:20ch;margin:18px auto 0;}
+  .intro h2 em{color:var(--pink);}
+  .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);margin-top:60px;border:1px solid var(--line);}
+  .facts div{background:var(--paper);padding:28px 16px;}
+  .facts b{display:block;font-family:'Bodoni Moda',serif;font-size:clamp(1.6rem,3.4vw,2.4rem);font-weight:400;}
+  .facts span{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);}
+  @media (max-width:640px){.facts{grid-template-columns:1fr;}}
+
+  /* Carta */
+  .carta{background:var(--soft);padding:clamp(80px,10vw,120px) 0;}
+  .carta-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;}
+  .carta-head h2{font-family:'Bodoni Moda',serif;font-size:clamp(2.2rem,5vw,3.8rem);line-height:1;margin-top:14px;}
+  .carta-head p{color:var(--muted);max-width:38ch;}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:44px 0 30px;}
+  .tabs button{font:inherit;font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:12px 20px;border-radius:999px;
+               border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;transition:.3s var(--ease);}
+  .tabs button:hover{background:#fff;}
+  .tabs button.on{background:var(--ink);color:#fff;}
+  .menu{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,5vw,70px);align-items:start;}
+  .menu-pic{position:sticky;top:90px;aspect-ratio:4/5;overflow:hidden;background:var(--ink);}
+  .menu-pic img{width:100%;height:100%;object-fit:cover;transition:opacity .5s,transform 1.2s var(--ease);}
+  .menu-pic img.swap{opacity:0;transform:scale(1.04);}
+  .menu-pic::after{content:'';position:absolute;left:0;right:0;bottom:0;height:10px;background:var(--stripes);}
+  .list{list-style:none;margin:0;padding:0;}
+  .list li{display:flex;align-items:baseline;gap:12px;padding:15px 0;border-bottom:1px solid var(--line);opacity:0;transform:translateY(8px);animation:rise .5s var(--ease) forwards;}
+  .list li .n{font-size:1.05rem;}
+  .list li .n small{display:block;font-size:.8rem;color:var(--muted);}
+  .list li .d{flex:1;border-bottom:1px dotted rgba(12,11,13,.3);transform:translateY(-4px);}
+  .list li .p{font-family:'Bodoni Moda',serif;font-size:1.25rem;white-space:nowrap;}
+  .list li.sub .n{padding-left:18px;color:var(--muted);}
+  @keyframes rise{to{opacity:1;transform:none;}}
+  .note{margin-top:22px;font-size:.85rem;color:var(--muted);}
+  @media (max-width:860px){.menu{grid-template-columns:1fr;}.menu-pic{position:relative;top:0;aspect-ratio:16/10;order:-1;}}
+
+  /* Vídeo */
+  .video{background:var(--ink);color:#fff;padding:clamp(80px,10vw,130px) 0;overflow:hidden;}
+  .video .wrap{display:grid;grid-template-columns:1fr auto;gap:clamp(30px,6vw,90px);align-items:center;}
+  .video h2{font-family:'Bodoni Moda',serif;font-size:clamp(2.2rem,5vw,4rem);line-height:1.02;margin:16px 0 20px;}
+  .video h2 em{color:var(--pink);}
+  .video p{color:rgba(255,255,255,.75);max-width:42ch;}
+  .phone{position:relative;width:min(320px,78vw);aspect-ratio:9/16;border-radius:34px;overflow:hidden;background:#222;
+         box-shadow:0 0 0 8px #1c1a1e,0 0 0 9px rgba(255,255,255,.12),0 40px 80px rgba(226,24,111,.25);}
+  .phone video{width:100%;height:100%;object-fit:cover;display:block;}
+  .phone .tag{position:absolute;top:14px;left:14px;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;background:rgba(12,11,13,.6);backdrop-filter:blur(6px);padding:6px 10px;border-radius:999px;display:flex;gap:6px;align-items:center;}
+  .phone .tag i{width:6px;height:6px;border-radius:50%;background:var(--pink);animation:blink 1.6s infinite;}
+  @keyframes blink{50%{opacity:.2;}}
+  .ig{display:inline-flex;align-items:center;gap:10px;margin-top:30px;padding:14px 24px;border:1px solid rgba(255,255,255,.35);border-radius:999px;
+      font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;transition:.3s;}
+  .ig:hover{background:#fff;color:var(--ink);}
+  .ig svg{width:16px;height:16px;}
+  @media (max-width:760px){.video .wrap{grid-template-columns:1fr;justify-items:center;text-align:center;}.video p{margin:0 auto;}}
+
+  /* Galería */
+  .gal{padding:clamp(80px,10vw,120px) 0;}
+  .gal h2{font-family:'Bodoni Moda',serif;font-size:clamp(2.2rem,5vw,3.6rem);margin:14px 0 40px;}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:clamp(150px,18vw,240px);gap:10px;}
+  .grid button{position:relative;padding:0;border:0;overflow:hidden;cursor:zoom-in;background:var(--ink);}
+  .grid img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease),opacity .4s;}
+  .grid button:hover img{transform:scale(1.05);}
+  .grid button span{position:absolute;left:12px;bottom:10px;color:#fff;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;text-shadow:0 1px 10px rgba(0,0,0,.7);}
+  .grid .w2{grid-column:span 2;}.grid .h2{grid-row:span 2;}
+  @media (max-width:760px){.grid{grid-template-columns:repeat(2,1fr);}.grid .w2{grid-column:span 2;}}
+  .lb{position:fixed;inset:0;z-index:90;background:rgba(12,11,13,.94);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:.35s;}
+  .lb.on{opacity:1;visibility:visible;}
+  .lb img{max-width:100%;max-height:90vh;object-fit:contain;}
+  .lb button{position:absolute;top:14px;right:18px;background:none;border:0;color:#fff;font-size:2rem;cursor:pointer;line-height:1;}
+
+  /* Visítanos */
+  .visit{background:#fff;padding:clamp(80px,10vw,120px) 0;}
+  .visit .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,70px);}
+  .visit h2{font-family:'Bodoni Moda',serif;font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.05;margin:14px 0 26px;}
+  .visit h2 em{color:var(--pink);}
+  .rows{border-top:1px solid var(--line);}
+  .rows div{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);}
+  .rows dt{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);padding-top:3px;}
+  .rows dd{margin:0;line-height:1.6;}
+  .rows dd a{border-bottom:1px solid var(--pink);}
+  .hours{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;}
+  .hours .today{color:var(--pink);font-weight:500;}
+  .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px;}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 26px;border-radius:999px;font-size:.74rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;border:1px solid var(--ink);transition:.3s var(--ease);}
+  .btn svg{width:15px;height:15px;}
+  .btn.dark{background:var(--ink);color:#fff;}
+  .btn.dark:hover{background:var(--pink);border-color:var(--pink);}
+  .btn.line:hover{background:var(--ink);color:#fff;}
+  .map{min-height:420px;background:var(--soft);position:relative;overflow:hidden;}
+  .map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:grayscale(1) contrast(1.05);}
+  @media (max-width:860px){.visit .wrap{grid-template-columns:1fr;}.map{min-height:320px;}}
+
+  footer{background:var(--ink);color:rgba(255,255,255,.7);padding:60px 0 110px;text-align:center;}
+  footer .script{font-size:3.4rem;color:var(--pink);line-height:1;}
+  footer p{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;margin-top:10px;}
+  footer small{display:block;margin-top:26px;font-size:.7rem;opacity:.5;}
+
+  /* Barra fija en móvil */
+  .dock{position:fixed;left:12px;right:12px;bottom:12px;z-index:60;display:none;gap:8px;transform:translateY(120%);transition:transform .5s var(--ease);}
+  .dock.on{transform:none;}
+  .dock a{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:15px;border-radius:999px;font-size:.74rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;box-shadow:0 10px 30px rgba(0,0,0,.25);}
+  .dock a svg{width:15px;height:15px;}
+  .dock .a{background:var(--pink);color:#fff;}
+  .dock .b{background:#fff;color:var(--ink);}
+  @media (max-width:760px){.dock{display:flex;}.top .pill{display:none;}}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity 1s var(--ease),transform 1s var(--ease);}
+  .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;}.curtain,.brand-load{display:none;}}
+</style>
+</head>
+<body class="lock">
+
+<div class="curtain" id="curtain"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div class="brand-load" id="brandLoad"><span class="script">Princess</span><small>Nails &amp; Beauty</small></div>
+
+<header class="top" id="top">
+  <a class="logo" href="#tour"><span class="script">Princess</span><small>Nails &amp; Beauty</small></a>
+  <nav>
+    <a href="#carta">Servicios y precios</a>
+    <a href="#video">Por dentro</a>
+    <a href="#galeria">Galería</a>
+    <a href="#visitanos">Visítanos</a>
+  </nav>
+  <a class="pill" href="tel:+34972454076"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Pide tu cita</a>
+</header>
+
+<!-- ============ RECORRIDO: se hace scroll y se entra al salón ============ -->
+<section id="tour">
+  <div class="stick">
+    <canvas id="gl"></canvas>
+    <div id="fb"></div>
+    <div class="shade"></div>
+
+    <div class="cap hero" data-i="0">
+      <div class="sub">Nails &amp; Beauty · Empuriabrava</div>
+      <h1 style="margin-top:14px">Pasa, <em>estás en tu casa</em></h1>
+      <p class="addr">Carrer Sant Maurici, 352</p>
+    </div>
+    <div class="cap" data-i="1">
+      <span class="num">01 · Bienvenida</span>
+      <h2>Aquí empieza <em>tu rato</em></h2>
+      <p>Rayas blancas y negras, rosa y espejos. Entras y ya no parece un día normal.</p>
+    </div>
+    <div class="cap" data-i="2">
+      <span class="num">02 · Uñas</span>
+      <h2>Gel, acrílico <em>y polygel</em></h2>
+      <p>Mesas de manicura con luz, sillones de terciopelo y todo el tiempo que haga falta para que salgan perfectas.</p>
+      <span class="from">Uñas completas · 60 €</span>
+    </div>
+    <div class="cap" data-i="3">
+      <span class="num">03 · Pedicura</span>
+      <h2>Pies en <em>buenas manos</em></h2>
+      <p>Sillones reclinables para la pedicura: express, completa, con semipermanente o la versión SPA.</p>
+      <span class="from">Desde 30 €</span>
+    </div>
+    <div class="cap" data-i="4">
+      <span class="num">04 · Cabina</span>
+      <h2>Faciales, pestañas <em>y depilación</em></h2>
+      <p>Una cabina tranquila para limpiezas faciales, lifting de pestañas, extensiones y depilación con cera.</p>
+      <span class="from">Depilación desde 4,50 €</span>
+    </div>
+    <div class="cap" data-i="5">
+      <span class="num">05 · Sala de espera</span>
+      <h2>Y si llegas pronto, <em>siéntate</em></h2>
+      <p>Sofá, alfombra rosa y revistas. Hasta la espera está pensada.</p>
+    </div>
+
+    <div class="dots" id="dots"></div>
+    <div class="hint" id="hint"><span>Desliza para entrar</span><div class="track"></div></div>
+  </div>
+</section>
+
+<div class="band"></div>
+
+<section class="intro">
+  <div class="wrap reveal">
+    <span class="eyebrow">Salón de belleza en Empuriabrava</span>
+    <h2>Uñas, pestañas, piel y masajes en un salón donde <em>te tratan como a una princesa</em>.</h2>
+    <div class="facts">
+      <div><b>6</b><span>Tipos de servicio</span></div>
+      <div><b>4,50 €</b><span>El servicio más económico</span></div>
+      <div><b>Lun – Sáb</b><span>Abierto toda la semana</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CARTA ============ -->
+<section class="carta" id="carta">
+  <div class="wrap">
+    <div class="carta-head reveal">
+      <div><span class="eyebrow">La carta del salón</span><h2>Servicios y precios</h2></div>
+      <p>Los precios son los de la carta del salón. Elige una categoría y lo ves todo de un vistazo.</p>
+    </div>
+    <div class="tabs" id="tabs"></div>
+    <div class="menu">
+      <ul class="list" id="list"></ul>
+      <div class="menu-pic"><img id="menuPic" src="assets/manicura.webp" alt=""></div>
+    </div>
+    <p class="note">¿Dudas con algún servicio? Llama al <a href="tel:+34972454076" style="border-bottom:1px solid var(--pink)">972 45 40 76</a> y te lo explicamos.</p>
+  </div>
+</section>
+
+<!-- ============ VÍDEO ============ -->
+<section class="video" id="video">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Recorrido en vídeo</span>
+      <h2>Así es <em>por dentro</em></h2>
+      <p>Antes de venir, date una vuelta: la zona de uñas, los sillones de pedicura, la cabina y la sala de espera.</p>
+      <a class="ig" href="https://www.instagram.com/princess.empuriabrava/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        Síguenos en @princess.empuriabrava</a>
+    </div>
+    <div class="phone reveal">
+      <video id="vid" src="assets/recorrido.mp4" poster="assets/recorrido.webp" muted loop playsinline preload="none"></video>
+      <span class="tag"><i></i>Princess</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALERÍA ============ -->
+<section class="gal" id="galeria">
+  <div class="wrap">
+    <div class="reveal"><span class="eyebrow">Galería</span><h2>Cada rincón, con su detalle</h2></div>
+    <div class="grid reveal" id="grid">
+      <button class="w2 h2" data-src="assets/salon.webp"><img loading="lazy" src="assets/salon.webp" alt="Vista general del salón"><span>El salón</span></button>
+      <button class="h2" data-src="assets/mesas.webp"><img loading="lazy" src="assets/mesas.webp" alt="Mesas de manicura"><span>Manicura</span></button>
+      <button data-src="assets/entrada.webp"><img loading="lazy" src="assets/entrada.webp" alt="Salón visto hacia la entrada"><span>La entrada</span></button>
+      <button data-src="assets/barra.webp"><img loading="lazy" src="assets/barra.webp" alt="Estantería de esmaltes y zona de trabajo"><span>Esmaltes</span></button>
+      <button class="h2" data-src="assets/facial.webp"><img loading="lazy" src="assets/facial.webp" alt="Cabina de tratamientos faciales"><span>Cabina facial</span></button>
+      <button class="w2" data-src="assets/masajes.webp"><img loading="lazy" src="assets/masajes.webp" alt="Sala con camilla"><span>Sala de camilla</span></button>
+      <button data-src="assets/lounge.webp"><img loading="lazy" src="assets/lounge.webp" alt="Sala de espera"><span>Sala de espera</span></button>
+      <button class="w2" data-src="assets/relax.webp"><img loading="lazy" src="assets/relax.webp" alt="Rincón de descanso"><span>Rincón de descanso</span></button>
+      <button data-src="assets/noche.webp"><img loading="lazy" src="assets/noche.webp" alt="Escaparate de noche"><span>De noche</span></button>
+    </div>
+  </div>
+</section>
+<div class="lb" id="lb"><button aria-label="Cerrar">×</button><img alt=""></div>
+
+<!-- ============ VISÍTANOS ============ -->
+<section class="visit" id="visitanos">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Visítanos</span>
+      <h2>Te esperamos en <em>Sant Maurici</em></h2>
+      <dl class="rows">
+        <div><dt>Dirección</dt><dd>Carrer Sant Maurici, 352<br>17487 Empuriabrava, Girona</dd></div>
+        <div><dt>Teléfono</dt><dd><a href="tel:+34972454076">972 45 40 76</a></dd></div>
+        <div><dt>Horario</dt><dd class="hours" id="hours"></dd></div>
+        <div><dt>Instagram</dt><dd><a href="https://www.instagram.com/princess.empuriabrava/" target="_blank" rel="noopener">@princess.empuriabrava</a></dd></div>
+      </dl>
+      <div class="btns">
+        <a class="btn dark" href="tel:+34972454076"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Llamar y pedir cita</a>
+        <a class="btn line" href="https://www.google.com/maps/search/?api=1&amp;query=Princess+Nails+%26+Beauty+Carrer+Sant+Maurici+352+Empuriabrava" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Cómo llegar</a>
+      </div>
+    </div>
+    <div class="map reveal">
+      <iframe loading="lazy" title="Mapa de Princess Nails & Beauty" referrerpolicy="no-referrer-when-downgrade"
+        src="https://maps.google.com/maps?q=Carrer%20Sant%20Maurici%20352%2C%2017487%20Empuriabrava&amp;z=16&amp;output=embed"></iframe>
+    </div>
+  </div>
+</section>
+
+<div class="band"></div>
+<footer>
+  <div class="script">Princess</div>
+  <p>Nails &amp; Beauty · Empuriabrava</p>
+  <small>Carrer Sant Maurici, 352 · 972 45 40 76</small>
+</footer>
+
+<div class="dock" id="dock">
+  <a class="a" href="tel:+34972454076"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Llamar</a>
+  <a class="b" href="https://www.google.com/maps/search/?api=1&amp;query=Princess+Nails+%26+Beauty+Carrer+Sant+Maurici+352+Empuriabrava" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Cómo llegar</a>
+</div>
+
+<script>
+(() => {
+  // ---------- Datos: la carta, tal como está escrita en el salón ----------
+  const CARTA = [
+    {id:'unas', label:'Uñas', pic:'assets/manicura.webp', items:[
+      ['Uñas de gel','60 €'],['Uñas acrílicas','60 €'],['Uñas polygel','60 €'],['Relleno','50 €',1],
+      ['Manicura + semipermanente','30 €'],['Manicura express','25 €'],['Manicura SPA','35 €'],
+      ['Construcción de una uña','6 €'],['Decoración de uñas','desde 1 €'],['French manicure o babyboomer','5 €'],
+      ['Retirar semipermanente','10 €'],['Retirar gel, acrílicas o polygel','15 €']]},
+    {id:'pedi', label:'Pedicura', pic:'assets/pedicura.webp', items:[
+      ['Pedicura express','30 €'],['Pedicura solo semipermanente','35 €'],['Pedicura completa','38 €'],
+      ['Pedicura completa + semipermanente','45 €'],['Pedicura SPA','50 €']]},
+    {id:'pest', label:'Pestañas y cejas', pic:'assets/facial.webp', items:[
+      ['Extensiones de pestañas','100 €'],['Relleno <small>máximo 4 semanas</small>','60 €',1],
+      ['Lifting de pestañas','30 €'],['Lifting + tinte de pestañas','45 €'],
+      ['Lifting de cejas','30 €'],['Lifting + tinte de cejas','45 €'],['Tinte de pestañas o cejas','17 €']]},
+    {id:'facial', label:'Faciales', pic:'assets/cabina.webp', items:[
+      ['Equilibrante y nutritivo','60 €'],['Antiespinillas','60 €'],['Antiedad','78 €'],
+      ['Especial hombre','65 €'],['Peeling + mascarilla','50 €']]},
+    {id:'masaje', label:'Masajes', pic:'assets/masajes.webp', items:[
+      ['Masaje cuerpo entero','70 €'],['Masaje espalda','40 €'],['Masaje piernas','40 €'],
+      ['Masaje facial','35 €'],['Masaje podal','35 €'],['Peeling + masaje corporal','70 €']]},
+    {id:'depi', label:'Depilación', pic:'assets/relax.webp', items:[
+      ['Piernas enteras','28 €'],['Medias piernas','19,50 €'],['Muslos','19,50 €'],
+      ['Ingles normales','12 €'],['Ingles brasileñas','18 €'],['Ingles integrales','25 €'],
+      ['Axilas','9,50 €'],['Brazos','16,50 €'],['Medios brazos','13,50 €'],['Glúteos','15 €'],
+      ['Cejas','9,50 €'],['Labio superior','6 €'],['Cejas y labio superior','12,50 €'],['Entrecejo','4,50 €'],
+      ['Barbilla','6 €'],['Patillas','5 €'],['Nariz','6 €'],['Cara entera','18 €']]}
+  ];
+
+  const tabs = document.getElementById('tabs'), list = document.getElementById('list'), pic = document.getElementById('menuPic');
+  function showCat(c){
+    [...tabs.children].forEach(b => b.classList.toggle('on', b.dataset.id === c.id));
+    list.innerHTML = c.items.map(([n,p,sub],k) =>
+      `<li class="${sub?'sub':''}" style="animation-delay:${k*35}ms"><span class="n">${n}</span><span class="d"></span><span class="p">${p}</span></li>`).join('');
+    if (!pic.src.endsWith(c.pic)){
+      pic.classList.add('swap');
+      setTimeout(() => { pic.src = c.pic; pic.onload = () => pic.classList.remove('swap'); }, 250);
+    }
+  }
+  CARTA.forEach(c => {
+    const b = document.createElement('button'); b.textContent = c.label; b.dataset.id = c.id;
+    b.onclick = () => showCat(c); tabs.appendChild(b);
+  });
+  showCat(CARTA[0]);
+
+  // ---------- Horario, resaltando el día de hoy ----------
+  const H = [['Lunes – Viernes','9:30 – 13:30 · 14:30 – 19:30',[1,2,3,4,5]],['Sábado','9:30 – 13:30',[6]],['Domingo','Cerrado',[0]]];
+  const today = new Date().getDay();
+  document.getElementById('hours').innerHTML = H.map(([d,h,days]) => {
+    const on = days.includes(today) ? ' class="today"' : '';
+    return `<span${on}>${d}</span><span${on}>${h}</span>`;
+  }).join('');
+
+  // ---------- Galería con visor ----------
+  const lb = document.getElementById('lb'), lbImg = lb.querySelector('img');
+  document.getElementById('grid').addEventListener('click', e => {
+    const b = e.target.closest('button'); if(!b) return;
+    lbImg.src = b.dataset.src; lbImg.alt = b.querySelector('img').alt; lb.classList.add('on');
+  });
+  lb.addEventListener('click', () => lb.classList.remove('on'));
+  addEventListener('keydown', e => { if(e.key === 'Escape') lb.classList.remove('on'); });
+
+  // ---------- Aparición al hacer scroll + vídeo que solo corre cuando se ve ----------
+  const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  const vid = document.getElementById('vid');
+  new IntersectionObserver(([e]) => {
+    if (e.isIntersecting){ vid.preload = 'auto'; vid.play().catch(()=>{}); } else vid.pause();
+  }, {threshold:.3}).observe(vid);
+
+  // ---------- Recorrido WebGL ----------
+  const SCENES = ['fachada','recepcion','manicura','pedicura','cabina','espera'];
+  const N = SCENES.length;
+  const tour = document.getElementById('tour'), canvas = document.getElementById('gl');
+  const caps = [...document.querySelectorAll('.cap')], hint = document.getElementById('hint');
+  const top = document.getElementById('top'), dock = document.getElementById('dock');
+  const dots = document.getElementById('dots');
+  SCENES.forEach((_,i) => {
+    const b = document.createElement('button'); b.setAttribute('aria-label','Ir a la escena ' + (i+1));
+    b.onclick = () => { const r = tour.offsetHeight - innerHeight; scrollTo({top: tour.offsetTop + r * i/(N-1), behavior:'smooth'}); };
+    dots.appendChild(b);
+  });
+
+  const loadImg = src => new Promise(res => { const im = new Image(); im.onload = () => res(im); im.onerror = () => res(null); im.src = src; });
+  const imgsP = Promise.all(SCENES.map(s => loadImg('assets/' + s + '.webp')));
+
+  const gl = canvas.getContext('webgl', {antialias:false, alpha:false});
+  let draw = null;
+
+  if (gl){
+    const vs = `attribute vec2 p;varying vec2 uv;void main(){uv=p*.5+.5;gl_Position=vec4(p,0.,1.);}`;
+    const fs = `precision highp float;
+      varying vec2 uv;
+      uniform sampler2D tA,tB; uniform vec2 res,sA,sB,mouse; uniform float m,zA,zB,time;
+      float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+      float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
+        return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
+      vec2 cover(vec2 u,vec2 img,float z){
+        float ra=res.x/res.y, ri=img.x/img.y;
+        vec2 s = ra>ri ? vec2(1.,ri/ra) : vec2(ra/ri,1.);
+        return (u-.5)*s/z+.5;
+      }
+      vec3 tex(sampler2D t,vec2 u,float split){
+        vec2 c=clamp(u,.001,.999);
+        return vec3(texture2D(t,clamp(c+vec2(split,0.),.001,.999)).r, texture2D(t,c).g, texture2D(t,clamp(c-vec2(split,0.),.001,.999)).b);
+      }
+      void main(){
+        vec2 u=vec2(uv.x,1.-uv.y);
+        float n=noise(u*4.+time*.08)*.6+noise(u*11.)*.4;
+        float wave=sin(m*3.14159);
+        vec2 par=mouse*.012;
+        vec2 ua=cover(u+par,sA,zA)+(n-.5)*wave*.09;
+        vec2 ub=cover(u+par*1.4,sB,zB)-(n-.5)*wave*.09;
+        vec3 a=tex(tA,ua,wave*.012), b=tex(tB,ub,wave*.012);
+        float f=smoothstep(n*.55,n*.55+.45,m);
+        vec3 col=mix(a,b,f);
+        col+=vec3(.89,.09,.44)*wave*.10*(1.-abs(f-.5)*2.);
+        float v=smoothstep(1.25,.35,length(uv-.5)*1.3);
+        gl_FragColor=vec4(col*mix(.78,1.,v),1.);
+      }`;
+    const sh = (t,s) => { const o = gl.createShader(t); gl.shaderSource(o,s); gl.compileShader(o); return o; };
+    const pr = gl.createProgram();
+    gl.attachShader(pr, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, fs));
+    gl.linkProgram(pr);
+    if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) { draw = null; }
+    else {
+      gl.useProgram(pr);
+      const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+      const loc = gl.getAttribLocation(pr,'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+      const U = {}; ['tA','tB','res','sA','sB','mouse','m','zA','zB','time'].forEach(k => U[k] = gl.getUniformLocation(pr,k));
+      gl.uniform1i(U.tA,0); gl.uniform1i(U.tB,1);
+      let texs = [], sizes = [];
+      imgsP.then(imgs => {
+        imgs.forEach((im,i) => {
+          const t = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, t);
+          gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+          if (im) gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, im);
+          else gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([12,11,13,255]));
+          texs[i] = t; sizes[i] = im ? [im.naturalWidth, im.naturalHeight] : [1,1];
+        });
+      });
+      const resize = () => {
+        const dpr = Math.min(devicePixelRatio || 1, 2);
+        canvas.width = Math.round(canvas.clientWidth * dpr); canvas.height = Math.round(canvas.clientHeight * dpr);
+        gl.viewport(0,0,canvas.width,canvas.height);
+      };
+      addEventListener('resize', resize); resize();
+      draw = (s, mx, my, t) => {
+        if (!texs.length) return;
+        const i = Math.min(Math.floor(s), N-2), f = s - i;
+        const m = smooth(clamp01((f - .52) / .48));
+        gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, texs[i]);
+        gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, texs[i+1]);
+        gl.uniform2f(U.res, canvas.width, canvas.height);
+        gl.uniform2f(U.sA, sizes[i][0], sizes[i][1]); gl.uniform2f(U.sB, sizes[i+1][0], sizes[i+1][1]);
+        gl.uniform2f(U.mouse, mx, my);
+        gl.uniform1f(U.m, m);
+        // la foto que se deja atrás avanza hacia ti; la nueva llega desde un poco más cerca y se asienta
+        gl.uniform1f(U.zA, (1.03 + f * .07) * (1 + m * .45));
+        gl.uniform1f(U.zB, 1.03 + (1 - m) * .18);
+        gl.uniform1f(U.time, t);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      };
+    }
+  }
+
+  // Sin WebGL: fundido entre fotos normales
+  let fbImgs = null;
+  if (!draw){
+    canvas.style.display = 'none';
+    const fb = document.getElementById('fb');
+    fbImgs = SCENES.map(s => { const im = document.createElement('img'); im.className = 'fallback-img'; im.src = 'assets/' + s + '.webp'; im.alt = ''; fb.appendChild(im); return im; });
+  }
+
+  function clamp01(x){ return Math.max(0, Math.min(1, x)); }
+  function smooth(x){ return x*x*(3-2*x); }
+
+  let target = 0, cur = 0, mx = 0, my = 0, tmx = 0, tmy = 0, lastCap = -1;
+  const readScroll = () => {
+    const r = tour.getBoundingClientRect();
+    const total = tour.offsetHeight - innerHeight;
+    target = clamp01(-r.top / total) * (N - 1);
+    top.classList.toggle('solid', r.bottom < 80);
+    dock.classList.toggle('on', r.bottom < innerHeight * .6);
+    hint.classList.toggle('gone', -r.top > 40);
+  };
+  addEventListener('scroll', readScroll, {passive:true}); addEventListener('resize', readScroll);
+  addEventListener('pointermove', e => { tmx = e.clientX / innerWidth - .5; tmy = e.clientY / innerHeight - .5; });
+
+  function frame(t){
+    cur += (target - cur) * .09;
+    if (Math.abs(target - cur) < .0005) cur = target;
+    mx += (tmx - mx) * .05; my += (tmy - my) * .05;
+    if (draw) draw(cur, mx, my, t / 1000);
+    const i = Math.floor(cur), f = cur - i;
+    let show = f < .45 ? i : (f > .9 ? i + 1 : -1);
+    if (cur >= N - 1) show = N - 1;
+    if (show !== lastCap){
+      caps.forEach(c => c.classList.toggle('on', +c.dataset.i === show));
+      if (show >= 0) [...dots.children].forEach((d,k) => d.classList.toggle('on', k === show));
+      if (fbImgs && show >= 0) fbImgs.forEach((im,k) => im.classList.toggle('on', k === show));
+      lastCap = show;
+    }
+    requestAnimationFrame(frame);
+  }
+
+  // ---------- Entrada: se abre el telón cuando las fotos están listas ----------
+  const minWait = new Promise(r => setTimeout(r, 900));
+  Promise.all([imgsP, minWait]).then(() => {
+    document.getElementById('brandLoad').classList.add('gone');
+    document.getElementById('curtain').classList.add('open');
+    document.body.classList.remove('lock');
+    readScroll(); requestAnimationFrame(frame);
+    setTimeout(() => document.getElementById('curtain').remove(), 1800);
+  });
+})();
+</script>
+</body>
+</html>
