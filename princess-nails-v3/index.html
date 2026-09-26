@@ -13,7 +13,13 @@
 <meta property="og:image" content="https://razak31rl-ops.github.io/web-demos-costabrava/princess-nails-v3/assets/fachada.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Great+Vibes&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&family=Great+Vibes&family=Inter+Tight:wght@400;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<!-- La foto de portada se pide cuanto antes, en el tamaño que toca a cada pantalla -->
+<link rel="preload" as="image" href="assets/manicura-m.webp" imagesrcset="assets/manicura-m.webp 900w, assets/manicura.webp 1500w" imagesizes="(min-width:900px) 40vw, 92vw" fetchpriority="high">
+<script>
+  // "lite" = móvil o tablet: sin efectos de cristal borroso ni 3D, que en el iPhone cuestan mucho
+  if (matchMedia('(pointer: coarse)').matches || innerWidth < 768) document.documentElement.classList.add('lite');
+</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"NailSalon","name":"Princess Nails & Beauty","telephone":"+34972454076","priceRange":"€€",
 "image":"https://razak31rl-ops.github.io/web-demos-costabrava/princess-nails-v3/assets/fachada.webp",
@@ -104,7 +110,8 @@
 
   /* ---------- Cinta de servicios ---------- */
   .marquee{overflow:hidden;border-block:1px solid var(--linea);padding:22px 0;margin-top:24px;}
-  .marquee-track{display:flex;width:max-content;gap:28px;font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-size:clamp(1.6rem,6vw,2.6rem);white-space:nowrap;will-change:transform;}
+  .marquee-track{display:flex;width:max-content;gap:28px;padding-right:28px;font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-size:clamp(1.6rem,6vw,2.6rem);white-space:nowrap;animation:marq 40s linear infinite;}
+  @keyframes marq{to{transform:translate3d(-50%,0,0);}}
   .marquee-track i{font-style:normal;color:var(--fucsia);}
 
   /* ---------- Secciones ---------- */
@@ -225,7 +232,44 @@
   .w>span{display:inline-block;transition:transform 1.1s var(--ease);}
   .js .split:not(.in) .w>span{transform:translateY(105%);}
 
+  /* ---------- Versión ligera para móvil ----------
+     El desenfoque de cristal (backdrop-filter) sobre un fondo animado obliga al iPhone a
+     repintar toda la pantalla en cada fotograma: en móvil se cambia por un color sólido. */
+  .lite .glass,.lite .shot span,.lite .play span{backdrop-filter:none;-webkit-backdrop-filter:none;}
+  .lite .glass{background:rgba(38,15,27,.78);}
+  .lite .nav{background:rgba(22,10,17,.94);}
+  .lite .grain,.lite #petals{display:none;}
+  .lite .hero-photo,.lite .shot,.lite .video-card{transform:translateZ(0);}
+
+  /* Pétalos del móvil: 8 elementos con animación CSS (la hace la GPU, sin JavaScript) */
+  .petals-css{display:none;position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:-1;}
+  .lite .petals-css{display:block;}
+  .hero{position:relative;}
+  .petals-css i{position:absolute;top:-40px;width:16px;height:22px;border-radius:80% 0 80% 0;opacity:.75;
+    background:linear-gradient(135deg,#ffd6e7,#ff6fae 55%,#b3125d);will-change:transform;animation:fall linear infinite;}
+  .petals-css.paused i{animation-play-state:paused;}
+  .petals-css i:nth-child(1){left:8%;animation-duration:11s;animation-delay:-2s;}
+  .petals-css i:nth-child(2){left:22%;animation-duration:14s;animation-delay:-7s;transform:scale(.7);}
+  .petals-css i:nth-child(3){left:38%;animation-duration:12s;animation-delay:-4s;}
+  .petals-css i:nth-child(4){left:55%;animation-duration:16s;animation-delay:-10s;}
+  .petals-css i:nth-child(5){left:68%;animation-duration:10s;animation-delay:-1s;}
+  .petals-css i:nth-child(6){left:80%;animation-duration:13s;animation-delay:-6s;}
+  .petals-css i:nth-child(7){left:90%;animation-duration:15s;animation-delay:-12s;}
+  .petals-css i:nth-child(8){left:48%;animation-duration:18s;animation-delay:-15s;}
+  @keyframes fall{
+    0%{transform:translate3d(0,0,0) rotate(0deg);}
+    50%{transform:translate3d(28px,55svh,0) rotate(200deg);}
+    100%{transform:translate3d(-12px,110svh,0) rotate(400deg);}
+  }
+
+  /* El mapa de Google pesa ~1 MB: solo se carga si la clienta lo pide */
+  .map-btn{width:100%;height:100%;min-height:280px;border:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+    background:radial-gradient(circle at 50% 45%,rgba(255,79,154,.18),transparent 60%),repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 38px),repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 38px),#1d0c16;}
+  .map-btn svg{width:34px;height:34px;color:var(--fucsia);}
+  .map-btn b{font-family:'Fraunces',serif;font-weight:300;font-size:1.3rem;}
+
   @media (prefers-reduced-motion:reduce){
+    .petals-css,.marquee-track{animation:none!important;}
     html{scroll-behavior:auto;}
     *,*::before,*::after{animation:none!important;transition:none!important;}
     .js .reveal,.js .photo-in,.js .photo-in>:first-child,.js .rule,.js .split .w>span{opacity:1!important;transform:none!important;clip-path:none!important;}
@@ -256,6 +300,7 @@
 <main>
   <!-- Portada -->
   <section class="hero wrap" id="inicio">
+    <div class="petals-css" id="petalsCss" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
     <div class="hero-grid">
       <div>
         <p class="mono eyebrow">Nails &amp; Beauty · Empuriabrava</p>
@@ -268,7 +313,7 @@
         <p class="status reveal" id="status"><i></i><span id="statusText">Carrer Sant Maurici, 352</span></p>
       </div>
       <figure class="hero-photo photo-in" style="margin:0">
-        <img src="assets/manicura.webp" alt="Zona de manicura de Princess: mesas blancas, sillones fucsia y paredes de rayas" fetchpriority="high" width="1500" height="2000">
+        <img src="assets/manicura-m.webp" srcset="assets/manicura-m.webp 900w, assets/manicura.webp 1500w" sizes="(min-width:900px) 40vw, 92vw" alt="Zona de manicura de Princess: mesas blancas, sillones fucsia y paredes de rayas" fetchpriority="high" decoding="async" width="1500" height="2000">
         <figcaption><b>Zona de uñas</b><span class="mono" style="color:var(--crema)">Sant Maurici, 352</span></figcaption>
       </figure>
     </div>
@@ -291,12 +336,12 @@
       <p class="reveal">Una cabina tranquila. <em>Solo para ti.</em></p>
     </div>
     <div class="gallery" id="gallery">
-      <figure class="shot" style="margin:0"><img loading="lazy" src="assets/recepcion.webp" alt="Recepción rosa con celosía blanca y espejo redondo"><span>Recepción</span></figure>
-      <figure class="shot" style="margin:0"><img loading="lazy" src="assets/mesas.webp" alt="Mesas de manicura con sillones fucsia"><span>Uñas</span></figure>
-      <figure class="shot" style="margin:0"><img loading="lazy" src="assets/pedicura.webp" alt="Sillones reclinables de pedicura con espejos barrocos"><span>Pedicura</span></figure>
-      <figure class="shot" style="margin:0"><img loading="lazy" src="assets/facial.webp" alt="Cabina de tratamientos faciales"><span>Cabina</span></figure>
-      <figure class="shot" style="margin:0"><img loading="lazy" src="assets/espera.webp" alt="Sala de espera con sofá negro y alfombra fucsia"><span>Sala de espera</span></figure>
-      <figure class="shot" style="margin:0"><img loading="lazy" src="assets/fachada.webp" alt="Fachada de Princess Nails & Beauty con el rótulo"><span>La entrada</span></figure>
+      <figure class="shot" style="margin:0"><img loading="lazy" decoding="async" src="assets/recepcion-m.webp" srcset="assets/recepcion-m.webp 900w, assets/recepcion.webp 1500w" sizes="(min-width:900px) 360px, 76vw" alt="Recepción rosa con celosía blanca y espejo redondo"><span>Recepción</span></figure>
+      <figure class="shot" style="margin:0"><img loading="lazy" decoding="async" src="assets/mesas-m.webp" srcset="assets/mesas-m.webp 900w, assets/mesas.webp 1500w" sizes="(min-width:900px) 360px, 76vw" alt="Mesas de manicura con sillones fucsia"><span>Uñas</span></figure>
+      <figure class="shot" style="margin:0"><img loading="lazy" decoding="async" src="assets/pedicura-m.webp" srcset="assets/pedicura-m.webp 900w, assets/pedicura.webp 1500w" sizes="(min-width:900px) 360px, 76vw" alt="Sillones reclinables de pedicura con espejos barrocos"><span>Pedicura</span></figure>
+      <figure class="shot" style="margin:0"><img loading="lazy" decoding="async" src="assets/facial-m.webp" srcset="assets/facial-m.webp 900w, assets/facial.webp 1500w" sizes="(min-width:900px) 360px, 76vw" alt="Cabina de tratamientos faciales"><span>Cabina</span></figure>
+      <figure class="shot" style="margin:0"><img loading="lazy" decoding="async" src="assets/espera-m.webp" srcset="assets/espera-m.webp 900w, assets/espera.webp 1500w" sizes="(min-width:900px) 360px, 76vw" alt="Sala de espera con sofá negro y alfombra fucsia"><span>Sala de espera</span></figure>
+      <figure class="shot" style="margin:0"><img loading="lazy" decoding="async" src="assets/fachada-m.webp" srcset="assets/fachada-m.webp 900w, assets/fachada.webp 1500w" sizes="(min-width:900px) 360px, 76vw" alt="Fachada de Princess Nails & Beauty con el rótulo"><span>La entrada</span></figure>
     </div>
     <div class="gal-foot"><span class="mono">Desliza</span><div class="bar"><i id="barFill"></i></div></div>
   </section>
@@ -346,7 +391,7 @@
           <a class="ghost" href="tel:+34972454076"><svg><use href="#phone"/></svg>972 45 40 76</a>
         </div>
       </div>
-      <div class="map reveal"><iframe loading="lazy" title="Mapa de Princess Nails & Beauty" src="https://maps.google.com/maps?q=Carrer%20Sant%20Maurici%20352%2C%2017487%20Empuriabrava&amp;z=16&amp;output=embed"></iframe></div>
+      <div class="map reveal" id="map"><button class="map-btn" type="button" id="mapBtn"><svg><use href="#pin"/></svg><b>Ver el mapa</b><span class="mono">Toca para cargarlo</span></button></div>
       <div class="box glass reveal">
         <span class="mono">Horario</span>
         <table class="hours" id="hours"></table>
@@ -414,7 +459,7 @@
   const plus = '<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 1v12M1 7h12"/></svg>';
   $('#menu').innerHTML = CARTA.map((c,k) => `
     <details class="cat glass reveal" ${k === 0 ? 'open' : ''}>
-      <summary><img loading="lazy" src="assets/${c.pic}.webp" alt=""><span class="t"><span class="mono num">0${k+1}</span><b>${c.name}</b><small>Desde ${c.from}</small></span><span class="plus">${plus}</span></summary>
+      <summary><img loading="lazy" decoding="async" width="60" height="60" src="assets/${c.pic}-t.webp" alt=""><span class="t"><span class="mono num">0${k+1}</span><b>${c.name}</b><small>Desde ${c.from}</small></span><span class="plus">${plus}</span></summary>
       <ul>${c.items.map(([n,p,sub]) => `<li class="${sub ? 'sub' : ''}"><span class="n">${n}</span><span class="d"></span><span class="p">${p}</span></li>`).join('')}</ul>
     </details>`).join('');
 
@@ -490,10 +535,14 @@
   vid.addEventListener('click', () => vid.paused ? vid.play() : vid.pause());
   new IntersectionObserver(([e]) => { if (!e.isIntersecting) vid.pause(); }).observe(vc);
 
-  // ---------- Barra superior que se esconde, botón flotante y cinta ----------
-  const nav = $('#nav'), flt = $('#float'), track = $('#track');
-  let last = scrollY, finalOn = false, heroOn = true, mx = 0, lastT = 0;
-  new IntersectionObserver(([e]) => { heroOn = e.isIntersecting; update(); }, {threshold:.25}).observe($('.hero'));
+  // ---------- Barra superior que se esconde y botón flotante ----------
+  const lite = document.documentElement.classList.contains('lite');
+  const nav = $('#nav'), flt = $('#float'), petalsCss = $('#petalsCss');
+  let last = scrollY, finalOn = false, heroOn = true, lastT = 0;
+  new IntersectionObserver(([e]) => {
+    heroOn = e.isIntersecting; update();
+    petalsCss.classList.toggle('paused', !e.isIntersecting);   // los pétalos del móvil se paran fuera de la portada
+  }, {threshold:0}).observe($('.hero'));
   new IntersectionObserver(([e]) => { finalOn = e.isIntersecting; update(); }).observe($('#final'));
   function update(){ flt.classList.toggle('on', !heroOn && !finalOn); }
   addEventListener('scroll', () => {
@@ -502,17 +551,19 @@
     last = y;
   }, {passive:true});
 
-  let prevY = scrollY;
+  // Bucle de animación: solo existe en ordenador, para los pétalos 3D.
+  // (La cinta de servicios ya va con CSS; en móvil no hay ningún bucle en marcha.)
+  let petals = null;
   function tick(t){
     const dt = Math.min((t - (lastT || t)) / 1000, .05); lastT = t;
-    const v = Math.abs(scrollY - prevY); prevY = scrollY;
-    const w = track.scrollWidth / 2;
-    if (!reduced) { mx = (mx + dt * (38 + Math.min(v * 3, 160))) % w; track.style.transform = `translate3d(${-mx}px,0,0)`; }
     if (petals) petals(t / 1000, dt);
     requestAnimationFrame(tick);
   }
-  let petals = null;
-  requestAnimationFrame(tick);
+
+  // ---------- Mapa bajo demanda ----------
+  $('#mapBtn').addEventListener('click', () => {
+    $('#map').innerHTML = '<iframe title="Mapa de Princess Nails & Beauty" src="https://maps.google.com/maps?q=Carrer%20Sant%20Maurici%20352%2C%2017487%20Empuriabrava&z=16&output=embed"></iframe>';
+  });
 
   // ---------- En ordenador, "Llamar" no puede marcar: enseñamos el número ----------
   // En móvil (pantalla táctil) los enlaces tel: abren la llamada directamente.
@@ -561,7 +612,8 @@
   }
 
   // ---------- Pétalos 3D de fondo (opcional: si falla, queda el halo CSS) ----------
-  if (!reduced) import('https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js').then(THREE => {
+  // Solo en ordenador y cuando la página ya ha cargado del todo, para no retrasar nada.
+  if (!reduced && !lite) addEventListener('load', () => setTimeout(() => import('https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js').then(THREE => {
     const canvas = $('#petals');
     const low = innerWidth < 768 || (navigator.hardwareConcurrency || 4) < 4;
     const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:!low, powerPreference:'low-power'});
@@ -630,7 +682,8 @@
       renderer.render(scene, camera);
     };
     canvas.classList.add('ready');
-  }).catch(() => {});
+    requestAnimationFrame(tick);
+  }).catch(() => {}), 400));
 })();
 </script>
 </body>
