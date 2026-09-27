@@ -1,0 +1,4 @@
+Tipografías usadas en esta web (alojadas aquí para no enviar datos de las visitas a terceros):
+- Fraunces, Great Vibes, Inter Tight y JetBrains Mono: SIL Open Font License 1.1
+  https://openfontlicense.org/open-font-license-official-text/
+Librería 3D (assets/js/three.module.min.js): three.js, licencia MIT (aviso incluido en el propio archivo).

@@ -10,9 +10,15 @@
 <meta property="og:title" content="Princess Nails & Beauty · Empuriabrava">
 <meta property="og:description" content="Uñas, pestañas, faciales, masajes y depilación en Carrer Sant Maurici, 352.">
 <meta property="og:image" content="https://razak31rl-ops.github.io/web-demos-costabrava/princess-nails-v3/assets/fachada.webp">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&family=Great+Vibes&family=Inter+Tight:wght@400;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<!-- Seguridad: la página solo puede cargar archivos propios (y el mapa de Google, si la clienta lo pide).
+     Así nadie puede colar un script de fuera aunque un proveedor externo fuera atacado. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; media-src 'self'; connect-src 'self'; frame-src https://maps.google.com https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'none'">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2216%22%20fill%3D%22%23120a0f%22%2F%3E%3Cpath%20d%3D%22M12%2024l11%209%209-16%209%2016%2011-9-5%2024H17z%22%20fill%3D%22%23ff4f9a%22%2F%3E%3C%2Fsvg%3E">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Tipografías alojadas en la propia web: no se envía la IP de las visitas a Google (RGPD) -->
+<link rel="preload" href="assets/fonts/Fraunces-300.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/InterTight-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts.css">
 <!-- La foto de portada se pide cuanto antes, en el tamaño que toca a cada pantalla -->
 <link rel="preload" as="image" href="assets/manicura-m.webp" imagesrcset="assets/manicura-m.webp 900w, assets/manicura.webp 1500w" imagesizes="(min-width:900px) 40vw, 92vw" fetchpriority="high">
 <script>
@@ -277,6 +283,7 @@
   .map-btn{width:100%;height:100%;min-height:280px;border:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
     background:radial-gradient(circle at 50% 45%,rgba(255,79,154,.18),transparent 60%),repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 38px),repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 38px),#1d0c16;}
   .map-btn svg{width:34px;height:34px;color:var(--fucsia);}
+  .map-note{font-size:.72rem;color:var(--muted);max-width:26ch;text-align:center;}
   .map-btn b{font-family:'Fraunces',serif;font-weight:300;font-size:1.3rem;}
 
   @media (prefers-reduced-motion:reduce){
@@ -412,7 +419,7 @@
           <a class="ghost" href="tel:+34972454076"><svg><use href="#phone"/></svg>972 45 40 76</a>
         </div>
       </div>
-      <div class="map reveal" id="map"><button class="map-btn" type="button" id="mapBtn"><svg><use href="#pin"/></svg><b>Ver el mapa</b><span class="mono">Toca para cargarlo</span></button></div>
+      <div class="map reveal" id="map"><button class="map-btn" type="button" id="mapBtn"><svg><use href="#pin"/></svg><b>Ver el mapa</b><span class="mono">Toca para cargarlo</span><small class="map-note">Al abrirlo, Google Maps puede usar sus propias cookies.</small></button></div>
       <div class="box glass reveal">
         <span class="mono">Horario</span>
         <table class="hours" id="hours"></table>
@@ -583,7 +590,7 @@
 
   // ---------- Mapa bajo demanda ----------
   $('#mapBtn').addEventListener('click', () => {
-    $('#map').innerHTML = '<iframe title="Mapa de Princess Nails & Beauty" src="https://maps.google.com/maps?q=Carrer%20Sant%20Maurici%20352%2C%2017487%20Empuriabrava&z=16&output=embed"></iframe>';
+    $('#map').innerHTML = '<iframe title="Mapa de Princess Nails & Beauty" src="https://maps.google.com/maps?q=Carrer%20Sant%20Maurici%20352%2C%2017487%20Empuriabrava&z=16&hl=es&output=embed"></iframe>';
   });
 
   // ---------- En ordenador, "Llamar" no puede marcar: enseñamos el número ----------
@@ -634,7 +641,7 @@
 
   // ---------- Pétalos 3D de fondo (opcional: si falla, queda el halo CSS) ----------
   // Solo en ordenador y cuando la página ya ha cargado del todo, para no retrasar nada.
-  if (!reduced && !lite) addEventListener('load', () => setTimeout(() => import('https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js').then(THREE => {
+  if (!reduced && !lite) addEventListener('load', () => setTimeout(() => import('./assets/js/three.module.min.js').then(THREE => {
     const canvas = $('#petals');
     const low = innerWidth < 768 || (navigator.hardwareConcurrency || 4) < 4;
     const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:!low, powerPreference:'low-power'});
