@@ -23,7 +23,7 @@
 {"@context":"https://schema.org","@type":"NailSalon","name":"Princess Nails & Beauty","telephone":"+34972454076","priceRange":"€€",
 "image":"https://razak31rl-ops.github.io/web-demos-costabrava/princess-nails-v3/assets/fachada.webp",
 "address":{"@type":"PostalAddress","streetAddress":"Carrer Sant Maurici, 352","addressLocality":"Empuriabrava","postalCode":"17487","addressRegion":"Girona","addressCountry":"ES"},
-"sameAs":["https://www.instagram.com/princess.empuriabrava/"],
+"sameAs":["https://www.instagram.com/princess.empuriabrava/","https://www.facebook.com/alexandra.virte/"],
 "openingHoursSpecification":[
 {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:30","closes":"13:30"},
 {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"14:30","closes":"19:30"},
@@ -198,6 +198,16 @@
   footer .wrap{display:flex;flex-wrap:wrap;gap:16px 30px;justify-content:space-between;align-items:center;font-size:.9rem;color:var(--muted);}
   footer .script{font-size:2.2rem;color:var(--crema);line-height:1;}
 
+  /* Redes sociales: botones con el color de cada marca */
+  .socials{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;}
+  .social{display:inline-flex;align-items:center;gap:10px;padding:12px 18px 12px 12px;border-radius:16px;font-weight:600;color:#fff;transition:transform .3s var(--ease),box-shadow .3s;}
+  .social:hover{transform:translateY(-2px);}
+  .social svg{width:22px;height:22px;flex:0 0 auto;}
+  .social.ig{background:linear-gradient(45deg,#f9a13a 0%,#ee2a7b 45%,#8a3ab9 100%);box-shadow:0 8px 24px rgba(238,42,123,.3);}
+  .social.fb{background:#1877f2;box-shadow:0 8px 24px rgba(24,119,242,.28);}
+  .social.round{padding:0;width:46px;height:46px;justify-content:center;border-radius:50%;}
+  footer .socials{margin-top:0;}
+
   /* Botón flotante */
   .float{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:45;display:inline-flex;align-items:center;gap:9px;padding:15px 20px;border-radius:999px;
          background:var(--fucsia);color:#fff;font-weight:600;box-shadow:0 12px 34px rgba(255,79,154,.4);transform:translateY(160%);transition:transform .55s var(--ease);}
@@ -284,6 +294,7 @@
   <symbol id="phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol>
   <symbol id="pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
   <symbol id="ig" viewBox="0 0 24 24"><rect x="2.5" y="2.5" width="19" height="19" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor"/></symbol>
+  <symbol id="fb" viewBox="0 0 24 24"><path fill="currentColor" d="M13.5 21v-7.6h2.6l.4-3h-3V8.5c0-.9.3-1.5 1.5-1.5h1.6V4.3c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21h3.1z"/></symbol>
 </defs></svg>
 
 <div class="backdrop" aria-hidden="true"></div>
@@ -303,13 +314,17 @@
     <div class="hero-grid">
       <div>
         <p class="mono eyebrow">Nails &amp; Beauty · Empuriabrava</p>
-        <h1 class="serif split">Uñas, pestañas y piel. <em>Como una princesa.</em></h1>
+        <h1 class="serif split">Uñas, pestañas y estética. <em>Como una princesa.</em></h1>
         <p class="lead reveal">Un salón de rayas blancas y negras, terciopelo fucsia y espejos barrocos. Entras a arreglarte las uñas y sales con el día arreglado.</p>
         <div class="ctas reveal">
           <a class="btn" href="tel:+34972454076"><svg><use href="#phone"/></svg>Pedir cita · 972 45 40 76</a>
           <a class="link" href="#carta">Ver precios ↓</a>
         </div>
         <p class="status reveal" id="status"><i></i><span id="statusText">Carrer Sant Maurici, 352</span></p>
+        <div class="socials reveal">
+          <a class="social ig" href="https://www.instagram.com/princess.empuriabrava/" target="_blank" rel="noopener" aria-label="Instagram de Princess"><svg><use href="#ig"/></svg><span>Instagram</span></a>
+          <a class="social fb" href="https://www.facebook.com/alexandra.virte/" target="_blank" rel="noopener" aria-label="Facebook de Princess"><svg><use href="#fb"/></svg><span>Facebook</span></a>
+        </div>
       </div>
       <figure class="hero-photo photo-in" style="margin:0">
         <img src="assets/manicura-m.webp" srcset="assets/manicura-m.webp 900w, assets/manicura.webp 1500w" sizes="(min-width:900px) 40vw, 92vw" alt="Zona de manicura de Princess: mesas blancas, sillones fucsia y paredes de rayas" fetchpriority="high" decoding="async" width="1500" height="2000">
@@ -365,7 +380,10 @@
         <p class="mono">03 / Por dentro</p>
         <h2 class="serif split">Date una vuelta <em>antes de venir.</em></h2>
         <p class="reveal">43 segundos por la zona de uñas, la pedicura, la cabina y la sala de espera.</p>
-        <div class="row-btns reveal"><a class="ghost" href="https://www.instagram.com/princess.empuriabrava/" target="_blank" rel="noopener"><svg><use href="#ig"/></svg>@princess.empuriabrava</a></div>
+        <div class="socials reveal" style="margin-top:22px">
+          <a class="social ig" href="https://www.instagram.com/princess.empuriabrava/" target="_blank" rel="noopener"><svg><use href="#ig"/></svg><span>@princess.empuriabrava</span></a>
+          <a class="social fb" href="https://www.facebook.com/alexandra.virte/" target="_blank" rel="noopener"><svg><use href="#fb"/></svg><span>Facebook</span></a>
+        </div>
       </div>
       <div class="video-card photo-in" id="videoCard">
         <video src="assets/recorrido.mp4" poster="assets/recorrido.webp" muted loop playsinline preload="none"></video>
@@ -411,7 +429,7 @@
   <div class="wrap">
     <span class="script">Princess</span>
     <span>Carrer Sant Maurici, 352 · Empuriabrava</span>
-    <a href="https://www.instagram.com/princess.empuriabrava/" target="_blank" rel="noopener">@princess.empuriabrava</a>
+    <span class="socials"><a class="social ig round" href="https://www.instagram.com/princess.empuriabrava/" target="_blank" rel="noopener" aria-label="Instagram"><svg><use href="#ig"/></svg></a><a class="social fb round" href="https://www.facebook.com/alexandra.virte/" target="_blank" rel="noopener" aria-label="Facebook"><svg><use href="#fb"/></svg></a></span>
   </div>
 </footer>
 
@@ -448,7 +466,7 @@
     {name:'Masajes', pic:'masajes-cabina', from:'35 €', items:[
       ['Masaje cuerpo entero','70 €'],['Masaje espalda','40 €'],['Masaje piernas','40 €'],
       ['Masaje facial','35 €'],['Masaje podal','35 €'],['Peeling + masaje corporal','70 €']]},
-    {name:'Depilación', pic:'depilacion', from:'4,50 €', items:[
+    {name:'Depilación mujer', pic:'depilacion', from:'4,50 €', items:[
       ['Piernas enteras','28 €'],['Medias piernas','19,50 €'],['Muslos','19,50 €'],
       ['Ingles normales','12 €'],['Ingles brasileñas','18 €'],['Ingles integrales','25 €'],
       ['Axilas','9,50 €'],['Brazos','16,50 €'],['Medios brazos','13,50 €'],['Glúteos','15 €'],
@@ -463,7 +481,7 @@
     </details>`).join('');
 
   // ---------- Cinta de servicios ----------
-  const words = ['Manicura','Pedicura','Uñas de gel','Lifting de pestañas','Extensiones','Faciales','Masajes','Depilación'];
+  const words = ['Manicura','Pedicura','Uñas de gel','Lifting de pestañas','Extensiones','Faciales','Masajes','Depilación mujer'];
   const one = words.map(w => `<span>${w}</span><i>✦</i>`).join('');
   $('#track').innerHTML = one + one;
 
