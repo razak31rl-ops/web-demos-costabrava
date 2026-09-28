@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Condiciones de reserva y cancelación · Villa Canal</title>
+<meta name="description" content="Condiciones de reserva y cancelación de Villa Canal: capacidad, horarios, qué incluye el precio, pagos y normas.">
+<!-- V1 de muestra: que Google no la indexe hasta que el propietario la apruebe -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F7F5F0">
+<!-- Seguridad: solo se cargan archivos de la propia web (esta página no tiene mapa) -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2212%22%20fill%3D%22%23214E50%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2244%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2234%22%20text-anchor%3D%22middle%22%20fill%3D%22%23F7F5F0%22%3EVC%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="preload" href="../assets/fonts/DMSerifDisplay-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/Inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/site.css">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  /* ---------- Páginas legales ---------- */
+  .cabecera-pagina .entrada{margin-top:18px;color:var(--piedra-txt);}
+  .borrador{display:grid;justify-items:start;gap:10px;max-width:46em;margin-top:28px;padding:16px 18px;background:#FFF8E9;border:1px solid #E9C987;border-radius:8px;color:#4F3700;font-size:.93rem;line-height:1.55;}
+  .legales{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}
+  .legales a{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--linea);border-radius:999px;background:var(--blanco-puro);font-size:.9rem;font-weight:500;text-decoration:none;transition:border-color .2s var(--ease),background .2s var(--ease);}
+  .legales a:hover{border-color:var(--tinta);}
+  .legales a[aria-current="page"]{background:var(--tinta);border-color:var(--tinta);color:#fff;}
+
+  /* Índice lateral (escritorio) o plegable (móvil) + texto */
+  .legal{display:grid;grid-template-columns:14rem minmax(0,1fr);gap:clamp(32px,6vw,88px);align-items:start;padding-block:clamp(8px,2vw,24px) clamp(72px,10vw,128px);}
+  .indice{position:sticky;top:calc(var(--header-h) + 28px);font-size:.9rem;}
+  .indice summary{list-style:none;font-size:.74rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--piedra-txt);margin-bottom:12px;}
+  .indice summary::-webkit-details-marker{display:none;}
+  .indice summary svg{width:18px;height:18px;flex:none;transition:transform .3s var(--ease);}
+  .indice ol{border-left:1px solid var(--linea);}
+  .indice a{display:block;padding:7px 0 7px 16px;margin-left:-1px;border-left:2px solid transparent;color:var(--piedra-txt);text-decoration:none;line-height:1.35;}
+  .indice a:hover{color:var(--tinta);border-left-color:var(--piedra);}
+  .indice a:focus-visible{outline-offset:-2px;}
+  @media (min-width:901px){
+    .indice{max-height:calc(100vh - var(--header-h) - 56px);overflow-y:auto;}
+    .indice summary{pointer-events:none;}
+    .indice summary svg{display:none;}
+  }
+  @media (max-width:900px){
+    .legal{grid-template-columns:1fr;}
+    .indice{position:static;background:var(--blanco-puro);border:1px solid var(--linea);border-radius:8px;}
+    .indice summary{display:flex;justify-content:space-between;align-items:center;min-height:52px;padding:0 16px;margin:0;cursor:pointer;}
+    .indice[open] summary svg{transform:rotate(45deg);}
+    .indice ol{margin:0 16px 14px;}
+    .indice a{padding-block:11px;font-size:.95rem;}
+  }
+  @media (prefers-reduced-motion:reduce){.indice summary svg,.legales a{transition:none;}}
+
+  /* Piezas del texto */
+  .prosa > h2:first-child{margin-top:0;}
+  .prosa .pendiente{-webkit-box-decoration-break:clone;box-decoration-break:clone;overflow-wrap:anywhere;}
+  .ficha{display:grid;grid-template-columns:minmax(8.5em,max-content) minmax(0,1fr);border-top:1px solid var(--linea);margin:0 0 1.4em;}
+  .ficha dt,.ficha dd{padding:12px 0;border-bottom:1px solid var(--linea);}
+  .ficha dt{font-weight:600;padding-right:24px;}
+  @media (max-width:560px){.ficha{grid-template-columns:1fr;}.ficha dt{border-bottom:0;padding-bottom:0;}.ficha dd{padding-top:2px;}}
+  .caja{background:var(--arena-2);border-radius:8px;padding:clamp(20px,3vw,28px);margin-bottom:1.6em;}
+  .caja > :last-child{margin-bottom:0;}
+  .prosa .caja h3{margin-top:0;}
+  .caja__titular{font-family:var(--serif);font-size:clamp(1.5rem,2.6vw,1.9rem);line-height:1.2;}
+  .prosa .caja .caja__titular{margin-bottom:.35em;}
+  .caja--pendiente{background:#FFF8E9;border:1px dashed #D9B56B;}
+  .dos-cajas{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:1.6em;}
+  .dos-cajas .caja{margin:0;}
+  @media (max-width:700px){.dos-cajas{grid-template-columns:1fr;}}
+  .prosa ul.lista-iconos{list-style:none;padding-left:0;}
+  .lista-iconos li{display:flex;gap:10px;align-items:flex-start;}
+  .lista-iconos svg{width:18px;height:18px;flex:none;margin-top:4px;color:var(--tinta);}
+  .caja--pendiente .lista-iconos svg{color:#7A5200;}
+  .fecha-borrador{margin-top:2.4em;padding-top:1.2em;border-top:1px solid var(--linea);}
+</style>
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+
+<header class="cabecera">
+  <div class="envoltura cabecera__fila">
+    <a class="marca" href="../" aria-label="Villa Canal, inicio">
+      <span class="marca__nombre">Villa Canal</span>
+      <span class="marca__lugar">Santa Margarida · Roses</span>
+    </a>
+    <nav class="menu" aria-label="Principal">
+      <ul class="menu__enlaces">
+        <li><a href="../#la-villa">La villa</a></li>
+        <li><a href="../#interiores">Interiores</a></li>
+        <li><a href="../#exteriores">Exteriores</a></li>
+        <li><a href="../galeria/">Galería</a></li>
+        <li><a href="../#ubicacion">Ubicación</a></li>
+      </ul>
+      <a class="boton boton--primario" href="../reservar/">Consultar disponibilidad</a>
+    </nav>
+    <div class="cabecera__acciones">
+      <a class="boton boton--primario cabecera__movil-cta" href="../reservar/">Disponibilidad</a>
+      <button class="boton-menu" type="button" data-abrir-menu aria-expanded="false" aria-controls="panel-menu" aria-label="Abrir menú">
+        <svg aria-hidden="true"><use href="../assets/iconos.svg#menu"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="panel" id="panel-menu" data-abierto="false" role="dialog" aria-modal="true" aria-label="Menú" tabindex="-1">
+  <div class="panel__arriba">
+    <a class="marca" href="../"><span class="marca__nombre">Villa Canal</span><span class="marca__lugar">Santa Margarida · Roses</span></a>
+    <button class="boton-menu" type="button" data-cerrar-menu aria-label="Cerrar menú"><svg aria-hidden="true"><use href="../assets/iconos.svg#cerrar"/></svg></button>
+  </div>
+  <nav aria-label="Menú móvil">
+    <a href="../#la-villa">La villa</a>
+    <a href="../#interiores">Interiores</a>
+    <a href="../#exteriores">Exteriores</a>
+    <a href="../#canal">El canal</a>
+    <a href="../#ubicacion">Ubicación</a>
+    <a href="../galeria/">Galería</a>
+    <a href="../#preguntas">Preguntas</a>
+  </nav>
+  <div class="panel__pie">
+    <a class="boton boton--primario" href="../reservar/">Consultar disponibilidad</a>
+    <a class="boton boton--linea" href="https://wa.me/34657337686" data-wa="Hola, tengo una pregunta sobre Villa Canal."><svg aria-hidden="true"><use href="../assets/iconos.svg#whatsapp"/></svg>Escribir por WhatsApp</a>
+  </div>
+</div>
+
+<main id="contenido">
+  <section class="cabecera-pagina" aria-labelledby="t-pagina">
+    <div class="envoltura">
+      <nav class="miga" aria-label="Estás aquí"><a href="../">Inicio</a> / <span aria-current="page">Condiciones de reserva</span></nav>
+      <h1 class="titulo-l" id="t-pagina">Condiciones de reserva y cancelación</h1>
+      <p class="entrada">Capacidad, horarios, qué incluye el precio, pagos, cancelación y normas de la casa.</p>
+      <div class="borrador" role="note">
+        <span class="chapa-demo">Borrador</span>
+        <p>Borrador pendiente de completar con los datos del titular antes de publicar la web. Lo que falta aparece marcado así: <span class="pendiente">[pendiente: …]</span>. Conviene que un gestor o un abogado revise estos textos antes de publicarlos.</p>
+      </div>
+      <nav class="legales" aria-label="Textos legales">
+        <a href="aviso-legal.html">Aviso legal</a>
+        <a href="privacidad.html">Privacidad</a>
+        <a href="cookies.html">Cookies</a>
+        <a href="condiciones.html" aria-current="page">Condiciones de reserva</a>
+      </nav>
+    </div>
+  </section>
+
+  <div class="envoltura legal">
+    <details class="indice" open data-indice>
+      <summary>En esta página<svg aria-hidden="true"><use href="../assets/iconos.svg#mas"/></svg></summary>
+      <nav aria-label="Apartados de esta página">
+        <ol>
+          <li><a href="#resumen">Resumen</a></li>
+          <li><a href="#alojamiento">El alojamiento</a></li>
+          <li><a href="#como-reservar">Cómo se reserva</a></li>
+          <li><a href="#huespedes">Huéspedes</a></li>
+          <li><a href="#precio">Precio</a></li>
+          <li><a href="#impuesto">Impuesto turístico</a></li>
+          <li><a href="#pago">Pago</a></li>
+          <li><a href="#fianza">Fianza</a></li>
+          <li><a href="#estancia-minima">Estancia mínima</a></li>
+          <li><a href="#horarios">Llegada y salida</a></li>
+          <li><a href="#cancelacion">Cancelación</a></li>
+          <li><a href="#normas">Normas de la casa</a></li>
+          <li><a href="#piscina">Piscina y jacuzzi</a></li>
+          <li><a href="#amarre">Canal y amarre</a></li>
+          <li><a href="#danos">Daños</a></li>
+          <li><a href="#incidencias">Incidencias</a></li>
+        </ol>
+      </nav>
+    </details>
+
+    <article class="prosa">
+      <h2 id="resumen">Resumen</h2>
+<div class="dos-cajas">
+        <div class="caja">
+          <h3>Confirmado</h3>
+          <ul class="lista-iconos">
+            <li><svg aria-hidden="true"><use href="../assets/iconos.svg#check"/></svg><span>Alojamiento completo y de uso privado, para un máximo de 8 huéspedes.</span></li>
+            <li><svg aria-hidden="true"><use href="../assets/iconos.svg#check"/></svg><span>Llegada de 15:00 a 19:00. Salida antes de las 10:00.</span></li>
+            <li><svg aria-hidden="true"><use href="../assets/iconos.svg#check"/></svg><span>Ropa de cama incluida.</span></li>
+            <li><svg aria-hidden="true"><use href="../assets/iconos.svg#check"/></svg><span>Limpieza e higienizado profesional antes de tu llegada.</span></li>
+            <li><svg aria-hidden="true"><use href="../assets/iconos.svg#check"/></svg><span>Aire acondicionado solo en los dormitorios.</span></li>
+            <li><svg aria-hidden="true"><use href="../assets/iconos.svg#check"/></svg><span>Registro turístico HUTG-021359.</span></li>
+          </ul>
+        </div>
+        <div class="caja caja--pendiente">
+          <h3>Por confirmar</h3>
+          <ul class="lista-iconos">
+            <li><svg aria-hidden="true"><use href="../assets/iconos.svg#pregunta"/></svg><span>Precios y qué incluyen</span></li>
+            <li><svg aria-hidden="true"><use href="../assets/iconos.svg#pregunta"/></svg><span>Forma y momento del pago</span></li>
+            <li><svg aria-hidden="true"><use href="../assets/iconos.svg#pregunta"/></svg><span>Fianza</span></li>
+            <li><svg aria-hidden="true"><use href="../assets/iconos.svg#pregunta"/></svg><span>Estancia mínima</span></li>
+            <li><svg aria-hidden="true"><use href="../assets/iconos.svg#pregunta"/></svg><span>Cancelación y reembolsos</span></li>
+            <li><svg aria-hidden="true"><use href="../assets/iconos.svg#pregunta"/></svg><span>Importe del impuesto turístico</span></li>
+            <li><svg aria-hidden="true"><use href="../assets/iconos.svg#pregunta"/></svg><span>Normas de la casa y del amarre</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <h2 id="alojamiento">El alojamiento</h2>
+<p>Villa Canal es una vivienda de uso turístico en Santa Margarida (Roses, Girona), inscrita en el Registro de Turismo de Cataluña con el número <strong>HUTG-021359</strong>. Titular: <span class="pendiente">[pendiente: nombre y apellidos, o razón social]</span>.</p>
+      <p>Se alquila completa y es de uso totalmente privado: no se comparte ningún espacio con otros huéspedes. Tiene 4 dormitorios (2 suites con baño completo y 2 dormitorios dobles), 6 camas, 3 baños, jardín con piscina, patio, garaje y acceso privado al canal, con amarre.</p>
+
+      <h2 id="como-reservar">Cómo se reserva</h2>
+<h3>Hoy: solicitud por WhatsApp</h3>
+      <p>Envíanos por <a href="https://wa.me/34657337686" data-wa="Hola, quiero consultar disponibilidad en Villa Canal.">WhatsApp</a> tus fechas y el número de huéspedes. Te responderemos con la disponibilidad y el precio. Una solicitud no es una reserva: la reserva solo queda confirmada cuando <span class="pendiente">[pendiente: qué confirma la reserva: el pago, un mensaje por escrito…]</span>.</p>
+      <h3>En Airbnb</h3>
+      <p>También puedes reservar en el <a href="https://www.airbnb.es/rooms/1406544957360206368" target="_blank" rel="noopener noreferrer">anuncio de Villa Canal en Airbnb</a>. En ese caso, el precio, el pago y la política de cancelación son los que muestra Airbnb al reservar.</p>
+      <h3>Reserva en línea en esta web</h3>
+      <p>Todavía no está activa. La página de reserva es una demostración: no confirma reservas ni cobra nada.</p>
+
+      <h2 id="huespedes">Huéspedes</h2>
+<ul>
+        <li>Máximo <strong>8 huéspedes</strong>. No pueden alojarse más personas de las indicadas en la reserva.</li>
+        <li><span class="pendiente">[pendiente: si los bebés cuentan en las 8 plazas y si hay cuna]</span></li>
+        <li><span class="pendiente">[pendiente: edad mínima de la persona que reserva]</span></li>
+        <li><span class="pendiente">[pendiente: si se permiten visitas durante el día]</span></li>
+      </ul>
+
+      <h2 id="precio">Precio y qué incluye</h2>
+<p><span class="pendiente">[pendiente: precio por noche en cada temporada y fechas de cada temporada]</span></p>
+      <h3>Incluido</h3>
+      <ul>
+        <li>El alojamiento completo, de uso privado.</li>
+        <li>Ropa de cama: sábanas y edredones.</li>
+        <li>Limpieza e higienizado profesional antes de tu llegada.</li>
+        <li>Aparcamiento gratuito en la propia villa, con garaje.</li>
+      </ul>
+      <h3>Por confirmar</h3>
+      <ul>
+        <li>Limpieza final: <span class="pendiente">[pendiente: incluida o con coste aparte, e importe]</span></li>
+        <li>Toallas y productos básicos: <span class="pendiente">[pendiente: incluidos o no]</span></li>
+        <li>Wifi: <span class="pendiente">[pendiente: si hay o no]</span></li>
+        <li>Jacuzzi y barbacoa: <span class="pendiente">[pendiente: si están disponibles y si tienen coste]</span></li>
+        <li>Uso del amarre: <span class="pendiente">[pendiente: incluido o con coste aparte]</span></li>
+      </ul>
+      <p>Antes de pagar verás el precio total desglosado: noches, limpieza, impuesto turístico, extras y fianza si la hay. No habrá cargos sorpresa: lo que pagues por la estancia será lo que aparezca en ese resumen.</p>
+
+      <h2 id="impuesto">Impuesto turístico</h2>
+<p>En Cataluña existe el impuesto sobre las estancias en establecimientos turísticos. Se paga por persona y noche, y su importe es el que marque la normativa vigente. <span class="pendiente">[pendiente: importe, quién está exento y si va incluido en el precio o se paga aparte]</span></p>
+
+      <h2 id="pago">Pago</h2>
+<ul>
+        <li>Forma de pago: <span class="pendiente">[pendiente: transferencia, tarjeta u otras]</span></li>
+        <li>Cuándo se paga: <span class="pendiente">[pendiente: una parte al reservar y el resto antes de llegar, o todo junto]</span></li>
+      </ul>
+
+      <h2 id="fianza">Fianza</h2>
+<p><span class="pendiente">[pendiente: si hay fianza: importe, cómo se deja, y cuándo y cómo se devuelve]</span></p>
+      <p>Si hay fianza, verás el importe y cómo se devuelve antes de pagar nada.</p>
+
+      <h2 id="estancia-minima">Estancia mínima</h2>
+<p><span class="pendiente">[pendiente: número mínimo de noches y si cambia según la temporada]</span></p>
+
+      <h2 id="horarios">Llegada y salida</h2>
+<ul>
+        <li><strong>Llegada</strong>: de 15:00 a 19:00.</li>
+        <li><strong>Salida</strong>: antes de las 10:00.</li>
+        <li>Llegadas fuera de horario: <span class="pendiente">[pendiente: si se puede y con qué condiciones]</span></li>
+        <li>Entrega de llaves: <span class="pendiente">[pendiente: cómo se hace]</span></li>
+      </ul>
+      <h3>Identificación de los huéspedes</h3>
+      <p>La ley obliga a identificar a los huéspedes y a comunicar sus datos a las autoridades (en Cataluña, a los Mossos d'Esquadra). Por eso te pediremos los datos de identificación de quienes se alojen. <span class="pendiente">[pendiente: cómo y cuándo se recogen]</span> Más información en la <a href="privacidad.html#viajeros">política de privacidad</a>.</p>
+
+      <h2 id="cancelacion">Cancelación y reembolsos</h2>
+<ul>
+        <li><span class="pendiente">[pendiente: hasta cuándo se puede cancelar y cuánto se devuelve en cada caso]</span></li>
+        <li><span class="pendiente">[pendiente: qué pasa si es el propietario quien tiene que cancelar]</span></li>
+        <li><span class="pendiente">[pendiente: cómo y en cuánto tiempo se hacen los reembolsos]</span></li>
+      </ul>
+      <p>Las condiciones de cancelación aparecerán en el resumen de la reserva, antes de pagar.</p>
+      <h3>Derecho de desistimiento</h3>
+      <p>En las reservas de alojamiento para fechas concretas no se aplica el derecho de desistimiento de 14 días de las compras a distancia (artículo 103, letra l, del texto refundido de la Ley General para la Defensa de los Consumidores y Usuarios). Por eso, si cancelas, se aplica la política de cancelación de este apartado.</p>
+
+      <h2 id="normas">Normas de la casa</h2>
+<ul>
+        <li>Mascotas: <span class="pendiente">[pendiente: si se admiten y con qué condiciones]</span></li>
+        <li>Fiestas y eventos: <span class="pendiente">[pendiente: si se permiten]</span></li>
+        <li>Ruido y descanso: <span class="pendiente">[pendiente: horario de silencio]</span></li>
+        <li>Fumar: <span class="pendiente">[pendiente: dónde se puede y dónde no]</span></li>
+        <li><span class="pendiente">[pendiente: otras normas: basura y reciclaje, ahorro de agua y luz…]</span></li>
+      </ul>
+
+      <h2 id="piscina">Piscina y jacuzzi</h2>
+<ul>
+        <li>La piscina es privada: solo la usan los huéspedes de la villa.</li>
+        <li>Los niños deben estar siempre bajo la supervisión de un adulto en la piscina, en el jacuzzi y junto al canal.</li>
+        <li>Normas de uso de la piscina: <span class="pendiente">[pendiente: horario, ducha antes del baño, flotadores…]</span></li>
+        <li>Jacuzzi exterior: <span class="pendiente">[pendiente: si está disponible, en qué época y cómo se usa]</span></li>
+      </ul>
+
+      <h2 id="amarre">Canal y amarre</h2>
+<ul>
+        <li>La villa da a un canal privado con salida directa al mar. El acceso al canal es solo para los huéspedes.</li>
+        <li>Puedes amarrar la embarcación que alquiles. La estancia no incluye barco.</li>
+        <li>Medidas del amarre y calado: <span class="pendiente">[pendiente: eslora y manga máximas, calado]</span></li>
+        <li>Condiciones de uso: <span class="pendiente">[pendiente: si tiene coste, si hace falta seguro, horarios y responsabilidad]</span></li>
+      </ul>
+
+      <h2 id="danos">Daños</h2>
+<p>Si se rompe o se estropea algo durante la estancia, avísanos cuanto antes por WhatsApp.</p>
+      <p><span class="pendiente">[pendiente: cómo se valoran y se cobran los daños, y su relación con la fianza]</span></p>
+
+      <h2 id="incidencias">Incidencias y legislación</h2>
+<p>Si algo no funciona o no está como esperabas, escríbenos por WhatsApp al <a href="https://wa.me/34657337686" data-wa="Hola, tengo una pregunta sobre Villa Canal.">+34 657 33 76 86</a> para que podamos solucionarlo cuanto antes.</p>
+      <p>Estas condiciones se rigen por la legislación española. Si eres consumidor, mantienes todos los derechos que te reconoce la normativa de consumo.</p>
+
+      <p class="pequeno secundario fecha-borrador">Borrador redactado el 27 de septiembre de 2026. Última revisión: <span class="pendiente">[pendiente: fecha de publicación]</span>.</p>
+    </article>
+  </div>
+</main>
+
+<footer class="pie">
+  <div class="envoltura">
+    <div class="pie__rejilla">
+      <div>
+        <span class="marca"><span class="marca__nombre">Villa Canal</span></span>
+        <p style="margin-top:14px">Santa Margarida, Roses<br>Costa Brava (Girona)</p>
+        <p class="pequeno" style="margin-top:14px;color:rgba(255,255,255,.66)">Registro de Turismo de Cataluña<br>HUTG-021359</p>
+      </div>
+      <div>
+        <h2>La villa</h2>
+        <ul>
+          <li><a href="../#la-villa">La villa</a></li>
+          <li><a href="../#interiores">Interiores</a></li>
+          <li><a href="../#exteriores">Exteriores</a></li>
+          <li><a href="../#canal">El canal</a></li>
+          <li><a href="../#ubicacion">Ubicación</a></li>
+          <li><a href="../galeria/">Galería</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Reservas</h2>
+        <ul>
+          <li><a href="../reservar/">Consultar disponibilidad</a></li>
+          <li><a href="../#preguntas">Preguntas frecuentes</a></li>
+          <li><a href="condiciones.html" aria-current="page">Condiciones de reserva y cancelación</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contacto</h2>
+        <ul>
+          <li><a href="https://wa.me/34657337686" data-wa="Hola, tengo una pregunta sobre Villa Canal.">WhatsApp · +34 657 33 76 86</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pie__base">
+      <span>© <span data-anio>2026</span> Villa Canal</span>
+      <nav class="pie__legal" aria-label="Legal">
+        <a href="aviso-legal.html">Aviso legal</a>
+        <a href="privacidad.html">Privacidad</a>
+        <a href="cookies.html">Cookies</a>
+        <a href="condiciones.html" aria-current="page">Condiciones de reserva</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-flotante" href="https://wa.me/34657337686" data-wa="Hola, tengo una pregunta sobre Villa Canal." aria-label="Escribir por WhatsApp">
+  <svg aria-hidden="true"><use href="../assets/iconos.svg#whatsapp"/></svg><span>WhatsApp</span>
+</a>
+<div class="barra-movil" data-visible="false">
+  <a class="boton boton--primario" href="../reservar/">Consultar disponibilidad</a>
+  <a class="boton boton--wa" href="https://wa.me/34657337686" data-wa="Hola, tengo una pregunta sobre Villa Canal." aria-label="Escribir por WhatsApp"><svg aria-hidden="true"><use href="../assets/iconos.svg#whatsapp"/></svg></a>
+</div>
+
+<script src="../assets/site.js" defer></script>
+<script>
+  // Índice: siempre abierto en escritorio; en el móvil empieza plegado y se pliega al elegir un apartado
+  document.addEventListener('DOMContentLoaded', function () {
+    var indice = document.querySelector('[data-indice]');
+    if (!indice || !window.matchMedia) return;
+    var movil = window.matchMedia('(max-width: 900px)');
+    var resumen = indice.querySelector('summary');
+    function ajustar() {
+      indice.open = !movil.matches;
+      resumen.tabIndex = movil.matches ? 0 : -1;
+    }
+    ajustar();
+    if (movil.addEventListener) movil.addEventListener('change', ajustar);
+    indice.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { if (movil.matches) indice.open = false; });
+    });
+  });
+</script>
+</body>
+</html>

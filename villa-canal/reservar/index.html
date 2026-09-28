@@ -1,0 +1,1409 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reservar (demostración) · Villa Canal</title>
+<meta name="description" content="Demostración del proceso de reserva directa de Villa Canal, en Santa Margarida (Roses). Calendario, precios y pago de ejemplo. Para reservar hoy: WhatsApp o Airbnb.">
+<!-- V1 de muestra: que Google no la indexe hasta que el propietario la apruebe -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F7F5F0">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Reservar Villa Canal · Santa Margarida, Roses">
+<meta property="og:description" content="Demostración de la reserva directa de Villa Canal. Para reservar hoy: WhatsApp o Airbnb.">
+<meta property="og:image" content="https://razak31rl-ops.github.io/web-demos-costabrava/villa-canal/assets/img/piscina-canal-1280.webp">
+<!-- Seguridad: solo se cargan archivos de la propia web -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2212%22%20fill%3D%22%23214E50%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2244%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2234%22%20text-anchor%3D%22middle%22%20fill%3D%22%23F7F5F0%22%3EVC%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="preload" href="../assets/fonts/DMSerifDisplay-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/Inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/site.css">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  [hidden]{display:none!important;}
+
+  /* ---------- Cabecera de la página ---------- */
+  /* El aviso es la columna ancha: así sus dos botones caben uno al lado del otro en escritorio */
+  .intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:28px clamp(32px,5vw,72px);align-items:start;}
+  .intro h1{margin-bottom:16px;}
+  @media (max-width:900px){.intro{grid-template-columns:minmax(0,1fr);}}
+  .aviso-demo{background:#FFF8EA;border:1px solid #E9C987;border-radius:10px;padding:clamp(18px,2.4vw,26px);}
+  .aviso-demo p{margin-top:12px;}
+  /* Los dos botones siempre del mismo ancho: uno al lado del otro si caben en una línea; si no, uno debajo del otro */
+  .aviso-demo__acciones{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:10px;margin-top:14px;}
+  /* En esta página los botones pueden partir línea: nada se sale en 360 px */
+  .cabecera-pagina .boton,.reserva .boton{white-space:normal;text-align:center;line-height:1.3;padding-block:10px;}
+  .por-confirmar{display:inline-block;font-size:.74rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#7A5200;background:#FFF1D6;border-radius:4px;padding:2px 7px;vertical-align:1px;white-space:nowrap;}
+  html:not(.js) .reserva{display:none;}
+  .sin-js{margin-bottom:64px;padding:18px 20px;border-radius:10px;background:#FFF8EA;border:1px solid #E9C987;}
+
+  /* ---------- Proceso: cabecera e indicador de pasos ---------- */
+  .reserva{padding-bottom:clamp(72px,10vw,128px);}
+  .reserva__cabeza{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-bottom:16px;}
+  .reserva__cabeza p{font-weight:600;}
+  .pasos{margin-bottom:clamp(20px,3vw,32px);}
+  .pasos ol{position:relative;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;}
+  .pasos ol::before{content:"";position:absolute;top:22px;left:calc(100% / 14);right:calc(100% / 14);height:1px;background:var(--piedra);opacity:.45;}
+  .pasos__boton{position:relative;width:100%;min-height:44px;display:flex;flex-direction:column;align-items:center;gap:8px;padding:4px 2px 6px;border:0;border-radius:8px;background:transparent;color:var(--piedra-txt);font-size:.82rem;font-weight:500;line-height:1.3;text-align:center;}
+  .pasos__num{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--blanco);border:1px solid var(--piedra);color:var(--tinta);font-size:.9rem;font-weight:600;font-variant-numeric:tabular-nums;transition:background .25s var(--ease),border-color .25s var(--ease);}
+  .pasos__num svg{width:18px;height:18px;display:none;}
+  .pasos__boton.esta-hecho .pasos__num{background:var(--arena-2);border-color:var(--petroleo);color:var(--petroleo);}
+  .pasos__boton.esta-hecho .pasos__num span{display:none;}
+  .pasos__boton.esta-hecho .pasos__num svg{display:block;}
+  .pasos__boton.es-actual{color:var(--tinta);font-weight:600;}
+  .pasos__boton.es-actual .pasos__num{background:var(--petroleo);border-color:var(--petroleo);color:#fff;}
+  .pasos__boton[aria-disabled="true"]{cursor:not-allowed;}
+  .pasos__boton[aria-disabled="true"] .pasos__num{border-style:dashed;color:var(--piedra-txt);}
+  .pasos__boton:not([aria-disabled="true"]):not(.es-actual):hover .pasos__num{border-color:var(--petroleo);border-width:2px;}
+  @media (max-width:700px){.pasos__texto{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;}}
+  /* En 360 px cada botón de paso sigue midiendo al menos 44 px de ancho */
+  @media (max-width:400px){.pasos ol{gap:0;}.pasos__boton{padding-inline:0;}}
+
+  /* ---------- Rejilla: paso + resumen lateral ---------- */
+  .reserva__rejilla{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:40px;align-items:start;}
+  @media (max-width:1000px){.reserva__rejilla{grid-template-columns:minmax(0,1fr);gap:32px;}}
+  .paso{background:var(--blanco-puro);border:1px solid var(--linea);border-radius:12px;padding:clamp(20px,3vw,36px);}
+  .paso__titulo{margin-bottom:8px;}
+  .paso__titulo:focus,[data-resultado-titulo]:focus{outline:none;}
+  .paso__intro{color:var(--piedra-txt);margin-bottom:24px;max-width:40em;}
+  .paso__acciones{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:32px;padding-top:24px;border-top:1px solid var(--linea);}
+  /* El botón principal va primero en el HTML (orden del foco); en escritorio se pinta a la derecha */
+  .paso__acciones .boton--primario{order:1;margin-left:auto;}
+  @media (max-width:640px){
+    .paso{background:transparent;border:0;border-radius:0;padding:0;}
+    .paso__acciones{flex-direction:column;}
+    .paso__acciones .boton{width:100%;margin-left:0;}
+    .paso__acciones .boton--primario{order:0;}
+  }
+  .subtitulo{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--piedra-txt);}
+
+  /* ---------- Paso 1: elección, huéspedes y calendario ---------- */
+  .avisos{margin-bottom:20px;padding:14px 16px;border-radius:8px;background:#FFF8EA;border-left:3px solid #C98A00;color:#5C4000;font-size:.95rem;}
+  .avisos li+li{margin-top:4px;}
+  .eleccion{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;gap:12px;margin-bottom:24px;}
+  .eleccion__caja{min-width:0;padding:10px 14px;border:1px solid var(--linea);border-radius:8px;background:var(--blanco);}
+  .etq{display:block;margin-bottom:2px;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--piedra-txt);}
+  .eleccion__caja strong{display:block;font-weight:500;}
+  .eleccion__caja strong.vacio{font-weight:400;color:var(--piedra-txt);}
+  @media (max-width:640px){.eleccion{grid-template-columns:minmax(0,1fr) minmax(0,1fr);}.eleccion__huespedes{grid-column:1 / -1;}}
+  .contador{display:flex;align-items:center;gap:6px;}
+  .contador__boton{width:44px;height:44px;flex:none;display:grid;place-items:center;border:1px solid var(--piedra);border-radius:50%;background:var(--blanco-puro);color:var(--tinta);}
+  .contador__boton svg{width:18px;height:18px;}
+  .contador__boton:hover{border-color:var(--petroleo);}
+  .contador__boton[aria-disabled="true"]{opacity:.4;cursor:not-allowed;}
+  .contador__valor{min-width:6.4em;text-align:center;font-weight:500;}
+
+  .calendario{position:relative;}
+  .calendario__nav{position:absolute;inset:0 0 auto 0;z-index:1;height:44px;display:flex;justify-content:space-between;pointer-events:none;}
+  .calendario__flecha{pointer-events:auto;width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--linea);border-radius:50%;background:var(--blanco-puro);color:var(--tinta);}
+  .calendario__flecha svg{width:20px;height:20px;}
+  .calendario__flecha:hover{border-color:var(--petroleo);}
+  .calendario__flecha[aria-disabled="true"]{opacity:.35;cursor:not-allowed;}
+  .calendario__meses{display:grid;grid-template-columns:minmax(0,1fr);gap:32px;}
+  .calendario__meses--dos{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .mes__titulo{height:44px;display:flex;align-items:center;justify-content:center;margin-bottom:6px;font-family:var(--serif);font-weight:400;font-size:1.22rem;}
+  .mes table{width:100%;border-collapse:collapse;table-layout:fixed;}
+  .mes th{padding:0 0 6px;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--piedra-txt);text-align:center;}
+  .mes td{padding:1px 0;text-align:center;}
+  .dia{position:relative;width:100%;height:44px;padding:0;border:0;border-radius:6px;background:transparent;color:var(--tinta);font-size:.95rem;font-variant-numeric:tabular-nums;}
+  .dia:hover{background:var(--arena-2);}
+  .dia:focus-visible{outline:2px solid var(--petroleo);outline-offset:-2px;z-index:1;}
+  .dia--hoy{font-weight:700;}
+  .dia--hoy::after{content:"";position:absolute;left:50%;bottom:6px;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:currentColor;}
+  .dia--pasado{color:#A8A59E;cursor:not-allowed;}
+  .dia--pasado:hover{background:transparent;}
+  .dia--ocupado{color:var(--piedra-txt);text-decoration:line-through;background:repeating-linear-gradient(135deg,rgba(37,43,44,.10) 0 3px,transparent 3px 7px);}
+  .dia--previo{background:rgba(33,78,80,.08);border-radius:0;}
+  .dia--rango{background:rgba(33,78,80,.15);border-radius:0;}
+  .dia--conflicto{color:#7A2318;background:repeating-linear-gradient(135deg,rgba(155,44,31,.24) 0 3px,rgba(155,44,31,.08) 3px 7px);border-radius:0;}
+  .dia--llegada,.dia--salida{background:var(--petroleo);color:#fff;text-decoration:none;}
+  .dia--llegada:hover,.dia--salida:hover{background:var(--petroleo-2);}
+  .dia--llegada.con-salida{border-radius:6px 0 0 6px;}
+  .dia--salida{border-radius:0 6px 6px 0;}
+  .dia--llegada:focus-visible,.dia--salida:focus-visible{outline:2px solid var(--tinta);outline-offset:1px;}
+  .leyenda{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:18px;font-size:.86rem;color:var(--piedra-txt);}
+  .leyenda li{display:flex;align-items:center;gap:8px;}
+  .muestra{width:18px;height:18px;flex:none;border-radius:4px;}
+  .muestra--sel{background:var(--petroleo);}
+  .muestra--ocupado{border:1px solid rgba(37,43,44,.3);background:repeating-linear-gradient(135deg,rgba(37,43,44,.28) 0 2px,transparent 2px 5px);}
+  .muestra--pasado{display:grid;place-items:center;border:1px solid var(--linea);background:var(--blanco);color:#A8A59E;font-size:.72rem;line-height:1;}
+  .cal-ayuda{margin-top:8px;}
+  @media (hover:none){.cal-ayuda{display:none;}}
+  .cal-mensaje{margin-top:16px;padding:12px 14px;border-radius:8px;background:var(--arena-2);font-size:.95rem;}
+  .cal-mensaje:empty{margin:0;padding:0;}
+  .cal-mensaje--error{background:#FBEDEA;color:#8A2519;border-left:3px solid #9B2C1F;}
+  .cal-mensaje--aviso{background:#FFF8EA;color:#5C4000;border-left:3px solid #C98A00;}
+  .cal-mensaje--ok{background:#EAF3EF;color:#1B4A36;border-left:3px solid #1F7A4D;}
+
+  /* ---------- Paso 2: disponibilidad ---------- */
+  .resultado{display:flex;gap:16px;align-items:flex-start;padding:20px;border-radius:10px;}
+  .resultado--si{background:#EAF3EF;border:1px solid #BCD8CA;}
+  .resultado--no{background:#FBEDEA;border:1px solid #EBC3BB;}
+  .resultado__icono{width:44px;height:44px;flex:none;display:grid;place-items:center;border-radius:50%;background:#fff;}
+  .resultado--si .resultado__icono{color:#1F7A4D;}
+  .resultado--no .resultado__icono{color:#9B2C1F;}
+  .resultado__icono svg{width:22px;height:22px;}
+  .resultado h3{margin-bottom:6px;font-family:var(--serif);font-weight:400;font-size:1.5rem;line-height:1.2;}
+  .resultado p+p{margin-top:6px;}
+  .alternativas__titulo{margin:28px 0 12px;}
+  .alternativas{display:grid;gap:12px;}
+  .alternativa{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;padding:14px 16px;border:1px solid var(--linea);border-radius:8px;background:var(--blanco);}
+  .alternativa .boton{min-height:44px;padding-inline:18px;}
+  .salida-real{margin-top:28px;padding:clamp(18px,2.4vw,24px);border-radius:10px;background:var(--arena-2);}
+  .salida-real h3{margin-bottom:6px;}
+  .salida-real__botones{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 12px;}
+  .salida-real__botones .boton{flex:1 1 220px;}
+
+  /* ---------- Paso 3: precio ---------- */
+  .desglose{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;}
+  .desglose caption{caption-side:top;text-align:left;padding-bottom:10px;}
+  .desglose th,.desglose td{padding:14px 0;border-bottom:1px solid var(--linea);vertical-align:top;}
+  .desglose th{text-align:left;font-weight:500;padding-right:16px;}
+  .desglose td{text-align:right;white-space:nowrap;}
+  .desglose small{display:block;margin-top:2px;font-size:.86rem;font-weight:400;color:var(--piedra-txt);}
+  .desglose__total th,.desglose__total td{font-size:1.15rem;font-weight:600;border-bottom:2px solid var(--tinta);}
+  .aviso-precio{margin-bottom:20px;padding:14px 16px;border-radius:8px;background:#FFF8EA;border:1px solid #E9C987;font-size:.95rem;}
+  .tarifas{margin-top:14px;}
+  .incluye{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 32px;margin-top:28px;}
+  @media (max-width:640px){.incluye{grid-template-columns:minmax(0,1fr);}}
+  .incluye .subtitulo{margin-bottom:10px;}
+  .incluye li{display:flex;gap:10px;align-items:flex-start;padding-block:4px;font-size:.95rem;}
+  .incluye svg{width:18px;height:18px;flex:none;margin-top:4px;color:var(--piedra-txt);}
+
+  /* ---------- Paso 4: datos ---------- */
+  .nota-privacidad{display:flex;gap:12px;align-items:flex-start;margin-bottom:24px;padding:14px 16px;border-radius:8px;background:#FFF8EA;border:1px solid #E9C987;font-size:.95rem;}
+  .nota-privacidad svg{width:20px;height:20px;flex:none;margin-top:3px;color:#6B4A00;}
+  .formulario{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 16px;}
+  .formulario .campo--ancho,.formulario .errores,.formulario .paso__acciones,.formulario .formulario__nota{grid-column:1 / -1;}
+  @media (max-width:640px){.formulario{grid-template-columns:minmax(0,1fr);}}
+  .campo{display:flex;flex-direction:column;gap:6px;min-width:0;}
+  .campo label{font-size:.92rem;font-weight:600;}
+  .opcional{font-weight:400;color:var(--piedra-txt);}
+  .campo input,.campo textarea{width:100%;min-height:50px;padding:12px 14px;border:1px solid var(--piedra);border-radius:var(--radio);background:var(--blanco-puro);color:var(--tinta);font-size:1rem;}
+  .campo textarea{min-height:110px;resize:vertical;line-height:1.5;}
+  .campo input:focus,.campo textarea:focus{border-color:var(--petroleo);}
+  .campo [aria-invalid="true"]{border:2px solid #9B2C1F;}
+  .campo__ayuda{font-size:.85rem;color:var(--piedra-txt);}
+  .campo__error{font-size:.88rem;font-weight:500;color:#9B2C1F;}
+  .errores{padding:16px 18px;border-radius:8px;background:#FBEDEA;border:1px solid #EBC3BB;color:#7A2318;}
+  .errores:focus{outline:2px solid #9B2C1F;outline-offset:2px;}
+  .errores h3{margin-bottom:6px;font-size:1rem;font-weight:600;}
+  .errores ul{list-style:disc;padding-left:1.2em;}
+  .errores a{color:#7A2318;font-weight:500;text-underline-offset:3px;}
+
+  /* ---------- Paso 5: revisión y condiciones ---------- */
+  .bloque-revision+.bloque-revision{margin-top:28px;}
+  .bloque-revision__cabeza{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:6px;border-bottom:1px solid var(--linea);}
+  .boton-texto{min-height:44px;padding:0 4px;border:0;background:none;color:var(--petroleo);font-size:.9rem;font-weight:600;text-decoration:underline;text-underline-offset:3px;}
+  .ficha > div{display:grid;grid-template-columns:minmax(0,10em) minmax(0,1fr);gap:2px 16px;padding:10px 0;border-bottom:1px solid var(--linea);}
+  .ficha dt{font-size:.92rem;color:var(--piedra-txt);}
+  .ficha dd{overflow-wrap:anywhere;white-space:pre-line;}
+  @media (max-width:480px){.ficha > div{grid-template-columns:minmax(0,1fr);}}
+  .pendientes{margin-top:24px;padding:14px 16px;border-radius:8px;background:var(--arena-2);font-size:.95rem;}
+  .casilla{display:flex;gap:14px;align-items:flex-start;margin-top:24px;padding:16px 18px;border:1px solid var(--piedra);border-radius:8px;background:var(--blanco);}
+  .casilla input{width:24px;height:24px;flex:none;margin:1px 0 0;accent-color:var(--petroleo);}
+  .casilla label{cursor:pointer;font-weight:500;}
+  .casilla a{color:var(--petroleo);text-underline-offset:3px;}
+  .casilla--error{border:2px solid #9B2C1F;}
+  #e-acepta{margin-top:8px;}
+
+  /* ---------- Paso 6: pago desactivado ---------- */
+  .pago-demo{padding:clamp(18px,2.6vw,28px);border:1px dashed var(--piedra);border-radius:10px;background:var(--blanco);}
+  .pago-demo h3{margin:14px 0 4px;}
+  .pasos-pago{counter-reset:pp;display:grid;gap:14px;margin:16px 0 22px;}
+  .pasos-pago li{counter-increment:pp;display:grid;grid-template-columns:32px minmax(0,1fr);gap:12px;}
+  .pasos-pago li::before{content:counter(pp);width:32px;height:32px;display:grid;place-items:center;border-radius:50%;background:var(--arena);font-size:.9rem;font-weight:600;}
+  .pago-demo__importe{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 12px;margin-bottom:18px;padding:14px 0;border-block:1px solid var(--linea);}
+  .pago-demo__importe strong{font-family:var(--serif);font-weight:400;font-size:1.6rem;}
+  .boton--pago{width:100%;}
+  .reserva .boton--pago[aria-disabled="true"]{opacity:1;background:var(--arena);color:var(--piedra-txt);border:1px dashed var(--piedra);}
+  .pago-demo__nota:not(:empty){margin-top:12px;font-weight:500;color:#6B4A00;}
+
+  /* ---------- Paso 7: vista previa de la confirmación ---------- */
+  .vista-previa{position:relative;overflow:hidden;margin-top:8px;padding:clamp(20px,3vw,32px) clamp(18px,3vw,36px);border:2px dashed #C98A00;border-radius:12px;background:#FFFDF6;}
+  .vista-previa__marca{position:absolute;right:-12px;top:44%;transform:rotate(-16deg);font-family:var(--serif);font-size:clamp(3rem,10vw,6.4rem);line-height:1;white-space:nowrap;color:rgba(201,138,0,.10);pointer-events:none;}
+  .vista-previa > *:not(.vista-previa__marca){position:relative;}
+  .vista-previa .chapa-demo{margin-bottom:18px;}
+  .vista-previa .antetitulo{margin-bottom:10px;}
+  .vista-previa .ficha{margin-top:18px;}
+  .vista-previa__pie{margin-top:16px;font-size:.95rem;color:var(--piedra-txt);overflow-wrap:anywhere;}
+  .fin-demo{margin-top:24px;padding:16px 18px;border-radius:8px;background:#FFF8EA;border:1px solid #E9C987;}
+
+  /* ---------- Resumen lateral (escritorio) / final de la página (móvil) ---------- */
+  /* Si la caja fija no cabe en pantallas bajas, se desplaza por dentro en vez de quedar cortada */
+  .resumen-lateral{position:sticky;top:calc(var(--header-h) + 20px);max-height:calc(100vh - var(--header-h) - 40px);overflow:auto;}
+  @media (max-width:1000px){.resumen-lateral{position:static;max-height:none;overflow:visible;}}
+  .resumen-lateral__caja{padding:22px 24px;border:1px solid var(--linea);border-radius:12px;background:var(--blanco-puro);}
+  .resumen-lateral__datos{margin-top:8px;}
+  .resumen-lateral__datos > div{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--linea);font-size:.94rem;}
+  .resumen-lateral__datos dt{color:var(--piedra-txt);}
+  .resumen-lateral__datos dd{text-align:right;font-weight:500;}
+  .resumen-lateral__total{margin-top:16px;}
+  .resumen-lateral__fila{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:8px;}
+  .resumen-lateral__fila strong{font-family:var(--serif);font-weight:400;font-size:1.9rem;line-height:1.1;}
+  .resumen-lateral__nota{margin-top:14px;}
+  .resumen-lateral__salida{display:grid;gap:10px;margin-top:18px;padding-top:16px;border-top:1px solid var(--linea);}
+  .resumen-lateral__salida .boton{width:100%;}
+  .resumen-lateral__horario{display:flex;gap:8px;align-items:flex-start;margin-top:12px;}
+  .resumen-lateral__horario svg{width:18px;height:18px;flex:none;margin-top:2px;color:var(--piedra-txt);}
+
+  /* En esta página ya hay WhatsApp en cada paso: el botón flotante sobra y tapaba el lateral */
+  .wa-flotante{display:none;}
+</style>
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+
+<header class="cabecera">
+  <div class="envoltura cabecera__fila">
+    <a class="marca" href="../" aria-label="Villa Canal, inicio">
+      <span class="marca__nombre">Villa Canal</span>
+      <span class="marca__lugar">Santa Margarida · Roses</span>
+    </a>
+    <nav class="menu" aria-label="Principal">
+      <ul class="menu__enlaces">
+        <li><a href="../#la-villa">La villa</a></li>
+        <li><a href="../#interiores">Interiores</a></li>
+        <li><a href="../#exteriores">Exteriores</a></li>
+        <li><a href="../galeria/">Galería</a></li>
+        <li><a href="../#ubicacion">Ubicación</a></li>
+      </ul>
+      <a class="boton boton--primario" href="./" aria-current="page">Consultar disponibilidad</a>
+    </nav>
+    <div class="cabecera__acciones">
+      <a class="boton boton--primario cabecera__movil-cta" href="./" aria-current="page">Disponibilidad</a>
+      <button class="boton-menu" type="button" data-abrir-menu aria-expanded="false" aria-controls="panel-menu" aria-label="Abrir menú">
+        <svg aria-hidden="true"><use href="../assets/iconos.svg#menu"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="panel" id="panel-menu" data-abierto="false" role="dialog" aria-modal="true" aria-label="Menú" tabindex="-1">
+  <div class="panel__arriba">
+    <a class="marca" href="../"><span class="marca__nombre">Villa Canal</span><span class="marca__lugar">Santa Margarida · Roses</span></a>
+    <button class="boton-menu" type="button" data-cerrar-menu aria-label="Cerrar menú"><svg aria-hidden="true"><use href="../assets/iconos.svg#cerrar"/></svg></button>
+  </div>
+  <nav aria-label="Menú móvil">
+    <a href="../#la-villa">La villa</a>
+    <a href="../#interiores">Interiores</a>
+    <a href="../#exteriores">Exteriores</a>
+    <a href="../#canal">El canal</a>
+    <a href="../#ubicacion">Ubicación</a>
+    <a href="../galeria/">Galería</a>
+    <a href="../#preguntas">Preguntas</a>
+  </nav>
+  <div class="panel__pie">
+    <a class="boton boton--primario" href="./" aria-current="page">Consultar disponibilidad</a>
+    <a class="boton boton--linea" href="https://wa.me/34657337686" data-wa="Hola, tengo una pregunta sobre Villa Canal."><svg aria-hidden="true"><use href="../assets/iconos.svg#whatsapp"/></svg>Escribir por WhatsApp</a>
+  </div>
+</div>
+
+<main id="contenido">
+
+  <!-- ============ CABECERA DE LA PÁGINA + AVISO DE DEMOSTRACIÓN ============ -->
+  <section class="cabecera-pagina" aria-labelledby="t-pagina">
+    <div class="envoltura">
+      <nav class="miga" aria-label="Ruta"><a href="../">Inicio</a> <span aria-hidden="true">/</span> <span aria-current="page">Reservar</span></nav>
+      <div class="intro">
+        <div>
+          <h1 class="titulo-l" id="t-pagina">Reserva directa</h1>
+          <p class="entrada">Así funcionará la reserva en la web de Villa Canal: eliges las fechas, ves el precio total desglosado, revisas las condiciones y pagas en una pasarela segura.</p>
+        </div>
+        <div class="aviso-demo" role="note" aria-label="Aviso: esta página es una demostración">
+          <span class="chapa-demo">Demostración</span>
+          <p><strong>El calendario, los precios y el pago de esta página son de ejemplo.</strong> Todavía no se puede reservar ni pagar desde esta web.</p>
+          <p>Para reservar hoy:</p>
+          <div class="aviso-demo__acciones">
+            <a class="boton boton--wa" href="https://wa.me/34657337686" data-enlace-wa target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="../assets/iconos.svg#whatsapp"/></svg>Solicitar por WhatsApp</a>
+            <a class="boton boton--linea" href="https://www.airbnb.es/rooms/1406544957360206368" data-enlace-airbnb target="_blank" rel="noopener noreferrer">Reservar en Airbnb</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <noscript>
+    <div class="envoltura"><p class="sin-js">Esta demostración necesita JavaScript. Para reservar hoy, envíanos la solicitud por WhatsApp o reserva en Airbnb con los botones de arriba.</p></div>
+  </noscript>
+
+  <!-- ============ PROCESO DE RESERVA (DEMOSTRACIÓN) ============ -->
+  <section class="reserva" aria-labelledby="t-proceso">
+    <div class="envoltura">
+      <div class="proceso" data-proceso>
+        <h2 class="sr" id="t-proceso">Proceso de reserva (demostración)</h2>
+        <div class="reserva__cabeza">
+          <p data-paso-actual>Paso 1 de 7 · Fechas y huéspedes</p>
+          <span class="chapa-demo">Demostración</span>
+        </div>
+
+        <!-- Indicador de pasos: se puede volver a cualquier paso ya visitado -->
+        <nav class="pasos" aria-label="Pasos de la reserva">
+          <ol data-pasos>
+            <li><button type="button" class="pasos__boton" data-ir="1" aria-label="Paso 1: Fechas y huéspedes"><span class="pasos__num" aria-hidden="true"><span>1</span><svg><use href="../assets/iconos.svg#check"/></svg></span><span class="pasos__texto">Fechas y huéspedes</span></button></li>
+            <li><button type="button" class="pasos__boton" data-ir="2" aria-label="Paso 2: Disponibilidad"><span class="pasos__num" aria-hidden="true"><span>2</span><svg><use href="../assets/iconos.svg#check"/></svg></span><span class="pasos__texto">Disponibilidad</span></button></li>
+            <li><button type="button" class="pasos__boton" data-ir="3" aria-label="Paso 3: Precio"><span class="pasos__num" aria-hidden="true"><span>3</span><svg><use href="../assets/iconos.svg#check"/></svg></span><span class="pasos__texto">Precio</span></button></li>
+            <li><button type="button" class="pasos__boton" data-ir="4" aria-label="Paso 4: Tus datos"><span class="pasos__num" aria-hidden="true"><span>4</span><svg><use href="../assets/iconos.svg#check"/></svg></span><span class="pasos__texto">Tus datos</span></button></li>
+            <li><button type="button" class="pasos__boton" data-ir="5" aria-label="Paso 5: Condiciones"><span class="pasos__num" aria-hidden="true"><span>5</span><svg><use href="../assets/iconos.svg#check"/></svg></span><span class="pasos__texto">Condiciones</span></button></li>
+            <li><button type="button" class="pasos__boton" data-ir="6" aria-label="Paso 6: Pago"><span class="pasos__num" aria-hidden="true"><span>6</span><svg><use href="../assets/iconos.svg#check"/></svg></span><span class="pasos__texto">Pago</span></button></li>
+            <li><button type="button" class="pasos__boton" data-ir="7" aria-label="Paso 7: Vista previa"><span class="pasos__num" aria-hidden="true"><span>7</span><svg><use href="../assets/iconos.svg#check"/></svg></span><span class="pasos__texto">Vista previa</span></button></li>
+          </ol>
+        </nav>
+      </div>
+
+      <div class="reserva__rejilla">
+        <div class="reserva__principal">
+
+          <!-- ---------- PASO 1 · Fechas y huéspedes ---------- -->
+          <section class="paso" data-paso="1" aria-labelledby="t-paso-1">
+            <h2 class="titulo-m paso__titulo" id="t-paso-1" tabindex="-1">Fechas y huéspedes</h2>
+            <p class="paso__intro">Elige en el calendario el día de llegada y el de salida.</p>
+            <ul class="avisos" data-avisos role="alert" hidden></ul>
+
+            <div class="eleccion">
+              <div class="eleccion__caja"><span class="etq">Llegada</span><strong data-v-llegada class="vacio">Sin elegir</strong></div>
+              <div class="eleccion__caja"><span class="etq">Salida</span><strong data-v-salida class="vacio">Sin elegir</strong></div>
+              <div class="eleccion__caja eleccion__huespedes" role="group" aria-labelledby="etq-huespedes">
+                <span class="etq" id="etq-huespedes">Huéspedes (máx. 8)</span>
+                <div class="contador">
+                  <button type="button" class="contador__boton" data-huespedes="-1" aria-label="Quitar un huésped"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+                  <output class="contador__valor" data-num-huespedes aria-live="polite">2 huéspedes</output>
+                  <button type="button" class="contador__boton" data-huespedes="1" aria-label="Añadir un huésped"><svg aria-hidden="true"><use href="../assets/iconos.svg#mas"/></svg></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Calendario propio: rejilla accesible, flechas del teclado, 2 meses en escritorio y 1 en móvil -->
+            <div class="calendario" data-calendario>
+              <div class="calendario__nav">
+                <button type="button" class="calendario__flecha" data-mes="-1" aria-label="Mes anterior"><svg aria-hidden="true"><use href="../assets/iconos.svg#izquierda"/></svg></button>
+                <button type="button" class="calendario__flecha" data-mes="1" aria-label="Mes siguiente"><svg aria-hidden="true"><use href="../assets/iconos.svg#derecha"/></svg></button>
+              </div>
+              <div class="calendario__meses" data-meses></div>
+              <p class="sr" aria-live="polite" data-cal-anuncio></p>
+            </div>
+            <ul class="leyenda" aria-label="Leyenda del calendario">
+              <li><span class="muestra muestra--sel" aria-hidden="true"></span>Tu selección</li>
+              <li><span class="muestra muestra--ocupado" aria-hidden="true"></span>Ocupado (ejemplo)</li>
+              <li><span class="muestra muestra--pasado" aria-hidden="true">9</span>Días pasados</li>
+              <li><svg aria-hidden="true" width="18" height="18"><use href="../assets/iconos.svg#calendario"/></svg><span>Estancia mínima: <span data-min-noches>3</span> noches (ejemplo)</span></li>
+            </ul>
+            <p class="pequeno secundario cal-ayuda" id="cal-ayuda">Con el teclado: flechas para moverte por los días, Re Pág y Av Pág para cambiar de mes, Intro para elegir.</p>
+            <p class="cal-mensaje" data-cal-mensaje role="status"></p>
+
+            <div class="paso__acciones">
+              <button type="button" class="boton boton--primario" data-continuar="1">Comprobar disponibilidad <svg aria-hidden="true"><use href="../assets/iconos.svg#flecha"/></svg></button>
+              <button type="button" class="boton boton--linea" data-borrar>Borrar fechas</button>
+            </div>
+          </section>
+
+          <!-- ---------- PASO 2 · Disponibilidad ---------- -->
+          <section class="paso" data-paso="2" aria-labelledby="t-paso-2" hidden>
+            <h2 class="titulo-m paso__titulo" id="t-paso-2" tabindex="-1">Disponibilidad</h2>
+            <p class="paso__intro">Comprobamos tus fechas en el calendario de ejemplo.</p>
+            <div data-resultado></div>
+
+            <div class="salida-real">
+              <h3 class="titulo-s">¿Quieres reservar ya?</h3>
+              <p>Envíanos la solicitud con estas fechas por WhatsApp y te respondemos con la disponibilidad y el precio reales. También puedes reservar en Airbnb.</p>
+              <div class="salida-real__botones">
+                <a class="boton boton--wa" href="https://wa.me/34657337686" data-enlace-wa target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="../assets/iconos.svg#whatsapp"/></svg>Solicitar por WhatsApp</a>
+                <a class="boton boton--linea" href="https://www.airbnb.es/rooms/1406544957360206368" data-enlace-airbnb target="_blank" rel="noopener noreferrer">Reservar en Airbnb</a>
+              </div>
+              <p class="pequeno secundario">Una solicitud no es una reserva: te contestamos con la disponibilidad real antes de nada.</p>
+            </div>
+
+            <div class="paso__acciones">
+              <button type="button" class="boton boton--primario" data-continuar="2">Ver el precio <svg aria-hidden="true"><use href="../assets/iconos.svg#flecha"/></svg></button>
+              <button type="button" class="boton boton--linea" data-atras>Cambiar fechas</button>
+            </div>
+          </section>
+
+          <!-- ---------- PASO 3 · Precio ---------- -->
+          <section class="paso" data-paso="3" aria-labelledby="t-paso-3" hidden>
+            <h2 class="titulo-m paso__titulo" id="t-paso-3" tabindex="-1">Precio</h2>
+            <p class="aviso-precio"><strong>Precio de ejemplo.</strong> Estos importes son inventados para enseñar cómo se verá el desglose. No son los precios de la villa.</p>
+            <div data-desglose></div>
+            <p class="pequeno secundario tarifas" data-tarifas></p>
+            <div class="incluye">
+              <div>
+                <h3 class="subtitulo">Incluido en la estancia</h3>
+                <ul>
+                  <li><svg aria-hidden="true"><use href="../assets/iconos.svg#check"/></svg>La villa completa, solo para vosotros</li>
+                  <li><svg aria-hidden="true"><use href="../assets/iconos.svg#check"/></svg>Ropa de cama: sábanas y edredones</li>
+                  <li><svg aria-hidden="true"><use href="../assets/iconos.svg#check"/></svg>Casa limpia e higienizada por un servicio profesional antes de tu llegada</li>
+                  <li><svg aria-hidden="true"><use href="../assets/iconos.svg#check"/></svg>Aparcamiento en la propia villa</li>
+                </ul>
+              </div>
+              <div>
+                <h3 class="subtitulo">Pregúntanos</h3>
+                <ul>
+                  <li><svg aria-hidden="true"><use href="../assets/iconos.svg#pregunta"/></svg>Wifi</li>
+                  <li><svg aria-hidden="true"><use href="../assets/iconos.svg#pregunta"/></svg>Toallas y productos básicos</li>
+                </ul>
+              </div>
+            </div>
+            <div class="paso__acciones">
+              <button type="button" class="boton boton--primario" data-continuar="3">Continuar con tus datos <svg aria-hidden="true"><use href="../assets/iconos.svg#flecha"/></svg></button>
+              <button type="button" class="boton boton--linea" data-atras>Atrás</button>
+            </div>
+          </section>
+
+          <!-- ---------- PASO 4 · Tus datos (no se envían ni se guardan) ---------- -->
+          <section class="paso" data-paso="4" aria-labelledby="t-paso-4" hidden>
+            <h2 class="titulo-m paso__titulo" id="t-paso-4" tabindex="-1">Tus datos</h2>
+            <p class="nota-privacidad" id="nota-datos"><svg aria-hidden="true"><use href="../assets/iconos.svg#llave"/></svg><span><strong>En esta demostración tus datos no se envían ni se guardan.</strong> Se borran al cerrar o recargar la página.</span></p>
+            <form class="formulario" data-formulario novalidate aria-describedby="nota-datos">
+              <div class="errores" data-errores tabindex="-1" hidden>
+                <h3>Revisa estos campos:</h3>
+                <ul data-errores-lista></ul>
+              </div>
+              <p class="pequeno secundario formulario__nota">Todos los campos son obligatorios, salvo los comentarios.</p>
+              <div class="campo">
+                <label for="f-nombre">Nombre y apellidos</label>
+                <input id="f-nombre" name="nombre" type="text" autocomplete="name" required>
+                <p class="campo__error" id="e-nombre" hidden></p>
+              </div>
+              <div class="campo">
+                <label for="f-email">Correo electrónico</label>
+                <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" spellcheck="false" required aria-describedby="a-email">
+                <p class="campo__ayuda" id="a-email">Aquí llegaría la confirmación.</p>
+                <p class="campo__error" id="e-email" hidden></p>
+              </div>
+              <div class="campo">
+                <label for="f-telefono">Teléfono</label>
+                <input id="f-telefono" name="telefono" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="a-telefono">
+                <p class="campo__ayuda" id="a-telefono">Con prefijo si no es de España, por ejemplo +33.</p>
+                <p class="campo__error" id="e-telefono" hidden></p>
+              </div>
+              <div class="campo">
+                <label for="f-pais">País de residencia</label>
+                <input id="f-pais" name="pais" type="text" autocomplete="country-name" required>
+                <p class="campo__error" id="e-pais" hidden></p>
+              </div>
+              <div class="campo campo--ancho">
+                <label for="f-comentarios">Comentarios <span class="opcional">(opcional)</span></label>
+                <textarea id="f-comentarios" name="comentarios" rows="4" aria-describedby="a-comentarios"></textarea>
+                <p class="campo__ayuda" id="a-comentarios">Por ejemplo: hora aproximada de llegada o si venís con embarcación.</p>
+              </div>
+              <div class="paso__acciones">
+                <button type="submit" class="boton boton--primario">Revisar las condiciones <svg aria-hidden="true"><use href="../assets/iconos.svg#flecha"/></svg></button>
+                <button type="button" class="boton boton--linea" data-atras>Atrás</button>
+              </div>
+            </form>
+          </section>
+
+          <!-- ---------- PASO 5 · Revisión y condiciones ---------- -->
+          <section class="paso" data-paso="5" aria-labelledby="t-paso-5" hidden>
+            <h2 class="titulo-m paso__titulo" id="t-paso-5" tabindex="-1">Condiciones</h2>
+            <p class="paso__intro">Revisa todo antes de pasar al pago.</p>
+            <div data-revision></div>
+            <p class="pendientes"><span class="por-confirmar">Por confirmar</span> Fianza, política de cancelación y normas de la casa. En la versión real las verás aquí, antes de pagar.</p>
+            <div class="casilla" data-casilla>
+              <input type="checkbox" id="f-acepta">
+              <label for="f-acepta">He leído las <a href="../legal/condiciones.html" target="_blank" rel="noopener">condiciones de reserva</a><span class="sr"> (se abren en una pestaña nueva)</span></label>
+            </div>
+            <p class="campo__error" id="e-acepta" hidden>Marca la casilla para continuar.</p>
+            <div class="paso__acciones">
+              <button type="button" class="boton boton--primario" data-continuar="5">Ir al pago <svg aria-hidden="true"><use href="../assets/iconos.svg#flecha"/></svg></button>
+              <button type="button" class="boton boton--linea" data-atras>Atrás</button>
+            </div>
+          </section>
+
+          <!-- ---------- PASO 6 · Pago (desactivado) ---------- -->
+          <section class="paso" data-paso="6" aria-labelledby="t-paso-6" hidden>
+            <h2 class="titulo-m paso__titulo" id="t-paso-6" tabindex="-1">Pago</h2>
+            <div class="pago-demo">
+              <span class="chapa-demo">Pago desactivado en la demostración</span>
+              <h3 class="titulo-s">Cómo funcionará</h3>
+              <ol class="pasos-pago">
+                <li><span><strong>Pasarela de pago segura.</strong> El pago se hará con un proveedor especializado (por ejemplo, Stripe). Si pagas con tarjeta, sus datos se escriben en su página: esta web no los ve ni los guarda.</span></li>
+                <li><span><strong>Forma y momento del pago:</strong> por confirmar (tarjeta o transferencia; todo junto o una parte al reservar). Antes de pagar verás el importe exacto.</span></li>
+                <li><span><strong>Confirmación por correo.</strong> Al terminar recibirás un correo con los datos de tu estancia.</span></li>
+              </ol>
+              <div class="pago-demo__importe"><span>Total <span class="por-confirmar">Precio de ejemplo</span></span><strong data-pago-importe>—</strong></div>
+              <button type="button" class="boton boton--primario boton--pago" aria-disabled="true" aria-describedby="pago-explica" data-pagar>Pagar (desactivado en la demostración)</button>
+              <p class="pequeno secundario" id="pago-explica" style="margin-top:10px">El proveedor de pago todavía no está contratado. Aquí no se pide ni se guarda ningún dato de tarjeta.</p>
+              <p class="pago-demo__nota" data-pagar-nota role="status"></p>
+            </div>
+            <div class="paso__acciones">
+              <button type="button" class="boton boton--primario" data-continuar="6">Ver cómo sería la confirmación <svg aria-hidden="true"><use href="../assets/iconos.svg#flecha"/></svg></button>
+              <button type="button" class="boton boton--linea" data-atras>Atrás</button>
+            </div>
+          </section>
+
+          <!-- ---------- PASO 7 · Vista previa de la confirmación ---------- -->
+          <section class="paso" data-paso="7" aria-labelledby="t-paso-7" hidden>
+            <h2 class="titulo-m paso__titulo" id="t-paso-7" tabindex="-1">Así se verá la confirmación</h2>
+            <p class="paso__intro">Cuando la reserva esté conectada, esto es lo que verá el huésped después de pagar.</p>
+            <div class="vista-previa" role="group" aria-label="Vista previa · no es una reserva">
+              <span class="vista-previa__marca" aria-hidden="true">Vista previa</span>
+              <span class="chapa-demo">Vista previa · no es una reserva</span>
+              <span class="antetitulo">Villa Canal · Santa Margarida, Roses</span>
+              <h3 class="titulo-m" data-vp-saludo>Gracias.</h3>
+              <p class="vista-previa__pie">Aquí aparecerán el número de reserva, las fechas y el importe pagado. Lo mismo llegará por correo a <strong data-vp-email>tu correo</strong>.</p>
+              <dl class="ficha" data-vp-ficha></dl>
+              <p class="vista-previa__pie">Con la confirmación te enviaremos la dirección exacta y cómo llegar.</p>
+            </div>
+            <p class="fin-demo"><strong>Fin de la demostración.</strong> No se ha hecho ninguna reserva ni ningún cargo, y tus datos no se han enviado a ningún sitio.</p>
+            <div class="salida-real">
+              <h3 class="titulo-s">Para reservar hoy</h3>
+              <p>Envíanos la solicitud con tus fechas por WhatsApp o reserva en Airbnb.</p>
+              <div class="salida-real__botones">
+                <a class="boton boton--wa" href="https://wa.me/34657337686" data-enlace-wa target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="../assets/iconos.svg#whatsapp"/></svg>Solicitar por WhatsApp</a>
+                <a class="boton boton--linea" href="https://www.airbnb.es/rooms/1406544957360206368" data-enlace-airbnb target="_blank" rel="noopener noreferrer">Reservar en Airbnb</a>
+              </div>
+              <p class="pequeno secundario">Una solicitud no es una reserva: te contestamos con la disponibilidad real antes de nada.</p>
+            </div>
+            <div class="paso__acciones">
+              <button type="button" class="boton boton--primario" data-ir-a="1">Volver al principio</button>
+              <button type="button" class="boton boton--linea" data-atras>Atrás</button>
+            </div>
+          </section>
+        </div>
+
+        <!-- ---------- Resumen: fijo a la derecha en escritorio, debajo en móvil ---------- -->
+        <aside class="resumen-lateral" aria-labelledby="t-resumen">
+          <div class="resumen-lateral__caja">
+            <h2 class="titulo-s" id="t-resumen">Tu estancia</h2>
+            <dl class="resumen-lateral__datos">
+              <div><dt>Llegada</dt><dd data-r-llegada>—</dd></div>
+              <div><dt>Salida</dt><dd data-r-salida>—</dd></div>
+              <div><dt>Noches</dt><dd data-r-noches>—</dd></div>
+              <div><dt>Huéspedes</dt><dd data-r-huespedes>2</dd></div>
+            </dl>
+            <p class="pequeno secundario resumen-lateral__horario"><svg aria-hidden="true"><use href="../assets/iconos.svg#reloj"/></svg><span>Llegada de 15:00 a 19:00 · Salida antes de las 10:00</span></p>
+            <div class="resumen-lateral__total" data-r-total hidden>
+              <div class="resumen-lateral__fila"><span>Total</span><strong data-r-importe></strong></div>
+              <span class="chapa-demo">Precio de ejemplo</span>
+            </div>
+            <p class="pequeno secundario resumen-lateral__nota" data-r-nota>Elige las fechas para ver el total de ejemplo.</p>
+            <div class="resumen-lateral__salida" data-r-salida-real hidden>
+              <p class="subtitulo">Reserva hoy</p>
+              <a class="boton boton--wa" href="https://wa.me/34657337686" data-enlace-wa target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="../assets/iconos.svg#whatsapp"/></svg>Solicitar por WhatsApp</a>
+              <a class="boton boton--linea" href="https://www.airbnb.es/rooms/1406544957360206368" data-enlace-airbnb target="_blank" rel="noopener noreferrer">Reservar en Airbnb</a>
+              <p class="pequeno secundario">Una solicitud no es una reserva.</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pie">
+  <div class="envoltura">
+    <div class="pie__rejilla">
+      <div>
+        <span class="marca"><span class="marca__nombre">Villa Canal</span></span>
+        <p style="margin-top:14px">Santa Margarida, Roses<br>Costa Brava (Girona)</p>
+        <p class="pequeno" style="margin-top:14px;color:rgba(255,255,255,.66)">Registro de Turismo de Cataluña<br>HUTG-021359</p>
+      </div>
+      <div>
+        <h2>La villa</h2>
+        <ul>
+          <li><a href="../#la-villa">La villa</a></li>
+          <li><a href="../#interiores">Interiores</a></li>
+          <li><a href="../#exteriores">Exteriores</a></li>
+          <li><a href="../#canal">El canal</a></li>
+          <li><a href="../#ubicacion">Ubicación</a></li>
+          <li><a href="../galeria/">Galería</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Reservas</h2>
+        <ul>
+          <li><a href="./" aria-current="page">Consultar disponibilidad</a></li>
+          <li><a href="../#preguntas">Preguntas frecuentes</a></li>
+          <li><a href="../legal/condiciones.html">Condiciones de reserva y cancelación</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contacto</h2>
+        <ul>
+          <li><a href="https://wa.me/34657337686" data-wa="Hola, tengo una pregunta sobre Villa Canal.">WhatsApp · +34 657 33 76 86</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pie__base">
+      <span>© <span data-anio>2026</span> Villa Canal</span>
+      <nav class="pie__legal" aria-label="Legal">
+        <a href="../legal/aviso-legal.html">Aviso legal</a>
+        <a href="../legal/privacidad.html">Privacidad</a>
+        <a href="../legal/cookies.html">Cookies</a>
+        <a href="../legal/condiciones.html">Condiciones de reserva</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-flotante" href="https://wa.me/34657337686" data-wa="Hola, tengo una pregunta sobre Villa Canal." aria-label="Escribir por WhatsApp">
+  <svg aria-hidden="true"><use href="../assets/iconos.svg#whatsapp"/></svg><span>WhatsApp</span>
+</a>
+
+<script src="../assets/site.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  'use strict';
+
+  /* ================================================================
+     NÚMEROS DE EJEMPLO: todo lo que esta demostración se inventa.
+     Cuando el propietario dé los reales, se cambian aquí y en ningún
+     otro sitio. Ninguno es un precio ni una disponibilidad real.
+     ================================================================ */
+  var EJEMPLO = {
+    precioNoche: { alta: 520, media: 340, baja: 230 }, // € por noche, villa completa
+    mesesAlta: [7, 8],          // julio y agosto
+    mesesMedia: [6, 9],         // junio y septiembre (el resto del año, temporada baja)
+    limpieza: 180,              // € por estancia
+    impuestoPersonaNoche: 1.5,  // impuesto turístico de Cataluña, € por persona y noche (importe real por confirmar)
+    estanciaMinima: 3,          // noches
+    diasCalendario: 365,        // se puede elegir hasta un año vista
+    // Noches ocupadas de ejemplo: [empiezan X días después de hoy, número de noches].
+    // El patrón se repite cada "ciclo" días. Siempre sale igual: nada es aleatorio.
+    ocupadas: { ciclo: 84, bloques: [[5, 4], [16, 6], [30, 3], [41, 7], [57, 4], [70, 5]] }
+  };
+
+  var MAX_HUESPEDES = 8; // dato real del anuncio
+  var IMPUESTO_MAX_NOCHES = 7; // el impuesto turístico catalán se cobra como máximo 7 noches por estancia
+  var AIRBNB = 'https://www.airbnb.es/rooms/1406544957360206368';
+  var ICONOS = '../assets/iconos.svg#';
+  var NOMBRES = ['Fechas y huéspedes', 'Disponibilidad', 'Precio', 'Tus datos', 'Condiciones', 'Pago', 'Vista previa'];
+  var TEMPORADA = { alta: 'temporada alta', media: 'temporada media', baja: 'temporada baja' };
+  var reducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function $(s, c) { return (c || document).querySelector(s); }
+  function $$(s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); }
+
+  /* ---------- Fechas: siempre texto AAAA-MM-DD en hora local ---------- */
+  function dos(n) { return (n < 10 ? '0' : '') + n; }
+  function aISO(d) { return d.getFullYear() + '-' + dos(d.getMonth() + 1) + '-' + dos(d.getDate()); }
+  function deISO(s) { var p = s.split('-'); return new Date(+p[0], +p[1] - 1, +p[2]); }
+  function sumar(s, n) { var d = deISO(s); d.setDate(d.getDate() + n); return aISO(d); }
+  function noches(a, b) { return Math.round((deISO(b) - deISO(a)) / 864e5); }
+  function valida(s) { return /^\d{4}-\d{2}-\d{2}$/.test(s) && aISO(deISO(s)) === s; }
+  function mesDe(s) { var d = deISO(s); return d.getFullYear() * 12 + d.getMonth(); }
+  function sumarMeses(s, k) {
+    var d = deISO(s), mi = d.getFullYear() * 12 + d.getMonth() + k;
+    var y = Math.floor(mi / 12), m = mi % 12, ultimo = new Date(y, m + 1, 0).getDate();
+    return aISO(new Date(y, m, Math.min(d.getDate(), ultimo)));
+  }
+  var fLarga = new Intl.DateTimeFormat('es-ES', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  var fCorta = new Intl.DateTimeFormat('es-ES', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+  var fMedia = new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long' });
+  var fMes = new Intl.DateTimeFormat('es-ES', { month: 'long', year: 'numeric' });
+  function larga(s) { return fLarga.format(deISO(s)); }
+  function corta(s) { return fCorta.format(deISO(s)); }
+  function media(s) { return fMedia.format(deISO(s)); }
+  function mayus(t) { return t.charAt(0).toUpperCase() + t.slice(1); }
+  function plural(n, uno, varios) { return n + ' ' + (n === 1 ? uno : varios); }
+  function textoHuespedes(n) { return plural(n, 'huésped', 'huéspedes'); }
+
+  var fEuros = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0, maximumFractionDigits: 0 });
+  var fEurosDec = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  function euros(n) { return (Math.round(n * 100) % 100 ? fEurosDec : fEuros).format(n); }
+
+  var HOY = aISO(new Date());
+  var ULTIMO = sumar(HOY, EJEMPLO.diasCalendario); // última fecha que se puede elegir
+
+  /* ---------- Noches ocupadas de ejemplo (deterministas, a partir de hoy) ---------- */
+  var ocupadas = {};
+  for (var c = 0; c * EJEMPLO.ocupadas.ciclo <= EJEMPLO.diasCalendario; c++) {
+    EJEMPLO.ocupadas.bloques.forEach(function (b) {
+      for (var i = 0; i < b[1]; i++) ocupadas[sumar(HOY, c * EJEMPLO.ocupadas.ciclo + b[0] + i)] = true;
+    });
+  }
+  function ocupada(s) { return ocupadas[s] === true; }
+  // Noches ocupadas entre la llegada y la salida (la noche de la salida no cuenta)
+  function conflictos(a, b) { var r = []; for (var d = a; d < b; d = sumar(d, 1)) if (ocupada(d)) r.push(d); return r; }
+  function libre(a, n) {
+    if (a < HOY || sumar(a, n) > ULTIMO) return false;
+    for (var i = 0; i < n; i++) if (ocupada(sumar(a, i))) return false;
+    return true;
+  }
+  function alternativas(a, n) {
+    var antes = null, despues = null, k, x;
+    for (k = 1; k <= 120 && !despues; k++) { x = sumar(a, k); if (libre(x, n)) despues = x; }
+    for (k = 1; k <= 120 && !antes; k++) { x = sumar(a, -k); if (x < HOY) break; if (libre(x, n)) antes = x; }
+    return [antes, despues].filter(Boolean);
+  }
+
+  /* ---------- Precio de ejemplo ---------- */
+  function temporada(s) {
+    var m = deISO(s).getMonth() + 1;
+    return EJEMPLO.mesesAlta.indexOf(m) >= 0 ? 'alta' : EJEMPLO.mesesMedia.indexOf(m) >= 0 ? 'media' : 'baja';
+  }
+  function precio() {
+    var cuenta = {}, orden = [], lineas = [], alojamiento = 0;
+    for (var d = estado.llegada; d < estado.salida; d = sumar(d, 1)) {
+      var t = temporada(d);
+      if (!cuenta[t]) { cuenta[t] = 0; orden.push(t); }
+      cuenta[t]++;
+    }
+    orden.forEach(function (t) {
+      var importe = cuenta[t] * EJEMPLO.precioNoche[t];
+      alojamiento += importe;
+      lineas.push({ temporada: t, noches: cuenta[t], precio: EJEMPLO.precioNoche[t], importe: importe });
+    });
+    var n = noches(estado.llegada, estado.salida);
+    // Sobre todos los huéspedes: no sabemos cuántos son menores de 17 (exentos); el texto lo avisa
+    var nochesImpuesto = Math.min(n, IMPUESTO_MAX_NOCHES);
+    var impuesto = estado.huespedes * nochesImpuesto * EJEMPLO.impuestoPersonaNoche;
+    return { lineas: lineas, noches: n, nochesImpuesto: nochesImpuesto, limpieza: EJEMPLO.limpieza, impuesto: impuesto, total: alojamiento + EJEMPLO.limpieza + impuesto };
+  }
+
+  /* ---------- Estado (solo en memoria: nada se guarda ni se envía) ---------- */
+  var estado = { llegada: null, salida: null, huespedes: 2, paso: 1, maxPaso: 1, acepta: false,
+                 datos: { nombre: '', email: '', telefono: '', pais: '', comentarios: '' } };
+
+  /* ---------- Parámetros que envía el buscador de la portada ---------- */
+  var avisos = [];
+  var q = new URLSearchParams(location.search);
+  var pLlegada = (q.get('llegada') || '').trim(), pSalida = (q.get('salida') || '').trim(), pHuespedes = q.get('huespedes');
+  if (pHuespedes !== null && pHuespedes !== '') {
+    var h = Number(pHuespedes);
+    if (!Number.isInteger(h)) avisos.push('No hemos entendido el número de huéspedes. Lo hemos dejado en 2.');
+    else if (h < 1) { estado.huespedes = 1; avisos.push('Tiene que haber al menos 1 huésped.'); }
+    else if (h > MAX_HUESPEDES) { estado.huespedes = MAX_HUESPEDES; avisos.push('La villa admite hasta 8 huéspedes. Lo hemos dejado en 8.'); }
+    else estado.huespedes = h;
+  }
+  if (pLlegada) {
+    if (!valida(pLlegada)) avisos.push('No hemos podido leer la fecha de llegada. Elígela en el calendario.');
+    else if (pLlegada < HOY) avisos.push('La fecha de llegada que elegiste (' + larga(pLlegada) + ') ya ha pasado. Elige otra.');
+    else if (sumar(pLlegada, EJEMPLO.estanciaMinima) > ULTIMO) avisos.push('Con esa fecha de llegada no quedan noches suficientes en el calendario de ejemplo (un año vista). Elige otra.');
+    else estado.llegada = pLlegada;
+  }
+  if (pSalida && estado.llegada) {
+    if (!valida(pSalida)) avisos.push('No hemos podido leer la fecha de salida. Elígela en el calendario.');
+    else if (pSalida <= estado.llegada) avisos.push('La salida tiene que ser después de la llegada. Elige de nuevo el día de salida.');
+    else if (pSalida > ULTIMO) avisos.push('La fecha de salida queda fuera del calendario de ejemplo. Elige otra.');
+    else estado.salida = pSalida;
+  }
+
+  /* ---------- Reglas de cada paso ---------- */
+  function fechasCompletas() { return !!(estado.llegada && estado.salida && estado.salida > estado.llegada); }
+  function errorPaso1() {
+    if (!estado.llegada) return 'Elige en el calendario el día de llegada.';
+    if (!estado.salida) return 'Elige el día de salida.';
+    var n = noches(estado.llegada, estado.salida);
+    if (n < EJEMPLO.estanciaMinima) return 'La estancia mínima es de ' + EJEMPLO.estanciaMinima + ' noches (ejemplo). Has elegido ' + plural(n, 'noche', 'noches') + '.';
+    return '';
+  }
+  function disponible() { return fechasCompletas() && conflictos(estado.llegada, estado.salida).length === 0; }
+  function pasoCompleto(n) {
+    switch (n) {
+      case 1: return !errorPaso1();
+      case 2: return !errorPaso1() && disponible();
+      case 4: return erroresFormulario().length === 0;
+      case 5: return estado.acepta;
+      default: return true;
+    }
+  }
+  function puedeIr(n) {
+    if (n < 1 || n > 7 || n > estado.maxPaso) return false;
+    for (var i = 1; i < n; i++) if (!pasoCompleto(i)) return false;
+    return true;
+  }
+
+  /* ---------- Salida real: WhatsApp (sin precios de ejemplo) y Airbnb ---------- */
+  function textoWA() {
+    if (!fechasCompletas()) return 'Hola, quiero consultar disponibilidad en Villa Canal.';
+    return 'Hola, quiero consultar disponibilidad en Villa Canal:\n' +
+      '· Llegada: ' + larga(estado.llegada) + '\n' +
+      '· Salida: ' + larga(estado.salida) + '\n' +
+      '· Noches: ' + noches(estado.llegada, estado.salida) + '\n' +
+      '· Huéspedes: ' + estado.huespedes + '\n' +
+      '¿Está libre? Gracias.';
+  }
+  function urlAirbnb() {
+    if (!fechasCompletas()) return AIRBNB;
+    return AIRBNB + '?check_in=' + estado.llegada + '&check_out=' + estado.salida + '&adults=' + estado.huespedes;
+  }
+  function pintarEnlaces() {
+    var texto = textoWA();
+    var wa = window.VillaCanal && window.VillaCanal.enlaceWA ? window.VillaCanal.enlaceWA(texto)
+      : 'https://wa.me/34657337686?text=' + encodeURIComponent(texto);
+    $$('[data-enlace-wa]').forEach(function (a) { a.href = wa; });
+    $$('[data-enlace-airbnb]').forEach(function (a) { a.href = urlAirbnb(); });
+  }
+
+  // Las fechas (no los datos personales) se reflejan en la dirección para poder recargar
+  function actualizarURL() {
+    var p = new URLSearchParams();
+    if (estado.llegada) p.set('llegada', estado.llegada);
+    if (estado.salida) p.set('salida', estado.salida);
+    p.set('huespedes', estado.huespedes);
+    try { history.replaceState(history.state, '', location.pathname + '?' + p.toString()); } catch (e) { /* sin historial */ }
+  }
+
+  /* ================================================================
+     CALENDARIO
+     ================================================================ */
+  var calendario = $('[data-calendario]');
+  var mesesCaja = $('[data-meses]');
+  var anuncio = $('[data-cal-anuncio]');
+  var mensaje = $('[data-cal-mensaje]');
+  var MIN_MES = mesDe(HOY), MAX_MES = mesDe(ULTIMO);
+  var vistaMes = mesDe(estado.llegada || HOY);
+  var foco = estado.llegada || HOY;
+  var numMeses = 1;
+  var DIAS = [['L', 'lunes'], ['M', 'martes'], ['X', 'miércoles'], ['J', 'jueves'], ['V', 'viernes'], ['S', 'sábado'], ['D', 'domingo']];
+  var CABECERA = DIAS.map(function (d) { return '<th scope="col"><span aria-hidden="true">' + d[0] + '</span><span class="sr">' + d[1] + '</span></th>'; }).join('');
+
+  function mensajeCal(texto, tipo) {
+    mensaje.textContent = texto || '';
+    mensaje.className = 'cal-mensaje' + (texto ? ' cal-mensaje--' + (tipo || 'info') : '');
+  }
+
+  function celda(s) {
+    var ll = estado.llegada, sa = estado.salida;
+    var clases = ['dia'], notas = [], bloqueado = false, sel = false;
+    if (s < HOY || s > ULTIMO) { clases.push('dia--pasado'); bloqueado = true; notas.push(s < HOY ? 'ya ha pasado' : 'fuera del calendario de ejemplo'); }
+    else if (ocupada(s)) { clases.push('dia--ocupado'); notas.push('ocupado (ejemplo)'); }
+    if (s === HOY) { clases.push('dia--hoy'); notas.unshift('hoy'); }
+    if (ll && sa && s > ll && s < sa) { clases.push('dia--rango'); sel = true; if (ocupada(s)) clases.push('dia--conflicto'); }
+    if (s === ll) { clases.push('dia--llegada'); if (sa) clases.push('con-salida'); notas.push('tu llegada'); sel = true; }
+    if (s === sa) { clases.push('dia--salida'); notas.push('tu salida'); sel = true; }
+    var etiqueta = larga(s) + (notas.length ? ', ' + notas.join(', ') : '');
+    return '<td role="gridcell" aria-selected="' + sel + '"><button type="button" class="' + clases.join(' ') + '" data-fecha="' + s + '" tabindex="' + (s === foco ? 0 : -1) + '"' +
+      (bloqueado ? ' aria-disabled="true"' : '') + ' aria-label="' + etiqueta + '">' + deISO(s).getDate() + '</button></td>';
+  }
+
+  function pintarCalendario(enfocar) {
+    if (enfocar === undefined) enfocar = mesesCaja.contains(document.activeElement);
+    vistaMes = Math.max(MIN_MES, Math.min(vistaMes, MAX_MES - numMeses + 1));
+    // La fecha que recibe el foco con Tab tiene que estar a la vista
+    var primero = new Date(Math.floor(vistaMes / 12), vistaMes % 12, 1);
+    if (mesDe(foco) < vistaMes || mesDe(foco) > vistaMes + numMeses - 1) {
+      var cand = [estado.llegada, HOY].filter(function (x) { return x && mesDe(x) >= vistaMes && mesDe(x) <= vistaMes + numMeses - 1; });
+      foco = cand[0] || aISO(primero);
+    }
+    var html = '', titulos = [];
+    for (var k = 0; k < numMeses; k++) {
+      var mi = vistaMes + k, anio = Math.floor(mi / 12), mes = mi % 12;
+      var inicio = new Date(anio, mes, 1);
+      var titulo = mayus(fMes.format(inicio));
+      titulos.push(titulo);
+      var desfase = (inicio.getDay() + 6) % 7; // la semana empieza en lunes
+      var diasMes = new Date(anio, mes + 1, 0).getDate();
+      var celdas = [];
+      for (var i = 0; i < desfase; i++) celdas.push('<td role="gridcell"></td>');
+      for (var d = 1; d <= diasMes; d++) celdas.push(celda(aISO(new Date(anio, mes, d))));
+      while (celdas.length < 42) celdas.push('<td role="gridcell"></td>'); // siempre 6 filas: el calendario no salta
+      html += '<div class="mes"><h3 class="mes__titulo" id="cal-mes-' + k + '">' + titulo + '</h3>' +
+        '<table role="grid" aria-labelledby="cal-mes-' + k + '" aria-describedby="cal-ayuda"><thead><tr>' + CABECERA + '</tr></thead><tbody>';
+      for (var f = 0; f < 42; f += 7) html += '<tr>' + celdas.slice(f, f + 7).join('') + '</tr>';
+      html += '</tbody></table></div>';
+    }
+    mesesCaja.innerHTML = html;
+    mesesCaja.classList.toggle('calendario__meses--dos', numMeses === 2);
+    $('[data-mes="-1"]').setAttribute('aria-disabled', vistaMes <= MIN_MES ? 'true' : 'false');
+    $('[data-mes="1"]').setAttribute('aria-disabled', vistaMes + numMeses - 1 >= MAX_MES ? 'true' : 'false');
+    var textoMeses = 'Calendario: ' + titulos.join(' y ');
+    if (anuncio.textContent !== textoMeses) anuncio.textContent = textoMeses;
+    if (enfocar) { var b = $('[data-fecha="' + foco + '"]', mesesCaja); if (b) b.focus(); }
+  }
+
+  // Resalta el rango provisional mientras se elige la salida
+  function previsualizar(s) {
+    var ll = estado.llegada, activo = ll && !estado.salida && s && s > ll;
+    $$('.dia', mesesCaja).forEach(function (b) {
+      var f = b.getAttribute('data-fecha');
+      b.classList.toggle('dia--previo', !!activo && f > ll && f <= s);
+    });
+  }
+
+  function mensajeSeleccion() {
+    var ll = estado.llegada, sa = estado.salida;
+    if (!ll) return mensajeCal('Elige en el calendario el día de llegada.');
+    if (!sa) return mensajeCal('Llegada: ' + larga(ll) + '. Ahora elige el día de salida.');
+    var err = errorPaso1();
+    if (err) return mensajeCal(err, 'error');
+    var c = conflictos(ll, sa);
+    if (c.length) {
+      return mensajeCal((c.length === 1 ? 'La noche del ' + media(c[0]) + ' está ocupada' : 'Entre esas fechas hay ' + c.length + ' noches ocupadas, desde el ' + media(c[0])) +
+        ' (ejemplo). Cambia las fechas o sigue: en el paso 2 te proponemos otras.', 'aviso');
+    }
+    mensajeCal(plural(noches(ll, sa), 'noche', 'noches') + ': del ' + media(ll) + ' al ' + media(sa) + '. Todo libre en el calendario de ejemplo.', 'ok');
+  }
+
+  function elegir(s) {
+    if (s < HOY) return mensajeCal('Ese día ya ha pasado.', 'error');
+    if (s > ULTIMO) return mensajeCal('Ese día queda fuera del calendario de ejemplo.', 'error');
+    var ll = estado.llegada, sa = estado.salida;
+    if (!ll || sa || s <= ll) {
+      // Nueva llegada: no puede ser una noche ocupada
+      if (ocupada(s)) return mensajeCal('El ' + larga(s) + ' está ocupado (ejemplo). Elige otro día de llegada.', 'error');
+      // Ni tampoco un día sin noches suficientes para la estancia mínima antes del final del calendario
+      if (sumar(s, EJEMPLO.estanciaMinima) > ULTIMO) return mensajeCal('No quedan noches suficientes en el calendario de ejemplo a partir de ese día. Elige otro día de llegada.', 'error');
+      estado.llegada = s; estado.salida = null;
+    } else {
+      estado.salida = s; // el día de salida puede coincidir con la llegada de otra reserva
+    }
+    cambioFechas();
+  }
+
+  function cambioFechas() {
+    actualizarURL();
+    pintarCalendario();
+    mensajeSeleccion();
+    pintarTodo();
+  }
+
+  mesesCaja.addEventListener('click', function (e) {
+    var b = e.target.closest('.dia');
+    if (!b) return;
+    foco = b.getAttribute('data-fecha');
+    elegir(foco);
+  });
+  mesesCaja.addEventListener('keydown', function (e) {
+    var b = e.target.closest('.dia');
+    if (!b) return;
+    var s = b.getAttribute('data-fecha'), dia = (deISO(s).getDay() + 6) % 7, n;
+    switch (e.key) {
+      case 'ArrowLeft': n = sumar(s, -1); break;
+      case 'ArrowRight': n = sumar(s, 1); break;
+      case 'ArrowUp': n = sumar(s, -7); break;
+      case 'ArrowDown': n = sumar(s, 7); break;
+      case 'Home': n = sumar(s, -dia); break;
+      case 'End': n = sumar(s, 6 - dia); break;
+      case 'PageUp': n = sumarMeses(s, e.shiftKey ? -12 : -1); break;
+      case 'PageDown': n = sumarMeses(s, e.shiftKey ? 12 : 1); break;
+      default: return;
+    }
+    e.preventDefault();
+    var minimo = aISO(new Date(Math.floor(MIN_MES / 12), MIN_MES % 12, 1));
+    if (n < minimo) n = minimo;
+    if (n > ULTIMO) n = ULTIMO;
+    foco = n;
+    var mi = mesDe(n);
+    if (mi < vistaMes) vistaMes = mi;
+    else if (mi > vistaMes + numMeses - 1) vistaMes = mi - numMeses + 1;
+    pintarCalendario(true);
+    previsualizar(n);
+  });
+  mesesCaja.addEventListener('mouseover', function (e) { var b = e.target.closest('.dia'); if (b) previsualizar(b.getAttribute('data-fecha')); });
+  mesesCaja.addEventListener('focusin', function (e) { var b = e.target.closest('.dia'); if (b) previsualizar(b.getAttribute('data-fecha')); });
+  mesesCaja.addEventListener('mouseleave', function () { previsualizar(null); });
+
+  $$('[data-mes]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (b.getAttribute('aria-disabled') === 'true') return;
+      vistaMes += Number(b.getAttribute('data-mes'));
+      pintarCalendario(false);
+    });
+  });
+
+  // 2 meses si caben con días de al menos 44 px; si no, 1
+  function medirCalendario() {
+    var ancho = calendario.clientWidth;
+    if (!ancho) return;
+    var m = ancho >= 2 * 7 * 44 + 32 ? 2 : 1;
+    if (m !== numMeses) { numMeses = m; pintarCalendario(); }
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(medirCalendario).observe(calendario);
+  else window.addEventListener('resize', medirCalendario);
+
+  $('[data-borrar]').addEventListener('click', function () {
+    estado.llegada = null; estado.salida = null;
+    cambioFechas();
+    mensajeCal('Fechas borradas. Elige en el calendario el día de llegada.');
+  });
+
+  /* ---------- Huéspedes ---------- */
+  $$('[data-huespedes]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var n = estado.huespedes + Number(b.getAttribute('data-huespedes'));
+      if (n < 1 || n > MAX_HUESPEDES) return;
+      estado.huespedes = n;
+      actualizarURL();
+      pintarTodo();
+    });
+  });
+
+  /* ================================================================
+     PASOS
+     ================================================================ */
+  function icono(nombre, clase) {
+    return '<span class="' + clase + '" aria-hidden="true"><svg><use href="' + ICONOS + nombre + '"/></svg></span>';
+  }
+
+  function pintarPasos() {
+    $$('[data-ir]').forEach(function (b) {
+      var n = Number(b.getAttribute('data-ir'));
+      var actual = n === estado.paso;
+      // El pago (6) nunca se marca como hecho: en la demostración no se cobra nada
+      var hecho = !actual && n < 6 && puedeIr(n) && pasoCompleto(n);
+      b.classList.toggle('es-actual', actual);
+      b.classList.toggle('esta-hecho', hecho);
+      if (actual) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+      b.setAttribute('aria-disabled', actual || puedeIr(n) ? 'false' : 'true');
+      b.setAttribute('aria-label', 'Paso ' + n + ': ' + NOMBRES[n - 1] + (hecho ? ' (hecho)' : ''));
+    });
+    $('[data-paso-actual]').textContent = 'Paso ' + estado.paso + ' de 7 · ' + NOMBRES[estado.paso - 1];
+  }
+
+  function pintarEleccion() {
+    var vl = $('[data-v-llegada]'), vs = $('[data-v-salida]');
+    vl.textContent = estado.llegada ? corta(estado.llegada) : 'Sin elegir';
+    vl.classList.toggle('vacio', !estado.llegada);
+    vs.textContent = estado.salida ? corta(estado.salida) : 'Sin elegir';
+    vs.classList.toggle('vacio', !estado.salida);
+    $('[data-num-huespedes]').textContent = textoHuespedes(estado.huespedes);
+    $('[data-huespedes="-1"]').setAttribute('aria-disabled', estado.huespedes <= 1 ? 'true' : 'false');
+    $('[data-huespedes="1"]').setAttribute('aria-disabled', estado.huespedes >= MAX_HUESPEDES ? 'true' : 'false');
+  }
+
+  function pintarResumen() {
+    var completas = fechasCompletas();
+    $('[data-r-llegada]').textContent = estado.llegada ? corta(estado.llegada) : '—';
+    $('[data-r-salida]').textContent = estado.salida ? corta(estado.salida) : '—';
+    $('[data-r-noches]').textContent = completas ? noches(estado.llegada, estado.salida) : '—';
+    $('[data-r-huespedes]').textContent = estado.huespedes;
+    var conTotal = !errorPaso1() && disponible();
+    $('[data-r-total]').hidden = !conTotal;
+    if (conTotal) $('[data-r-importe]').textContent = euros(precio().total);
+    var nota = $('[data-r-nota]');
+    nota.hidden = conTotal;
+    nota.textContent = !completas ? 'Elige las fechas para ver el total de ejemplo.'
+      : errorPaso1() ? 'Estancia mínima: ' + EJEMPLO.estanciaMinima + ' noches (ejemplo).'
+      : 'Fechas no disponibles en el calendario de ejemplo.';
+    // Los pasos 2 y 7 ya llevan su propio bloque de WhatsApp y Airbnb
+    $('[data-r-salida-real]').hidden = !(estado.paso >= 3 && estado.paso <= 6 && completas);
+  }
+
+  /* Paso 2 */
+  function pintarDisponibilidad() {
+    var ll = estado.llegada, sa = estado.salida, n = noches(ll, sa);
+    var c = conflictos(ll, sa);
+    var fechas = 'Del ' + larga(ll) + ' al ' + larga(sa) + ' · ' + plural(n, 'noche', 'noches') + ' · ' + textoHuespedes(estado.huespedes) + '.';
+    var html;
+    if (!c.length) {
+      html = '<div class="resultado resultado--si">' + icono('check', 'resultado__icono') +
+        '<div><h3 tabindex="-1" data-resultado-titulo>Disponible (ejemplo)</h3><p>' + fechas + '</p>' +
+        '<p class="pequeno secundario">La disponibilidad de esta demostración es inventada. La real te la confirmamos por WhatsApp.</p></div></div>';
+    } else {
+      html = '<div class="resultado resultado--no">' + icono('cerrar', 'resultado__icono') +
+        '<div><h3 tabindex="-1" data-resultado-titulo>No disponible (ejemplo)</h3><p>' + fechas + '</p>' +
+        '<p class="pequeno">' + (c.length === 1 ? 'La noche del ' + media(c[0]) + ' está ocupada' : 'Hay ' + c.length + ' noches ocupadas, desde el ' + media(c[0])) + ' (ejemplo).</p>' +
+        '<p class="pequeno secundario">La disponibilidad de esta demostración es inventada. La real te la confirmamos por WhatsApp.</p></div></div>';
+      var alt = alternativas(ll, n);
+      if (alt.length) {
+        html += '<h3 class="titulo-s alternativas__titulo">Fechas libres parecidas (ejemplo)</h3><ul class="alternativas">' + alt.map(function (a) {
+          var b = sumar(a, n);
+          return '<li class="alternativa"><span><strong>' + corta(a) + ' → ' + corta(b) + '</strong><br><span class="pequeno secundario">' +
+            plural(n, 'noche', 'noches') + ' · ' + (a < ll ? 'antes' : 'después') + ' de lo que buscabas</span></span>' +
+            '<button type="button" class="boton boton--linea" data-alt="' + a + '" aria-label="Elegir del ' + larga(a) + ' al ' + larga(b) + '">Elegir estas fechas</button></li>';
+        }).join('') + '</ul>';
+      } else {
+        html += '<p style="margin-top:16px">No encontramos fechas libres cercanas con las mismas noches. Prueba con otras en el calendario.</p>';
+      }
+    }
+    $('[data-resultado]').innerHTML = html;
+    $('[data-continuar="2"]').hidden = c.length > 0;
+  }
+  $('[data-resultado]').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-alt]');
+    if (!b) return;
+    var n = noches(estado.llegada, estado.salida);
+    estado.llegada = b.getAttribute('data-alt');
+    estado.salida = sumar(estado.llegada, n);
+    foco = estado.llegada;
+    vistaMes = mesDe(estado.llegada);
+    cambioFechas();
+    var t = $('[data-resultado-titulo]');
+    if (t) t.focus();
+  });
+
+  /* Paso 3 (y resumen del paso 5) */
+  function tablaDesglose() {
+    var p = precio(), filas = '';
+    p.lineas.forEach(function (l) {
+      filas += '<tr><th scope="row">Alojamiento<small>' + plural(l.noches, 'noche', 'noches') + ' × ' + euros(l.precio) + ' · ' + TEMPORADA[l.temporada] + '</small></th><td>' + euros(l.importe) + '</td></tr>';
+    });
+    filas += '<tr><th scope="row">Limpieza final<small>Ejemplo · por confirmar si va aparte</small></th><td>' + euros(p.limpieza) + '</td></tr>';
+    filas += '<tr><th scope="row">Impuesto turístico de Cataluña<small>' + textoHuespedes(estado.huespedes) + ' × ' + plural(p.nochesImpuesto, 'noche', 'noches') + ' (máx. ' + IMPUESTO_MAX_NOCHES + ') × ' + euros(EJEMPLO.impuestoPersonaNoche) + '</small>' +
+      '<small>Importe de ejemplo · menores de 17 años exentos · por confirmar</small></th><td>' + euros(p.impuesto) + '</td></tr>';
+    return '<table class="desglose"><caption><span class="chapa-demo">Precio de ejemplo</span><span class="sr"> Desglose con importes inventados</span></caption><tbody>' + filas + '</tbody><tfoot>' +
+      '<tr class="desglose__total"><th scope="row">Total de ejemplo</th><td>' + euros(p.total) + '</td></tr>' +
+      '<tr><th scope="row">Fianza<small>Si la hay, verás el importe y cómo se devuelve antes de pagar.</small></th><td><span class="por-confirmar">Por confirmar</span></td></tr>' +
+      '<tr><th scope="row">Cancelación<small>Las condiciones se mostrarán aquí antes de pagar.</small></th><td><span class="por-confirmar">Por confirmar</span></td></tr>' +
+      '</tfoot></table>';
+  }
+  function pintarPrecio() {
+    $('[data-desglose]').innerHTML = tablaDesglose();
+    var pn = EJEMPLO.precioNoche;
+    $('[data-tarifas]').textContent = 'Tarifas de ejemplo por noche: ' + euros(pn.alta) + ' en temporada alta (julio y agosto), ' +
+      euros(pn.media) + ' en temporada media (junio y septiembre) y ' + euros(pn.baja) + ' en temporada baja (resto del año).';
+  }
+
+  /* Paso 4: formulario con validación accesible (no se envía a ningún sitio) */
+  var formulario = $('[data-formulario]');
+  var CAMPOS = [
+    { id: 'f-nombre', dato: 'nombre', etiqueta: 'Nombre y apellidos',
+      error: function (v) { return v.trim().length >= 2 ? '' : 'Escribe tu nombre y apellidos.'; } },
+    { id: 'f-email', dato: 'email', etiqueta: 'Correo electrónico',
+      error: function (v) { v = v.trim(); return !v ? 'Escribe tu correo electrónico.' : /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? '' : 'Revisa el correo: tiene que ser como nombre@dominio.com.'; } },
+    { id: 'f-telefono', dato: 'telefono', etiqueta: 'Teléfono',
+      error: function (v) { var d = v.replace(/[\s().-]/g, ''); return !d ? 'Escribe un teléfono de contacto.' : /^\+?\d{6,15}$/.test(d) ? '' : 'Revisa el teléfono: solo números, con el prefijo si no es de España.'; } },
+    { id: 'f-pais', dato: 'pais', etiqueta: 'País de residencia',
+      error: function (v) { return v.trim().length >= 2 ? '' : 'Escribe tu país de residencia.'; } }
+  ];
+  function erroresFormulario() {
+    return CAMPOS.filter(function (c) { return c.error($('#' + c.id).value); });
+  }
+  function marcarCampo(c) {
+    var input = $('#' + c.id), p = $('#e-' + c.id.slice(2)), msg = c.error(input.value);
+    var ayuda = (input.getAttribute('aria-describedby') || '').split(' ').filter(function (x) { return x && x !== p.id; });
+    if (msg) {
+      p.textContent = msg; p.hidden = false;
+      input.setAttribute('aria-invalid', 'true');
+      ayuda.push(p.id);
+    } else {
+      p.textContent = ''; p.hidden = true;
+      input.removeAttribute('aria-invalid');
+    }
+    if (ayuda.length) input.setAttribute('aria-describedby', ayuda.join(' ')); else input.removeAttribute('aria-describedby');
+    return !msg;
+  }
+  CAMPOS.forEach(function (c) {
+    var input = $('#' + c.id);
+    input.addEventListener('input', function () {
+      estado.datos[c.dato] = input.value;
+      if (input.getAttribute('aria-invalid') === 'true') marcarCampo(c); // se corrige al escribir
+      pintarPasos();
+    });
+    input.addEventListener('blur', function () { if (input.value) marcarCampo(c); });
+  });
+  $('#f-comentarios').addEventListener('input', function (e) { estado.datos.comentarios = e.target.value; });
+  formulario.addEventListener('submit', function (e) {
+    e.preventDefault(); // nunca se envía: es una demostración
+    var malos = CAMPOS.filter(function (c) { return !marcarCampo(c); });
+    var caja = $('[data-errores]'), lista = $('[data-errores-lista]');
+    lista.textContent = '';
+    if (malos.length) {
+      malos.forEach(function (c) {
+        var li = document.createElement('li'), a = document.createElement('a');
+        a.href = '#' + c.id;
+        a.textContent = c.etiqueta + ': ' + c.error($('#' + c.id).value);
+        a.addEventListener('click', function (ev) { ev.preventDefault(); $('#' + c.id).focus(); });
+        li.appendChild(a); lista.appendChild(li);
+      });
+      caja.hidden = false;
+      caja.focus();
+      return;
+    }
+    caja.hidden = true;
+    // Siempre lo que hay escrito en los campos (el navegador puede haberlos rellenado sin eventos)
+    CAMPOS.forEach(function (c) { estado.datos[c.dato] = $('#' + c.id).value; });
+    estado.datos.comentarios = $('#f-comentarios').value;
+    avanzar(4);
+  });
+  // Los datos no se guardan: si el navegador restaura los campos (atrás, recarga), se vacían
+  function vaciarDatos() {
+    formulario.reset();
+    $('#f-acepta').checked = false;
+    estado.acepta = false;
+    estado.datos = { nombre: '', email: '', telefono: '', pais: '', comentarios: '' };
+  }
+
+  /* Paso 5: revisión completa */
+  function bloque(titulo, filas, textoBoton, paso) {
+    var b = document.createElement('div'); b.className = 'bloque-revision';
+    var cab = document.createElement('div'); cab.className = 'bloque-revision__cabeza';
+    var h = document.createElement('h3'); h.className = 'subtitulo'; h.textContent = titulo; cab.appendChild(h);
+    if (textoBoton) {
+      var bt = document.createElement('button');
+      bt.type = 'button'; bt.className = 'boton-texto'; bt.textContent = textoBoton; bt.setAttribute('data-ir-a', paso);
+      cab.appendChild(bt);
+    }
+    b.appendChild(cab);
+    if (filas) b.appendChild(ficha(filas));
+    return b;
+  }
+  function ficha(filas, dl) {
+    dl = dl || document.createElement('dl');
+    dl.className = 'ficha'; dl.textContent = '';
+    filas.forEach(function (f) {
+      var fila = document.createElement('div'), dt = document.createElement('dt'), dd = document.createElement('dd');
+      dt.textContent = f[0]; dd.textContent = f[1];
+      fila.appendChild(dt); fila.appendChild(dd); dl.appendChild(fila);
+    });
+    return dl;
+  }
+  function filasEstancia() {
+    return [
+      ['Alojamiento', 'Villa Canal, villa completa'],
+      ['Llegada', mayus(larga(estado.llegada)) + ', de 15:00 a 19:00'],
+      ['Salida', mayus(larga(estado.salida)) + ', antes de las 10:00'],
+      ['Noches', String(noches(estado.llegada, estado.salida))],
+      ['Huéspedes', textoHuespedes(estado.huespedes)]
+    ];
+  }
+  function pintarRevision() {
+    var caja = $('[data-revision]'), d = estado.datos;
+    caja.textContent = '';
+    caja.appendChild(bloque('Tu estancia', filasEstancia(), 'Cambiar fechas', 1));
+    var precioBloque = bloque('Precio', null, 'Ver detalle', 3);
+    var envoltorio = document.createElement('div');
+    envoltorio.innerHTML = tablaDesglose(); // solo cifras calculadas, ningún dato escrito por el usuario
+    precioBloque.appendChild(envoltorio.firstChild);
+    caja.appendChild(precioBloque);
+    caja.appendChild(bloque('Tus datos', [
+      ['Nombre', d.nombre.trim()], ['Correo', d.email.trim()], ['Teléfono', d.telefono.trim()],
+      ['País', d.pais.trim()], ['Comentarios', d.comentarios.trim() || '—']
+    ], 'Cambiar datos', 4));
+    $('#f-acepta').checked = estado.acepta;
+  }
+  $('#f-acepta').addEventListener('change', function (e) {
+    estado.acepta = e.target.checked;
+    if (estado.acepta) { $('#e-acepta').hidden = true; $('[data-casilla]').classList.remove('casilla--error'); e.target.removeAttribute('aria-invalid'); e.target.removeAttribute('aria-describedby'); }
+    pintarPasos();
+  });
+
+  /* Paso 6: pago desactivado */
+  function pintarPago() {
+    $('[data-pago-importe]').textContent = euros(precio().total);
+    $('[data-pagar-nota]').textContent = '';
+  }
+  $('[data-pagar]').addEventListener('click', function () {
+    $('[data-pagar-nota]').textContent = 'El pago está desactivado: esto es una demostración y no se cobra nada.';
+  });
+
+  /* Paso 7: vista previa de la confirmación */
+  function pintarVistaPrevia() {
+    var nombre = estado.datos.nombre.trim().split(/\s+/)[0];
+    $('[data-vp-saludo]').textContent = nombre ? 'Gracias, ' + nombre + '.' : 'Gracias.';
+    $('[data-vp-email]').textContent = estado.datos.email.trim() || 'tu correo';
+    ficha([
+      ['Número de reserva', 'VC-0000 (ejemplo)'],
+      ['Llegada', mayus(larga(estado.llegada)) + ', de 15:00 a 19:00'],
+      ['Salida', mayus(larga(estado.salida)) + ', antes de las 10:00'],
+      ['Huéspedes', textoHuespedes(estado.huespedes)],
+      ['Importe pagado', euros(precio().total) + ' (ejemplo)']
+    ], $('[data-vp-ficha]'));
+  }
+
+  /* ---------- Navegación entre pasos ---------- */
+  function pintarPaso() {
+    switch (estado.paso) {
+      case 1: pintarEleccion(); break;
+      case 2: pintarDisponibilidad(); break;
+      case 3: pintarPrecio(); break;
+      case 5: pintarRevision(); break;
+      case 6: pintarPago(); break;
+      case 7: pintarVistaPrevia(); break;
+    }
+  }
+  function pintarTodo() {
+    pintarEleccion();
+    pintarPasos();
+    pintarResumen();
+    pintarEnlaces();
+    if (estado.paso !== 1) pintarPaso();
+  }
+
+  function irA(n, desdeHistorial) {
+    if (n !== estado.paso && !puedeIr(n)) return;
+    var cambia = n !== estado.paso;
+    estado.paso = n;
+    $$('.paso').forEach(function (p) { p.hidden = Number(p.getAttribute('data-paso')) !== n; });
+    pintarTodo();
+    pintarPaso();
+    if (n === 1) { medirCalendario(); pintarCalendario(false); }
+    if (cambia && !desdeHistorial) { try { history.pushState({ paso: n }, '', location.href); } catch (e) { /* sin historial */ } }
+    // Sube hasta el indicador de pasos si ha quedado fuera de la vista y pone el foco en el título
+    var proceso = $('[data-proceso]'), arriba = proceso.getBoundingClientRect().top;
+    if (arriba < 0 || arriba > window.innerHeight * 0.5) proceso.scrollIntoView({ behavior: reducido ? 'auto' : 'smooth', block: 'start' });
+    $('#t-paso-' + n).focus({ preventScroll: true });
+  }
+  function avanzar(n) {
+    if (!pasoCompleto(n)) return;
+    estado.maxPaso = Math.max(estado.maxPaso, n + 1);
+    irA(n + 1);
+  }
+
+  $$('[data-continuar]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var n = Number(b.getAttribute('data-continuar'));
+      if (n === 1) {
+        var err = errorPaso1();
+        if (err) { mensajeCal(err, 'error'); return; }
+      }
+      if (n === 5 && !estado.acepta) {
+        var casilla = $('#f-acepta');
+        $('#e-acepta').hidden = false;
+        $('[data-casilla]').classList.add('casilla--error');
+        casilla.setAttribute('aria-invalid', 'true');
+        casilla.setAttribute('aria-describedby', 'e-acepta');
+        casilla.focus();
+        return;
+      }
+      avanzar(n);
+    });
+  });
+  $$('[data-atras]').forEach(function (b) {
+    b.addEventListener('click', function () { irA(estado.paso - 1); });
+  });
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-ir-a]');
+    if (b) irA(Number(b.getAttribute('data-ir-a')));
+  });
+  $$('[data-ir]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (b.getAttribute('aria-disabled') === 'true') return;
+      irA(Number(b.getAttribute('data-ir')));
+    });
+  });
+  // Botón "atrás" del navegador: vuelve al paso anterior (las entradas sin paso, p. ej. anclas, no cambian nada)
+  window.addEventListener('popstate', function (e) {
+    if (!e.state || !e.state.paso) return;
+    var n = e.state.paso;
+    while (n > 1 && !puedeIr(n)) n--;
+    irA(n, true);
+    actualizarURL(); // la dirección guardada en el historial puede llevar fechas antiguas
+  });
+  // Al volver con el historial, Chrome rellena los campos después del arranque, y desde la caché
+  // del navegador (bfcache) la página vuelve tal cual: en los dos casos los datos se vacían aquí
+  window.addEventListener('pageshow', function () {
+    vaciarDatos();
+    if (estado.paso > 4) {
+      irA(4, true);
+      try { history.replaceState({ paso: 4 }, '', location.href); } catch (err) { /* sin historial */ }
+    } else {
+      pintarTodo();
+    }
+  });
+
+  // Los enlaces a esta misma página no recargan (se perdería lo elegido): llevan al proceso
+  $$('a[aria-current="page"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      var panel = $('#panel-menu'), abierto = panel && panel.getAttribute('data-abierto') === 'true';
+      if (abierto) $('[data-cerrar-menu]').click(); // al cerrar, el menú devuelve el foco; se desplaza después
+      setTimeout(function () {
+        $('[data-proceso]').scrollIntoView({ behavior: reducido ? 'auto' : 'smooth', block: 'start' });
+      }, abierto ? 60 : 0);
+    });
+  });
+
+  /* ---------- Arranque ---------- */
+  $('[data-min-noches]').textContent = EJEMPLO.estanciaMinima;
+  if (avisos.length) {
+    var ul = $('[data-avisos]');
+    avisos.forEach(function (t) { var li = document.createElement('li'); li.textContent = t; ul.appendChild(li); });
+    ul.hidden = false;
+  }
+  if (location.search) actualizarURL(); // deja en la dirección solo lo que es válido
+  try { history.replaceState({ paso: 1 }, '', location.href); } catch (e) { /* sin historial */ }
+  vaciarDatos();
+  medirCalendario();
+  pintarCalendario(false);
+  mensajeSeleccion();
+  pintarTodo();
+});
+</script>
+</body>
+</html>

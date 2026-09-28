@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aviso legal · Villa Canal</title>
+<meta name="description" content="Datos del titular de la web de Villa Canal y condiciones de uso del sitio.">
+<!-- V1 de muestra: que Google no la indexe hasta que el propietario la apruebe -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F7F5F0">
+<!-- Seguridad: solo se cargan archivos de la propia web (esta página no tiene mapa) -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2212%22%20fill%3D%22%23214E50%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2244%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2234%22%20text-anchor%3D%22middle%22%20fill%3D%22%23F7F5F0%22%3EVC%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="preload" href="../assets/fonts/DMSerifDisplay-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/Inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/site.css">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  /* ---------- Páginas legales ---------- */
+  .cabecera-pagina .entrada{margin-top:18px;color:var(--piedra-txt);}
+  .borrador{display:grid;justify-items:start;gap:10px;max-width:46em;margin-top:28px;padding:16px 18px;background:#FFF8E9;border:1px solid #E9C987;border-radius:8px;color:#4F3700;font-size:.93rem;line-height:1.55;}
+  .legales{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}
+  .legales a{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--linea);border-radius:999px;background:var(--blanco-puro);font-size:.9rem;font-weight:500;text-decoration:none;transition:border-color .2s var(--ease),background .2s var(--ease);}
+  .legales a:hover{border-color:var(--tinta);}
+  .legales a[aria-current="page"]{background:var(--tinta);border-color:var(--tinta);color:#fff;}
+
+  /* Índice lateral (escritorio) o plegable (móvil) + texto */
+  .legal{display:grid;grid-template-columns:14rem minmax(0,1fr);gap:clamp(32px,6vw,88px);align-items:start;padding-block:clamp(8px,2vw,24px) clamp(72px,10vw,128px);}
+  .indice{position:sticky;top:calc(var(--header-h) + 28px);font-size:.9rem;}
+  .indice summary{list-style:none;font-size:.74rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--piedra-txt);margin-bottom:12px;}
+  .indice summary::-webkit-details-marker{display:none;}
+  .indice summary svg{width:18px;height:18px;flex:none;transition:transform .3s var(--ease);}
+  .indice ol{border-left:1px solid var(--linea);}
+  .indice a{display:block;padding:7px 0 7px 16px;margin-left:-1px;border-left:2px solid transparent;color:var(--piedra-txt);text-decoration:none;line-height:1.35;}
+  .indice a:hover{color:var(--tinta);border-left-color:var(--piedra);}
+  .indice a:focus-visible{outline-offset:-2px;}
+  @media (min-width:901px){
+    .indice{max-height:calc(100vh - var(--header-h) - 56px);overflow-y:auto;}
+    .indice summary{pointer-events:none;}
+    .indice summary svg{display:none;}
+  }
+  @media (max-width:900px){
+    .legal{grid-template-columns:1fr;}
+    .indice{position:static;background:var(--blanco-puro);border:1px solid var(--linea);border-radius:8px;}
+    .indice summary{display:flex;justify-content:space-between;align-items:center;min-height:52px;padding:0 16px;margin:0;cursor:pointer;}
+    .indice[open] summary svg{transform:rotate(45deg);}
+    .indice ol{margin:0 16px 14px;}
+    .indice a{padding-block:11px;font-size:.95rem;}
+  }
+  @media (prefers-reduced-motion:reduce){.indice summary svg,.legales a{transition:none;}}
+
+  /* Piezas del texto */
+  .prosa > h2:first-child{margin-top:0;}
+  .prosa .pendiente{-webkit-box-decoration-break:clone;box-decoration-break:clone;overflow-wrap:anywhere;}
+  .ficha{display:grid;grid-template-columns:minmax(8.5em,max-content) minmax(0,1fr);border-top:1px solid var(--linea);margin:0 0 1.4em;}
+  .ficha dt,.ficha dd{padding:12px 0;border-bottom:1px solid var(--linea);}
+  .ficha dt{font-weight:600;padding-right:24px;}
+  @media (max-width:560px){.ficha{grid-template-columns:1fr;}.ficha dt{border-bottom:0;padding-bottom:0;}.ficha dd{padding-top:2px;}}
+  .caja{background:var(--arena-2);border-radius:8px;padding:clamp(20px,3vw,28px);margin-bottom:1.6em;}
+  .caja > :last-child{margin-bottom:0;}
+  .prosa .caja h3{margin-top:0;}
+  .caja__titular{font-family:var(--serif);font-size:clamp(1.5rem,2.6vw,1.9rem);line-height:1.2;}
+  .prosa .caja .caja__titular{margin-bottom:.35em;}
+  .caja--pendiente{background:#FFF8E9;border:1px dashed #D9B56B;}
+  .dos-cajas{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:1.6em;}
+  .dos-cajas .caja{margin:0;}
+  @media (max-width:700px){.dos-cajas{grid-template-columns:1fr;}}
+  .prosa ul.lista-iconos{list-style:none;padding-left:0;}
+  .lista-iconos li{display:flex;gap:10px;align-items:flex-start;}
+  .lista-iconos svg{width:18px;height:18px;flex:none;margin-top:4px;color:var(--tinta);}
+  .caja--pendiente .lista-iconos svg{color:#7A5200;}
+  .fecha-borrador{margin-top:2.4em;padding-top:1.2em;border-top:1px solid var(--linea);}
+</style>
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+
+<header class="cabecera">
+  <div class="envoltura cabecera__fila">
+    <a class="marca" href="../" aria-label="Villa Canal, inicio">
+      <span class="marca__nombre">Villa Canal</span>
+      <span class="marca__lugar">Santa Margarida · Roses</span>
+    </a>
+    <nav class="menu" aria-label="Principal">
+      <ul class="menu__enlaces">
+        <li><a href="../#la-villa">La villa</a></li>
+        <li><a href="../#interiores">Interiores</a></li>
+        <li><a href="../#exteriores">Exteriores</a></li>
+        <li><a href="../galeria/">Galería</a></li>
+        <li><a href="../#ubicacion">Ubicación</a></li>
+      </ul>
+      <a class="boton boton--primario" href="../reservar/">Consultar disponibilidad</a>
+    </nav>
+    <div class="cabecera__acciones">
+      <a class="boton boton--primario cabecera__movil-cta" href="../reservar/">Disponibilidad</a>
+      <button class="boton-menu" type="button" data-abrir-menu aria-expanded="false" aria-controls="panel-menu" aria-label="Abrir menú">
+        <svg aria-hidden="true"><use href="../assets/iconos.svg#menu"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="panel" id="panel-menu" data-abierto="false" role="dialog" aria-modal="true" aria-label="Menú" tabindex="-1">
+  <div class="panel__arriba">
+    <a class="marca" href="../"><span class="marca__nombre">Villa Canal</span><span class="marca__lugar">Santa Margarida · Roses</span></a>
+    <button class="boton-menu" type="button" data-cerrar-menu aria-label="Cerrar menú"><svg aria-hidden="true"><use href="../assets/iconos.svg#cerrar"/></svg></button>
+  </div>
+  <nav aria-label="Menú móvil">
+    <a href="../#la-villa">La villa</a>
+    <a href="../#interiores">Interiores</a>
+    <a href="../#exteriores">Exteriores</a>
+    <a href="../#canal">El canal</a>
+    <a href="../#ubicacion">Ubicación</a>
+    <a href="../galeria/">Galería</a>
+    <a href="../#preguntas">Preguntas</a>
+  </nav>
+  <div class="panel__pie">
+    <a class="boton boton--primario" href="../reservar/">Consultar disponibilidad</a>
+    <a class="boton boton--linea" href="https://wa.me/34657337686" data-wa="Hola, tengo una pregunta sobre Villa Canal."><svg aria-hidden="true"><use href="../assets/iconos.svg#whatsapp"/></svg>Escribir por WhatsApp</a>
+  </div>
+</div>
+
+<main id="contenido">
+  <section class="cabecera-pagina" aria-labelledby="t-pagina">
+    <div class="envoltura">
+      <nav class="miga" aria-label="Estás aquí"><a href="../">Inicio</a> / <span aria-current="page">Aviso legal</span></nav>
+      <h1 class="titulo-l" id="t-pagina">Aviso legal</h1>
+      <p class="entrada">Quién está detrás de esta web y en qué condiciones puedes usarla.</p>
+      <div class="borrador" role="note">
+        <span class="chapa-demo">Borrador</span>
+        <p>Borrador pendiente de completar con los datos del titular antes de publicar la web. Lo que falta aparece marcado así: <span class="pendiente">[pendiente: …]</span>. Conviene que un gestor o un abogado revise estos textos antes de publicarlos.</p>
+      </div>
+      <nav class="legales" aria-label="Textos legales">
+        <a href="aviso-legal.html" aria-current="page">Aviso legal</a>
+        <a href="privacidad.html">Privacidad</a>
+        <a href="cookies.html">Cookies</a>
+        <a href="condiciones.html">Condiciones de reserva</a>
+      </nav>
+    </div>
+  </section>
+
+  <div class="envoltura legal">
+    <details class="indice" open data-indice>
+      <summary>En esta página<svg aria-hidden="true"><use href="../assets/iconos.svg#mas"/></svg></summary>
+      <nav aria-label="Apartados de esta página">
+        <ol>
+          <li><a href="#titular">Titular</a></li>
+          <li><a href="#objeto">Objeto de la web</a></li>
+          <li><a href="#uso">Uso de la web</a></li>
+          <li><a href="#propiedad">Propiedad intelectual</a></li>
+          <li><a href="#responsabilidad">Responsabilidad</a></li>
+          <li><a href="#enlaces">Enlaces a otras webs</a></li>
+          <li><a href="#datos">Datos y cookies</a></li>
+          <li><a href="#ley">Legislación aplicable</a></li>
+        </ol>
+      </nav>
+    </details>
+
+    <article class="prosa">
+      <h2 id="titular">Titular de la web</h2>
+<p>En cumplimiento del artículo 10 de la Ley 34/2002, de servicios de la sociedad de la información y de comercio electrónico (LSSI-CE), estos son los datos de quien responde de esta web:</p>
+      <dl class="ficha">
+        <dt>Titular</dt><dd><span class="pendiente">[pendiente: nombre y apellidos, o razón social si es una empresa]</span></dd>
+        <dt>NIF</dt><dd><span class="pendiente">[pendiente: NIF o CIF]</span></dd>
+        <dt>Domicilio</dt><dd><span class="pendiente">[pendiente: domicilio del titular]</span></dd>
+        <dt>Correo electrónico</dt><dd><span class="pendiente">[pendiente: email de contacto]</span></dd>
+        <dt>WhatsApp</dt><dd><a href="https://wa.me/34657337686" data-wa="Hola, tengo una pregunta sobre Villa Canal.">+34 657 33 76 86</a></dd>
+        <dt>Registro turístico</dt><dd>HUTG-021359, en el Registro de Turismo de Cataluña</dd>
+      </dl>
+      <p><span class="pendiente">[pendiente: si el titular es una sociedad, sus datos de inscripción en el Registro Mercantil; si es una persona física, se borra esta línea]</span></p>
+
+      <h2 id="objeto">Para qué sirve esta web</h2>
+<p>Esta web presenta Villa Canal, una vivienda de uso turístico en Santa Margarida (Roses, Girona). Sirve para conocer la casa, consultar su disponibilidad y ponerte en contacto con nosotros.</p>
+      <p>Por ahora, desde la web no se puede reservar ni pagar:</p>
+      <ul>
+        <li>La página de reserva es una <strong>demostración</strong>. Te ayuda a preparar una solicitud con tus fechas y el número de huéspedes, que luego nos envías por WhatsApp.</li>
+        <li>Enviar una solicitud no es una reserva confirmada.</li>
+        <li>También puedes reservar la villa en Airbnb. En ese caso se aplican las condiciones y la política de cancelación que muestra Airbnb.</li>
+      </ul>
+
+      <h2 id="uso">Uso de la web</h2>
+<p>Puedes navegar por la web libremente y sin registrarte. Te pedimos que la uses de forma lícita y que no intentes dañarla, alterarla ni usarla para enviar contenido engañoso o dañino.</p>
+
+      <h2 id="propiedad">Propiedad intelectual</h2>
+<p>Los textos, las fotografías y el diseño de esta web pertenecen a su titular o se usan con permiso de sus autores. <span class="pendiente">[pendiente: confirmar quién hizo las fotos y que hay permiso para usarlas en la web]</span></p>
+      <p>No puedes copiarlos, distribuirlos ni usarlos con fines comerciales sin permiso por escrito.</p>
+      <p>Las tipografías DM Serif Display e Inter se usan con la licencia SIL Open Font License. Los datos del mapa de la zona son © colaboradores de OpenStreetMap.</p>
+      <p>Los nombres Airbnb, WhatsApp y OpenStreetMap pertenecen a sus propietarios. Aparecen solo para identificar esos servicios.</p>
+
+      <h2 id="responsabilidad">Responsabilidad</h2>
+<ul>
+        <li>Intentamos que la información de la web sea correcta y esté al día. Aun así, puede haber errores o cambios. Lo que vale para tu estancia es lo que se confirme por escrito al reservar.</li>
+        <li>Algunos datos aparecen como «por confirmar» o «pregúntanos». Consúltalos antes de reservar.</li>
+        <li>Las distancias que se indican son aproximadas.</li>
+        <li>No podemos garantizar que la web funcione siempre sin cortes ni errores técnicos, aunque intentaremos resolverlos lo antes posible.</li>
+      </ul>
+
+      <h2 id="enlaces">Enlaces a otras webs</h2>
+<p>La web enlaza con servicios de otras empresas. Al usarlos sales de esta web y se aplican sus propias condiciones y políticas de privacidad:</p>
+      <ul>
+        <li><strong>Airbnb</strong>: el anuncio de la villa y sus opiniones.</li>
+        <li><strong>WhatsApp</strong>: para escribirnos.</li>
+        <li><strong>OpenStreetMap</strong>: el mapa de la zona, que solo se carga si pulsas «Ver el mapa de la zona».</li>
+      </ul>
+      <p>No controlamos el contenido de esas webs ni respondemos de él.</p>
+
+      <h2 id="datos">Datos personales y cookies</h2>
+<p>Cómo tratamos tus datos está explicado en la <a href="privacidad.html">política de privacidad</a>. Qué se carga en tu navegador, en la <a href="cookies.html">política de cookies</a>: esta web no usa cookies.</p>
+
+      <h2 id="ley">Legislación aplicable</h2>
+<p>Esta web se rige por la legislación española. Si tienes una queja, escríbenos primero y trataremos de resolverla. Si eres consumidor, mantienes todos los derechos que te reconoce la normativa de consumo, incluido el de reclamar ante los juzgados de tu domicilio.</p>
+
+      <p class="pequeno secundario fecha-borrador">Borrador redactado el 27 de septiembre de 2026. Última revisión: <span class="pendiente">[pendiente: fecha de publicación]</span>.</p>
+    </article>
+  </div>
+</main>
+
+<footer class="pie">
+  <div class="envoltura">
+    <div class="pie__rejilla">
+      <div>
+        <span class="marca"><span class="marca__nombre">Villa Canal</span></span>
+        <p style="margin-top:14px">Santa Margarida, Roses<br>Costa Brava (Girona)</p>
+        <p class="pequeno" style="margin-top:14px;color:rgba(255,255,255,.66)">Registro de Turismo de Cataluña<br>HUTG-021359</p>
+      </div>
+      <div>
+        <h2>La villa</h2>
+        <ul>
+          <li><a href="../#la-villa">La villa</a></li>
+          <li><a href="../#interiores">Interiores</a></li>
+          <li><a href="../#exteriores">Exteriores</a></li>
+          <li><a href="../#canal">El canal</a></li>
+          <li><a href="../#ubicacion">Ubicación</a></li>
+          <li><a href="../galeria/">Galería</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Reservas</h2>
+        <ul>
+          <li><a href="../reservar/">Consultar disponibilidad</a></li>
+          <li><a href="../#preguntas">Preguntas frecuentes</a></li>
+          <li><a href="condiciones.html">Condiciones de reserva y cancelación</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contacto</h2>
+        <ul>
+          <li><a href="https://wa.me/34657337686" data-wa="Hola, tengo una pregunta sobre Villa Canal.">WhatsApp · +34 657 33 76 86</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pie__base">
+      <span>© <span data-anio>2026</span> Villa Canal</span>
+      <nav class="pie__legal" aria-label="Legal">
+        <a href="aviso-legal.html" aria-current="page">Aviso legal</a>
+        <a href="privacidad.html">Privacidad</a>
+        <a href="cookies.html">Cookies</a>
+        <a href="condiciones.html">Condiciones de reserva</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-flotante" href="https://wa.me/34657337686" data-wa="Hola, tengo una pregunta sobre Villa Canal." aria-label="Escribir por WhatsApp">
+  <svg aria-hidden="true"><use href="../assets/iconos.svg#whatsapp"/></svg><span>WhatsApp</span>
+</a>
+<div class="barra-movil" data-visible="false">
+  <a class="boton boton--primario" href="../reservar/">Consultar disponibilidad</a>
+  <a class="boton boton--wa" href="https://wa.me/34657337686" data-wa="Hola, tengo una pregunta sobre Villa Canal." aria-label="Escribir por WhatsApp"><svg aria-hidden="true"><use href="../assets/iconos.svg#whatsapp"/></svg></a>
+</div>
+
+<script src="../assets/site.js" defer></script>
+<script>
+  // Índice: siempre abierto en escritorio; en el móvil empieza plegado y se pliega al elegir un apartado
+  document.addEventListener('DOMContentLoaded', function () {
+    var indice = document.querySelector('[data-indice]');
+    if (!indice || !window.matchMedia) return;
+    var movil = window.matchMedia('(max-width: 900px)');
+    var resumen = indice.querySelector('summary');
+    function ajustar() {
+      indice.open = !movil.matches;
+      resumen.tabIndex = movil.matches ? 0 : -1;
+    }
+    ajustar();
+    if (movil.addEventListener) movil.addEventListener('change', ajustar);
+    indice.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { if (movil.matches) indice.open = false; });
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Galería · Villa Canal, Santa Margarida (Roses)</title>
+<meta name="description" content="Las 33 fotos de Villa Canal: interiores, dormitorios, exteriores, piscina y canal. Villa privada para 8 huéspedes en Santa Margarida, Roses.">
+<!-- V1 de muestra: que Google no la indexe hasta que el propietario la apruebe -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F7F5F0">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Galería · Villa Canal, Santa Margarida (Roses)">
+<meta property="og:description" content="Interiores, dormitorios, exteriores, piscina y canal de Villa Canal, en la Costa Brava.">
+<meta property="og:image" content="https://razak31rl-ops.github.io/web-demos-costabrava/villa-canal/assets/img/piscina-canal-1280.webp">
+<!-- Seguridad: solo se cargan archivos de la propia web -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2212%22%20fill%3D%22%23214E50%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2244%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2234%22%20text-anchor%3D%22middle%22%20fill%3D%22%23F7F5F0%22%3EVC%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="preload" href="../assets/fonts/DMSerifDisplay-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/Inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/site.css">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  /* La barra de filtros es fija al bajar: que los saltos a una foto no queden debajo */
+  html{scroll-padding-top:calc(var(--header-h) + 84px);}
+
+  /* ---------- Cabecera de la página ---------- */
+  .galeria-intro{display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px clamp(32px,6vw,96px);align-items:end;}
+  .galeria-intro h1{line-height:1.08;}
+  .galeria-intro p{max-width:30em;justify-self:end;}
+  @media (max-width:760px){.galeria-intro{grid-template-columns:1fr;}.galeria-intro p{justify-self:start;}}
+
+  /* ---------- Filtros (solo con JS: sin JS se ven todas las fotos) ---------- */
+  .barra-filtros{display:none;}
+  .js .barra-filtros{display:block;position:sticky;top:var(--header-h);z-index:20;background:rgba(247,245,240,.95);border-bottom:1px solid var(--linea);}
+  @supports (backdrop-filter:blur(10px)){.js .barra-filtros{background:rgba(247,245,240,.86);backdrop-filter:saturate(1.2) blur(12px);-webkit-backdrop-filter:saturate(1.2) blur(12px);}}
+  .filtros{display:flex;gap:8px;padding-block:12px;overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain;}
+  .filtros::-webkit-scrollbar{display:none;}
+  .filtro{display:inline-flex;align-items:center;gap:9px;flex:none;min-height:44px;padding:0 16px;border:1px solid var(--linea);border-radius:var(--radio);background:transparent;color:var(--tinta);font-size:.92rem;font-weight:500;white-space:nowrap;transition:background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease);}
+  .filtro:hover{border-color:var(--tinta);}
+  .filtro__n{font-size:.78rem;font-weight:600;color:var(--piedra-txt);font-variant-numeric:tabular-nums;}
+  .filtro[aria-pressed="true"]{background:var(--tinta);border-color:var(--tinta);color:#fff;}
+  .filtro[aria-pressed="true"] .filtro__n{color:rgba(255,255,255,.75);}
+  /* En móvil la fila se desliza de lado, pegada a los bordes de la pantalla */
+  @media (max-width:760px){.filtros{margin-inline:calc(var(--pad) * -1);padding-inline:var(--pad);scroll-padding-inline:var(--pad);}}
+
+  /* ---------- Rejilla: filas justificadas, cada foto con su proporción ---------- */
+  .galeria{padding-bottom:clamp(64px,9vw,120px);}
+  .galeria .rejilla{margin-top:clamp(14px,2.2vw,28px);}
+  .rejilla{--alto:clamp(110px,calc(13vw + 40px),240px);--hueco:clamp(6px,.9vw,12px);display:flex;flex-wrap:wrap;gap:var(--hueco);}
+  .rejilla::after{content:"";flex:999999 1 0;}
+  .rejilla li{position:relative;flex:var(--r) 1 calc(var(--r) * var(--alto));aspect-ratio:var(--r);min-width:0;}
+  .rejilla li[hidden]{display:none;}
+  /* Última fila (con JS): se completa si le falta poco; si no, queda centrada */
+  .rejilla--cierre-justo::after,.rejilla--cierre-centro::after{display:none;}
+  .rejilla--cierre-centro{justify-content:center;}
+  .rejilla--cierre-centro .ultima{flex-grow:0;}
+  .rejilla a{position:absolute;inset:0;display:block;overflow:hidden;border-radius:3px;background:var(--arena);}
+  .rejilla img{width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 50%);transition:transform 1.2s var(--ease);}
+  .rejilla__pie{position:absolute;inset:auto 0 0 0;padding:28px 14px 11px;font-size:.84rem;line-height:1.35;color:#fff;background:linear-gradient(to top,rgba(14,22,23,.72),rgba(14,22,23,0));opacity:0;transition:opacity .35s var(--ease);pointer-events:none;}
+  @media (hover:hover){
+    .rejilla a:hover img{transform:scale(1.035);}
+    .rejilla a:hover .rejilla__pie,.rejilla a:focus-visible .rejilla__pie{opacity:1;}
+  }
+  .rejilla a:focus-visible{outline-offset:2px;}
+  .rejilla--entra li{animation:aparecer .45s var(--ease) both;}
+  @keyframes aparecer{from{opacity:0;}to{opacity:1;}}
+  @media (prefers-reduced-motion:reduce){.rejilla img,.rejilla__pie{transition:none;}.rejilla--entra li{animation:none;}}
+
+  /* ---------- Visor ---------- */
+  .visor:not([open]){display:none;}
+  .visor{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:#0F1516;color:#fff;overflow:hidden;overscroll-behavior:contain;}
+  .visor[open]{display:grid;grid-template-rows:auto minmax(0,1fr) auto;animation:aparecer .25s ease both;}
+  .visor::backdrop{background:#0F1516;}
+  .visor :focus-visible{outline-color:#fff;}
+  .visor__arriba{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:calc(10px + env(safe-area-inset-top)) 12px 4px 20px;}
+  .visor__contador{font-size:.88rem;font-weight:500;letter-spacing:.08em;color:rgba(255,255,255,.78);font-variant-numeric:tabular-nums;}
+  .visor__boton{display:inline-flex;align-items:center;justify-content:center;flex:none;width:48px;height:48px;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.1);color:#fff;transition:background .2s;}
+  .visor__boton:hover{background:rgba(255,255,255,.22);}
+  .visor__boton svg{width:22px;height:22px;}
+  .visor__escena{position:relative;min-height:0;display:flex;align-items:center;justify-content:center;padding:6px 0;touch-action:pinch-zoom;user-select:none;-webkit-user-select:none;}
+  .visor__img{width:100%;height:100%;object-fit:contain;transition:transform .3s var(--ease),opacity .25s ease;-webkit-user-drag:none;}
+  .visor__img--espera{opacity:0;}
+  .visor__escena[data-cargando]::after{content:"";position:absolute;left:50%;top:50%;width:30px;height:30px;margin:-15px 0 0 -15px;border:2px solid rgba(255,255,255,.22);border-top-color:#fff;border-radius:50%;animation:girar .8s linear infinite;}
+  @keyframes girar{to{transform:rotate(360deg);}}
+  .visor__abajo{display:grid;grid-template-columns:48px minmax(0,1fr) 48px;align-items:center;gap:12px;padding:8px 12px calc(14px + env(safe-area-inset-bottom));}
+  .visor__pie{text-align:center;font-size:.92rem;line-height:1.45;color:rgba(255,255,255,.88);min-height:2.9em;display:flex;flex-direction:column;justify-content:center;}
+  .visor__nota{display:block;margin-top:2px;font-size:.84rem;color:#F3D9A4;}
+  @media (min-width:761px){
+    .visor__escena{padding:8px 96px;}
+    .visor__abajo{grid-template-columns:minmax(0,1fr);padding:8px 96px calc(22px + env(safe-area-inset-bottom));}
+    .visor__ant,.visor__sig{position:absolute;top:50%;width:56px;height:56px;margin-top:-28px;}
+    .visor__ant{left:20px;}
+    .visor__sig{right:20px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .visor[open]{animation:none;}
+    .visor__img{transition:none;}
+    .visor__escena[data-cargando]::after{animation:none;}
+  }
+
+  /* ---------- Cierre ---------- */
+  /* Texto a la izquierda y los dos botones en una sola fila a la derecha */
+  .cierre-galeria__fila{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px clamp(32px,6vw,96px);align-items:end;}
+  .cierre-galeria p{margin-top:18px;max-width:32em;}
+  .cierre-galeria__acciones{display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-end;}
+  /* Por debajo de 1100 px los botones en fila no dejan sitio al texto: pasan debajo */
+  @media (max-width:1100px){.cierre-galeria__fila{grid-template-columns:1fr;}.cierre-galeria__acciones{justify-content:flex-start;}}
+  @media (max-width:420px){.cierre-galeria__acciones .boton{width:100%;}}
+</style>
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+
+<header class="cabecera">
+  <div class="envoltura cabecera__fila">
+    <a class="marca" href="../" aria-label="Villa Canal, inicio">
+      <span class="marca__nombre">Villa Canal</span>
+      <span class="marca__lugar">Santa Margarida · Roses</span>
+    </a>
+    <nav class="menu" aria-label="Principal">
+      <ul class="menu__enlaces">
+        <li><a href="../#la-villa">La villa</a></li>
+        <li><a href="../#interiores">Interiores</a></li>
+        <li><a href="../#exteriores">Exteriores</a></li>
+        <li><a href="./" aria-current="page">Galería</a></li>
+        <li><a href="../#ubicacion">Ubicación</a></li>
+      </ul>
+      <a class="boton boton--primario" href="../reservar/">Consultar disponibilidad</a>
+    </nav>
+    <div class="cabecera__acciones">
+      <a class="boton boton--primario cabecera__movil-cta" href="../reservar/">Disponibilidad</a>
+      <button class="boton-menu" type="button" data-abrir-menu aria-expanded="false" aria-controls="panel-menu" aria-label="Abrir menú">
+        <svg aria-hidden="true"><use href="../assets/iconos.svg#menu"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="panel" id="panel-menu" data-abierto="false" role="dialog" aria-modal="true" aria-label="Menú" tabindex="-1">
+  <div class="panel__arriba">
+    <a class="marca" href="../"><span class="marca__nombre">Villa Canal</span><span class="marca__lugar">Santa Margarida · Roses</span></a>
+    <button class="boton-menu" type="button" data-cerrar-menu aria-label="Cerrar menú"><svg aria-hidden="true"><use href="../assets/iconos.svg#cerrar"/></svg></button>
+  </div>
+  <nav aria-label="Menú móvil">
+    <a href="../#la-villa">La villa</a>
+    <a href="../#interiores">Interiores</a>
+    <a href="../#exteriores">Exteriores</a>
+    <a href="../#canal">El canal</a>
+    <a href="../#ubicacion">Ubicación</a>
+    <a href="./" aria-current="page">Galería</a>
+    <a href="../#preguntas">Preguntas</a>
+  </nav>
+  <div class="panel__pie">
+    <a class="boton boton--primario" href="../reservar/">Consultar disponibilidad</a>
+    <a class="boton boton--linea" href="https://wa.me/34657337686" data-wa="Hola, tengo una pregunta sobre Villa Canal."><svg aria-hidden="true"><use href="../assets/iconos.svg#whatsapp"/></svg>Escribir por WhatsApp</a>
+  </div>
+</div>
+
+<main id="contenido">
+
+  <!-- ============ CABECERA DE LA PÁGINA ============ -->
+  <section class="cabecera-pagina" aria-labelledby="t-galeria">
+    <div class="envoltura">
+      <nav class="miga" aria-label="Estás aquí"><a href="../">Inicio</a> <span aria-hidden="true">/</span> <span aria-current="page">Galería</span></nav>
+      <div class="galeria-intro">
+        <h1 class="titulo-l" id="t-galeria">Galería</h1>
+        <p class="entrada secundario">Las <span data-total>33</span> fotos de Villa Canal, ordenadas como un recorrido por la casa. Pulsa cualquiera para verla en grande.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOTOS ============ -->
+  <section class="galeria" aria-label="Fotos de la villa">
+    <div class="barra-filtros">
+      <div class="envoltura">
+        <div class="filtros" role="group" aria-label="Filtrar fotos por zona" data-filtros>
+          <button class="filtro" type="button" data-filtro="todas" aria-pressed="true">Todas <span class="filtro__n">33</span></button>
+          <button class="filtro" type="button" data-filtro="interiores" aria-pressed="false">Interiores <span class="filtro__n">11</span></button>
+          <button class="filtro" type="button" data-filtro="dormitorios" aria-pressed="false">Dormitorios <span class="filtro__n">4</span></button>
+          <button class="filtro" type="button" data-filtro="exteriores" aria-pressed="false">Exteriores <span class="filtro__n">11</span></button>
+          <button class="filtro" type="button" data-filtro="piscina" aria-pressed="false">Piscina y canal <span class="filtro__n">7</span></button>
+        </div>
+      </div>
+    </div>
+    <p class="sr" role="status" data-estado></p>
+
+    <div class="envoltura">
+      <!-- Sin JS cada foto es un enlace a su versión grande; con JS abre el visor -->
+      <ul class="rejilla" data-rejilla>
+        <!-- rejilla:inicio -->
+          <li data-cat="piscina" style="--r:1.7778;--pos:50% 62%"><a id="piscina-canal" href="../assets/img/piscina-canal-1920.webp"><img src="../assets/img/piscina-canal-640.webp" srcset="../assets/img/piscina-canal-640.webp 640w, ../assets/img/piscina-canal-1280.webp 1280w, ../assets/img/piscina-canal-1920.webp 1920w" sizes="(min-width:1240px) 516px, (min-width:600px) 37.3vw, 100vw" width="1920" height="1440" fetchpriority="high" decoding="async" alt="Piscina privada y canal con barcos amarrados, vistos desde la planta superior"><span class="rejilla__pie" aria-hidden="true">Piscina privada y canal con barcos amarrados, vistos desde la planta superior</span></a></li>
+          <li data-cat="exteriores" style="--r:1.3333"><a id="fachada-terraza" href="../assets/img/fachada-terraza-1920.webp"><img src="../assets/img/fachada-terraza-640.webp" srcset="../assets/img/fachada-terraza-640.webp 640w, ../assets/img/fachada-terraza-1280.webp 1280w, ../assets/img/fachada-terraza-1920.webp 1920w" sizes="(min-width:1240px) 387px, (min-width:600px) 28vw, 51vw" width="1920" height="1440" decoding="async" alt="Fachada con grandes cristaleras y terraza con sofás exteriores"><span class="rejilla__pie" aria-hidden="true">Fachada con grandes cristaleras y terraza con sofás exteriores</span></a></li>
+          <li data-cat="interiores" style="--r:1.7778;--pos:50% 55%"><a id="salon-vistas" href="../assets/img/salon-vistas-1920.webp"><img src="../assets/img/salon-vistas-640.webp" srcset="../assets/img/salon-vistas-640.webp 640w, ../assets/img/salon-vistas-1280.webp 1280w, ../assets/img/salon-vistas-1920.webp 1920w" sizes="(min-width:1240px) 516px, (min-width:600px) 37.3vw, 100vw" width="1920" height="1440" decoding="async" alt="Salón con cristaleras abiertas a la piscina y al canal"><span class="rejilla__pie" aria-hidden="true">Salón con cristaleras abiertas a la piscina y al canal</span></a></li>
+          <li data-cat="interiores" style="--r:1.3333"><a id="salon-comedor" href="../assets/img/salon-comedor-1920.webp"><img src="../assets/img/salon-comedor-640.webp" srcset="../assets/img/salon-comedor-640.webp 640w, ../assets/img/salon-comedor-1280.webp 1280w, ../assets/img/salon-comedor-1920.webp 1920w" sizes="(min-width:1240px) 387px, (min-width:600px) 28vw, 51vw" width="1920" height="1440" decoding="async" alt="Salón y comedor junto a las cristaleras que dan a la terraza"><span class="rejilla__pie" aria-hidden="true">Salón y comedor junto a las cristaleras que dan a la terraza</span></a></li>
+          <li data-cat="interiores" style="--r:1.3333"><a id="salon-cocina" href="../assets/img/salon-cocina-1920.webp"><img src="../assets/img/salon-cocina-640.webp" srcset="../assets/img/salon-cocina-640.webp 640w, ../assets/img/salon-cocina-1280.webp 1280w, ../assets/img/salon-cocina-1920.webp 1920w" sizes="(min-width:1240px) 387px, (min-width:600px) 28vw, 51vw" width="1920" height="1440" decoding="async" alt="Salón con la cocina abierta y la escalera al fondo"><span class="rejilla__pie" aria-hidden="true">Salón con la cocina abierta y la escalera al fondo</span></a></li>
+          <li data-cat="interiores" style="--r:1.3333"><a id="cocina-isla" href="../assets/img/cocina-isla-1920.webp"><img src="../assets/img/cocina-isla-640.webp" srcset="../assets/img/cocina-isla-640.webp 640w, ../assets/img/cocina-isla-1280.webp 1280w, ../assets/img/cocina-isla-1920.webp 1920w" sizes="(min-width:1240px) 387px, (min-width:600px) 28vw, 51vw" width="1920" height="1440" decoding="async" alt="Isla de la cocina con taburetes, comedor y salón"><span class="rejilla__pie" aria-hidden="true">Isla de la cocina con taburetes, comedor y salón</span></a></li>
+          <li data-cat="interiores" style="--r:1.3333"><a id="cocina-salon" href="../assets/img/cocina-salon-1920.webp"><img src="../assets/img/cocina-salon-640.webp" srcset="../assets/img/cocina-salon-640.webp 640w, ../assets/img/cocina-salon-1280.webp 1280w, ../assets/img/cocina-salon-1920.webp 1920w" sizes="(min-width:1240px) 387px, (min-width:600px) 28vw, 51vw" width="1920" height="1440" loading="lazy" decoding="async" alt="Cocina abierta al salón"><span class="rejilla__pie" aria-hidden="true">Cocina abierta al salón</span></a></li>
+          <li data-cat="interiores" style="--r:1.3333"><a id="cocina" href="../assets/img/cocina-1920.webp"><img src="../assets/img/cocina-640.webp" srcset="../assets/img/cocina-640.webp 640w, ../assets/img/cocina-1280.webp 1280w, ../assets/img/cocina-1920.webp 1920w" sizes="(min-width:1240px) 387px, (min-width:600px) 28vw, 51vw" width="1920" height="1440" loading="lazy" decoding="async" alt="Cocina completa con frigorífico de dos puertas"><span class="rejilla__pie" aria-hidden="true">Cocina completa con frigorífico de dos puertas</span></a></li>
+          <li data-cat="interiores" style="--r:1.3333"><a id="comedor" href="../assets/img/comedor-1920.webp"><img src="../assets/img/comedor-640.webp" srcset="../assets/img/comedor-640.webp 640w, ../assets/img/comedor-1280.webp 1280w, ../assets/img/comedor-1920.webp 1920w" sizes="(min-width:1240px) 387px, (min-width:600px) 28vw, 51vw" width="1920" height="1440" loading="lazy" decoding="async" alt="Mesa de comedor interior junto al jardín"><span class="rejilla__pie" aria-hidden="true">Mesa de comedor interior junto al jardín</span></a></li>
+          <li data-cat="interiores" style="--r:0.75;--pos:45% 50%"><a id="pasillo" href="../assets/img/pasillo-1920.webp"><img src="../assets/img/pasillo-640.webp" srcset="../assets/img/pasillo-640.webp 640w, ../assets/img/pasillo-1280.webp 1280w, ../assets/img/pasillo-1920.webp 1920w" sizes="(min-width:1240px) 218px, (min-width:600px) 15.8vw, 28vw" width="1920" height="1440" loading="lazy" decoding="async" alt="Pasillo de la planta superior"><span class="rejilla__pie" aria-hidden="true">Pasillo de la planta superior</span></a></li>
+          <li data-cat="dormitorios" style="--r:1.3333"><a id="dormitorio-1" href="../assets/img/dormitorio-1-1920.webp"><img src="../assets/img/dormitorio-1-640.webp" srcset="../assets/img/dormitorio-1-640.webp 640w, ../assets/img/dormitorio-1-1280.webp 1280w, ../assets/img/dormitorio-1-1920.webp 1920w" sizes="(min-width:1240px) 387px, (min-width:600px) 28vw, 51vw" width="1920" height="1440" loading="lazy" decoding="async" alt="Dormitorio 1"><span class="rejilla__pie" aria-hidden="true">Dormitorio 1</span></a></li>
+          <li data-cat="dormitorios" style="--r:1.3333"><a id="dormitorio-2" href="../assets/img/dormitorio-2-1920.webp"><img src="../assets/img/dormitorio-2-640.webp" srcset="../assets/img/dormitorio-2-640.webp 640w, ../assets/img/dormitorio-2-1280.webp 1280w, ../assets/img/dormitorio-2-1920.webp 1920w" sizes="(min-width:1240px) 387px, (min-width:600px) 28vw, 51vw" width="1920" height="1440" loading="lazy" decoding="async" alt="Dormitorio 2, con salida a la terraza superior"><span class="rejilla__pie" aria-hidden="true">Dormitorio 2, con salida a la terraza superior</span></a></li>
+          <li data-cat="dormitorios" style="--r:1.7778;--pos:50% 62%"><a id="dormitorio-3" href="../assets/img/dormitorio-3-1920.webp"><img src="../assets/img/dormitorio-3-640.webp" srcset="../assets/img/dormitorio-3-640.webp 640w, ../assets/img/dormitorio-3-1280.webp 1280w, ../assets/img/dormitorio-3-1920.webp 1920w" sizes="(min-width:1240px) 516px, (min-width:600px) 37.3vw, 100vw" width="1920" height="1440" loading="lazy" decoding="async" alt="Dormitorio 3, con mural floral"><span class="rejilla__pie" aria-hidden="true">Dormitorio 3, con mural floral</span></a></li>
+          <li data-cat="dormitorios" style="--r:1.3333"><a id="dormitorio-4" href="../assets/img/dormitorio-4-1920.webp"><img src="../assets/img/dormitorio-4-640.webp" srcset="../assets/img/dormitorio-4-640.webp 640w, ../assets/img/dormitorio-4-1280.webp 1280w, ../assets/img/dormitorio-4-1920.webp 1920w" sizes="(min-width:1240px) 387px, (min-width:600px) 28vw, 51vw" width="1920" height="1440" loading="lazy" decoding="async" alt="Dormitorio 4, con salida a la terraza superior"><span class="rejilla__pie" aria-hidden="true">Dormitorio 4, con salida a la terraza superior</span></a></li>
+          <li data-cat="interiores" style="--r:1;--pos:50% 50%"><a id="bano-1" href="../assets/img/bano-1-1920.webp"><img src="../assets/img/bano-1-640.webp" srcset="../assets/img/bano-1-640.webp 640w, ../assets/img/bano-1-1280.webp 1280w, ../assets/img/bano-1-1920.webp 1920w" sizes="(min-width:1240px) 290px, (min-width:600px) 21vw, 38vw" width="1920" height="1440" loading="lazy" decoding="async" alt="Baño completo con ducha a ras de suelo y doble lavabo"><span class="rejilla__pie" aria-hidden="true">Baño completo con ducha a ras de suelo y doble lavabo</span></a></li>
+          <li data-cat="interiores" style="--r:1;--pos:50% 50%"><a id="bano-2" href="../assets/img/bano-2-1920.webp"><img src="../assets/img/bano-2-640.webp" srcset="../assets/img/bano-2-640.webp 640w, ../assets/img/bano-2-1280.webp 1280w, ../assets/img/bano-2-1920.webp 1920w" sizes="(min-width:1240px) 290px, (min-width:600px) 21vw, 38vw" width="1920" height="1440" loading="lazy" decoding="async" alt="Baño completo con ducha a ras de suelo"><span class="rejilla__pie" aria-hidden="true">Baño completo con ducha a ras de suelo</span></a></li>
+          <li data-cat="interiores" style="--r:1;--pos:50% 50%"><a id="bano-3" href="../assets/img/bano-3-1920.webp"><img src="../assets/img/bano-3-640.webp" srcset="../assets/img/bano-3-640.webp 640w, ../assets/img/bano-3-1280.webp 1280w, ../assets/img/bano-3-1920.webp 1920w" sizes="(min-width:1240px) 290px, (min-width:600px) 21vw, 38vw" width="1920" height="1440" loading="lazy" decoding="async" alt="Baño completo con ducha y mueble de madera"><span class="rejilla__pie" aria-hidden="true">Baño completo con ducha y mueble de madera</span></a></li>
+          <li data-cat="piscina" style="--r:1.7778;--pos:50% 60%"><a id="piscina" href="../assets/img/piscina-1920.webp"><img src="../assets/img/piscina-640.webp" srcset="../assets/img/piscina-640.webp 640w, ../assets/img/piscina-1280.webp 1280w, ../assets/img/piscina-1920.webp 1920w" sizes="(min-width:1240px) 516px, (min-width:600px) 37.3vw, 100vw" width="1920" height="1440" loading="lazy" decoding="async" alt="Piscina privada con tumbonas y jardín"><span class="rejilla__pie" aria-hidden="true">Piscina privada con tumbonas y jardín</span></a></li>
+          <li data-cat="piscina" style="--r:1.3333"><a id="piscina-2" href="../assets/img/piscina-2-1920.webp"><img src="../assets/img/piscina-2-640.webp" srcset="../assets/img/piscina-2-640.webp 640w, ../assets/img/piscina-2-1280.webp 1280w, ../assets/img/piscina-2-1920.webp 1920w" sizes="(min-width:1240px) 387px, (min-width:600px) 28vw, 51vw" width="1920" height="1440" loading="lazy" decoding="async" alt="Piscina privada con escalones de acceso"><span class="rejilla__pie" aria-hidden="true">Piscina privada con escalones de acceso</span></a></li>
+          <li data-cat="piscina" style="--r:2.6667"><a id="jardin-fachada" href="../assets/img/jardin-fachada-1920.webp"><img src="../assets/img/jardin-fachada-640.webp" srcset="../assets/img/jardin-fachada-640.webp 640w, ../assets/img/jardin-fachada-1280.webp 1280w, ../assets/img/jardin-fachada-1920.webp 1920w" sizes="(min-width:1240px) 773px, (min-width:600px) 56vw, 100vw" width="1920" height="720" loading="lazy" decoding="async" alt="Jardín, piscina y fachada, con el canal y un barco amarrado a la derecha"><span class="rejilla__pie" aria-hidden="true">Jardín, piscina y fachada, con el canal y un barco amarrado a la derecha</span></a></li>
+          <li data-cat="piscina" style="--r:1.3333"><a id="terraza-canal" href="../assets/img/terraza-canal-1920.webp"><img src="../assets/img/terraza-canal-640.webp" srcset="../assets/img/terraza-canal-640.webp 640w, ../assets/img/terraza-canal-1280.webp 1280w, ../assets/img/terraza-canal-1920.webp 1920w" sizes="(min-width:1240px) 387px, (min-width:600px) 28vw, 51vw" width="1920" height="1440" loading="lazy" decoding="async" alt="Terraza de la planta superior con vistas al canal"><span class="rejilla__pie" aria-hidden="true">Terraza de la planta superior con vistas al canal</span></a></li>
+          <li data-cat="exteriores" style="--r:1.3333"><a id="piscina-comedor" href="../assets/img/piscina-comedor-1920.webp"><img src="../assets/img/piscina-comedor-640.webp" srcset="../assets/img/piscina-comedor-640.webp 640w, ../assets/img/piscina-comedor-1280.webp 1280w, ../assets/img/piscina-comedor-1920.webp 1920w" sizes="(min-width:1240px) 387px, (min-width:600px) 28vw, 51vw" width="1920" height="1440" loading="lazy" decoding="async" alt="Comedor exterior junto a la piscina"><span class="rejilla__pie" aria-hidden="true">Comedor exterior junto a la piscina</span></a></li>
+          <li data-cat="exteriores" style="--r:1.3333"><a id="porche-comedor" href="../assets/img/porche-comedor-1920.webp"><img src="../assets/img/porche-comedor-640.webp" srcset="../assets/img/porche-comedor-640.webp 640w, ../assets/img/porche-comedor-1280.webp 1280w, ../assets/img/porche-comedor-1920.webp 1920w" sizes="(min-width:1240px) 387px, (min-width:600px) 28vw, 51vw" width="1920" height="1440" loading="lazy" decoding="async" alt="Comedor exterior bajo el porche"><span class="rejilla__pie" aria-hidden="true">Comedor exterior bajo el porche</span></a></li>
+          <li data-cat="exteriores" style="--r:1.3333"><a id="barra-piscina" href="../assets/img/barra-piscina-1920.webp"><img src="../assets/img/barra-piscina-640.webp" srcset="../assets/img/barra-piscina-640.webp 640w, ../assets/img/barra-piscina-1280.webp 1280w, ../assets/img/barra-piscina-1920.webp 1920w" sizes="(min-width:1240px) 387px, (min-width:600px) 28vw, 51vw" width="1920" height="1440" loading="lazy" decoding="async" alt="Barra exterior de obra junto a la piscina"><span class="rejilla__pie" aria-hidden="true">Barra exterior de obra junto a la piscina</span></a></li>
+          <li data-cat="exteriores" style="--r:1.3333"><a id="cocina-exterior" href="../assets/img/cocina-exterior-1920.webp"><img src="../assets/img/cocina-exterior-640.webp" srcset="../assets/img/cocina-exterior-640.webp 640w, ../assets/img/cocina-exterior-1280.webp 1280w, ../assets/img/cocina-exterior-1920.webp 1920w" sizes="(min-width:1240px) 387px, (min-width:600px) 28vw, 51vw" width="1920" height="1440" loading="lazy" decoding="async" alt="Cocina exterior de obra con fregadero"><span class="rejilla__pie" aria-hidden="true">Cocina exterior de obra con fregadero</span></a></li>
+          <li data-cat="exteriores" style="--r:1.7778;--pos:50% 60%"><a id="tumbonas" href="../assets/img/tumbonas-1920.webp"><img src="../assets/img/tumbonas-640.webp" srcset="../assets/img/tumbonas-640.webp 640w, ../assets/img/tumbonas-1280.webp 1280w, ../assets/img/tumbonas-1920.webp 1920w" sizes="(min-width:1240px) 516px, (min-width:600px) 37.3vw, 100vw" width="1920" height="1440" loading="lazy" decoding="async" alt="Tumbonas de bambú junto a la piscina"><span class="rejilla__pie" aria-hidden="true">Tumbonas de bambú junto a la piscina</span></a></li>
+          <li data-cat="exteriores" style="--r:1.3333"><a id="entrada" href="../assets/img/entrada-1920.webp"><img src="../assets/img/entrada-640.webp" srcset="../assets/img/entrada-640.webp 640w, ../assets/img/entrada-1280.webp 1280w, ../assets/img/entrada-1920.webp 1920w" sizes="(min-width:1240px) 387px, (min-width:600px) 28vw, 51vw" width="1920" height="1440" loading="lazy" decoding="async" alt="Patio de entrada con palmera"><span class="rejilla__pie" aria-hidden="true">Patio de entrada con palmera</span></a></li>
+          <li data-cat="exteriores" style="--r:0.75"><a id="jacuzzi" href="../assets/img/jacuzzi-1080.webp" data-nota="Pregúntanos si el jacuzzi estará disponible en tus fechas."><img src="../assets/img/jacuzzi-640.webp" srcset="../assets/img/jacuzzi-640.webp 640w, ../assets/img/jacuzzi-1080.webp 1080w" sizes="(min-width:1240px) 218px, (min-width:600px) 15.8vw, 28vw" width="1080" height="1440" loading="lazy" decoding="async" alt="Jacuzzi exterior"><span class="rejilla__pie" aria-hidden="true">Jacuzzi exterior</span></a></li>
+          <li data-cat="exteriores" style="--r:1.7778;--pos:50% 55%"><a id="fachada-noche" href="../assets/img/fachada-noche-1920.webp"><img src="../assets/img/fachada-noche-640.webp" srcset="../assets/img/fachada-noche-640.webp 640w, ../assets/img/fachada-noche-1280.webp 1280w, ../assets/img/fachada-noche-1920.webp 1920w" sizes="(min-width:1240px) 516px, (min-width:600px) 37.3vw, 100vw" width="1920" height="1440" loading="lazy" decoding="async" alt="Fachada iluminada de noche, con terraza, porche y piscina"><span class="rejilla__pie" aria-hidden="true">Fachada iluminada de noche, con terraza, porche y piscina</span></a></li>
+          <li data-cat="piscina" style="--r:0.75"><a id="piscina-noche" href="../assets/img/piscina-noche-1080.webp"><img src="../assets/img/piscina-noche-640.webp" srcset="../assets/img/piscina-noche-640.webp 640w, ../assets/img/piscina-noche-1080.webp 1080w" sizes="(min-width:1240px) 218px, (min-width:600px) 15.8vw, 28vw" width="1080" height="1440" loading="lazy" decoding="async" alt="Piscina y terraza iluminadas de noche"><span class="rejilla__pie" aria-hidden="true">Piscina y terraza iluminadas de noche</span></a></li>
+          <li data-cat="piscina" style="--r:0.75"><a id="piscina-noche-2" href="../assets/img/piscina-noche-2-1080.webp"><img src="../assets/img/piscina-noche-2-640.webp" srcset="../assets/img/piscina-noche-2-640.webp 640w, ../assets/img/piscina-noche-2-1080.webp 1080w" sizes="(min-width:1240px) 218px, (min-width:600px) 15.8vw, 28vw" width="1080" height="1440" loading="lazy" decoding="async" alt="Piscina de noche junto a la barra exterior"><span class="rejilla__pie" aria-hidden="true">Piscina de noche junto a la barra exterior</span></a></li>
+          <li data-cat="exteriores" style="--r:0.75"><a id="entrada-noche" href="../assets/img/entrada-noche-1080.webp"><img src="../assets/img/entrada-noche-640.webp" srcset="../assets/img/entrada-noche-640.webp 640w, ../assets/img/entrada-noche-1080.webp 1080w" sizes="(min-width:1240px) 218px, (min-width:600px) 15.8vw, 28vw" width="1080" height="1440" loading="lazy" decoding="async" alt="Entrada iluminada de noche"><span class="rejilla__pie" aria-hidden="true">Entrada iluminada de noche</span></a></li>
+          <li data-cat="exteriores" style="--r:0.6667"><a id="jacuzzi-noche" href="../assets/img/jacuzzi-noche-1080.webp" data-nota="Pregúntanos si el jacuzzi estará disponible en tus fechas."><img src="../assets/img/jacuzzi-noche-640.webp" srcset="../assets/img/jacuzzi-noche-640.webp 640w, ../assets/img/jacuzzi-noche-1080.webp 1080w" sizes="(min-width:1240px) 193px, (min-width:600px) 14vw, 25vw" width="1080" height="1620" loading="lazy" decoding="async" alt="Jacuzzi iluminado de noche"><span class="rejilla__pie" aria-hidden="true">Jacuzzi iluminado de noche</span></a></li>
+        <!-- rejilla:fin -->
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ CIERRE ============ -->
+  <section class="seccion seccion--suave cierre-galeria" aria-labelledby="t-cierre">
+    <div class="envoltura cierre-galeria__fila">
+      <div>
+        <span class="antetitulo">Villa Canal</span>
+        <h2 class="titulo-l" id="t-cierre">Si te encaja, consulta tus fechas.</h2>
+        <p class="secundario">Hasta 8 huéspedes, 4 dormitorios y 3 baños. Si tienes dudas sobre el amarre, las camas o el jacuzzi, pregúntanos por WhatsApp.</p>
+      </div>
+      <div class="cierre-galeria__acciones">
+        <a class="boton boton--primario" href="../reservar/">Consultar disponibilidad</a>
+        <a class="boton boton--wa" href="https://wa.me/34657337686" data-wa="Hola, he visto las fotos de Villa Canal y tengo una pregunta."><svg aria-hidden="true"><use href="../assets/iconos.svg#whatsapp"/></svg>Escribir por WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ VISOR ============ -->
+<dialog class="visor" id="visor" aria-label="Visor de fotos">
+  <div class="visor__arriba">
+    <p class="visor__contador"><span data-visor-n>1</span> / <span data-visor-total>33</span></p>
+    <button class="visor__boton" type="button" data-visor-cerrar aria-label="Cerrar el visor"><svg aria-hidden="true"><use href="../assets/iconos.svg#cerrar"/></svg></button>
+  </div>
+  <div class="visor__escena" data-visor-escena>
+    <img class="visor__img" data-visor-img alt="" draggable="false">
+  </div>
+  <div class="visor__abajo">
+    <button class="visor__boton visor__ant" type="button" data-visor-ant aria-label="Foto anterior"><svg aria-hidden="true"><use href="../assets/iconos.svg#izquierda"/></svg></button>
+    <p class="visor__pie" data-visor-pie></p>
+    <button class="visor__boton visor__sig" type="button" data-visor-sig aria-label="Foto siguiente"><svg aria-hidden="true"><use href="../assets/iconos.svg#derecha"/></svg></button>
+  </div>
+  <p class="sr" aria-live="polite" data-visor-aviso></p>
+</dialog>
+
+<footer class="pie">
+  <div class="envoltura">
+    <div class="pie__rejilla">
+      <div>
+        <span class="marca"><span class="marca__nombre">Villa Canal</span></span>
+        <p style="margin-top:14px">Santa Margarida, Roses<br>Costa Brava (Girona)</p>
+        <p class="pequeno" style="margin-top:14px;color:rgba(255,255,255,.66)">Registro de Turismo de Cataluña<br>HUTG-021359</p>
+      </div>
+      <div>
+        <h2>La villa</h2>
+        <ul>
+          <li><a href="../#la-villa">La villa</a></li>
+          <li><a href="../#interiores">Interiores</a></li>
+          <li><a href="../#exteriores">Exteriores</a></li>
+          <li><a href="../#canal">El canal</a></li>
+          <li><a href="../#ubicacion">Ubicación</a></li>
+          <li><a href="./">Galería</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Reservas</h2>
+        <ul>
+          <li><a href="../reservar/">Consultar disponibilidad</a></li>
+          <li><a href="../#preguntas">Preguntas frecuentes</a></li>
+          <li><a href="../legal/condiciones.html">Condiciones de reserva y cancelación</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contacto</h2>
+        <ul>
+          <li><a href="https://wa.me/34657337686" data-wa="Hola, tengo una pregunta sobre Villa Canal.">WhatsApp · +34 657 33 76 86</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pie__base">
+      <span>© <span data-anio>2026</span> Villa Canal</span>
+      <nav class="pie__legal" aria-label="Legal">
+        <a href="../legal/aviso-legal.html">Aviso legal</a>
+        <a href="../legal/privacidad.html">Privacidad</a>
+        <a href="../legal/cookies.html">Cookies</a>
+        <a href="../legal/condiciones.html">Condiciones de reserva</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-flotante" href="https://wa.me/34657337686" data-wa="Hola, tengo una pregunta sobre Villa Canal." aria-label="Escribir por WhatsApp">
+  <svg aria-hidden="true"><use href="../assets/iconos.svg#whatsapp"/></svg><span>WhatsApp</span>
+</a>
+<div class="barra-movil" data-visible="false">
+  <a class="boton boton--primario" href="../reservar/">Consultar disponibilidad</a>
+  <a class="boton boton--wa" href="https://wa.me/34657337686" data-wa="Hola, tengo una pregunta sobre Villa Canal." aria-label="Escribir por WhatsApp"><svg aria-hidden="true"><use href="../assets/iconos.svg#whatsapp"/></svg></a>
+</div>
+
+<script src="../assets/fotos.js" defer></script>
+<script src="../assets/site.js" defer></script>
+<script>
+  // Galería: filtros, visor a pantalla completa y enlaces directos (#foto o #zona).
+  // Sin JS todo sigue funcionando: cada miniatura es un enlace a la foto grande.
+  document.addEventListener('DOMContentLoaded', function () {
+    'use strict';
+    var rejilla = document.querySelector('[data-rejilla]');
+    if (!rejilla) return;
+
+    var ZONAS = ['todas', 'interiores', 'dormitorios', 'exteriores', 'piscina'];
+    var NOMBRES = { todas: 'Todas', interiores: 'Interiores', dormitorios: 'Dormitorios', exteriores: 'Exteriores', piscina: 'Piscina y canal' };
+    var movimientoReducido = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    /* ---------- Datos: fotos.js manda; si no cargara, se leen de la propia miniatura ---------- */
+    var datos = {};
+    (window.FOTOS || []).forEach(function (f) { datos[f.slug] = f; });
+    var fotos = [].slice.call(rejilla.querySelectorAll('li')).map(function (li) {
+      var a = li.querySelector('a');
+      var mini = a.querySelector('img');
+      var d = datos[a.id] || {};
+      return {
+        li: li, a: a, mini: mini, slug: a.id,
+        cat: li.getAttribute('data-cat'),
+        alt: d.alt || mini.alt,
+        nota: a.getAttribute('data-nota') || '',
+        r: (d.w || mini.width) / (d.h || mini.height),
+        srcset: d.tams ? d.tams.map(function (t) { return '../assets/img/' + a.id + '-' + t + '.webp ' + t + 'w'; }).join(', ') : mini.getAttribute('srcset'),
+        grande: a.getAttribute('href')
+      };
+    });
+    var porSlug = {};
+    fotos.forEach(function (f) { porSlug[f.slug] = f; });
+
+    /* ---------- Filtros ---------- */
+    var botones = [].slice.call(document.querySelectorAll('[data-filtro]'));
+    var estado = document.querySelector('[data-estado]');
+    var zona = 'todas';
+
+    function cuantas(cat) {
+      return cat === 'todas' ? fotos.length : fotos.filter(function (f) { return f.cat === cat; }).length;
+    }
+    botones.forEach(function (b) {
+      var n = b.querySelector('.filtro__n');
+      if (n) n.textContent = cuantas(b.getAttribute('data-filtro'));
+      b.addEventListener('click', function () {
+        filtrar(b.getAttribute('data-filtro'), { hash: true, desplazar: true, animar: true });
+      });
+    });
+
+    function visibles() { return fotos.filter(function (f) { return !f.li.hidden; }); }
+
+    function urlSinHash() { return location.pathname + location.search; }
+
+    function filtrar(cat, op) {
+      op = op || {};
+      if (ZONAS.indexOf(cat) < 0) cat = 'todas';
+      zona = cat;
+      fotos.forEach(function (f) { f.li.hidden = !(cat === 'todas' || f.cat === cat); });
+      botones.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-filtro') === cat ? 'true' : 'false'); });
+      // En móvil, que el filtro activo quede a la vista dentro de su fila deslizable
+      var activo = botones.filter(function (b) { return b.getAttribute('data-filtro') === cat; })[0];
+      var fila = activo && activo.parentNode;
+      if (fila && fila.scrollWidth > fila.clientWidth) {
+        var izq = activo.getBoundingClientRect().left - fila.getBoundingClientRect().left + fila.scrollLeft;
+        fila.scrollTo({ left: Math.max(0, izq - 16), behavior: movimientoReducido.matches ? 'auto' : 'smooth' });
+      }
+      if (estado) estado.textContent = NOMBRES[cat] + ': ' + cuantas(cat) + ' fotos';
+      if (op.hash) history.replaceState(null, '', cat === 'todas' ? urlSinHash() : '#' + cat);
+      if (op.animar && !movimientoReducido.matches) {
+        rejilla.classList.remove('rejilla--entra');
+        void rejilla.offsetWidth; // reinicia la animación
+        rejilla.classList.add('rejilla--entra');
+      }
+      ultimaFila();
+      if (op.desplazar) {
+        // Si ya se había bajado, vuelve al principio de las fotos
+        var barra = document.querySelector('.barra-filtros');
+        var margen = (document.querySelector('.cabecera') || {}).offsetHeight || 0;
+        margen += (barra ? barra.offsetHeight : 0) + 12;
+        var tope = rejilla.getBoundingClientRect().top + window.scrollY - margen;
+        if (window.scrollY > tope + 1) window.scrollTo({ top: tope, behavior: movimientoReducido.matches ? 'auto' : 'smooth' });
+      }
+    }
+
+    // La última fila de la rejilla: si casi llena el ancho se completa; si no, se centra
+    fotos.forEach(function (f) { f.rMini = parseFloat(f.li.style.getPropertyValue('--r')) || f.r; });
+    function ultimaFila() {
+      rejilla.classList.remove('rejilla--cierre-justo', 'rejilla--cierre-centro');
+      fotos.forEach(function (f) {
+        f.li.classList.remove('ultima');
+        if (f.recortada) { f.li.style.setProperty('--r', f.rMini); f.recortada = false; }
+      });
+      var vis = visibles();
+      if (!vis.length) return;
+      var arriba = vis[vis.length - 1].li.offsetTop;
+      var fila = vis.filter(function (f) { return Math.abs(f.li.offsetTop - arriba) < 2; });
+      var ancho = rejilla.clientWidth;
+      // En el móvil, una foto sola al final ocupa todo el ancho (recortada en horizontal)
+      if (ancho < 600 && fila.length === 1 && vis.length > 1) {
+        var sola = fila[0];
+        if (sola.rMini < 4 / 3) { sola.li.style.setProperty('--r', 4 / 3); sola.recortada = true; }
+        rejilla.classList.add('rejilla--cierre-justo');
+        return;
+      }
+      var hueco = parseFloat(getComputedStyle(rejilla).columnGap) || 0;
+      var sumaR = fila.reduce(function (s, f) { return s + f.rMini; }, 0);
+      var altoJusto = (ancho - hueco * (fila.length - 1)) / sumaR;
+      var limite = ancho < 600 ? 2.2 : 1.45;
+      fila.forEach(function (f) { f.li.classList.add('ultima'); });
+      rejilla.classList.add(altoJusto <= fila[0].li.offsetHeight * limite ? 'rejilla--cierre-justo' : 'rejilla--cierre-centro');
+    }
+    var anchoPrevio = 0;
+    function alCambiarAncho() {
+      if (rejilla.clientWidth === anchoPrevio) return;
+      anchoPrevio = rejilla.clientWidth;
+      ultimaFila();
+    }
+    if ('ResizeObserver' in window) new ResizeObserver(alCambiarAncho).observe(rejilla);
+    else window.addEventListener('resize', alCambiarAncho);
+    alCambiarAncho();
+
+    /* ---------- Visor ---------- */
+    var visor = document.getElementById('visor');
+    var puedeVisor = visor && typeof visor.showModal === 'function';
+    if (!puedeVisor) { leerHash(true); return; }
+
+    var escena = visor.querySelector('[data-visor-escena]');
+    var img = visor.querySelector('[data-visor-img]');
+    var txtN = visor.querySelector('[data-visor-n]');
+    var txtTotal = visor.querySelector('[data-visor-total]');
+    var pie = visor.querySelector('[data-visor-pie]');
+    var aviso = visor.querySelector('[data-visor-aviso]');
+    var lista = [];   // fotos del filtro activo al abrir el visor
+    var pos = 0;
+    var turno = 0;    // evita que una carga lenta pise a la foto actual
+
+    // Ancho real que ocupará la foto en pantalla, para que el navegador elija el tamaño justo
+    function tamano(f) {
+      var cs = getComputedStyle(escena);
+      var ancho = escena.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      var alto = escena.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+      if (ancho <= 0 || alto <= 0) { ancho = window.innerWidth; alto = window.innerHeight; }
+      return Math.max(1, Math.round(Math.min(ancho, alto * f.r))) + 'px';
+    }
+
+    // Carga (o reutiliza) la versión grande de una foto
+    function cargar(f) {
+      var sizes = tamano(f);
+      if (!f.carga || f.carga.sizes !== sizes) {
+        var im = new Image();
+        im.decoding = 'async';
+        im.sizes = sizes;
+        im.srcset = f.srcset;
+        im.src = f.grande;
+        var c = { sizes: sizes, im: im, lista: false };
+        var hecho = function () { c.lista = true; };
+        c.promesa = im.decode ? im.decode().then(hecho, hecho) : new Promise(function (ok) { im.onload = im.onerror = function () { hecho(); ok(); }; });
+        f.carga = c;
+      }
+      return f.carga;
+    }
+
+    function pintar() {
+      var f = lista[pos];
+      if (!f) return;
+      var t = ++turno;
+      txtN.textContent = pos + 1;
+      txtTotal.textContent = lista.length;
+      pie.textContent = f.alt;
+      if (f.nota) {
+        var nota = document.createElement('span');
+        nota.className = 'visor__nota';
+        nota.textContent = f.nota;
+        pie.appendChild(nota);
+      }
+      aviso.textContent = 'Foto ' + (pos + 1) + ' de ' + lista.length + ': ' + f.alt;
+      img.alt = f.alt;
+
+      var c = cargar(f);
+      function ponerGrande() {
+        if (t !== turno) return;
+        img.sizes = c.sizes;
+        img.srcset = f.srcset;
+        img.src = f.grande;
+        img.classList.remove('visor__img--espera');
+        escena.removeAttribute('data-cargando');
+      }
+      if (c.lista) {
+        ponerGrande();
+      } else {
+        // Mientras llega la grande, se enseña la miniatura si ya está cargada
+        img.removeAttribute('srcset');
+        if (f.mini.complete && f.mini.naturalWidth) {
+          img.src = f.mini.currentSrc || f.mini.src;
+          img.classList.remove('visor__img--espera');
+        } else {
+          img.classList.add('visor__img--espera');
+        }
+        escena.setAttribute('data-cargando', '');
+        c.promesa.then(ponerGrande);
+      }
+      // Precarga la anterior y la siguiente
+      if (lista.length > 1) {
+        cargar(lista[(pos + 1) % lista.length]);
+        cargar(lista[(pos - 1 + lista.length) % lista.length]);
+      }
+      history.replaceState(null, '', '#' + hashDeFoto(f.slug));
+    }
+
+    // "piscina" es a la vez una zona y una foto: la foto usa #foto-piscina
+    function hashDeFoto(slug) { return ZONAS.indexOf(slug) >= 0 ? 'foto-' + slug : slug; }
+
+    function abrir(f) {
+      lista = visibles();
+      pos = lista.indexOf(f);
+      if (pos < 0) { filtrar('todas'); lista = visibles(); pos = lista.indexOf(f); }
+      if (!visor.open) {
+        visor.showModal();
+        abierto = true;
+        document.documentElement.style.overflow = 'hidden';
+      }
+      pintar();
+    }
+
+    function ir(paso) {
+      if (lista.length < 2) return;
+      pos = (pos + paso + lista.length) % lista.length;
+      pintar();
+    }
+
+    // Cierre: se ordena aquí mismo (no se espera al evento "close", que Chrome retrasa al siguiente fotograma)
+    var abierto = false;
+    function alCerrar() {
+      if (!abierto) return;
+      abierto = false;
+      turno++;
+      document.documentElement.style.overflow = '';
+      history.replaceState(null, '', zona === 'todas' ? urlSinHash() : '#' + zona);
+      // Devuelve el foco a la miniatura de la última foto vista
+      var f = lista[pos];
+      if (!f) return;
+      f.a.focus({ preventScroll: true });
+      var caja = f.a.getBoundingClientRect();
+      if (caja.top < 140 || caja.bottom > window.innerHeight) {
+        // Salto directo (sin desplazamiento suave): el visor tapaba la página
+        var raiz = document.documentElement;
+        raiz.style.scrollBehavior = 'auto';
+        f.a.scrollIntoView({ block: 'center' });
+        raiz.style.scrollBehavior = '';
+      }
+    }
+    function cerrar() {
+      if (visor.open) visor.close();
+      alCerrar();
+    }
+    // (si el visor ya se ha vuelto a abrir, un "close" atrasado no debe deshacer nada)
+    visor.addEventListener('close', function () { if (!visor.open) alCerrar(); });
+    // Esc (y el botón "atrás" de Android): se cierra con el mismo camino
+    visor.addEventListener('cancel', function (e) { e.preventDefault(); cerrar(); });
+
+    visor.querySelector('[data-visor-cerrar]').addEventListener('click', cerrar);
+    visor.querySelector('[data-visor-ant]').addEventListener('click', function () { ir(-1); });
+    visor.querySelector('[data-visor-sig]').addEventListener('click', function () { ir(1); });
+
+    // Teclado: flechas para pasar, Inicio/Fin, y Esc cierra (lo hace el propio <dialog>).
+    // Se escucha en todo el documento: al entrar por #foto el foco puede quedar en <body>
+    document.addEventListener('keydown', function (e) {
+      if (!visor.open) return;
+      if (e.altKey || e.ctrlKey || e.metaKey) return;
+      if (e.key === 'ArrowRight') { e.preventDefault(); ir(1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); ir(-1); }
+      else if (e.key === 'Home') { e.preventDefault(); pos = 0; pintar(); }
+      else if (e.key === 'End') { e.preventDefault(); pos = lista.length - 1; pintar(); }
+    });
+
+    window.addEventListener('resize', function () {
+      if (!visor.open || !lista[pos]) return;
+      img.sizes = tamano(lista[pos]);
+    });
+
+    /* ---------- Gestos en móvil: deslizar para pasar, hacia abajo para cerrar ---------- */
+    // Con el zoom del navegador activo no se interceptan gestos: se deja mover la foto ampliada
+    function ampliado() { return !!(window.visualViewport && window.visualViewport.scale > 1.02); }
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', function () {
+        escena.style.touchAction = ampliado() ? 'auto' : '';
+      });
+    }
+    var dedos = {};
+    var gesto = null;
+    function numDedos() { return Object.keys(dedos).length; }
+    function soltarImagen(sinAnimacion) {
+      img.style.transition = sinAnimacion ? 'none' : '';
+      img.style.transform = '';
+      if (sinAnimacion) { void img.offsetWidth; img.style.transition = ''; }
+    }
+    escena.addEventListener('pointerdown', function (e) {
+      if (e.pointerType === 'mouse') return;
+      dedos[e.pointerId] = true;
+      if (numDedos() > 1 || ampliado()) { if (gesto) soltarImagen(); gesto = null; return; }
+      gesto = { id: e.pointerId, x: e.clientX, y: e.clientY, t: Date.now(), dx: 0, dy: 0 };
+    });
+    escena.addEventListener('pointermove', function (e) {
+      if (!gesto || e.pointerId !== gesto.id) return;
+      gesto.dx = e.clientX - gesto.x;
+      gesto.dy = e.clientY - gesto.y;
+      if (!movimientoReducido.matches && Math.abs(gesto.dx) > Math.abs(gesto.dy)) {
+        img.style.transition = 'none';
+        img.style.transform = 'translateX(' + gesto.dx + 'px)';
+      }
+    });
+    function finGesto(e) {
+      delete dedos[e.pointerId];
+      if (!gesto || e.pointerId !== gesto.id) return;
+      var g = gesto;
+      gesto = null;
+      var ax = Math.abs(g.dx), ay = Math.abs(g.dy);
+      var rapido = Date.now() - g.t < 300;
+      var umbral = Math.min(80, escena.clientWidth * 0.18);
+      if (e.type === 'pointerup' && ax > ay * 1.3 && (ax > umbral || (rapido && ax > 30))) {
+        soltarImagen(true);
+        ir(g.dx < 0 ? 1 : -1);
+      } else if (e.type === 'pointerup' && g.dy > 90 && ay > ax * 1.3) {
+        soltarImagen(true);
+        cerrar();
+      } else {
+        soltarImagen(false);
+      }
+    }
+    escena.addEventListener('pointerup', finGesto);
+    escena.addEventListener('pointercancel', finGesto);
+
+    /* ---------- Miniaturas: abren el visor (Ctrl/Cmd + clic sigue abriendo la foto aparte) ---------- */
+    rejilla.addEventListener('click', function (e) {
+      var a = e.target.closest ? e.target.closest('a') : null;
+      if (!a || !porSlug[a.id]) return;
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      e.preventDefault();
+      abrir(porSlug[a.id]);
+    });
+
+    /* ---------- Enlaces directos: #interiores activa el filtro, #cocina-isla abre esa foto ---------- */
+    function leerHash(inicial) {
+      var h = '';
+      try { h = decodeURIComponent(location.hash.slice(1)); } catch (err) { h = location.hash.slice(1); }
+      if (!h) return;
+      if (ZONAS.indexOf(h) >= 0) {
+        if (puedeVisor) cerrar();
+        filtrar(h, { hash: true, desplazar: !inicial });
+        if (inicial) window.scrollTo(0, 0);
+        return;
+      }
+      var slug = h.indexOf('foto-') === 0 && porSlug[h.slice(5)] ? h.slice(5) : h;
+      var f = porSlug[slug];
+      if (!f) return;
+      if (f.li.hidden) filtrar('todas');
+      if (puedeVisor) abrir(f);
+    }
+    window.addEventListener('hashchange', function () { leerHash(false); });
+    leerHash(true);
+    // Al entrar por #foto, el navegador salta a la miniatura (inerte bajo el visor) y el foco
+    // acaba en <body>: al terminar la carga se devuelve al botón de cerrar
+    function recolocarFoco() {
+      if (visor.open && !visor.contains(document.activeElement)) visor.querySelector('[data-visor-cerrar]').focus();
+    }
+    if (document.readyState === 'complete') recolocarFoco();
+    else window.addEventListener('load', recolocarFoco);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Política de privacidad · Villa Canal</title>
+<meta name="description" content="Qué datos trata Villa Canal, para qué, durante cuánto tiempo y cómo ejercer tus derechos.">
+<!-- V1 de muestra: que Google no la indexe hasta que el propietario la apruebe -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F7F5F0">
+<!-- Seguridad: solo se cargan archivos de la propia web (esta página no tiene mapa) -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2212%22%20fill%3D%22%23214E50%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2244%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2234%22%20text-anchor%3D%22middle%22%20fill%3D%22%23F7F5F0%22%3EVC%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="preload" href="../assets/fonts/DMSerifDisplay-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/Inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/site.css">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  /* ---------- Páginas legales ---------- */
+  .cabecera-pagina .entrada{margin-top:18px;color:var(--piedra-txt);}
+  .borrador{display:grid;justify-items:start;gap:10px;max-width:46em;margin-top:28px;padding:16px 18px;background:#FFF8E9;border:1px solid #E9C987;border-radius:8px;color:#4F3700;font-size:.93rem;line-height:1.55;}
+  .legales{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}
+  .legales a{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--linea);border-radius:999px;background:var(--blanco-puro);font-size:.9rem;font-weight:500;text-decoration:none;transition:border-color .2s var(--ease),background .2s var(--ease);}
+  .legales a:hover{border-color:var(--tinta);}
+  .legales a[aria-current="page"]{background:var(--tinta);border-color:var(--tinta);color:#fff;}
+
+  /* Índice lateral (escritorio) o plegable (móvil) + texto */
+  .legal{display:grid;grid-template-columns:14rem minmax(0,1fr);gap:clamp(32px,6vw,88px);align-items:start;padding-block:clamp(8px,2vw,24px) clamp(72px,10vw,128px);}
+  .indice{position:sticky;top:calc(var(--header-h) + 28px);font-size:.9rem;}
+  .indice summary{list-style:none;font-size:.74rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--piedra-txt);margin-bottom:12px;}
+  .indice summary::-webkit-details-marker{display:none;}
+  .indice summary svg{width:18px;height:18px;flex:none;transition:transform .3s var(--ease);}
+  .indice ol{border-left:1px solid var(--linea);}
+  .indice a{display:block;padding:7px 0 7px 16px;margin-left:-1px;border-left:2px solid transparent;color:var(--piedra-txt);text-decoration:none;line-height:1.35;}
+  .indice a:hover{color:var(--tinta);border-left-color:var(--piedra);}
+  .indice a:focus-visible{outline-offset:-2px;}
+  @media (min-width:901px){
+    .indice{max-height:calc(100vh - var(--header-h) - 56px);overflow-y:auto;}
+    .indice summary{pointer-events:none;}
+    .indice summary svg{display:none;}
+  }
+  @media (max-width:900px){
+    .legal{grid-template-columns:1fr;}
+    .indice{position:static;background:var(--blanco-puro);border:1px solid var(--linea);border-radius:8px;}
+    .indice summary{display:flex;justify-content:space-between;align-items:center;min-height:52px;padding:0 16px;margin:0;cursor:pointer;}
+    .indice[open] summary svg{transform:rotate(45deg);}
+    .indice ol{margin:0 16px 14px;}
+    .indice a{padding-block:11px;font-size:.95rem;}
+  }
+  @media (prefers-reduced-motion:reduce){.indice summary svg,.legales a{transition:none;}}
+
+  /* Piezas del texto */
+  .prosa > h2:first-child{margin-top:0;}
+  .prosa .pendiente{-webkit-box-decoration-break:clone;box-decoration-break:clone;overflow-wrap:anywhere;}
+  .ficha{display:grid;grid-template-columns:minmax(8.5em,max-content) minmax(0,1fr);border-top:1px solid var(--linea);margin:0 0 1.4em;}
+  .ficha dt,.ficha dd{padding:12px 0;border-bottom:1px solid var(--linea);}
+  .ficha dt{font-weight:600;padding-right:24px;}
+  @media (max-width:560px){.ficha{grid-template-columns:1fr;}.ficha dt{border-bottom:0;padding-bottom:0;}.ficha dd{padding-top:2px;}}
+  .caja{background:var(--arena-2);border-radius:8px;padding:clamp(20px,3vw,28px);margin-bottom:1.6em;}
+  .caja > :last-child{margin-bottom:0;}
+  .prosa .caja h3{margin-top:0;}
+  .caja__titular{font-family:var(--serif);font-size:clamp(1.5rem,2.6vw,1.9rem);line-height:1.2;}
+  .prosa .caja .caja__titular{margin-bottom:.35em;}
+  .caja--pendiente{background:#FFF8E9;border:1px dashed #D9B56B;}
+  .dos-cajas{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:1.6em;}
+  .dos-cajas .caja{margin:0;}
+  @media (max-width:700px){.dos-cajas{grid-template-columns:1fr;}}
+  .prosa ul.lista-iconos{list-style:none;padding-left:0;}
+  .lista-iconos li{display:flex;gap:10px;align-items:flex-start;}
+  .lista-iconos svg{width:18px;height:18px;flex:none;margin-top:4px;color:var(--tinta);}
+  .caja--pendiente .lista-iconos svg{color:#7A5200;}
+  .fecha-borrador{margin-top:2.4em;padding-top:1.2em;border-top:1px solid var(--linea);}
+</style>
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+
+<header class="cabecera">
+  <div class="envoltura cabecera__fila">
+    <a class="marca" href="../" aria-label="Villa Canal, inicio">
+      <span class="marca__nombre">Villa Canal</span>
+      <span class="marca__lugar">Santa Margarida · Roses</span>
+    </a>
+    <nav class="menu" aria-label="Principal">
+      <ul class="menu__enlaces">
+        <li><a href="../#la-villa">La villa</a></li>
+        <li><a href="../#interiores">Interiores</a></li>
+        <li><a href="../#exteriores">Exteriores</a></li>
+        <li><a href="../galeria/">Galería</a></li>
+        <li><a href="../#ubicacion">Ubicación</a></li>
+      </ul>
+      <a class="boton boton--primario" href="../reservar/">Consultar disponibilidad</a>
+    </nav>
+    <div class="cabecera__acciones">
+      <a class="boton boton--primario cabecera__movil-cta" href="../reservar/">Disponibilidad</a>
+      <button class="boton-menu" type="button" data-abrir-menu aria-expanded="false" aria-controls="panel-menu" aria-label="Abrir menú">
+        <svg aria-hidden="true"><use href="../assets/iconos.svg#menu"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="panel" id="panel-menu" data-abierto="false" role="dialog" aria-modal="true" aria-label="Menú" tabindex="-1">
+  <div class="panel__arriba">
+    <a class="marca" href="../"><span class="marca__nombre">Villa Canal</span><span class="marca__lugar">Santa Margarida · Roses</span></a>
+    <button class="boton-menu" type="button" data-cerrar-menu aria-label="Cerrar menú"><svg aria-hidden="true"><use href="../assets/iconos.svg#cerrar"/></svg></button>
+  </div>
+  <nav aria-label="Menú móvil">
+    <a href="../#la-villa">La villa</a>
+    <a href="../#interiores">Interiores</a>
+    <a href="../#exteriores">Exteriores</a>
+    <a href="../#canal">El canal</a>
+    <a href="../#ubicacion">Ubicación</a>
+    <a href="../galeria/">Galería</a>
+    <a href="../#preguntas">Preguntas</a>
+  </nav>
+  <div class="panel__pie">
+    <a class="boton boton--primario" href="../reservar/">Consultar disponibilidad</a>
+    <a class="boton boton--linea" href="https://wa.me/34657337686" data-wa="Hola, tengo una pregunta sobre Villa Canal."><svg aria-hidden="true"><use href="../assets/iconos.svg#whatsapp"/></svg>Escribir por WhatsApp</a>
+  </div>
+</div>
+
+<main id="contenido">
+  <section class="cabecera-pagina" aria-labelledby="t-pagina">
+    <div class="envoltura">
+      <nav class="miga" aria-label="Estás aquí"><a href="../">Inicio</a> / <span aria-current="page">Privacidad</span></nav>
+      <h1 class="titulo-l" id="t-pagina">Política de privacidad</h1>
+      <p class="entrada">Qué datos tratamos, para qué y qué derechos tienes. La web no recoge datos por sí misma: solo tratamos lo que tú nos envías al escribirnos.</p>
+      <div class="borrador" role="note">
+        <span class="chapa-demo">Borrador</span>
+        <p>Borrador pendiente de completar con los datos del titular antes de publicar la web. Lo que falta aparece marcado así: <span class="pendiente">[pendiente: …]</span>. Conviene que un gestor o un abogado revise estos textos antes de publicarlos.</p>
+      </div>
+      <nav class="legales" aria-label="Textos legales">
+        <a href="aviso-legal.html">Aviso legal</a>
+        <a href="privacidad.html" aria-current="page">Privacidad</a>
+        <a href="cookies.html">Cookies</a>
+        <a href="condiciones.html">Condiciones de reserva</a>
+      </nav>
+    </div>
+  </section>
+
+  <div class="envoltura legal">
+    <details class="indice" open data-indice>
+      <summary>En esta página<svg aria-hidden="true"><use href="../assets/iconos.svg#mas"/></svg></summary>
+      <nav aria-label="Apartados de esta página">
+        <ol>
+          <li><a href="#resumen">En pocas palabras</a></li>
+          <li><a href="#responsable">Responsable</a></li>
+          <li><a href="#datos">Qué datos tratamos</a></li>
+          <li><a href="#finalidades">Para qué los usamos</a></li>
+          <li><a href="#base">Base jurídica</a></li>
+          <li><a href="#conservacion">Cuánto tiempo</a></li>
+          <li><a href="#destinatarios">Con quién se comparten</a></li>
+          <li><a href="#viajeros">Registro de viajeros</a></li>
+          <li><a href="#derechos">Tus derechos</a></li>
+          <li><a href="#menores">Menores</a></li>
+          <li><a href="#cambios">Cambios</a></li>
+        </ol>
+      </nav>
+    </details>
+
+    <article class="prosa">
+      <h2 id="resumen">En pocas palabras</h2>
+<div class="caja">
+        <ul class="lista-iconos">
+          <li><svg aria-hidden="true"><use href="../assets/iconos.svg#check"/></svg><span>La web no tiene formularios que nos envíen tus datos y no usa cookies.</span></li>
+          <li><svg aria-hidden="true"><use href="../assets/iconos.svg#check"/></svg><span>Solo tratamos los datos que tú nos mandas cuando nos escribes por WhatsApp.</span></li>
+          <li><svg aria-hidden="true"><use href="../assets/iconos.svg#check"/></svg><span>Los usamos para responderte y, si reservas, para gestionar tu estancia y cumplir la ley.</span></li>
+          <li><svg aria-hidden="true"><use href="../assets/iconos.svg#check"/></svg><span>No los vendemos ni los usamos para enviarte publicidad.</span></li>
+          <li><svg aria-hidden="true"><use href="../assets/iconos.svg#check"/></svg><span>Puedes pedirnos verlos, corregirlos o borrarlos cuando quieras.</span></li>
+        </ul>
+      </div>
+
+      <h2 id="responsable">Quién es el responsable</h2>
+<p>El responsable de tus datos es el titular de Villa Canal:</p>
+      <dl class="ficha">
+        <dt>Responsable</dt><dd><span class="pendiente">[pendiente: nombre y apellidos, o razón social]</span></dd>
+        <dt>NIF</dt><dd><span class="pendiente">[pendiente: NIF o CIF]</span></dd>
+        <dt>Domicilio</dt><dd><span class="pendiente">[pendiente: domicilio del titular]</span></dd>
+        <dt>Correo electrónico</dt><dd><span class="pendiente">[pendiente: email para temas de privacidad]</span></dd>
+        <dt>WhatsApp</dt><dd><a href="https://wa.me/34657337686" data-wa="Hola, tengo una pregunta sobre Villa Canal.">+34 657 33 76 86</a></dd>
+      </dl>
+      <p>Aplicamos el Reglamento General de Protección de Datos (Reglamento (UE) 2016/679, «RGPD») y la Ley Orgánica 3/2018, de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD).</p>
+
+      <h2 id="datos">Qué datos tratamos</h2>
+<h3>Cuando nos escribes por WhatsApp</h3>
+      <p>Recibimos tu número de teléfono, el nombre de tu perfil de WhatsApp y lo que nos cuentes en el mensaje: por ejemplo, tus fechas, el número de huéspedes o tus preguntas. No nos envíes datos que no hagan falta, como datos de salud o copias de documentos, salvo que te los pidamos para cumplir la ley.</p>
+      <h3>Cuando usas la página de reserva</h3>
+      <p>Es una demostración y no nos envía ningún dato. Si eliges enviar la solicitud por WhatsApp, se abre WhatsApp con el mensaje ya escrito y eres tú quien decide si lo manda.</p>
+      <h3>Cuando visitas la web</h3>
+      <p>Nosotros no recogemos datos de las visitas: no hay analítica ni cookies. La web está alojada en GitHub Pages (GitHub, Inc.), que registra la dirección IP de quien visita la web por motivos de seguridad. <span class="pendiente">[pendiente: actualizar este párrafo si la web cambia de alojamiento o de dominio]</span></p>
+      <p>El mapa de la zona solo se carga si pulsas «Ver el mapa de la zona». Entonces tu navegador se conecta a OpenStreetMap, que recibe tu dirección IP.</p>
+      <h3>Cuando reservas</h3>
+      <p>Para gestionar la reserva necesitamos los datos de contacto de quien reserva. Además, la ley obliga a identificar a los huéspedes (lo explicamos en <a href="#viajeros">registro de viajeros</a>). Si más adelante se puede pagar desde la web, el pago lo tramitará un proveedor de pagos: <span class="pendiente">[pendiente: nombre del proveedor, cuando se contrate]</span>.</p>
+      <p>Si reservas en Airbnb, Airbnb nos facilita los datos necesarios para tu estancia y trata tus datos según su propia política de privacidad, que puedes consultar en su web.</p>
+
+      <h2 id="finalidades">Para qué los usamos</h2>
+<ul>
+        <li>Responder a tus consultas.</li>
+        <li>Gestionar tu reserva y tu estancia: llegada, salida, avisos e incidencias.</li>
+        <li>Cumplir las obligaciones legales: registro de viajeros, facturación e impuesto turístico.</li>
+      </ul>
+      <p>No usamos tus datos para enviarte publicidad ni para hacer perfiles, y no tomamos decisiones automáticas sobre ti.</p>
+
+      <h2 id="base">Por qué podemos tratarlos</h2>
+<dl class="ficha">
+        <dt>Responder a tu consulta</dt><dd>Tu propia petición, como paso previo a una posible reserva (art. 6.1.b del RGPD). Si la consulta no tiene que ver con una reserva, nuestro interés legítimo en contestarte (art. 6.1.f del RGPD).</dd>
+        <dt>Gestionar tu reserva y tu estancia</dt><dd>El contrato de alojamiento que haces con nosotros (art. 6.1.b del RGPD).</dd>
+        <dt>Registro de viajeros, facturación e impuestos</dt><dd>El cumplimiento de una obligación legal (art. 6.1.c del RGPD).</dd>
+      </dl>
+
+      <h2 id="conservacion">Cuánto tiempo los guardamos</h2>
+<ul>
+        <li><strong>Consultas que no acaban en reserva</strong>: el tiempo necesario para contestarte; después se borran. <span class="pendiente">[pendiente: plazo concreto]</span></li>
+        <li><strong>Reservas</strong>: mientras dure la relación y, después, durante los plazos que exige la ley (fiscales y de registro de viajeros). <span class="pendiente">[pendiente: confirmar los plazos con la gestoría]</span></li>
+      </ul>
+
+      <h2 id="destinatarios">Con quién se comparten</h2>
+<p>No vendemos ni cedemos tus datos. Solo llegan a otros en estos casos:</p>
+      <ul>
+        <li><strong>WhatsApp (grupo Meta)</strong>, cuando nos escribes por esa aplicación. WhatsApp aplica su <a href="https://www.whatsapp.com/legal/privacy-policy-eea" target="_blank" rel="noopener noreferrer">política de privacidad</a>.</li>
+        <li><strong>GitHub</strong>, que aloja la web. Consulta su <a href="https://docs.github.com/es/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">declaración de privacidad</a>.</li>
+        <li><strong>OpenStreetMap</strong>, solo si cargas el mapa. Consulta su <a href="https://osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener noreferrer">política de privacidad</a> (en inglés).</li>
+        <li><strong>Airbnb</strong>, si reservas a través de su web.</li>
+        <li><strong>Autoridades</strong>, cuando la ley lo exige: por ejemplo, los datos del registro de viajeros o los que pida la Administración tributaria.</li>
+        <li><strong>Proveedores que se contraten para reservas y pagos</strong>: <span class="pendiente">[pendiente: sistema de reservas y proveedor de pagos, cuando se contraten]</span> y <span class="pendiente">[pendiente: gestoría, si la hay]</span>. Solo tratarán los datos por encargo nuestro y con un contrato que lo regule.</li>
+      </ul>
+      <p>Algunos de estos servicios pueden tratar datos fuera del Espacio Económico Europeo. Según explican en sus políticas, lo hacen con las garantías que prevé el RGPD. <span class="pendiente">[pendiente: revisarlo con un asesor al contratar nuevos proveedores]</span></p>
+
+      <h2 id="viajeros">Registro de viajeros</h2>
+<p>La normativa española de registro de huéspedes (Real Decreto 933/2021) obliga a quien aloja a viajeros a identificarlos y a comunicar sus datos a las autoridades. En Cataluña, esa comunicación se hace a los Mossos d'Esquadra.</p>
+      <p>Esta obligación se aplica a todas las estancias, también cuando la reserva llega por Airbnb. Tratamos esos datos solo para cumplirla.</p>
+      <p><span class="pendiente">[pendiente: definir cómo se recogen los datos de los huéspedes, quién los envía y cuánto tiempo se guardan; revisarlo con la gestoría o con el futuro sistema de reservas]</span></p>
+
+      <h2 id="derechos">Tus derechos</h2>
+<p>Puedes pedirnos en cualquier momento:</p>
+      <ul>
+        <li><strong>Acceso</strong>: saber qué datos tuyos tenemos.</li>
+        <li><strong>Rectificación</strong>: corregirlos si están mal.</li>
+        <li><strong>Supresión</strong>: que los borremos, salvo los que la ley nos obliga a guardar.</li>
+        <li><strong>Oposición y limitación</strong>: que dejemos de usarlos o que solo los usemos para algunas cosas.</li>
+        <li><strong>Portabilidad</strong>: recibirlos en un formato que puedas llevar a otro sitio.</li>
+      </ul>
+      <p>Para pedirlo, escríbenos a <span class="pendiente">[pendiente: email]</span> o por WhatsApp al <a href="https://wa.me/34657337686" data-wa="Hola, quiero ejercer un derecho sobre mis datos personales.">+34 657 33 76 86</a>, diciendo qué derecho quieres ejercer. Si hace falta, te pediremos que acredites tu identidad. Te contestaremos en el plazo de un mes como máximo.</p>
+      <p>Si crees que no hemos tratado bien tus datos, puedes presentar una reclamación ante la Agencia Española de Protección de Datos, en <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">www.aepd.es</a>.</p>
+
+      <h2 id="menores">Menores</h2>
+<p>Si tienes menos de 14 años, no nos envíes datos personales sin permiso de tus padres o tutores. <span class="pendiente">[pendiente: edad mínima para hacer una reserva]</span></p>
+
+      <h2 id="cambios">Cambios en esta política</h2>
+<p>Si la web cambia (por ejemplo, si se añaden reservas o pagos en línea), actualizaremos esta página y su fecha de revisión.</p>
+
+      <p class="pequeno secundario fecha-borrador">Borrador redactado el 27 de septiembre de 2026. Última revisión: <span class="pendiente">[pendiente: fecha de publicación]</span>.</p>
+    </article>
+  </div>
+</main>
+
+<footer class="pie">
+  <div class="envoltura">
+    <div class="pie__rejilla">
+      <div>
+        <span class="marca"><span class="marca__nombre">Villa Canal</span></span>
+        <p style="margin-top:14px">Santa Margarida, Roses<br>Costa Brava (Girona)</p>
+        <p class="pequeno" style="margin-top:14px;color:rgba(255,255,255,.66)">Registro de Turismo de Cataluña<br>HUTG-021359</p>
+      </div>
+      <div>
+        <h2>La villa</h2>
+        <ul>
+          <li><a href="../#la-villa">La villa</a></li>
+          <li><a href="../#interiores">Interiores</a></li>
+          <li><a href="../#exteriores">Exteriores</a></li>
+          <li><a href="../#canal">El canal</a></li>
+          <li><a href="../#ubicacion">Ubicación</a></li>
+          <li><a href="../galeria/">Galería</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Reservas</h2>
+        <ul>
+          <li><a href="../reservar/">Consultar disponibilidad</a></li>
+          <li><a href="../#preguntas">Preguntas frecuentes</a></li>
+          <li><a href="condiciones.html">Condiciones de reserva y cancelación</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contacto</h2>
+        <ul>
+          <li><a href="https://wa.me/34657337686" data-wa="Hola, tengo una pregunta sobre Villa Canal.">WhatsApp · +34 657 33 76 86</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pie__base">
+      <span>© <span data-anio>2026</span> Villa Canal</span>
+      <nav class="pie__legal" aria-label="Legal">
+        <a href="aviso-legal.html">Aviso legal</a>
+        <a href="privacidad.html" aria-current="page">Privacidad</a>
+        <a href="cookies.html">Cookies</a>
+        <a href="condiciones.html">Condiciones de reserva</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-flotante" href="https://wa.me/34657337686" data-wa="Hola, tengo una pregunta sobre Villa Canal." aria-label="Escribir por WhatsApp">
+  <svg aria-hidden="true"><use href="../assets/iconos.svg#whatsapp"/></svg><span>WhatsApp</span>
+</a>
+<div class="barra-movil" data-visible="false">
+  <a class="boton boton--primario" href="../reservar/">Consultar disponibilidad</a>
+  <a class="boton boton--wa" href="https://wa.me/34657337686" data-wa="Hola, tengo una pregunta sobre Villa Canal." aria-label="Escribir por WhatsApp"><svg aria-hidden="true"><use href="../assets/iconos.svg#whatsapp"/></svg></a>
+</div>
+
+<script src="../assets/site.js" defer></script>
+<script>
+  // Índice: siempre abierto en escritorio; en el móvil empieza plegado y se pliega al elegir un apartado
+  document.addEventListener('DOMContentLoaded', function () {
+    var indice = document.querySelector('[data-indice]');
+    if (!indice || !window.matchMedia) return;
+    var movil = window.matchMedia('(max-width: 900px)');
+    var resumen = indice.querySelector('summary');
+    function ajustar() {
+      indice.open = !movil.matches;
+      resumen.tabIndex = movil.matches ? 0 : -1;
+    }
+    ajustar();
+    if (movil.addEventListener) movil.addEventListener('change', ajustar);
+    indice.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { if (movil.matches) indice.open = false; });
+    });
+  });
+</script>
+</body>
+</html>
